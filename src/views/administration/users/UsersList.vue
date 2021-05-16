@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <h1>Menu</h1>
-  </div>
+  <main class="column">
+
+  </main>
 </template>
 
 <script>
 export default {
-  name: 'menu'
+  name: 'user-list'
 }
 </script>

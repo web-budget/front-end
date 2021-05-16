@@ -1,43 +1,41 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import AuthenticationLayout from '@/components/layouts/Authentication'
+import store from '@/store'
+
+import homeRoutes from './home.route.js'
+import dashboardRoutes from './dashboard.route.js'
+import financialRoutes from './financial.route.js'
+import registrationRoutes from './registration.route.js'
+import administrationRoutes from './administration.route.js'
+import authenticationRoutes from './authentication.route.js'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/authentication',
-    redirect: 'login',
-    component: AuthenticationLayout,
-    children: [
-      {
-        path: '/login',
-        name: 'login',
-        meta: { public: true },
-        component: () => import(/* webpackChunkName: "authentication" */ '../views/authentication/Login.vue')
-      },
-      {
-        path: '/password/recover',
-        name: 'recover-password',
-        meta: { public: true },
-        component: () => import(/* webpackChunkName: "authentication" */ '../views/authentication/RecoverPassword.vue')
-      },
-      {
-        props: true,
-        path: '/password/change/:token',
-        name: 'change-password',
-        meta: { public: true },
-        component: () => import(/* webpackChunkName: "authentication" */ '../views/authentication/ChangePassword.vue')
-      }
-    ]
-  }
+  ...homeRoutes,
+  ...financialRoutes,
+  ...dashboardRoutes,
+  ...registrationRoutes,
+  ...authenticationRoutes,
+  ...administrationRoutes
 ]
 
 const router = new VueRouter({
+  routes,
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
+})
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = store.getters['userSession/isLoggedIn']
+  if (to.matched.some(route => route.meta.public) || loggedIn) {
+    next()
+  } else {
+    next({ name: 'login', params: { redirect: to.path } })
+  }
 })
 
 export default router

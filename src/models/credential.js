@@ -1,6 +1,6 @@
 export default class Credential {
-  constructor(email, password) {
-    this.email = email
+  constructor(username, password) {
+    this.username = username
     this.password = password
   }
 }

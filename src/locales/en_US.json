@@ -1,3 +1,16 @@
 {
-  "message": "hello i18n !!"
+  "validation": {
+    "required": "Campo obrigatório"
+  },
+  "login": {
+    "title": "Bem-vindo",
+    "form": {
+      "username": "E-mail",
+      "password": "Senha"
+    },
+    "actions": {
+      "login": "Login",
+      "recover-password": "Esqueceu sua senha?"
+    }
+  }
 }

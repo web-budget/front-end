@@ -1,20 +1,22 @@
 <template>
-  <div id="container" class="auth-container">
-    <div class="logo-container">
-      <div class="logo-box">
-        <div class="logo-panel">
-          <!-- <b-image
-            rounded
-            alt="webBudget"
-            :src="require('@/assets/images/logo.png')"/> -->
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="logo-container">
+        <div class="logo-box">
+          <div class="logo-panel">
+            <!-- <b-image
+              rounded
+              alt="webBudget"
+              :src="require('@/assets/images/logo.png')"/> -->
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-container sign-in-container">
-      <div class="sign-in-form">
-        <fade-transition :duration="200" origin="center top" mode="out-in">
-          <router-view />
-        </fade-transition>
+      <div class="form-container sign-in-container">
+        <div class="sign-in-form">
+          <fade-transition :duration="200" origin="center top" mode="out-in">
+            <router-view />
+          </fade-transition>
+        </div>
       </div>
     </div>
   </div>
@@ -31,22 +33,7 @@ export default {
 }
 </script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #f6f5f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
-  height: 100vh;
-  margin: -20px 0 50px;
-}
-
+<style scoped>
 h1 {
   font-weight: bold;
   margin: 0;
@@ -57,6 +44,16 @@ button {
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.auth-container {
+  background: #f6f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
 }
 
 .sign-in-form {
@@ -70,7 +67,7 @@ button {
   text-align: center;
 }
 
-.auth-container {
+.auth-box {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);

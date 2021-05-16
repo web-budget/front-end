@@ -5,12 +5,37 @@
   "login": {
     "title": "Bem-vindo",
     "form": {
-      "email": "E-mail",
+      "username": "E-mail",
       "password": "Senha"
     },
     "actions": {
       "login": "Login",
       "recover-password": "Esqueceu sua senha?"
+    }
+  },
+  "user-menu": {
+    "profile": "Perfil",
+    "logout": "Sair"
+  },
+  "main-menu": {
+    "dashboard": "Dashboard",
+    "administration": "Administração",
+    "registration": "Cadastros",
+    "financial": "Financeiro"
+  },
+  "page-menu": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "administration": {
+      "title": "Administração",
+      "users": "Usuários"
+    },
+    "registration": {
+      "title": "Cadastros"
+    },
+    "financial": {
+      "title": "Financeiro"
     }
   }
 }

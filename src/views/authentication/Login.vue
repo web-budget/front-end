@@ -5,7 +5,7 @@
       <validation-provider
         rules="required"
         v-slot="{ errors, valid }"
-        :name="$t('login.form.email')" >
+        :name="$t('login.form.username')" >
         <b-field :type="{ 'is-danger': errors[0], 'is-success': valid }">
           <b-input
             type="text"
@@ -13,8 +13,8 @@
             class="mb-3"
             tabindex="1"
             icon-pack="fas"
-            v-model="credential.email"
-            :placeholder="$t('login.form.email')"/>
+            v-model="credential.username"
+            :placeholder="$t('login.form.username')"/>
         </b-field>
       </validation-provider>
       <validation-provider
@@ -52,17 +52,42 @@
 <script>
 import Credential from '@/models/credential.js'
 
+import AuthenticationClient from '@/clients/authentication.client.js'
+
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'login',
+  computed: {
+    ...mapGetters('userSession', ['isLoggedIn'])
+  },
   methods: {
+    ...mapActions('userSession', ['createSession']),
     async doLogin() {
-      console.log(this.credential)
+      try {
+        const response = await this.authenticationClient.login(this.credential)
+        this.createSession(response.data)
+        this.$router.push(this.$router.currentRoute.params.redirect || { name: 'home' })
+      } catch (error) {
+        console.log(error) // FIXME handle this properly
+      } finally {
+        this.loading = false
+      }
     }
   },
   data() {
     return {
       loading: false,
+      authenticationClient: null,
       credential: new Credential()
+    }
+  },
+  created() {
+    this.authenticationClient = new AuthenticationClient()
+  },
+  mounted() {
+    if (this.isLoggedIn) {
+      this.$router.push({ name: 'home' })
     }
   }
 }
