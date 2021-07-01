@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "yarn"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    allow:
+      - dependency-type: "direct"
+    labels:
+      - "front-end"
+      - "maintenance"
