@@ -2,17 +2,21 @@
   "validation": {
     "required": "Campo obrigatório"
   },
-  "login": {
-    "title": "Bem-vindo",
-    "form": {
-      "username": "E-mail",
-      "password": "Senha"
-    },
+
+  "commons": {
     "actions": {
-      "login": "Login",
-      "recover-password": "Esqueceu sua senha?"
+      "new": "Novo",
+      "search": "Buscar",
+      "edit": "Editar",
+      "delete": "Excluir"
+    },
+    "list": {
+      "actions": "Ações",
+      "empty": "Nenhum registro encontrado",
+      "rows-per-page": "Linhas por página"
     }
   },
+
   "user-menu": {
     "profile": "Perfil",
     "logout": "Sair"
@@ -36,6 +40,37 @@
     },
     "financial": {
       "title": "Financeiro"
+    }
+  },
+
+  "breadcrumb": {
+    "home": "Home",
+    "administration": "Administração",
+    "users": {
+      "listing": "Usuários"
+    }
+  },
+
+  "login": {
+    "title": "Bem-vindo",
+    "form": {
+      "username": "E-mail",
+      "password": "Senha"
+    },
+    "actions": {
+      "login": "Login",
+      "recover-password": "Esqueceu sua senha?"
+    }
+  },
+
+  "users": {
+    "page-title": {
+      "listing": "Usuários"
+    },
+    "list": {
+      "filter": "Nome ou e-mail",
+      "name": "Nome",
+      "email": "E-mail"
     }
   }
 }

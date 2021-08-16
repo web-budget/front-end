@@ -30,6 +30,7 @@
             icon-pack="fas"
             password-reveal
             v-model="credential.password"
+            @keypress.native.enter="doLogin"
             :placeholder="$t('login.form.password')"/>
         </b-field>
       </validation-provider>
@@ -50,14 +51,19 @@
 </template>
 
 <script>
-import Credential from '@/models/credential.js'
+import Credential from '@/models/administration/credential.js'
 
 import AuthenticationClient from '@/clients/authentication.client.js'
+
+import ViewStateMixin from '@/components/mixins/view-state.mixin.js'
 
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'login',
+  mixins: [
+    ViewStateMixin
+  ],
   computed: {
     ...mapGetters('userSession', ['isLoggedIn'])
   },
@@ -65,19 +71,19 @@ export default {
     ...mapActions('userSession', ['createSession']),
     async doLogin() {
       try {
+        this.loadingStarted()
         const response = await this.authenticationClient.login(this.credential)
         this.createSession(response.data)
         this.$router.push(this.$router.currentRoute.params.redirect || { name: 'home' })
       } catch (error) {
         console.log(error) // FIXME handle this properly
       } finally {
-        this.loading = false
+        this.loadingEnded()
       }
     }
   },
   data() {
     return {
-      loading: false,
       authenticationClient: null,
       credential: new Credential()
     }

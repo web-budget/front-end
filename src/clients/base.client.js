@@ -9,10 +9,10 @@ const getClient = (baseUrl, secured) => {
     baseURL: baseUrl
   }
 
-  if (secured && store.getters['user-session/isLoggedIn']) {
+  if (secured && store.getters['userSession/isLoggedIn']) {
     options.headers = {
       'Content-type': 'application/json',
-      Authorization: `Bearer ${store.getters['user-session/accessToken']}`
+      Authorization: `Bearer ${store.getters['userSession/accessToken']}`
     }
   }
 
