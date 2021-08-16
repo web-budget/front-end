@@ -13,7 +13,15 @@
     "list": {
       "actions": "Ações",
       "empty": "Nenhum registro encontrado",
-      "rows-per-page": "Linhas por página"
+      "rows-per-page": "Linhas por página",
+      "active": "Ativo",
+      "inactive": "Inativo",
+      "status": "Status"
+    },
+    "state": {
+      "active": "Ativos",
+      "inactive": "Inativos",
+      "all": "Todos"
     }
   },
 

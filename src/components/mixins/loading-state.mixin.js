@@ -1,9 +1,9 @@
 export default {
   methods: {
-    loadingStarted() {
+    loadingStart() {
       this.loading = true
     },
-    loadingEnded() {
+    loadingEnd() {
       this.loading = false
     }
   },

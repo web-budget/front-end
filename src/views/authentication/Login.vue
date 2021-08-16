@@ -55,14 +55,14 @@ import Credential from '@/models/administration/credential.js'
 
 import AuthenticationClient from '@/clients/authentication.client.js'
 
-import ViewStateMixin from '@/components/mixins/view-state.mixin.js'
+import LoadingStateMixin from '@/components/mixins/loading-state.mixin.js'
 
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'login',
   mixins: [
-    ViewStateMixin
+    LoadingStateMixin
   ],
   computed: {
     ...mapGetters('userSession', ['isLoggedIn'])
@@ -71,14 +71,14 @@ export default {
     ...mapActions('userSession', ['createSession']),
     async doLogin() {
       try {
-        this.loadingStarted()
+        this.loadingStart()
         const response = await this.authenticationClient.login(this.credential)
         this.createSession(response.data)
         this.$router.push(this.$router.currentRoute.params.redirect || { name: 'home' })
       } catch (error) {
         console.log(error) // FIXME handle this properly
       } finally {
-        this.loadingEnded()
+        this.loadingEnd()
       }
     }
   },

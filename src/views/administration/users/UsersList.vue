@@ -32,7 +32,32 @@
       </div>
     </div>
     <div class="columns is-multiline">
-      <div class="column is-four-fifths">
+      <div class="column">
+        <b-field>
+          <b-radio-button
+            native-value="all"
+            v-model="selectedState"
+            @click.native="loadData"
+            type="is-primary is-light is-outlined">
+            <span>{{ $t('commons.state.all') }}</span>
+          </b-radio-button>
+          <b-radio-button
+            native-value="active"
+            v-model="selectedState"
+            @click.native="loadData"
+            type="is-success is-light is-outlined">
+            <span>{{ $t('commons.state.active') }}</span>
+          </b-radio-button>
+          <b-radio-button
+            native-value="inactive"
+            v-model="selectedState"
+            @click.native="loadData"
+            type="is-danger is-light is-outlined">
+            <span>{{ $t('commons.state.inactive') }}</span>
+          </b-radio-button>
+        </b-field>
+      </div>
+      <div class="column is-three-quarters">
         <b-field>
           <b-input
             expanded
@@ -43,6 +68,7 @@
           <p class="control">
             <b-button
               type="is-primary"
+              :loading="loading"
               @click.prevent="loadData">
               {{ $t('commons.actions.search') }}
             </b-button>
@@ -71,6 +97,16 @@
             backend-sorting
             @sort="onSort">
 
+            <b-table-column
+              sortable
+              width="5%"
+              v-slot="props"
+              field="active"
+              cell-class="is-vcentered"
+              :label="$t('commons.list.status')">
+              <b-tag v-if="props.row.active" type="is-success">{{ $t('commons.list.active') }}</b-tag>
+              <b-tag v-else type="is-warning">{{ $t('commons.list.inactive') }}</b-tag>
+            </b-table-column>
             <b-table-column
               sortable
               field="name"
@@ -138,23 +174,23 @@ import PageResponse from '@/models/utilities/page-response.js'
 
 import UserClient from '@/clients/administration/user.client.js'
 
-import ViewStateMixin from '@/components/mixins/view-state.mixin.js'
+import LoadingStateMixin from '@/components/mixins/loading-state.mixin.js'
 
 export default {
   name: 'user-list',
   mixins: [
-    ViewStateMixin
+    LoadingStateMixin
   ],
   methods: {
     async loadData() {
       try {
-        this.loadingStarted()
+        this.loadingStart()
         const response = await this.userClient.findAll(this.pageRequest)
         this.pageResponse = PageResponse.fromJson(response.data)
       } catch (error) {
         console.error(error) // FIXME handle this properly
       } finally {
-        this.loadingEnded()
+        this.loadingEnd()
       }
     },
     onPageChange(pageNumber) {
@@ -181,6 +217,7 @@ export default {
   data() {
     return {
       userClient: null,
+      selectedState: 'all',
       pageRequest: new PageRequest(),
       pageResponse: new PageResponse()
     }
