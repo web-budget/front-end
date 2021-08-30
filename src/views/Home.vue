@@ -22,6 +22,7 @@
       </div>
     </div>
     <div class="columns is-multiline">
+      asasdad
     </div>
   </main>
 </template>

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 
 import homeRoutes from './home.route.js'
+import errorsRoutes from './errors.route.js'
 import dashboardRoutes from './dashboard.route.js'
 import financialRoutes from './financial.route.js'
 import registrationRoutes from './registration.route.js'
@@ -14,6 +15,7 @@ Vue.use(VueRouter)
 
 const routes = [
   ...homeRoutes,
+  ...errorsRoutes,
   ...financialRoutes,
   ...dashboardRoutes,
   ...registrationRoutes,

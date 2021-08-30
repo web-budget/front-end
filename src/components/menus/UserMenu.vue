@@ -1,7 +1,7 @@
 <template>
   <b-dropdown position="is-bottom-left" append-to-body aria-role="menu" trap-focus>
     <button class="button" slot="trigger" slot-scope="{ active }">
-      <span v-if="subject" >{{ subject }}</span>
+      <span v-once v-if="subject">{{ subject }}</span>
       <b-icon pack='fas' size="is-small" :icon="active ? 'angle-up' : 'angle-down'"></b-icon>
     </button>
     <b-dropdown-item aria-role="listitem">

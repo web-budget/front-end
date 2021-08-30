@@ -76,7 +76,7 @@ export default {
         this.createSession(response.data)
         this.$router.push(this.$router.currentRoute.params.redirect || { name: 'home' })
       } catch (error) {
-        console.log(error) // FIXME handle this properly
+        console.log(error)
       } finally {
         this.loadingEnd()
       }

@@ -1,6 +1,29 @@
 {
   "validation": {
-    "required": "Campo obrigatório"
+    "required": "Campo obrigatório",
+    "strongPassword": "Senha deve conter ao menos uma letra e um número",
+    "matchPassword": "As senhas devem ser iguais",
+    "email": "Endereço inválido",
+    "min": "Tamanho mínimo: {length} caracteres",
+    "max": "Tamanho máximo: {length} caracteres"
+  },
+
+  "errors": {
+    "unknown": "Erro desconhecido, entre em contato com o administrador",
+    "no-connection": "Sem conexão com o servidor, tente novamente em instantes",
+    "bad-credentials": "Usuário ou senha inválidos",
+    "401": {
+      "session-expired": "Sua sessão expirou",
+      "go-to-login": "Voltar ao login"
+    },
+    "404": {
+      "page-not-found": "A página solicitada não foi encontrada",
+      "go-to-home": "Voltar para home"
+    },
+    "403": {
+      "unauthorized": "Você não tem permissão para acessar o recurso solicitado",
+      "go-to-home": "Voltar para home"
+    }
   },
 
   "commons": {
@@ -8,7 +31,11 @@
       "new": "Novo",
       "search": "Buscar",
       "edit": "Editar",
-      "delete": "Excluir"
+      "delete": "Excluir",
+      "save": "Salvar",
+      "back": "Voltar",
+      "yes": "Sim",
+      "no": "Não"
     },
     "list": {
       "actions": "Ações",
@@ -18,11 +45,26 @@
       "inactive": "Inativo",
       "status": "Status"
     },
+    "select": {
+      "pick-one": "Selecione",
+      "type-to-search": "Digite para buscar"
+    },
     "state": {
-      "active": "Ativos",
-      "inactive": "Inativos",
-      "all": "Todos"
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "notification": {
+      "saved": "Dados salvos com sucesso!",
+      "updated": "Dados atualizados com sucesso!",
+      "deleted": "Dados excluídos com sucesso!",
+      "delete-confirmation": "Deseja excluir este registro?"
     }
+  },
+
+  "state-filter": {
+    "active": "Ativos",
+    "inactive": "Inativos",
+    "all": "Todos"
   },
 
   "user-menu": {
@@ -53,9 +95,17 @@
 
   "breadcrumb": {
     "home": "Home",
-    "administration": "Administração",
-    "users": {
-      "listing": "Usuários"
+    "menus": {
+      "administration": "Administração"
+    },
+    "pages": {
+      "users": "Usuários"
+    },
+    "actions": {
+      "adding": "Cadastrando",
+      "editing": "Editando",
+      "detailing": "Detalhando",
+      "deleting": "Excluindo"
     }
   },
 
@@ -73,12 +123,32 @@
 
   "users": {
     "page-title": {
-      "listing": "Usuários"
+      "listing": "Usuários",
+      "adding": "Cadastrando usuário",
+      "editing": "Editando usuário",
+      "deleting": "Excluindo usuário",
+      "detailing": "Detalhando usuário"
     },
     "list": {
       "filter": "Nome ou e-mail",
       "name": "Nome",
       "email": "E-mail"
+    },
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "password": "Senha",
+      "password-confirmation": "Confirmar senha",
+      "profile": "Perfil"
+    },
+    "authorities": {
+      "DASHBOARDS": "Dashboards",
+      "ADMINISTRATION": "Administração",
+      "FINANCIAL": "Financeiro",
+      "REGISTRATION": "Cadastros"
+    },
+    "errors": {
+      "duplicated-email": "E-mail informado já esta em uso"
     }
   }
 }

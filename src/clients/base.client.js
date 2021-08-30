@@ -16,7 +16,29 @@ const getClient = (baseUrl, secured) => {
     }
   }
 
-  return axios.create(options)
+  const axiosClient = axios.create(options)
+
+  axiosClient.interceptors.request.use(
+    function(request) {
+      return request
+    },
+    function(error) {
+      store.dispatch('errorHandler/catchError', error.response)
+      return Promise.reject(error)
+    }
+  )
+
+  axiosClient.interceptors.response.use(
+    function(response) {
+      return response
+    },
+    function(error) {
+      store.dispatch('errorHandler/catchError', error.response)
+      return Promise.reject(error)
+    }
+  )
+
+  return axiosClient
 }
 
 class BaseService {

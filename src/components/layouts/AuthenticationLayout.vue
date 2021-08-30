@@ -1,5 +1,6 @@
 <template>
   <div class="auth-container">
+    <error-handler></error-handler>
     <div class="auth-box">
       <div class="logo-container">
         <div class="logo-box">
@@ -25,9 +26,12 @@
 <script>
 import { FadeTransition } from 'vue2-transitions'
 
+import ErrorHandler from '@/components/ErrorHandler.vue'
+
 export default {
   name: 'authentication-layout',
   components: {
+    ErrorHandler,
     FadeTransition
   }
 }

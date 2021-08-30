@@ -39,8 +39,11 @@ export default {
       return state.status.loggedIn
     },
     subject: state => {
-      const decoded = jwtDecode(state.token.accessToken)
-      return decoded.sub
+      const token = state.token
+      if (token) {
+        const decoded = jwtDecode(state.token.accessToken)
+        return decoded.sub
+      }
     }
   }
 }
