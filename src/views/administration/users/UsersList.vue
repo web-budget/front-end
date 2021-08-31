@@ -33,7 +33,7 @@
     </div>
     <div class="columns is-multiline">
       <div class="column">
-        <state-filter v-model="pageRequest.state" />
+        <state-filter v-model="pageRequest.state" @change.native="loadData" />
       </div>
       <div class="column is-three-quarters">
         <b-field>
