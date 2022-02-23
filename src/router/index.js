@@ -1,43 +1,23 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-import store from '@/store'
+import HomeView from '@/views/HomeView'
 
-import homeRoutes from './home.route.js'
-import errorsRoutes from './errors.route.js'
-import dashboardRoutes from './dashboard.route.js'
-import financialRoutes from './financial.route.js'
-import registrationRoutes from './registration.route.js'
-import administrationRoutes from './administration.route.js'
-import authenticationRoutes from './authentication.route.js'
-
-Vue.use(VueRouter)
+import publicRoutes from '@/router/public.routes.js'
 
 const routes = [
-  ...homeRoutes,
-  ...errorsRoutes,
-  ...financialRoutes,
-  ...dashboardRoutes,
-  ...registrationRoutes,
-  ...authenticationRoutes,
-  ...administrationRoutes
+  {
+    path: '/home',
+    name: 'home',
+    component: HomeView
+  },
+  ...publicRoutes
 ]
 
-const router = new VueRouter({
+const router = createRouter({
   routes,
-  mode: 'history',
-  base: process.env.BASE_URL,
   linkActiveClass: 'is-active',
-  linkExactActiveClass: 'is-active'
-})
-
-router.beforeEach((to, from, next) => {
-  const loggedIn = store.getters['userSession/isLoggedIn']
-  if (to.matched.some(route => route.meta.public) || loggedIn) {
-    next()
-  } else {
-    next({ name: 'login', params: { redirect: to.path } })
-  }
+  linkExactActiveClass: 'is-active',
+  history: createWebHistory(process.env.BASE_URL)
 })
 
 export default router

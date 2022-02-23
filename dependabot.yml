@@ -7,5 +7,5 @@ updates:
     allow:
       - dependency-type: "direct"
     labels:
-      - "back-end"
+      - "front-end"
       - "maintenance"
