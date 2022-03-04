@@ -14,6 +14,13 @@ import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'bootstrap/scss/bootstrap.scss'
 
+// tabler
+import '@/assets/css/tabler.min.css'
+import '@/assets/js/tabler.min.js'
+
+// web-budget custom
+import '@/assets/scss/webbudget.scss'
+
 createApp(App)
   .use(router)
   .use(PrimeVue)

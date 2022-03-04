@@ -1,0 +1,28 @@
+
+/*
+    Default application CSS, if you want to customize something
+    it should be done here :D
+
+    ReklameScript is free for personal use, and here, we are using 
+    for an OSS software, all credits to them
+
+    Author: http://www.hvdfonts.com/
+    Link: https://www.dafont.com/pt/reklame-script-demo.font
+*/
+
+// main logo 
+@font-face {
+    font-family: 'ReklameScript';
+    font-style: normal;
+    font-weight: normal;
+    src: local('ReklameScript'), url("../fonts/ReklameScript.otf") format('truetype');
+}
+
+.wb-logo {
+    font-size: 75px;
+    font-family: 'ReklameScript', serif !important;
+    color: #007fff;
+}
+.wb-logo-black {
+    color: black;
+}
