@@ -1,0 +1,15 @@
+{
+  "login": {
+    "title": "Bem vindo, acesse sua conta",
+    "form": {
+      "username": "Usuário",
+      "username-placeholder": "Seu e-mail",
+      "password": "Senha",
+      "password-placeholder": "Sua senha"
+    },
+    "action": {
+      "sign-in": "Acessar",
+      "forgot-password": "esqueci minha senha"
+    }
+  }
+}

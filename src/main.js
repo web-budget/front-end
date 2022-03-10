@@ -3,7 +3,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // utilities
-import router from './router'
+import router from '@/router'
+import i18n from '@/locales'
 
 // ui framework
 import PrimeVue from 'primevue/config'
@@ -22,6 +23,7 @@ import '@/assets/js/tabler.min.js'
 import '@/assets/scss/webbudget.scss'
 
 createApp(App)
+  .use(i18n)
   .use(router)
   .use(PrimeVue)
   .mount('#app')
