@@ -20,4 +20,9 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL)
 })
 
+/*
+ TODO create router guard here to prevent user navigation
+      to non public routes without being authenticated
+*/
+
 export default router

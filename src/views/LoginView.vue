@@ -8,7 +8,7 @@
         </label>
         <InputText
           class="form-control"
-          v-model="credentials.username"
+          v-model="form.username"
           :placeholder="$t('login.form.username-placeholder')"
         />
       </div>
@@ -25,7 +25,7 @@
           <Password
             :feedback="false"
             input-class="form-control"
-            v-model="credentials.password"
+            v-model="form.password"
             :placeholder="$t('login.form.password-placeholder')"
           />
         </div>
@@ -40,21 +40,18 @@
 <script setup>
 import { reactive } from 'vue'
 
+import router from '@/router'
+
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 
-const credentials = reactive({
+const form = reactive({
   username: '',
   password: ''
 })
 
 function onSubmit() {
-  console.log(this.credentials)
+  console.log(form)
+  router.push({ name: 'home' })
 }
 </script>
-
-<style scoped>
-.p-password.p-inputwrapper {
-  width: 100%;
-}
-</style>

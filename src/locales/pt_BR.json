@@ -11,5 +11,32 @@
       "sign-in": "Acessar",
       "forgot-password": "esqueci minha senha"
     }
+  },
+  "forgot-password": {
+    "title": "Esqueci minha senha",
+    "subtitle": "Informe seu e-mail de cadastro para que possamos resetar sua senha de acesso",
+    "footer": "Lembrei da minha senha! {0}",
+    "form": {
+      "email": "E-mail",
+      "email-placeholder": "Seu e-mail cadastrado"
+    },
+    "action": {
+      "send-email": "Enviar nova senha",
+      "send-me-back": "voltar para o login"
+    }
+  },
+  "recover-password": {
+    "title": "Trocar minha senha",
+    "subtitle": "Informe uma nova senha de acesso, ela deve conter números e ao menos uma letra maiúscula",
+    "form": {
+      "password": "Nova senha",
+      "password-placeholder":"Sua nova senha",
+      "new-password": "Confirmação",
+      "new-password-placeholder": "Confirme sua senha"
+    },
+    "action": {
+      "change-password": "Trocar senha",
+      "back-to-login": "Voltar ao login"
+    }
   }
 }
