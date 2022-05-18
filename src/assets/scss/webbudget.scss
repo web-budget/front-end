@@ -26,7 +26,12 @@
 .wb-logo-black {
     color: black;
 }
-
+.wb-logo-home {
+    font-size: 2em;
+    color: #ffffff;
+    font-weight: 300;
+    text-decoration: none !important;
+}
 
 // primevue x tabler adjustments
 .p-password.p-inputwrapper {
