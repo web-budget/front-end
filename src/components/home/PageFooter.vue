@@ -24,13 +24,13 @@
         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
           <ul class="list-inline list-inline-dots mb-0">
             <li class="list-inline-item">
-              Copyright &copy; 2022
+              Copyright &copy; {{ new Date().getFullYear() }}
               <a href="https://webbudget.com.br" target="_blank" class="link-secondary">webBudget</a>.
               All rights reserved.
             </li>
             <li class="list-inline-item">
               <a href="./changelog.html" class="link-secondary" rel="noopener">
-                v{{ version }}
+                v{{ packageInfo.version }}
               </a>
             </li>
           </ul>
@@ -41,5 +41,5 @@
 </template>
 
 <script setup>
-import { version } from '../../../package.json'
+import * as packageInfo from '../../../package.json'
 </script>
