@@ -7,7 +7,7 @@
         <label class="form-label">
           {{ $t('forgot-password.form.email') }}
         </label>
-        <InputText
+        <input-text
           type="email"
           class="form-control"
           v-model="form.email"

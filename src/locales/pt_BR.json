@@ -1,4 +1,28 @@
 {
+  "home": {
+    "header": {
+      "title": "Home",
+      "pre-title": "Bem vindo"
+    },
+    "footer": {
+      "source-code": "Código Fonte",
+      "license": "Licença",
+      "documentation": "Documentação"
+    }
+  },
+  "user-menu": {
+    "profile": "Meu Perfil",
+    "configurations": "Configurações",
+    "change-password": "Trocar senha",
+    "logout": "Sair"
+  },
+  "main-menu": {
+    "dashboards": "Dashboards",
+    "financial": "Financeiro",
+    "registration": "Cadastros",
+    "configurations": "Configurações",
+    "investments": "Investimentos"
+  },
   "login": {
     "title": "Bem vindo, acesse sua conta",
     "form": {

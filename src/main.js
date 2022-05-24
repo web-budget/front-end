@@ -6,8 +6,9 @@ import App from './App.vue'
 import router from '@/router'
 import i18n from '@/locales'
 
-// ui framework
+// UI things (magic)
 import PrimeVue from 'primevue/config'
+import VueGravatar from 'vue3-gravatar'
 
 // some css
 import 'primevue/resources/themes/saga-blue/theme.css'
@@ -15,7 +16,7 @@ import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'bootstrap/scss/bootstrap.scss'
 
-// tabler
+// tabler (the real magic)
 import '@/assets/css/tabler.min.css'
 import '@/assets/js/tabler.min.js'
 
@@ -26,4 +27,5 @@ createApp(App)
   .use(i18n)
   .use(router)
   .use(PrimeVue)
+  .use(VueGravatar)
   .mount('#app')

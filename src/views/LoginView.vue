@@ -6,7 +6,7 @@
         <label class="form-label">
           {{ $t('login.form.username') }}
         </label>
-        <InputText
+        <input-text
           class="form-control"
           v-model="form.username"
           :placeholder="$t('login.form.username-placeholder')"
@@ -22,7 +22,7 @@
           </span>
         </label>
         <div class="input-group input-group-flat">
-          <Password
+          <password
             :feedback="false"
             input-class="form-control"
             v-model="form.password"
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="form-footer">
-        <button @click="onSubmit()" class="btn btn-primary w-100">{{ $t('login.action.sign-in') }}</button>
+        <button @click="doLogin()" class="btn btn-primary w-100">{{ $t('login.action.sign-in') }}</button>
       </div>
     </div>
   </div>
@@ -50,8 +50,8 @@ const form = reactive({
   password: ''
 })
 
-function onSubmit() {
-  console.log(form)
+function doLogin() {
+  // TODO do login stuff here
   router.push({ name: 'home' })
 }
 </script>

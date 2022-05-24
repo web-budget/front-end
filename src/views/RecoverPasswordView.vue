@@ -7,7 +7,7 @@
         <label class="form-label">
           {{ $t('recover-password.form.password') }}
         </label>
-        <Password
+        <password
           :feedback="false"
           input-class="form-control"
           v-model="form.password"
@@ -18,7 +18,7 @@
         <label class="form-label">
           {{ $t('recover-password.form.new-password') }}
         </label>
-        <Password
+        <password
           :feedback="false"
           input-class="form-control"
           v-model="form.newPassword"
