@@ -17,11 +17,35 @@
     "logout": "Sair"
   },
   "main-menu": {
-    "dashboards": "Dashboards",
-    "financial": "Financeiro",
-    "registration": "Cadastros",
-    "configurations": "Configurações",
-    "investments": "Investimentos"
+    "base": {
+      "financial": "Financeiro",
+      "registration": "Cadastros",
+      "configurations": "Configurações",
+      "investments": "Investimentos"
+    },
+    "financial": {
+      "fixed-movements": "Movimentos fixos",
+      "period-movements": "Movimentos do período",
+      "financial-periods": "Períodos financeiros",
+      "credit-card-invoice": "Fatura do cartão",
+      "bank-accounts": "Contas bancárias",
+      "vehicle-logbook": "Diário do veículo"
+    },
+    "investments": {
+      "stocks": "Ações",
+      "funds": "Fundos"
+    },
+    "registration": { 
+      "vehicles": "Veículos",
+      "wallets": "Carteiras",
+      "credit-cards": "Cartões de credito",
+      "cost-centers": "Centros de custos",
+      "movement-classes": "Classes de movimento"
+    },
+    "configurations": { 
+      "users": "Usuários",
+      "parameters": "Parâmetros"
+    }
   },
   "login": {
     "title": "Bem vindo, acesse sua conta",

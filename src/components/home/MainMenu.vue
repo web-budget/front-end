@@ -16,55 +16,118 @@
         <div class="collapse navbar-collapse" id="navbar-menu">
           <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#" >
-                  <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <dashboard-icon />
-                  </span>
-                  <span class="nav-link-title">
-                    {{ $t('main-menu.dashboards') }}
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" >
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <currency-dollar-icon />
                   </span>
                   <span class="nav-link-title">
-                    {{ $t('main-menu.financial') }}
+                    {{ $t('main-menu.base.financial') }}
                   </span>
                 </a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.financial.credit-card-invoice') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.financial.bank-accounts') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.financial.financial-periods') }}
+                      </a>
+                    </div>
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.financial.vehicle-logbook') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.financial.fixed-movements') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.financial.period-movements') }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" >
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <chart-area-icon />
                   </span>
                   <span class="nav-link-title">
-                    {{ $t('main-menu.investments') }}
+                    {{ $t('main-menu.base.investments') }}
                   </span>
                 </a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.investments.stocks') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.investments.funds') }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" >
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <edit-icon />
                   </span>
                   <span class="nav-link-title">
-                    {{ $t('main-menu.registration') }}
+                    {{ $t('main-menu.base.registration') }}
                   </span>
                 </a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.registration.vehicles') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.registration.wallets') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.registration.credit-cards') }}
+                      </a>
+                    </div>
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.registration.cost-centers') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.registration.movement-classes') }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" >
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <adjustments-icon />
                   </span>
                   <span class="nav-link-title">
-                    {{ $t('main-menu.configurations') }}
+                    {{ $t('main-menu.base.configurations') }}
                   </span>
                 </a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.configurations.users') }}
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        {{ $t('main-menu.configurations.parameters') }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
@@ -78,10 +141,17 @@ import UserMenu from '@/components/home/UserMenu.vue'
 import NotificationMenu from '@/components/home/NotificationMenu.vue'
 
 import {
-  DashboardIcon,
   EditIcon,
   CurrencyDollarIcon,
   ChartAreaIcon,
   AdjustmentsIcon
 } from 'vue-tabler-icons'
 </script>
+
+<style scoped>
+.dropdown-toggle::after {
+  border-top: none;
+  border-right: none;
+  box-sizing: unset;
+}
+</style>
