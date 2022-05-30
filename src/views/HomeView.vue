@@ -1,8 +1,9 @@
 <template>
-  <home-template ></home-template>
+  <page-content pre-title="home.header.pre-title" title="home.header.title">
+    Home
+  </page-content>
 </template>
 
 <script setup>
-import HomeTemplate from '@/components/templates/HomeTemplate.vue'
-
+import PageContent from '@/components/home/PageContent.vue'
 </script>

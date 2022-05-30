@@ -33,7 +33,18 @@
     text-decoration: none !important;
 }
 
-// primevue x tabler adjustments
+/* 
+    primevue x tabler adjustments
+*/
+
+// fix input password wrapper 
 .p-password.p-inputwrapper {
     width: 100%;
+}
+
+// fix arrow down in drop downs and menus
+.dropdown-toggle::after {
+    border-top: none;
+    border-right: none;
+    box-sizing: unset;
 }

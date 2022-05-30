@@ -86,5 +86,17 @@
       "change-password": "Trocar senha",
       "back-to-login": "Voltar ao login"
     }
+  },
+  "cost-center": {
+    "header": {
+      "title": "Centros de custo",
+      "pre-title": "Lista"
+    },
+    "form": {
+
+    },
+    "list": {
+
+    }
   }
 }

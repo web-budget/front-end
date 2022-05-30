@@ -97,9 +97,9 @@
                       </a>
                     </div>
                     <div class="dropdown-menu-column">
-                      <a class="dropdown-item" href="#">
+                      <router-link class="dropdown-item" :to="{ name: 'cost-centers' }">
                         {{ $t('main-menu.registration.cost-centers') }}
-                      </a>
+                      </router-link>
                       <a class="dropdown-item" href="#">
                         {{ $t('main-menu.registration.movement-classes') }}
                       </a>
@@ -147,11 +147,3 @@ import {
   AdjustmentsIcon
 } from 'vue-tabler-icons'
 </script>
-
-<style scoped>
-.dropdown-toggle::after {
-  border-top: none;
-  border-right: none;
-  box-sizing: unset;
-}
-</style>
