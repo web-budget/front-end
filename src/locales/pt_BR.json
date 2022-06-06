@@ -47,6 +47,16 @@
       "parameters": "Parâmetros"
     }
   },
+  "grid": {
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "actions": { 
+      "edit": "Editar",
+      "delete": "Deletar"
+    }
+  },
   "login": {
     "title": "Bem vindo, acesse sua conta",
     "form": {

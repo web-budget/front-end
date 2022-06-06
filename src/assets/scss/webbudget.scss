@@ -48,3 +48,8 @@
     border-right: none;
     box-sizing: unset;
 }
+
+// fix bottom border for tables inside cards
+.p-datatable-tbody {
+    border-bottom-width: 0 !important;
+}
