@@ -55,6 +55,17 @@
     "actions": { 
       "edit": "Editar",
       "delete": "Deletar"
+    },
+    "columns": {
+      "status": "Status",
+      "actions": "Ações"
+    }
+  },
+  "search-controls": {
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo",
+      "all": "Todos"
     }
   },
   "login": {
@@ -93,20 +104,23 @@
       "new-password-placeholder": "Confirme sua senha"
     },
     "action": {
-      "change-password": "Trocar senha",
+      "change-password": "Trocar senha", 
       "back-to-login": "Voltar ao login"
     }
   },
   "cost-center": {
     "header": {
       "title": "Centros de custo",
-      "pre-title": "Lista"
+      "pre-title": "Cadastros"
     },
     "form": {
 
     },
-    "list": {
-
+    "grid": {
+      "description": "Descrição"
+    },
+    "search": {
+      "filters": "Descrição"
     }
   }
 }

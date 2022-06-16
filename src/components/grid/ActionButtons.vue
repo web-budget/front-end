@@ -2,13 +2,13 @@
   <div class="w-100 text-center">
     <button
       type="button"
-      @click="$emit('edit-action')"
+      @click="$emit('onEdit')"
       class="btn btn-outline-primary btn-icon me-2">
       <edit-icon />
     </button>
     <button
       type="button"
-      @click="$emit('delete-action')"
+      @click="$emit('onDelete')"
       class="btn btn-outline-danger btn-icon">
       <trash-icon />
     </button>
@@ -23,5 +23,5 @@ import {
   EditIcon
 } from 'vue-tabler-icons'
 
-defineEmits(['edit-action', 'delete-action'])
+defineEmits(['onEdit', 'onDelete'])
 </script>
