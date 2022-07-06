@@ -48,6 +48,10 @@
     }
   },
   "grid": {
+    "state": {
+      "empty": "Nenhum registro encontrado",
+      "loading": "Carregando registros, aguarde..."
+    },
     "status": {
       "active": "Ativo",
       "inactive": "Inativo"
@@ -66,6 +70,9 @@
       "active": "Ativo",
       "inactive": "Inativo",
       "all": "Todos"
+    },
+    "actions": {
+      "add": "Adicionar"
     }
   },
   "login": {

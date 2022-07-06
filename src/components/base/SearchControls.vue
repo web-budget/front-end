@@ -39,7 +39,7 @@
       </label>
     </div>
   </div>
-  <div class="col-9">
+  <div class="col-8 pe-2">
     <div class="row g-2">
       <div class="col">
         <input
@@ -51,11 +51,16 @@
           @input="$emit('update:filter', $event.target.value)">
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-primary btn-icon" @click="$emit('onFilter')">
+        <button type="button" class="btn btn-secondary btn-icon" @click="$emit('onFilter')">
           <search-icon/>
         </button>
       </div>
     </div>
+  </div>
+  <div class="col-1">
+    <button type="button" class="btn btn-primary w-100" @click="$emit('onAdd')">
+      {{ $t('search-controls.actions.add') }}
+    </button>
   </div>
 </template>
 
@@ -83,5 +88,5 @@ const props = defineProps({
 
 const selectedStatus = ref(props.status)
 
-defineEmits(['onFilter', 'update:filter', 'update:status'])
+defineEmits(['onFilter', 'onAdd', 'update:filter', 'update:status'])
 </script>
