@@ -10,7 +10,7 @@
         v-model="selectedStatus"
         @click="$emit('onFilter')"
         @change="$emit('update:status', $event.target.value)">
-      <label for="rdAll" class="btn btn-outline-secondary">
+      <label for="rdAll" class="btn btn-outline-primary">
         {{ $t('search-controls.status.all') }}
       </label>
       <input
@@ -40,21 +40,17 @@
     </div>
   </div>
   <div class="col-8 pe-2">
-    <div class="row g-2">
-      <div class="col">
-        <input
-          type="text"
-          :value="props.filter"
-          class="form-control"
-          :placeholder="props.placeholder"
-          @keydown.enter.prevent="$emit('onFilter')"
-          @input="$emit('update:filter', $event.target.value)">
-      </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-secondary btn-icon" @click="$emit('onFilter')">
-          <search-icon/>
-        </button>
-      </div>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        :value="props.filter"
+        :placeholder="props.placeholder"
+        @keydown.enter.prevent="$emit('onFilter')"
+        @input="$emit('update:filter', $event.target.value)">
+      <button type="button" class="btn" @click="$emit('onFilter')">
+        <search-icon/>
+      </button>
     </div>
   </div>
   <div class="col-1">
@@ -65,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, defineProps } from 'vue'
+import { ref } from 'vue'
 
 import { SearchIcon } from 'vue-tabler-icons'
 
@@ -90,3 +86,9 @@ const selectedStatus = ref(props.status)
 
 defineEmits(['onFilter', 'onAdd', 'update:filter', 'update:status'])
 </script>
+
+<style scoped>
+.btn .icon {
+  margin: 0;
+}
+</style>

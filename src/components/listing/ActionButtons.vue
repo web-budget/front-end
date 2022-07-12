@@ -16,8 +16,6 @@
 </template>
 
 <script setup>
-import { defineEmits } from 'vue'
-
 import {
   TrashIcon,
   EditIcon

@@ -1,5 +1,5 @@
 export default class PageRequest {
-  constructor(filter = '', state = 'ACTIVE', current = 0, size = 10, direction = 'asc', sortFields) {
+  constructor(filter = '', state = 'ACTIVE', current = 0, size = 15, direction = 'asc', sortFields) {
     this.filter = filter
     this.state = state
     this.current = current

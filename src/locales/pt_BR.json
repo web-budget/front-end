@@ -54,7 +54,10 @@
     },
     "status": {
       "active": "Ativo",
-      "inactive": "Inativo"
+      "inactive": "Inativo",
+      "showing": "Mostrando de ",
+      "until": " até ",
+      "total": ", total "
     },
     "actions": { 
       "edit": "Editar",
