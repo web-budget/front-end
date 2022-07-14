@@ -3,8 +3,7 @@ import axios from 'axios'
 
 const getClient = (context, requireAuth) => {
   const options = {
-    baseURL: `${process.env.VUE_APP_API_URL || 'http://localhost:8080'}/${context}`,
-    timeout: 600
+    baseURL: `${process.env.VUE_APP_API_URL || 'http://localhost:8080'}/${context}`
   }
 
   // if (requireAuth && store.getters['authentication/isAuthenticated']) {

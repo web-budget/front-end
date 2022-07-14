@@ -11,49 +11,23 @@
             :placeholder="$t('cost-center.search.filters')"/>
         </div>
         <div class="card-body border-bottom p-0">
-          <DataTable
-            dataKey="id"
-            :lazy="true"
-            :rowHover="true"
-            sortMode="multiple"
-            :paginator="true"
-            stateStorage="session"
-            selectionMode="single"
-            :rows="pageRequest.size"
-            responsiveLayout="scroll"
-            :value="pageResponse.content"
-            @page="onPageChange($event)"
-            :loading="viewState.gridLoading"
-            stateKey="dt-state-demo-session"
-            @row-select="changeToDetail()"
-            :rowsPerPageOptions="[15,30,60]"
-            v-model:selection="viewState.selectedValue"
-            :total-records="pageResponse.totalElements"
-            :currentPageReportTemplate="translatePageReport()"
-            class="table card-table table-vcenter text-nowrap datatable"
-            paginatorTemplate="CurrentPageReport RowsPerPageDropdown FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink">
-
-            <template #empty>
-              {{ $t('grid.state.empty') }}
+          <default-grid
+            :loading="viewState.loading"
+            :data="pageResponse.content"
+            @on-page-change="onPageChange($event)"
+            @on-row-select="changeToDetail($event)"
+            :total-elements="pageResponse.totalElements">
+            <template #columns>
+              <Column field="description" :header="$t('cost-center.grid.description')" :sortable="true" />
+              <Column headerStyle="width: 12%" :header="$t('grid.columns.actions')">
+                <template #body="slotProps">
+                  <action-buttons
+                    @onEdit="changeToEdit(slotProps.data.id)"
+                    @onDelete="changeToDelete(slotProps.data.id)" />
+                </template>
+              </Column>
             </template>
-            <template #loading>
-              {{ $t('grid.state.loading') }}
-            </template>
-
-            <Column field="active" headerStyle="width: 10%" :header="$t('grid.columns.status')" :sortable="true">
-              <template #body="slotProps">
-                <status-badge :active="slotProps.data.active" />
-              </template>
-            </Column>
-            <Column field="description" :header="$t('cost-center.grid.description')" :sortable="true" />
-            <Column headerStyle="width: 12%" :header="$t('grid.columns.actions')">
-              <template #body="slotProps">
-                <action-buttons
-                  @onEdit="changeToEdit(slotProps.data.id)"
-                  @onDelete="changeToDelete(slotProps.data.id)" />
-              </template>
-            </Column>
-          </DataTable>
+          </default-grid>
         </div>
       </div>
     </div>
@@ -62,28 +36,24 @@
 
 <script setup>
 import { reactive, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-import DataTable from 'primevue/datatable'
-import Column from 'primevue/column'
 
 import router from '@/router'
 
+import Column from 'primevue/column'
+
 import PageContent from '@/components/home/PageContent.vue'
-import ActionButtons from '@/components/listing/ActionButtons.vue'
-import StatusBadge from '@/components/listing/StatusBadge.vue'
+
+import DefaultGrid from '@/components/listing/DefaultGrid.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
+import ActionButtons from '@/components/listing/ActionButtons.vue'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
 import CostCenterClient from '@/clients/registration/cost-center.client'
 
-const { t } = useI18n()
-
 const viewState = reactive({
-  gridLoading: false,
-  selectedValue: null
+  loading: false
 })
 
 const pageRequest = reactive(new PageRequest())
@@ -97,24 +67,20 @@ onMounted(() => {
 
 async function applyFilter() {
   try {
-    viewState.gridLoading = true
+    viewState.loading = true
     const response = await costCenterClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
     console.log(error)
   } finally {
-    viewState.gridLoading = false
+    viewState.loading = false
   }
 }
 
 function onPageChange(event) {
-  pageRequest.current = event.page
-  pageRequest.size = event.rows
+  pageRequest.size = event.pageSize
+  pageRequest.current = event.currentPage
   applyFilter()
-}
-
-function translatePageReport() {
-  return t('grid.status.showing') + '{first}' + t('grid.status.until') + '{last}' + t('grid.status.total') + '{totalRecords}'
 }
 
 function changeToEdit(id) {
@@ -125,19 +91,11 @@ function changeToDelete(id) {
   router.push({ name: 'cost-centers.delete', params: { id: id } })
 }
 
-function changeToDetail() {
-  router.push({ name: 'cost-centers.detail', params: { id: viewState.selectedValue.id } })
+function changeToDetail(event) {
+  router.push({ name: 'cost-centers.detail', params: { id: event.id } })
 }
 
 function changeToAdd() {
   router.push({ name: 'cost-centers.add' })
 }
 </script>
-
-<style lang="scss" scoped>
-::v-deep(.p-paginator) {
-    .p-paginator-rpp-options {
-        margin-right: auto;
-    }
-}
-</style>
