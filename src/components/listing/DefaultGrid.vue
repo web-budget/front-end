@@ -1,24 +1,23 @@
 <template>
   <DataTable
-    dataKey="id"
     :lazy="true"
+    dataKey="id"
     :rowHover="true"
     :paginator="true"
+    :autoLayout="true"
     :value="props.data"
-    sortMode="multiple"
-    stateStorage="session"
+    :removableSort="true"
     selectionMode="single"
     :rows="props.pageSize"
     :loading="props.loading"
-    responsiveLayout="scroll"
-    stateKey="dt-state-demo-session"
+    @sort="fireTableSorted($event)"
     :rowsPerPageOptions="[15,30,60]"
     v-model:selection="selectedRowValue"
-    :total-records="props.totalElements"
+    :totalRecords="props.totalElements"
     :currentPageReportTemplate="translatePageReport()"
-    @row-select="$emit('onRowSelect', selectedRowValue)"
+    @row-select="$emit('rowSelected', selectedRowValue)"
     class="table card-table table-vcenter text-nowrap datatable"
-    @page="$emit('onPageChange', { currentPage: $event.page, pageSize: $event.rows })"
+    @page="$emit('pageChanged', { currentPage: $event.page, pageSize: $event.rows })"
     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown">
 
     <template #empty>
@@ -76,11 +75,19 @@ const props = defineProps({
   }
 })
 
-defineEmits(['onPageChange', 'onRowSelect'])
+const emit = defineEmits(['pageChanged', 'rowSelected', 'tableSorted'])
 
 function translatePageReport() {
   return t('grid.status.showing') + '{first}' + t('grid.status.until') +
   '{last}' + t('grid.status.total') + '{totalRecords}'
+}
+
+function fireTableSorted(event) {
+  const order = event.sortOrder != null
+    ? event.sortOrder > 0 ? 'asc' : 'desc'
+    : event.sortOrder
+
+  emit('tableSorted', { sortField: event.sortField, direction: order })
 }
 </script>
 

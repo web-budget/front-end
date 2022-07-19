@@ -5,7 +5,7 @@
         <div class="card-header">
           <search-controls
             @onAdd="changeToAdd()"
-            @onFilter="applyFilter()"
+            @onStatusChange="applyFilter()"
             v-model:filter="pageRequest.filter"
             v-model:status="pageRequest.status"
             :placeholder="$t('cost-center.search.filters')"/>
@@ -14,8 +14,9 @@
           <default-grid
             :loading="viewState.loading"
             :data="pageResponse.content"
-            @on-page-change="onPageChange($event)"
-            @on-row-select="changeToDetail($event)"
+            @page-changed="onPageChange($event)"
+            @table-sorted="onTableSorted($event)"
+            @row-selected="changeToDetail($event)"
             :total-elements="pageResponse.totalElements">
             <template #columns>
               <Column field="description" :header="$t('cost-center.grid.description')" :sortable="true" />
@@ -61,10 +62,6 @@ const pageResponse = reactive(new PageResponse())
 
 const costCenterClient = new CostCenterClient()
 
-onMounted(() => {
-  applyFilter()
-})
-
 async function applyFilter() {
   try {
     viewState.loading = true
@@ -83,6 +80,12 @@ function onPageChange(event) {
   applyFilter()
 }
 
+function onTableSorted(event) {
+  pageRequest.sortField = event.sortField
+  pageRequest.direction = event.direction
+  applyFilter()
+}
+
 function changeToEdit(id) {
   router.push({ name: 'cost-centers.edit', params: { id: id } })
 }
@@ -98,4 +101,8 @@ function changeToDetail(event) {
 function changeToAdd() {
   router.push({ name: 'cost-centers.add' })
 }
+
+onMounted(() => {
+  applyFilter()
+})
 </script>

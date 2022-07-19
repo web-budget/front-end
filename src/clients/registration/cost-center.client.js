@@ -6,18 +6,11 @@ export default class CostCenterClient extends ApiClient {
   }
 
   findAll(pageRequest) {
-    const requestPath = `?page=${pageRequest.current}&size=${pageRequest.size}`
+    const requestParams = {
+      filter: pageRequest.filter,
+      status: pageRequest.status.toUpperCase()
+    }
 
-    // if (pageRequest.isSortable()) {
-    //   requestPath = `${requestPath}&sort=${pageRequest.sortFields},${pageRequest.direction}`
-    // }
-
-    // const requestParams = {
-    //   filter: pageRequest.filter,
-    //   state: pageRequest.state.toUpperCase()
-    // }
-
-    // return super.get(requestPath, { params: requestParams })
-    return super.get(requestPath)
+    return super.get(pageRequest.buildRequestPath(), { params: requestParams })
   }
 }

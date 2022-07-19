@@ -1,14 +1,24 @@
 export default class PageRequest {
-  constructor(filter = '', state = 'ACTIVE', current = 0, size = 15, direction = 'asc', sortFields) {
+  constructor(filter = '', status = 'ACTIVE', current = 0, size = 15, direction = 'asc', sortField) {
     this.filter = filter
-    this.state = state
+    this.status = status
     this.current = current
     this.size = size
     this.direction = direction
-    this.sortFields = sortFields
+    this.sortField = sortField
   }
 
   isSortable() {
-    return Boolean(this.sortFields)
+    return Boolean(this.sortField)
+  }
+
+  buildRequestPath() {
+    let requestPath = `?page=${this.current}&size=${this.size}`
+
+    if (this.isSortable()) {
+      requestPath = `${requestPath}&sort=${this.sortField},${this.direction}`
+    }
+
+    return requestPath
   }
 }

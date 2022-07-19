@@ -8,8 +8,7 @@
         value="ALL"
         class="btn-check"
         v-model="selectedStatus"
-        @click="$emit('onFilter')"
-        @change="$emit('update:status', $event.target.value)">
+        @change="fireStatusChanged()">
       <label for="rdAll" class="btn btn-outline-primary">
         {{ $t('search-controls.status.all') }}
       </label>
@@ -20,8 +19,7 @@
         value="ACTIVE"
         class="btn-check"
         v-model="selectedStatus"
-        @click="$emit('onFilter')"
-        @change="$emit('update:status', $event.target.value)">
+        @change="fireStatusChanged()">
       <label for="rdActive" class="btn btn-outline-success">
         {{ $t('search-controls.status.active') }}
       </label>
@@ -32,8 +30,7 @@
         value="INACTIVE"
         class="btn-check"
         v-model="selectedStatus"
-        @click="$emit('onFilter')"
-        @change="$emit('update:status', $event.target.value)">
+        @change="fireStatusChanged()">
       <label for="rdInactive" class="btn btn-outline-danger" >
         {{ $t('search-controls.status.inactive') }}
       </label>
@@ -46,9 +43,9 @@
         class="form-control"
         :value="props.filter"
         :placeholder="props.placeholder"
-        @keydown.enter.prevent="$emit('onFilter')"
+        @keydown.enter.prevent="fireStatusChanged()"
         @input="$emit('update:filter', $event.target.value)">
-      <button type="button" class="btn" @click="$emit('onFilter')">
+      <button type="button" class="btn" @click="fireStatusChanged()">
         <search-icon/>
       </button>
     </div>
@@ -84,7 +81,12 @@ const props = defineProps({
 
 const selectedStatus = ref(props.status)
 
-defineEmits(['onFilter', 'onAdd', 'update:filter', 'update:status'])
+const emit = defineEmits(['onStatusChange', 'onAdd', 'update:filter', 'update:status'])
+
+function fireStatusChanged() {
+  emit('update:status', selectedStatus.value)
+  emit('onStatusChange')
+}
 </script>
 
 <style scoped>
