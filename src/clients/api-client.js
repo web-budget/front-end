@@ -1,24 +1,55 @@
 
 import axios from 'axios'
 
-const getClient = (context, requireAuth) => {
+const configureClient = (context) => {
   const options = {
     baseURL: `${process.env.VUE_APP_API_URL || 'http://localhost:8080'}/${context}`
   }
-
-  // if (requireAuth && store.getters['authentication/isAuthenticated']) {
-  //   options.headers = {
-  //     'Content-type': 'application/json',
-  //     Authorization: `Bearer ${store.getters['authentication/accessToken']}`
-  //   }
-  // }
-
   return axios.create(options)
 }
 
+const authInterceptor = config => {
+  config.headers.Authorization = 'Bearer something'
+  config.headers.common.Accept = 'Application/json'
+  config.headers['Access-Control-Allow-Origin'] = '*'
+  return config
+}
+
+const loggingInterceptor = config => {
+  const params = JSON.stringify(config.params)
+  console.info(`Sending [${config.method.toUpperCase()}] to [${config.baseURL}/${config.url}] with params [${params}]`)
+  return config
+}
+
 class ApiClient {
-  constructor(context = null, requireAuth = true) {
-    this.client = getClient(context, requireAuth)
+  constructor(context = null, requireAuth = false) {
+    this.client = configureClient(context, requireAuth)
+
+    if (requireAuth) {
+      this.client.interceptors.request.use(authInterceptor)
+    }
+
+    const debugEnabled = process.env.VUE_APP_LOG_REQUESTS || false
+    if (debugEnabled) {
+      this.client.interceptors.request.use(loggingInterceptor)
+    }
+
+    this.client.interceptors.response.use(
+      success => Promise.resolve(success),
+      error => {
+        const status = error.response.status
+
+        if (status === 401) {
+          // TODO logout and send back to login
+        } else if (status === 403) {
+          // TODO send user to unauthorized page
+        } else {
+          Event.$emit('requestError', status, error.response.data.message)
+        }
+
+        return Promise.reject(error)
+      }
+    )
   }
 
   head(path, conf = {}) {
