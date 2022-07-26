@@ -43,10 +43,7 @@ class ApiClient {
           // TODO logout and send back to login
         } else if (status === 403) {
           // TODO send user to unauthorized page
-        } else {
-          Event.$emit('requestError', status, error.response.data.message)
         }
-
         return Promise.reject(error)
       }
     )

@@ -47,6 +47,21 @@
       "parameters": "Parâmetros"
     }
   },
+  "messages": {
+    "500": {
+      "summary": "Erro no servidor",
+      "server-unavailable": "Servidor não respondeu a requisição ou está inacessível no momento"
+    },
+    "400": {
+      "summary": "Falha ao processar a requisição"
+    },
+    "422": {
+      "summary": "Falha ao processar os dados da requisição"
+    },
+    "409": {
+      "summary": "Conflito"
+    }
+  },
   "grid": {
     "state": {
       "empty": "Nenhum registro encontrado",

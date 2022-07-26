@@ -1,4 +1,4 @@
-<template>
+<template v-once>
   <div class="nav-item dropdown">
     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
       <vue-gravatar :email="currentUser.email" class="avatar avatar-sm" />
@@ -17,14 +17,16 @@
 </template>
 
 <script setup>
+import { reactive } from 'vue'
+
 import router from '@/router'
 
 // TODO mock, should come from state holder
-const currentUser = {
+const currentUser = reactive({
   name: 'Admin',
   email: 'admin@webbudget.com.br',
   role: 'ADMINISTRATOR'
-}
+})
 
 function doLogout() {
   // TODO do logout stuff here

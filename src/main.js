@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
 import App from './App.vue'
 
@@ -9,6 +10,7 @@ import i18n from '@/locales'
 // UI things (magic)
 import PrimeVue from 'primevue/config'
 import Tooltip from 'primevue/tooltip'
+import ToastService from 'primevue/toastservice'
 import VueGravatar from 'vue3-gravatar'
 
 // some css
@@ -24,10 +26,14 @@ import '@/assets/js/tabler.min.js'
 // web-budget custom
 import '@/assets/scss/webbudget.scss'
 
+const pinia = createPinia()
+
 createApp(App)
+  .use(pinia)
   .use(i18n)
   .use(router)
   .use(PrimeVue)
+  .use(ToastService)
   .use(VueGravatar)
   .directive('tooltip', Tooltip)
   .mount('#app')

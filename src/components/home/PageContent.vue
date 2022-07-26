@@ -14,6 +14,7 @@
     </div>
   </div>
   <div class="page-body">
+    <message-display />
     <div class="container-xl">
       <div class="row row-deck row-cards">
         <slot></slot>
@@ -23,6 +24,8 @@
 </template>
 
 <script setup>
+import MessageDisplay from '@/components/utilities/MessageDisplay.vue'
+
 const props = defineProps({
   title: {
     type: String,

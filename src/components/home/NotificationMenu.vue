@@ -1,5 +1,5 @@
 <template>
-  <div class="d-none d-md-flex">
+  <div v-once class="d-none d-md-flex">
     <div class="nav-item dropdown d-none d-md-flex me-3">
       <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
         <bell-icon />

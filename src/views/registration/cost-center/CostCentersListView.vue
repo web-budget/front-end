@@ -53,9 +53,13 @@ import PageResponse from '@/models/page-response'
 
 import CostCenterClient from '@/clients/registration/cost-center.client'
 
+import { useMessagingStore } from '@/stores/messagingStore'
+
 const viewState = reactive({
   loading: false
 })
+
+const messagingStore = useMessagingStore()
 
 const pageRequest = reactive(new PageRequest())
 const pageResponse = reactive(new PageResponse())
@@ -68,7 +72,8 @@ async function applyFilter() {
     const response = await costCenterClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
-    console.log(error)
+    messagingStore.httpStatus = error.response.status
+    messagingStore.messageData = error.response.data
   } finally {
     viewState.loading = false
   }
