@@ -19,7 +19,7 @@
             @row-selected="changeToDetail($event)"
             :total-elements="pageResponse.totalElements">
             <template #columns>
-              <Column field="description" :header="$t('cost-center.grid.description')" :sortable="true" />
+              <Column field="name" :header="$t('cost-center.grid.name')" :sortable="true" />
               <Column headerStyle="width: 12%" :header="$t('grid.columns.actions')">
                 <template #body="slotProps">
                   <action-buttons
@@ -53,13 +53,13 @@ import PageResponse from '@/models/page-response'
 
 import CostCenterClient from '@/clients/registration/cost-center.client'
 
-import { useMessagingStore } from '@/stores/messagingStore'
+import { useHttpErrorHandler } from '@/composables/http-error-handler.js'
 
 const viewState = reactive({
   loading: false
 })
 
-const messagingStore = useMessagingStore()
+const { handleError } = useHttpErrorHandler()
 
 const pageRequest = reactive(new PageRequest())
 const pageResponse = reactive(new PageResponse())
@@ -72,8 +72,7 @@ async function applyFilter() {
     const response = await costCenterClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
-    messagingStore.httpStatus = error.response.status
-    messagingStore.messageData = error.response.data
+    handleError(error.response)
   } finally {
     viewState.loading = false
   }

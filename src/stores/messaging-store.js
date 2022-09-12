@@ -2,13 +2,11 @@ import { defineStore } from 'pinia'
 
 export const useMessagingStore = defineStore('messagingStore', {
   state: () => ({
-    messageData: null,
-    httpStatus: null
+    message: null
   }),
   actions: {
     handleMessage(message) {
-      this.messageData = message.data
-      this.httpStatus = message.httpStatus
+      this.message = message
     }
   }
 })

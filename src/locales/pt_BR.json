@@ -60,6 +60,12 @@
     },
     "409": {
       "summary": "Conflito"
+    },
+    "common": {
+      "success": "Sucesso!",
+      "error": "Erro",
+      "warning": "Aviso",
+      "information": "Informação"
     }
   },
   "grid": {
@@ -81,6 +87,21 @@
     "columns": {
       "status": "Status",
       "actions": "Ações"
+    }
+  },
+  "form": {
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "actions": {
+      "save": "Salvar",
+      "back": "Voltar"
+    },
+    "messages": {
+      "saved": "Registro salvo com sucesso!",
+      "update": "Registro atualizado com sucesso!",
+      "delete": "Registro excluído com sucesso!"
     }
   },
   "search-controls": {
@@ -139,13 +160,14 @@
       "pre-title": "Cadastros"
     },
     "form": {
-
-    },
-    "grid": {
+      "name": "Nome",
       "description": "Descrição"
     },
+    "grid": {
+      "name": "Nome"
+    },
     "search": {
-      "filters": "Descrição"
+      "filters": "Nome ou descrição"
     }
   }
 }
