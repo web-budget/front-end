@@ -53,7 +53,7 @@ import PageResponse from '@/models/page-response'
 
 import CostCenterClient from '@/clients/registration/cost-center.client'
 
-import { useHttpErrorHandler } from '@/composables/http-error-handler.js'
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 
 const viewState = reactive({
   loading: false

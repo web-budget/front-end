@@ -58,8 +58,8 @@ import { reactive } from 'vue'
 
 import router from '@/router'
 
-// import { useHttpErrorHandler } from '@/composables/http-error-handler.js'
-import { useMessageHandler } from '@/composables/message-handler.js'
+// import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
+import { useMessageHandler } from '@/composables/useMessageHandler.js'
 
 import PageContent from '@/components/home/PageContent.vue'
 
