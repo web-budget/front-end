@@ -17,12 +17,13 @@
     "pinia": "^2.0.16",
     "primeicons": "^5.0.0",
     "primevue": "^3.12.1",
-    "vee-validate": "^4.6.4",
+    "vee-validate": "^4.6.7",
     "vue": "^3.2.13",
     "vue-i18n": "^9.1.0",
     "vue-router": "^4.0.3",
     "vue-tabler-icons": "^2.6.0",
-    "vue3-gravatar": "^3.0.0"
+    "vue3-gravatar": "^3.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
