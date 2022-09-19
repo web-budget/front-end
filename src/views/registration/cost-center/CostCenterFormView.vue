@@ -1,6 +1,10 @@
 <template>
-  <page-content pre-title="cost-center.header.pre-title" title="cost-center.header.title">
-    <Form @submit="doSave" :validation-schema="schema" :initial-values="formDefaults" v-slot="{ errors }">
+  <page-content title="cost-center.title" :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'">
+    <Form
+      @submit="selectAction"
+      v-slot="{ errors }"
+      :initial-values="formDefaults"
+      :validation-schema="validationSchema">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
@@ -8,7 +12,7 @@
               <Field
                 id="rdAll"
                 type="radio"
-                value="false"
+                :value="false"
                 class="btn-check"
                 name="active" />
               <label for="rdAll" class="btn btn-outline-danger">
@@ -17,7 +21,7 @@
               <Field
                 id="rdActive"
                 type="radio"
-                value="true"
+                :value="true"
                 class="btn-check"
                 name="active" />
               <label for="rdActive" class="btn btn-outline-success">
@@ -41,8 +45,17 @@
           <div class="card-footer">
             <div class="row">
               <div class="col text-end">
-                <button class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">{{ $t('form.actions.back') }}</button>
-                <button type="submit" class="btn btn-primary">{{ $t('form.actions.save') }}</button>
+                <button class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">
+                  {{ $t('form.actions.back') }}
+                </button>
+                <button type="submit" class="btn btn-primary" :class="{ 'disabled': loading }">
+                  <span v-if="updating">
+                    {{ $t('form.actions.update') }}
+                  </span>
+                  <span v-else>
+                    {{ $t('form.actions.create') }}
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -53,46 +66,109 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 
 import router from '@/router'
 
-import * as Yup from 'yup'
+import { useI18n } from 'vue-i18n'
 
 import { Form, Field } from 'vee-validate'
 
-// import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
-// import { useMessageHandler } from '@/composables/useMessageHandler.js'
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
+import { useMessageHandler } from '@/composables/useMessageHandler.js'
+import { useI18nYupSchema } from '@/composables/useI18nYupSchema.js'
 
 import PageContent from '@/components/home/PageContent.vue'
+import CostCenterClient from '@/clients/registration/cost-center.client'
 
-// const { displaySuccess } = useMessageHandler()
-// const { handleError } = useHttpErrorHandler()
+const props = defineProps({
+  id: {
+    type: String,
+    default: null
+  },
+  updating: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const { displaySuccess } = useMessageHandler()
+const { handleError } = useHttpErrorHandler()
+
+const costCenterClient = new CostCenterClient()
+
+const { t } = useI18n()
+const { yup } = useI18nYupSchema()
+
+const loading = ref(false)
 
 const formDefaults = reactive({
-  active: 'true',
-  name: null,
-  description: null
+  active: true,
+  name: '',
+  description: ''
 })
 
-const schema = Yup.object().shape({
-  name: Yup.string().min(3).max(150).required()
+const validationSchema = yup.object().shape({
+  name: yup.string()
+    .min(3)
+    .max(150)
+    .required()
+    .label(t('cost-center.form.name'))
 })
 
-function doSave(values) {
-  console.log(values)
-  // try {
-  //   // loading true
-  //   console.log(formData)
-  //   displaySuccess('form.messages.saved')
-  // } catch (error) {
-  //   // handleError(error.response)
-  // } finally {
-  //   // loading false
-  // }
+async function prepareForUpdate() {
+  try {
+    loading.value = true
+    const { data } = await costCenterClient.findById(props.id)
+    Object.assign(formDefaults, data)
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
+}
+
+function selectAction(values, { resetForm }) {
+  if (props.updating) {
+    doUpdate(values)
+  } else {
+    doCreate(values, resetForm)
+  }
+}
+
+async function doCreate(values, resetForm) {
+  try {
+    loading.value = true
+    await costCenterClient.create(values)
+    resetForm()
+    displaySuccess('form.messages.created')
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
+}
+
+async function doUpdate(values) {
+  try {
+    loading.value = true
+    await costCenterClient.update(props.id, values)
+    prepareForUpdate()
+    displaySuccess('form.messages.updated')
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
 }
 
 function goBack() {
   router.go(-1)
 }
+
+onMounted(() => {
+  if (props.updating && props.id) {
+    prepareForUpdate()
+  }
+})
 </script>

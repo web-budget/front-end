@@ -3,13 +3,13 @@
     <button
       type="button"
       @click="$emit('onEdit')"
-      class="btn btn-outline-primary btn-icon me-2">
+      class="btn btn-ghost-primary btn-icon me-2">
       <edit-icon />
     </button>
     <button
       type="button"
       @click="$emit('onDelete')"
-      class="btn btn-outline-danger btn-icon">
+      class="btn btn-ghost-danger btn-icon">
       <trash-icon />
     </button>
   </div>

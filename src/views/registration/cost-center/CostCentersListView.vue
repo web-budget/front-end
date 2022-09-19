@@ -1,5 +1,5 @@
 <template>
-  <page-content pre-title="cost-center.header.pre-title" title="cost-center.header.title">
+  <page-content title="cost-center.title" action="pages.actions.listing">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
@@ -12,7 +12,7 @@
         </div>
         <div class="card-body border-bottom p-0">
           <default-grid
-            :loading="viewState.loading"
+            :loading="loading"
             :data="pageResponse.content"
             @page-changed="onPageChange($event)"
             @table-sorted="onTableSorted($event)"
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 
 import router from '@/router'
 
@@ -55,9 +55,7 @@ import CostCenterClient from '@/clients/registration/cost-center.client'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 
-const viewState = reactive({
-  loading: false
-})
+const loading = ref(false)
 
 const { handleError } = useHttpErrorHandler()
 
@@ -68,13 +66,13 @@ const costCenterClient = new CostCenterClient()
 
 async function applyFilter() {
   try {
-    viewState.loading = true
+    loading.value = true
     const response = await costCenterClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
     handleError(error.response)
   } finally {
-    viewState.loading = false
+    loading.value = false
   }
 }
 
@@ -91,7 +89,7 @@ function onTableSorted(event) {
 }
 
 function changeToEdit(id) {
-  router.push({ name: 'cost-centers.edit', params: { id: id } })
+  router.push({ name: 'cost-centers.update', params: { id: id } })
 }
 
 function changeToDelete(id) {
@@ -103,7 +101,7 @@ function changeToDetail(event) {
 }
 
 function changeToAdd() {
-  router.push({ name: 'cost-centers.add' })
+  router.push({ name: 'cost-centers.create' })
 }
 
 onMounted(() => {

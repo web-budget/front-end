@@ -13,4 +13,16 @@ export default class CostCenterClient extends ApiClient {
 
     return super.get(pageRequest.buildRequestPath(), { params: requestParams })
   }
+
+  findById(id) {
+    return super.get(`/${id}`)
+  }
+
+  create(values) {
+    return super.post('', values)
+  }
+
+  update(id, values) {
+    return super.put(`/${id}`, values)
+  }
 }

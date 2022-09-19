@@ -52,7 +52,7 @@
   </div>
   <div class="col-1">
     <button type="button" class="btn btn-primary w-100" @click="$emit('onAdd')">
-      {{ $t('search-controls.actions.add') }}
+      {{ $t('search-controls.actions.create') }}
     </button>
   </div>
 </template>

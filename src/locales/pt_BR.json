@@ -10,6 +10,15 @@
       "documentation": "Documentação"
     }
   },
+  "pages": {
+    "actions": {
+      "listing": "Listando",
+      "creating": "Criando",
+      "updating": "Atualizando",
+      "detailing": "Detalhando",
+      "deleting": "Excluindo"
+    }
+  },
   "user-menu": {
     "profile": "Meu Perfil",
     "configurations": "Configurações",
@@ -95,13 +104,20 @@
       "inactive": "Inativo"
     },
     "actions": {
-      "save": "Salvar",
+      "create": "Criar",
+      "update": "Atualizar",
       "back": "Voltar"
     },
     "messages": {
-      "saved": "Registro salvo com sucesso!",
-      "update": "Registro atualizado com sucesso!",
-      "delete": "Registro excluído com sucesso!"
+      "created": "Registro criado com sucesso!",
+      "updated": "Registro atualizado com sucesso!",
+      "deleted": "Registro excluído com sucesso!"
+    },
+    "validation": {
+      "required": "Obrigatório",
+      "min-value": "Tamanho mínimo {min} caracteres",
+      "max-value": "Tamanho máximo {max} caracteres",
+      "invalid": "Valor inválido"
     }
   },
   "search-controls": {
@@ -111,7 +127,7 @@
       "all": "Todos"
     },
     "actions": {
-      "add": "Adicionar"
+      "create": "Criar"
     }
   },
   "login": {
@@ -155,16 +171,16 @@
     }
   },
   "cost-center": {
-    "header": {
-      "title": "Centros de custo",
-      "pre-title": "Cadastros"
-    },
+    "title": "Centros de custo",
     "form": {
       "name": "Nome",
       "description": "Descrição"
     },
     "grid": {
       "name": "Nome"
+    },
+    "errors": {
+      "duplicated-name": "O nome informado já esta em uso por outro centro de custo"
     },
     "search": {
       "filters": "Nome ou descrição"

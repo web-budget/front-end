@@ -4,10 +4,10 @@
       <div class="row g-2 align-items-center">
         <div class="col">
           <div class="page-pretitle">
-            {{ $t(props.preTitle) }}
+            {{ $t(props.title) }}
           </div>
           <h2 class="page-title">
-            {{ $t(props.title) }}
+            {{ $t(props.action) }}
           </h2>
         </div>
       </div>
@@ -31,7 +31,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  preTitle: {
+  action: {
     type: String,
     default: ''
   }

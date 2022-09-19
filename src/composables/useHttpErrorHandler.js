@@ -5,11 +5,11 @@ export function useHttpErrorHandler() {
   const { t } = useI18n()
   const messagingStore = useMessagingStore()
 
-  function filterMessage(messageData) {
-    if (messageData.includes('ECONNREFUSED')) {
+  function filterMessage(responseData) {
+    if ((typeof responseData === 'string' || responseData instanceof String) && responseData.includes('ECONNREFUSED')) {
       return t('messages.500.server-unavailable')
     }
-    return messageData
+    return t(responseData.message)
   }
 
   function determineSeverity(httpStatus) {

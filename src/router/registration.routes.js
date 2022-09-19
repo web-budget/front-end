@@ -12,20 +12,20 @@ const routes = [
         component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCentersListView.vue')
       },
       {
-        path: 'add',
-        name: 'cost-centers.add',
+        path: 'create',
+        name: 'cost-centers.create',
         component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue')
       },
       {
-        path: ':id/edit',
-        name: 'cost-centers.edit',
-        props: (route) => ({ id: route.params.id, editing: true }),
+        path: ':id/update',
+        name: 'cost-centers.update',
+        props: (route) => ({ id: route.params.id, updating: true }),
         component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue')
       },
       {
         path: ':id/detail',
         name: 'cost-centers.detail',
-        props: (route) => ({ id: route.params.id, editing: false }),
+        props: (route) => ({ id: route.params.id, updating: false }),
         component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue')
       },
       {
