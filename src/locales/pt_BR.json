@@ -106,7 +106,11 @@
     "actions": {
       "create": "Criar",
       "update": "Atualizar",
-      "back": "Voltar"
+      "delete": "Excluir",
+      "back": "Voltar",
+      "yes": "Sim",
+      "no": "Não",
+      "delete-confirm": "Confirma a exclusão do registro?"
     },
     "messages": {
       "created": "Registro criado com sucesso!",

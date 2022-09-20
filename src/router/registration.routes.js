@@ -25,13 +25,13 @@ const routes = [
       {
         path: ':id/detail',
         name: 'cost-centers.detail',
-        props: (route) => ({ id: route.params.id, updating: false }),
+        props: (route) => ({ id: route.params.id }),
         component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue')
       },
       {
         path: ':id/delete',
         name: 'cost-centers.delete',
-        props: (route) => ({ id: route.params.id, deleting: false }),
+        props: (route) => ({ id: route.params.id, deleting: true }),
         component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue')
       }
     ]

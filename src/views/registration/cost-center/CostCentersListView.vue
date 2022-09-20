@@ -23,7 +23,7 @@
               <Column headerStyle="width: 12%" :header="$t('grid.columns.actions')">
                 <template #body="slotProps">
                   <action-buttons
-                    @onEdit="changeToEdit(slotProps.data.id)"
+                    @onEdit="changeToUpdate(slotProps.data.id)"
                     @onDelete="changeToDelete(slotProps.data.id)" />
                 </template>
               </Column>
@@ -88,7 +88,7 @@ function onTableSorted(event) {
   applyFilter()
 }
 
-function changeToEdit(id) {
+function changeToUpdate(id) {
   router.push({ name: 'cost-centers.update', params: { id: id } })
 }
 

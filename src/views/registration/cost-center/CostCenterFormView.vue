@@ -45,9 +45,9 @@
           <div class="card-footer">
             <div class="row">
               <div class="col text-end">
-                <button class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">
+                <a class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">
                   {{ $t('form.actions.back') }}
-                </button>
+                </a>
                 <button type="submit" class="btn btn-primary" :class="{ 'disabled': loading }">
                   <span v-if="updating">
                     {{ $t('form.actions.update') }}

@@ -25,4 +25,8 @@ export default class CostCenterClient extends ApiClient {
   update(id, values) {
     return super.put(`/${id}`, values)
   }
+
+  delete(id) {
+    return super.delete(`/${id}`)
+  }
 }
