@@ -10,14 +10,15 @@ import i18n from '@/locales'
 // UI things (magic)
 import PrimeVue from 'primevue/config'
 import Tooltip from 'primevue/tooltip'
-import ToastService from 'primevue/toastservice'
 import VueGravatar from 'vue3-gravatar'
+import Toast from 'vue-toastification'
 
 // some css
 import 'primevue/resources/themes/saga-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'bootstrap/scss/bootstrap.scss'
+import 'vue-toastification/dist/index.css'
 
 // tabler (the real magic)
 import '@/assets/css/tabler.min.css'
@@ -28,12 +29,18 @@ import '@/assets/scss/webbudget.scss'
 
 const pinia = createPinia()
 
+const toastConfig = {
+  transition: 'Vue-Toastification__fade',
+  maxToasts: 20,
+  newestOnTop: true
+}
+
 createApp(App)
   .use(pinia)
   .use(i18n)
   .use(router)
   .use(PrimeVue)
-  .use(ToastService)
+  .use(Toast, toastConfig)
   .use(VueGravatar)
   .directive('tooltip', Tooltip)
   .mount('#app')

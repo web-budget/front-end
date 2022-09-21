@@ -5,43 +5,32 @@ export function useMessageHandler() {
   const { t } = useI18n()
   const messagingStore = useMessagingStore()
 
-  function displayWarn(detail, title = 'messages.common.warning') {
-    const message = {
-      severity: 'warn',
-      summary: t(title),
-      detail: t(detail)
-    }
-    messagingStore.handleMessage(message)
+  function displayWarn(detail) {
+    display(detail, 'warning')
   }
 
-  function displaySuccess(detail, title = 'messages.common.success') {
-    const message = {
-      severity: 'success',
-      summary: t(title),
-      detail: t(detail)
-    }
-    messagingStore.handleMessage(message)
+  function displaySuccess(detail) {
+    display(detail, 'success')
   }
 
-  function displayInfo(detail, title = 'messages.common.information') {
-    const message = {
-      severity: 'info',
-      summary: t(title),
-      detail: t(detail)
-    }
-    messagingStore.handleMessage(message)
+  function displayInfo(detail) {
+    display(detail, 'info')
   }
 
-  function displayError(detail, title = 'messages.common.error') {
+  function displayError(detail) {
+    display(detail, 'error')
+  }
+
+  function display(detail, type = 'default') {
     const message = {
-      severity: 'error',
-      summary: t(title),
-      detail: t(detail)
+      type: type,
+      content: t(detail)
     }
     messagingStore.handleMessage(message)
   }
 
   return {
+    display,
     displayWarn,
     displayError,
     displayInfo,

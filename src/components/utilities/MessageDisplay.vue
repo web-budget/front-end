@@ -1,22 +1,30 @@
 <template>
-  <Toast position="top-center"/>
+  <div></div>
 </template>
 
 <script setup>
-import Toast from 'primevue/toast'
-import { useToast } from 'primevue/usetoast'
-
+import { useToast, POSITION } from 'vue-toastification'
 import { useMessagingStore } from '@/stores/messaging-store'
 
 const toast = useToast()
 const messagingStore = useMessagingStore()
 
 function displayMessage(message) {
-  const toastMessage = {
-    life: 5000,
-    ...message
+  const toastConfig = {
+    timeout: 5000,
+    position: POSITION.TOP_CENTER,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    closeButton: 'button',
+    icon: true,
+    type: message.type
   }
-  toast.add(toastMessage)
+
+  toast(message.content, toastConfig)
 }
 
 messagingStore.$subscribe((mutation, state) => {

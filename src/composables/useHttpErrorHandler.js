@@ -14,27 +14,17 @@ export function useHttpErrorHandler() {
 
   function determineSeverity(httpStatus) {
     if (httpStatus >= 400 && httpStatus < 500) {
-      return 'warn'
+      return 'warning'
     }
     return 'error'
   }
 
   function handleError(response) {
-    const summaries = {
-      500: 'messages.500.summary',
-      400: 'messages.400.summary',
-      422: 'messages.422.summary',
-      409: 'messages.409.summary'
-    }
-
     const { data, status } = response
 
-    const summary = summaries[status] || summaries.default
-
     const message = {
-      severity: determineSeverity(status),
-      summary: t(summary),
-      detail: filterMessage(data)
+      type: determineSeverity(status),
+      content: filterMessage(data)
     }
 
     messagingStore.handleMessage(message)
