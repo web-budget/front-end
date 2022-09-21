@@ -137,8 +137,8 @@
 </template>
 
 <script setup>
-import UserMenu from '@/components/home/UserMenu.vue'
-import NotificationMenu from '@/components/home/NotificationMenu.vue'
+import UserMenu from '@/components/base/UserMenu.vue'
+import NotificationMenu from '@/components/base/NotificationMenu.vue'
 
 import {
   EditIcon,

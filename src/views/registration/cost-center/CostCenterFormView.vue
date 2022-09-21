@@ -69,7 +69,7 @@ import { useMessageHandler } from '@/composables/useMessageHandler.js'
 import { useI18nYupSchema } from '@/composables/useI18nYupSchema.js'
 
 import FormField from '@/components/forms/FormField.vue'
-import PageContent from '@/components/home/PageContent.vue'
+import PageContent from '@/components/base/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import CostCenterClient from '@/clients/registration/cost-center.client'
 

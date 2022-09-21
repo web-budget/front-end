@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import PageContent from '@/components/home/PageContent.vue'
+import PageContent from '@/components/base/PageContent.vue'
 </script>
