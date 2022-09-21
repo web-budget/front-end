@@ -3,22 +3,25 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 v-if="formData.active" class="card-title text-success">
-            {{ $t('form.status.active') }}
-          </h3>
-          <h3 v-else class="card-title text-danger">
-            {{ $t('form.status.inactive') }}
-          </h3>
+          <status-toggle name="active" readOnly />
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-12 mb-3">
-              <label class="form-label required">{{ $t('cost-center.form.name') }}</label>
-              {{ formData.name }}
+              <form-field
+                readOnly
+                name="name"
+                label="cost-center.form.name"
+              />
             </div>
             <div class="col-12">
-              <label class="form-label">{{ $t('cost-center.form.description') }}</label>
-              {{ formData.description === '' ? '---' : formData.description }}
+              <form-field
+                readOnly
+                rows="4"
+                as="textarea"
+                name="description"
+                label="cost-center.form.description"
+              />
             </div>
           </div>
         </div>
@@ -54,14 +57,18 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import router from '@/router'
+
+import { useForm } from 'vee-validate'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
 
+import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/home/PageContent.vue'
+import StatusToggle from '@/components/forms/StatusToggle.vue'
 import CostCenterClient from '@/clients/registration/cost-center.client'
 
 const props = defineProps({
@@ -75,18 +82,13 @@ const props = defineProps({
   }
 })
 
+const { setValues } = useForm()
 const { displaySuccess } = useMessageHandler()
 const { handleError } = useHttpErrorHandler()
 
 const loading = ref(false)
 
 const costCenterClient = new CostCenterClient()
-
-const formData = reactive({
-  active: true,
-  name: '',
-  description: ''
-})
 
 async function doDelete() {
   try {
@@ -117,7 +119,12 @@ onMounted(async() => {
   if (props.id) {
     try {
       const { data } = await costCenterClient.findById(props.id)
-      Object.assign(formData, data)
+
+      setValues({
+        name: data.name,
+        active: data.active,
+        description: data.description
+      })
     } catch (error) {
       handleError(error.response)
     }

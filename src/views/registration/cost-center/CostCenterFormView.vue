@@ -1,44 +1,36 @@
 <template>
-  <page-content title="cost-center.title" :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'">
+  <page-content
+    title="cost-center.title"
+    :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'">
     <Form
-      @submit="selectAction"
       v-slot="{ errors }"
+      @submit="selectAction"
       :initial-values="formDefaults"
       :validation-schema="validationSchema">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <div class="btn-group">
-              <Field
-                id="rdAll"
-                type="radio"
-                :value="false"
-                class="btn-check"
-                name="active" />
-              <label for="rdAll" class="btn btn-outline-danger">
-                {{ $t('form.status.inactive') }}
-              </label>
-              <Field
-                id="rdActive"
-                type="radio"
-                :value="true"
-                class="btn-check"
-                name="active" />
-              <label for="rdActive" class="btn btn-outline-success">
-                {{ $t('form.status.active') }}
-              </label>
-            </div>
+            <status-toggle name="active" />
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-12 mb-3">
-                <label class="form-label required">{{ $t('cost-center.form.name') }}</label>
-                <Field type="text" name="name" class="form-control" :class="{ 'is-invalid': errors.name }" autocomplete="off"/>
-                <div class="invalid-feedback">{{ errors.name }}</div>
+                <form-field
+                  type="text"
+                  name="name"
+                  autocomplete="off"
+                  :errors="errors.name"
+                  label="cost-center.form.name"
+                />
               </div>
               <div class="col-12">
-                <label class="form-label">{{ $t('cost-center.form.description') }}</label>
-                <Field as="textarea" name="description" class="form-control" rows="4" data-bs-toggle="autosize" />
+                <form-field
+                  rows="4"
+                  as="textarea"
+                  name="description"
+                  data-bs-toggle="autosize"
+                  label="cost-center.form.description"
+                />
               </div>
             </div>
           </div>
@@ -70,15 +62,15 @@ import { reactive, ref, onMounted } from 'vue'
 
 import router from '@/router'
 
-import { useI18n } from 'vue-i18n'
-
-import { Form, Field } from 'vee-validate'
+import { Form } from 'vee-validate'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
 import { useI18nYupSchema } from '@/composables/useI18nYupSchema.js'
 
+import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/home/PageContent.vue'
+import StatusToggle from '@/components/forms/StatusToggle.vue'
 import CostCenterClient from '@/clients/registration/cost-center.client'
 
 const props = defineProps({
@@ -92,13 +84,11 @@ const props = defineProps({
   }
 })
 
+const { yup } = useI18nYupSchema()
 const { displaySuccess } = useMessageHandler()
 const { handleError } = useHttpErrorHandler()
 
 const costCenterClient = new CostCenterClient()
-
-const { t } = useI18n()
-const { yup } = useI18nYupSchema()
 
 const loading = ref(false)
 
@@ -113,7 +103,6 @@ const validationSchema = yup.object().shape({
     .min(3)
     .max(150)
     .required()
-    .label(t('cost-center.form.name'))
 })
 
 async function prepareForUpdate() {
