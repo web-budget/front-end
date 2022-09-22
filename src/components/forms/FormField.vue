@@ -1,6 +1,11 @@
 <template>
   <label class="form-label required">{{ $t(props.label) }}</label>
-  <Field class="form-control" :class="{ 'is-invalid': errors }" v-bind="$attrs" :disabled="readOnly"/>
+  <Field
+    v-bind="$attrs"
+    class="form-control"
+    :readonly="readonly"
+    :disabled="disabled"
+    :class="{ 'is-invalid': errors }"/>
   <div class="invalid-feedback">{{ props.errors }}</div>
 </template>
 
@@ -12,7 +17,11 @@ const props = defineProps({
     type: String,
     required: true
   },
-  readOnly: {
+  readonly: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
     type: Boolean,
     default: false
   },

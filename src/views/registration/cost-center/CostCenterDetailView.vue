@@ -3,20 +3,20 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <status-toggle name="active" readOnly />
+          <status-toggle name="active" disabled />
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-12 mb-3">
               <form-field
-                readOnly
+                disabled
                 name="name"
                 label="cost-center.form.name"
               />
             </div>
             <div class="col-12">
               <form-field
-                readOnly
+                disabled
                 rows="4"
                 as="textarea"
                 name="description"
