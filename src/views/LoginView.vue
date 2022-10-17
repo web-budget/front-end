@@ -51,7 +51,6 @@ const form = reactive({
 })
 
 function doLogin() {
-  // TODO do login stuff here
   router.push({ name: 'home' })
 }
 </script>

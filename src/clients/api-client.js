@@ -1,6 +1,8 @@
 
 import axios from 'axios'
 
+import { useUserSession } from '@/stores/user-session.store'
+
 const configureClient = (context) => {
   const options = {
     baseURL: `${process.env.VUE_APP_API_URL || 'http://localhost:8080'}/${context}`
@@ -38,11 +40,9 @@ class ApiClient {
       success => Promise.resolve(success),
       error => {
         const status = error.response.status
-
-        if (status === 401) {
-          // TODO logout and send back to login
-        } else if (status === 403) {
-          // TODO send user to unauthorized page
+        if (status === 403) {
+          const userSession = useUserSession()
+          userSession.handleAuthorizationError()
         }
         return Promise.reject(error)
       }

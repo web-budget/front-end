@@ -1,5 +1,5 @@
 import { useI18n } from 'vue-i18n'
-import { useMessagingStore } from '@/stores/messaging-store'
+import { useMessagingStore } from '@/stores/messaging.store'
 
 export function useMessageHandler() {
   const { t } = useI18n()

@@ -5,6 +5,8 @@ import HomeTemplate from '@/components/templates/HomeTemplate'
 import publicRoutes from '@/router/public.routes.js'
 import registrationRoutes from '@/router/registration.routes.js'
 
+import { useUserSession } from '@/stores/user-session.store'
+
 const routes = [
   {
     path: '/',
@@ -29,9 +31,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL)
 })
 
-/*
- TODO create router guard here to prevent user navigation
-      to non public routes without being authenticated
-*/
+router.beforeEach((to, from, next) => {
+  const userSession = useUserSession()
+  if (to.matched.some(route => route.meta.public) || userSession.isValid()) {
+    next()
+  } else {
+    next({ name: 'login', params: { redirect: to.path } })
+  }
+})
 
 export default router

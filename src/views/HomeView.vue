@@ -1,5 +1,5 @@
 <template>
-  <page-content pre-title="home.header.pre-title" title="home.header.title">
+  <page-content title="home.header.pre-title" action="home.header.title">
     Home
   </page-content>
 </template>
