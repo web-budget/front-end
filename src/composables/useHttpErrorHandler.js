@@ -13,9 +13,12 @@ export function useHttpErrorHandler() {
   }
 
   function handleError(response) {
-    const { data, status } = response
+    const {
+      data,
+      status
+    } = response
 
-    let content = ''
+    let content
 
     if ((typeof data === 'string' || data instanceof String) && data.includes('ECONNREFUSED')) {
       content = t('messages.500.server-unavailable')

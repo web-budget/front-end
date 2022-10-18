@@ -1,12 +1,12 @@
 <template>
-  <label class="form-label required">{{ $t(props.label) }}</label>
+  <label class='form-label required'>{{ $t(props.label) }}</label>
   <Field
-    v-bind="$attrs"
-    class="form-control"
-    :readonly="readonly"
-    :disabled="disabled"
-    :class="{ 'is-invalid': errors }"/>
-  <div class="invalid-feedback">{{ props.errors }}</div>
+    v-bind='$attrs'
+    class='form-control'
+    :readonly='readonly'
+    :disabled='disabled'
+    :class="{ 'is-invalid': errors }" />
+  <div class='invalid-feedback'>{{ props.errors }}</div>
 </template>
 
 <script setup>

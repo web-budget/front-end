@@ -1,24 +1,24 @@
 <template>
   <DataTable
-    :lazy="true"
-    dataKey="id"
-    :rowHover="true"
-    :paginator="true"
-    :autoLayout="true"
-    :value="props.data"
-    :removableSort="true"
-    selectionMode="single"
-    :rows="props.pageSize"
-    :loading="props.loading"
-    @sort="fireTableSorted($event)"
-    :rowsPerPageOptions="[15,30,60]"
-    v-model:selection="selectedRowValue"
-    :totalRecords="props.totalElements"
-    :currentPageReportTemplate="translatePageReport()"
+    :lazy='true'
+    dataKey='id'
+    :rowHover='true'
+    :paginator='true'
+    :autoLayout='true'
+    :value='props.data'
+    :removableSort='true'
+    selectionMode='single'
+    :rows='props.pageSize'
+    :loading='props.loading'
+    @sort='fireTableSorted($event)'
+    :rowsPerPageOptions='[15,30,60]'
+    v-model:selection='selectedRowValue'
+    :totalRecords='props.totalElements'
+    :currentPageReportTemplate='translatePageReport()'
     @row-select="$emit('rowSelected', selectedRowValue)"
-    class="table card-table table-vcenter text-nowrap datatable"
+    class='table card-table table-vcenter text-nowrap datatable'
     @page="$emit('pageChanged', { currentPage: $event.page, pageSize: $event.rows })"
-    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown">
+    paginatorTemplate='CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'>
 
     <template #empty>
       {{ $t('grid.state.empty') }}
@@ -27,12 +27,13 @@
       {{ $t('grid.state.loading') }}
     </template>
 
-    <Column v-if="showStatus" field="active" headerStyle="width: 10%" :header="$t('grid.columns.status')" :sortable="true">
-      <template #body="slotProps">
-        <status-badge :active="slotProps.data.active" />
+    <Column v-if='showStatus' field='active' headerStyle='width: 10%' :header="$t('grid.columns.status')"
+            :sortable='true'>
+      <template #body='slotProps'>
+        <status-badge :active='slotProps.data.active' />
       </template>
     </Column>
-    <slot name="columns"></slot>
+    <slot name='columns'></slot>
   </DataTable>
 </template>
 
@@ -79,7 +80,7 @@ const emit = defineEmits(['pageChanged', 'rowSelected', 'tableSorted'])
 
 function translatePageReport() {
   return t('grid.status.showing') + '{first}' + t('grid.status.until') +
-  '{last}' + t('grid.status.total') + '{totalRecords}'
+    '{last}' + t('grid.status.total') + '{totalRecords}'
 }
 
 function fireTableSorted(event) {
@@ -87,14 +88,17 @@ function fireTableSorted(event) {
     ? event.sortOrder > 0 ? 'asc' : 'desc'
     : event.sortOrder
 
-  emit('tableSorted', { sortField: event.sortField, direction: order })
+  emit('tableSorted', {
+    sortField: event.sortField,
+    direction: order
+  })
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 ::v-deep(.p-paginator) {
-    .p-paginator-current {
-      margin-right: auto;
-    }
+  .p-paginator-current {
+    margin-right: auto;
+  }
 }
 </style>

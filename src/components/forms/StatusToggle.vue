@@ -1,21 +1,21 @@
 <template>
-  <div class="btn-group">
+  <div class='btn-group'>
     <Field
-      id="rdInactive"
-      type="radio"
-      :value="false"
-      class="btn-check"
-      :name="props.name"/>
-    <label for="rdInactive" class="btn btn-outline-danger" :class="{ 'disabled': disabled }">
+      id='rdInactive'
+      type='radio'
+      :value='false'
+      class='btn-check'
+      :name='props.name' />
+    <label for='rdInactive' class='btn btn-outline-danger' :class="{ 'disabled': disabled }">
       {{ $t('form.status.inactive') }}
     </label>
     <Field
-      id="rdActive"
-      type="radio"
-      :value="true"
-      class="btn-check"
-      :name="props.name" />
-    <label for="rdActive" class="btn btn-outline-success" :class="{ 'disabled': disabled }">
+      id='rdActive'
+      type='radio'
+      :value='true'
+      class='btn-check'
+      :name='props.name' />
+    <label for='rdActive' class='btn btn-outline-success' :class="{ 'disabled': disabled }">
       {{ $t('form.status.active') }}
     </label>
   </div>

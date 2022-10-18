@@ -44,14 +44,14 @@
       "stocks": "Ações",
       "funds": "Fundos"
     },
-    "registration": { 
+    "registration": {
       "vehicles": "Veículos",
       "wallets": "Carteiras",
       "credit-cards": "Cartões de credito",
       "cost-centers": "Centros de custos",
       "movement-classes": "Classes de movimento"
     },
-    "configurations": { 
+    "configurations": {
       "users": "Usuários",
       "parameters": "Parâmetros"
     }
@@ -82,7 +82,7 @@
       "until": " até ",
       "total": ", total "
     },
-    "actions": { 
+    "actions": {
       "edit": "Editar",
       "delete": "Deletar"
     },
@@ -158,12 +158,12 @@
     "subtitle": "Informe uma nova senha de acesso, ela deve conter números e ao menos uma letra maiúscula",
     "form": {
       "password": "Nova senha",
-      "password-placeholder":"Sua nova senha",
+      "password-placeholder": "Sua nova senha",
       "new-password": "Confirmação",
       "new-password-placeholder": "Confirme sua senha"
     },
     "action": {
-      "change-password": "Trocar senha", 
+      "change-password": "Trocar senha",
       "back-to-login": "Voltar ao login"
     }
   },

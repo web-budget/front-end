@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { useToast, POSITION } from 'vue-toastification'
+import { POSITION, useToast } from 'vue-toastification'
 import { useMessagingStore } from '@/stores/messaging.store'
 
 const toast = useToast()

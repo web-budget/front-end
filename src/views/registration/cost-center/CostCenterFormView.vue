@@ -1,47 +1,47 @@
 <template>
   <page-content
-    title="cost-center.title"
+    title='cost-center.title'
     :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'">
     <Form
-      v-slot="{ errors }"
-      @submit="selectAction"
-      :initial-values="formDefaults"
-      :validation-schema="validationSchema">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-            <status-toggle name="active" />
+      v-slot='{ errors }'
+      @submit='selectAction'
+      :initial-values='formDefaults'
+      :validation-schema='validationSchema'>
+      <div class='col-12'>
+        <div class='card'>
+          <div class='card-header'>
+            <status-toggle name='active' />
           </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12 mb-3">
+          <div class='card-body'>
+            <div class='row'>
+              <div class='col-12 mb-3'>
                 <form-field
-                  type="text"
-                  name="name"
-                  autocomplete="off"
-                  :errors="errors.name"
-                  label="cost-center.form.name"
+                  type='text'
+                  name='name'
+                  autocomplete='off'
+                  :errors='errors.name'
+                  label='cost-center.form.name'
                 />
               </div>
-              <div class="col-12">
+              <div class='col-12'>
                 <form-field
-                  rows="4"
-                  as="textarea"
-                  name="description"
-                  data-bs-toggle="autosize"
-                  label="cost-center.form.description"
+                  rows='4'
+                  as='textarea'
+                  name='description'
+                  data-bs-toggle='autosize'
+                  label='cost-center.form.description'
                 />
               </div>
             </div>
           </div>
-          <div class="card-footer">
-            <div class="row">
-              <div class="col text-end">
-                <a class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">
+          <div class='card-footer'>
+            <div class='row'>
+              <div class='col text-end'>
+                <a class='btn btn-ghost-secondary me-3' @click.prevent='goBack()'>
                   {{ $t('form.actions.back') }}
                 </a>
-                <button type="submit" class="btn btn-primary" :class="{ 'disabled': loading }">
-                  <span v-if="updating">
+                <button type='submit' class='btn btn-primary' :class="{ 'disabled': loading }">
+                  <span v-if='updating'>
                     {{ $t('form.actions.update') }}
                   </span>
                   <span v-else>
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 import router from '@/router'
 

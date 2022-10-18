@@ -36,7 +36,10 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(route => route.meta.public) || userSession.isValid()) {
     next()
   } else {
-    next({ name: 'login', params: { redirect: to.path } })
+    next({
+      name: 'login',
+      params: { redirect: to.path }
+    })
   }
 })
 
