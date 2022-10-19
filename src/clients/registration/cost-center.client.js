@@ -2,7 +2,7 @@ import ApiClient from '../api-client.js'
 
 export default class CostCenterClient extends ApiClient {
   constructor() {
-    super('api/registration/cost-centers')
+    super('api/registration/cost-centers', true)
   }
 
   findAll(pageRequest) {

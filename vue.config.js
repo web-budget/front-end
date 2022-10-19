@@ -17,6 +17,11 @@ module.exports = defineConfig({
         target: 'http://localhost:8085',
         ws: true,
         changeOrigin: true
+      },
+      '/token': {
+        target: 'http://localhost:8085',
+        ws: true,
+        changeOrigin: true
       }
     }
   }

@@ -8,7 +8,7 @@
         </label>
         <input-text
           class='form-control'
-          v-model='form.username'
+          v-model='credentials.username'
           :placeholder="$t('login.form.username-placeholder')"
         />
       </div>
@@ -25,32 +25,52 @@
           <password
             :feedback='false'
             input-class='form-control'
-            v-model='form.password'
+            v-model='credentials.password'
             :placeholder="$t('login.form.password-placeholder')"
           />
         </div>
       </div>
       <div class='form-footer'>
-        <button @click='doLogin()' class='btn btn-primary w-100'>{{ $t('login.action.sign-in') }}</button>
+        <button
+          @click.prevent='doLogin()'
+          class='btn btn-primary w-100'
+          :class="{ 'disabled': loading }">
+          {{ $t('login.action.sign-in') }}
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
-
-import router from '@/router'
+import { reactive, ref } from 'vue'
 
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 
-const form = reactive({
+import TokenClient from '@/clients/administration/token.client'
+
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
+
+const { handleError } = useHttpErrorHandler()
+
+const loading = ref(false)
+const credentials = reactive({
   username: '',
   password: ''
 })
 
-function doLogin() {
-  router.push({ name: 'home' })
+async function doLogin() {
+  const tokenClient = new TokenClient()
+
+  try {
+    loading.value = true
+    const response = await tokenClient.generate(credentials)
+    console.log(response.data)
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
