@@ -1,4 +1,5 @@
 <template>
+  <message-display />
   <div class='card card-md'>
     <div class='card-body'>
       <h2 class='card-title text-center mb-4'>{{ $t('login.title') }}</h2>
@@ -31,28 +32,36 @@
         </div>
       </div>
       <div class='form-footer'>
-        <button
+        <a
           @click.prevent='doLogin()'
           class='btn btn-primary w-100'
           :class="{ 'disabled': loading }">
           {{ $t('login.action.sign-in') }}
-        </button>
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+import router from '@/router'
 
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 
+import MessageDisplay from '@/components/base/MessageDisplay'
+
 import TokenClient from '@/clients/administration/token.client'
 
-import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
+import { useUserSession } from '@/stores/user-session.store'
 
-const { handleError } = useHttpErrorHandler()
+import { useMessageHandler } from '@/composables/useMessageHandler'
+
+const route = useRoute()
+const userSession = useUserSession()
 
 const loading = ref(false)
 const credentials = reactive({
@@ -60,17 +69,47 @@ const credentials = reactive({
   password: ''
 })
 
+const {
+  displayError,
+  displayWarn
+} = useMessageHandler()
+
 async function doLogin() {
   const tokenClient = new TokenClient()
 
   try {
     loading.value = true
-    const response = await tokenClient.generate(credentials)
-    console.log(response.data)
+    const { data } = await tokenClient.generate(credentials)
+    userSession.login(data)
+    doAfterLoginNavigation()
   } catch (error) {
-    handleError(error.response)
+    handleLoginError(error.response)
   } finally {
     loading.value = false
   }
 }
+
+function handleLoginError(response) {
+  if (response.status === 401 || response.status === 403) {
+    displayWarn('login.errors.unauthorized')
+  } else {
+    displayError('login.errors.failed-unknown')
+  }
+}
+
+function doAfterLoginNavigation() {
+  const redirectTo = route.query.redirect
+
+  if (redirectTo) {
+    router.push({ path: redirectTo })
+  } else {
+    router.push({ name: 'home' })
+  }
+}
+
+onMounted(() => {
+  if (userSession.isValid()) {
+    doAfterLoginNavigation()
+  }
+})
 </script>

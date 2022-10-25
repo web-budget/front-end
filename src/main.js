@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+
+// pinia
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
@@ -27,20 +29,16 @@ import '@/assets/js/tabler.min.js'
 // web-budget custom
 import '@/assets/scss/webbudget.scss'
 
-const pinia = createPinia()
-
-const toastConfig = {
-  transition: 'Vue-Toastification__fade',
-  maxToasts: 20,
-  newestOnTop: true
-}
-
 createApp(App)
-  .use(pinia)
+  .use(createPinia())
   .use(i18n)
   .use(router)
   .use(PrimeVue)
-  .use(Toast, toastConfig)
+  .use(Toast, {
+    transition: 'Vue-Toastification__fade',
+    maxToasts: 20,
+    newestOnTop: true
+  })
   .use(VueGravatar)
   .directive('tooltip', Tooltip)
   .mount('#app')

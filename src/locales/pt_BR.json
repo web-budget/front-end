@@ -135,6 +135,10 @@
       "password": "Senha",
       "password-placeholder": "Sua senha"
     },
+    "errors": {
+      "unauthorized": "Usuário ou senha inválidos, tente novamente",
+      "failed-unknown": "Falha ao realizar login, entre em contato com o administrador"
+    },
     "action": {
       "sign-in": "Acessar",
       "forgot-password": "esqueci minha senha"

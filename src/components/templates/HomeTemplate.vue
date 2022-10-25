@@ -12,5 +12,4 @@
 <script setup>
 import MainMenu from '@/components/base/MainMenu.vue'
 import PageFooter from '@/components/base/PageFooter.vue'
-import MessageDisplay from '@/components/base/MessageDisplay.vue'
-</script>
+import MessageDisplay from '@/components/base/MessageDisplay.vue'</script>

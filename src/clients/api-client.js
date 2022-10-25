@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import { useUserSession } from '@/stores/user-session.store'
 
+const userSession = useUserSession()
+
 const configureClient = (context) => {
   const options = {
     baseURL: `${process.env.VUE_APP_API_URL || 'http://localhost:8080'}/${context}`
@@ -10,7 +12,7 @@ const configureClient = (context) => {
 }
 
 const authInterceptor = config => {
-  config.headers.Authorization = 'Bearer something'
+  config.headers.Authorization = `Bearer ${userSession.session.token}`
   config.headers.common.Accept = 'Application/json'
   config.headers['Access-Control-Allow-Origin'] = '*'
   return config
@@ -34,18 +36,6 @@ class ApiClient {
     if (debugEnabled) {
       this.client.interceptors.request.use(loggingInterceptor)
     }
-
-    this.client.interceptors.response.use(
-      success => Promise.resolve(success),
-      error => {
-        const status = error.response.status
-        if (status === 403) {
-          const userSession = useUserSession()
-          userSession.handleAuthorizationError()
-        }
-        return Promise.reject(error)
-      }
-    )
   }
 
   head(path, conf = {}) {

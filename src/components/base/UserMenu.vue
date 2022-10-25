@@ -1,10 +1,10 @@
 <template v-once>
   <div class='nav-item dropdown'>
     <a href='#' class='nav-link d-flex lh-1 text-reset p-0' data-bs-toggle='dropdown' aria-label='Open user menu'>
-      <vue-gravatar :email='currentUser.email' class='avatar avatar-sm' />
+      <vue-gravatar email='admin@admin.com' class='avatar avatar-sm' />
       <div class='d-none d-xl-block ps-2'>
-        <div>{{ currentUser.name }}</div>
-        <div class='mt-1 small text-muted'>{{ currentUser.role }}</div>
+        <div v-once>{{ userSession.session.name }}</div>
+        <div v-once class='mt-1 small text-muted'>{{ userSession.session.email }}</div>
       </div>
     </a>
     <div class='dropdown-menu dropdown-menu-end dropdown-menu-arrow'>
@@ -17,19 +17,14 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
-
 import router from '@/router'
 
-// TODO mock, should come from state holder
-const currentUser = reactive({
-  name: 'Admin',
-  email: 'admin@webbudget.com.br',
-  role: 'ADMINISTRATOR'
-})
+import { useUserSession } from '@/stores/user-session.store'
+
+const userSession = useUserSession()
 
 function doLogout() {
-  // TODO do logout stuff here
+  userSession.logout()
   router.push({ name: 'login' })
 }
 </script>

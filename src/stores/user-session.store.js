@@ -1,30 +1,31 @@
 import { defineStore } from 'pinia'
 
-import router from '@/router'
+import { StorageSerializers, useStorage } from '@vueuse/core'
+
+import jwtDecode from 'jwt-decode'
 
 export const useUserSession = defineStore('userSessionStore', {
   state: () => ({
-    subject: null
+    session: useStorage(
+      'auth_session',
+      null,
+      localStorage,
+      { serializer: StorageSerializers.object }
+    )
   }),
   actions: {
     login(subject) {
-      this.subject = subject
-      // TODO save to local storage
-      router.go({ name: 'home' })
+      this.session = { ...subject }
     },
     logout() {
-      this.subject = null
-      // TODO clear local storage
-      router.go({ name: 'login' })
+      this.session = null
     },
     isValid() {
-      return this.state != null
-    },
-    handleAuthenticationError() {
-      this.logout()
-    },
-    handleAuthorizationError() {
-      router.go({ name: 'unauthorized' })
+      if (this.session) {
+        const { exp } = jwtDecode(this.session.token)
+        return !(Date.now() >= exp * 1000)
+      }
+      return false
     }
   }
 })

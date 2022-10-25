@@ -33,12 +33,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userSession = useUserSession()
-  if (to.matched.some(route => route.meta.public) || userSession.isValid()) {
+  const publicRoute = to.matched.some(route => route.meta.public)
+
+  if (publicRoute || userSession.isValid()) {
     next()
   } else {
     next({
       name: 'login',
-      params: { redirect: to.path }
+      query: { redirect: to.path }
     })
   }
 })
