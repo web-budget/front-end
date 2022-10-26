@@ -19,6 +19,18 @@
       "deleting": "Excluindo"
     }
   },
+  "errors": {
+    "401": {
+      "title": "Sessão expirada",
+      "description": "Suas credênciais não são mais válidas para esta sessão, faça login e tente novamente",
+      "action": "Login"
+    },
+    "403": {
+      "title": "Não autorizado",
+      "description": "Você não tem permissão para acessar a página ou recurso solicitado",
+      "action": "Voltar"
+    }
+  },
   "user-menu": {
     "profile": "Meu Perfil",
     "configurations": "Configurações",

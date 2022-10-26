@@ -110,4 +110,5 @@
 </template>
 
 <script setup>
-import { BellIcon } from 'vue-tabler-icons'</script>
+import { BellIcon } from 'vue-tabler-icons'
+</script>

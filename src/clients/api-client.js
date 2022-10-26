@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import router from '@/router'
+
 import { useUserSession } from '@/stores/user-session.store'
 
 const userSession = useUserSession()
@@ -36,6 +38,20 @@ class ApiClient {
     if (debugEnabled) {
       this.client.interceptors.request.use(loggingInterceptor)
     }
+
+    this.client.interceptors.response.use(
+      success => Promise.resolve(success),
+      error => {
+        const status = error.response.status
+
+        if (status === 401) {
+          router.push({ name: 'unauthorized' })
+        } else if (status === 403) {
+          router.push({ name: 'forbidden' })
+        }
+        return Promise.reject(error)
+      }
+    )
   }
 
   head(path, conf = {}) {

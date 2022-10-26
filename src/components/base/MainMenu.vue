@@ -144,4 +144,5 @@
 import UserMenu from '@/components/base/UserMenu.vue'
 import NotificationMenu from '@/components/base/NotificationMenu.vue'
 
-import { AdjustmentsIcon, ChartAreaIcon, CurrencyDollarIcon, EditIcon } from 'vue-tabler-icons'</script>
+import { AdjustmentsIcon, ChartAreaIcon, CurrencyDollarIcon, EditIcon } from 'vue-tabler-icons'
+</script>
