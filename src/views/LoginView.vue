@@ -52,7 +52,7 @@ import router from '@/router'
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 
-import MessageDisplay from '@/components/base/MessageDisplay'
+import MessageDisplay from '@/components/MessageDisplay'
 
 import TokenClient from '@/clients/administration/token.client'
 

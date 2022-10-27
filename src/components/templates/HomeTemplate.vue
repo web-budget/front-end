@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import MainMenu from '@/components/base/MainMenu.vue'
-import PageFooter from '@/components/base/PageFooter.vue'
-import MessageDisplay from '@/components/base/MessageDisplay.vue'
+import MainMenu from '@/components/menu/MainMenu.vue'
+import PageFooter from '@/components/page/PageFooter.vue'
+import MessageDisplay from '@/components/MessageDisplay.vue'
 </script>

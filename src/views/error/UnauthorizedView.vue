@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import ErrorPage from '@/components/base/ErrorPage'
+import ErrorPage from '@/components/page/ErrorPage'
 
 import router from '@/router'
 

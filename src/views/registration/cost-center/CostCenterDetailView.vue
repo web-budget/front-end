@@ -67,7 +67,7 @@ import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
 
 import FormField from '@/components/forms/FormField.vue'
-import PageContent from '@/components/base/PageContent.vue'
+import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import CostCenterClient from '@/clients/registration/cost-center.client'
 

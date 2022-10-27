@@ -42,7 +42,7 @@ import router from '@/router'
 
 import Column from 'primevue/column'
 
-import PageContent from '@/components/base/PageContent.vue'
+import PageContent from '@/components/page/PageContent.vue'
 
 import DefaultGrid from '@/components/listing/DefaultGrid.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
