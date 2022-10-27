@@ -45,9 +45,9 @@ class ApiClient {
         const status = error.response.status
 
         if (status === 401) {
-          router.push({ name: 'unauthorized' })
+          router.push({ name: 'session-expired' })
         } else if (status === 403) {
-          router.push({ name: 'forbidden' })
+          router.push({ name: 'unauthorized' })
         }
         return Promise.reject(error)
       }

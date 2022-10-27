@@ -33,10 +33,10 @@ const routes = [
     component: ErrorTemplate,
     children: [
       {
-        path: 'forbidden',
-        name: 'forbidden',
+        path: 'session-expired',
+        name: 'session-expired',
         meta: { public: true },
-        component: () => import(/* webpackChunkName: "errors" */ '../views/error/ForbiddenView.vue')
+        component: () => import(/* webpackChunkName: "errors" */ '../views/error/SessionExpiredView.vue')
       },
       {
         path: 'unauthorized',
