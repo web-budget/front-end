@@ -34,7 +34,7 @@ class ApiClient {
       this.client.interceptors.request.use(authInterceptor)
     }
 
-    const debugEnabled = process.env.VUE_APP_LOG_REQUESTS === 'true'
+    const debugEnabled = process.env.VUE_APP_LOG_REQUESTS || false
     if (debugEnabled) {
       this.client.interceptors.request.use(loggingInterceptor)
     }
