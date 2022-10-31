@@ -8,7 +8,7 @@ const userSession = useUserSession()
 
 const configureClient = (context) => {
   const options = {
-    baseURL: `http://localhost:${process.env.VUE_APP_WEB_PORT || '8080'}'/${context}`
+    baseURL: `http://localhost:${process.env.VUE_APP_WEB_PORT || '8080'}/${context}`
   }
   return axios.create(options)
 }
