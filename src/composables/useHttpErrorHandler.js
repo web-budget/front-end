@@ -25,7 +25,7 @@ export function useHttpErrorHandler() {
       displayToast(t('messages.500.server-unavailable'), severity)
     } else if (status > 500) {
       displayToast(t('messages.500.server-error'), severity)
-    } else if (status === 422) {
+    } else if (status === 422 || status === 409) {
       displayToast(t(data.message), severity)
     }
   }
