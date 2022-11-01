@@ -24,7 +24,7 @@ const loggingInterceptor = config => {
   const requestData = {
     method: config.method.toUpperCase(),
     url: `${config.baseURL}${config.url}`,
-    params: config.params || null
+    ...config.params
   }
   console.info(requestData)
   return config
