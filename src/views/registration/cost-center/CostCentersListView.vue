@@ -103,6 +103,7 @@ function changeToDelete(id) {
 }
 
 function changeToDetail(event) {
+  console.log(event)
   router.push({
     name: 'cost-centers.detail',
     params: { id: event.id }
