@@ -90,7 +90,7 @@ async function doLogin() {
 }
 
 function handleLoginError(response) {
-  if (response.status === 401 || response.status === 403) {
+  if (response.status && (response.status === 401 || response.status === 403)) {
     displayWarn('login.errors.unauthorized')
   } else {
     displayError('login.errors.failed-unknown')
