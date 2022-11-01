@@ -28,7 +28,7 @@
     "403": {
       "title": "Não autorizado",
       "description": "Você não tem permissão para acessar a página ou recurso solicitado",
-      "action": "Voltar"
+      "action": "Ir para a Home"
     }
   },
   "user-menu": {
@@ -70,10 +70,8 @@
   },
   "messages": {
     "500": {
-      "server-unavailable": "Servidor não respondeu a requisição ou está inacessível no momento"
-    },
-    "401": {
-      "no-authentication": "Usuário desconectado! Faça login e tente novamente"
+      "server-unavailable": "Servidor indisponível no momento, tente novamente em instantes",
+      "server-error": "O servidor encontrou um erro ao processar sua requisição"
     },
     "common": {
       "success": "Sucesso!",

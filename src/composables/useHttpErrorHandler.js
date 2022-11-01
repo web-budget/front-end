@@ -18,22 +18,23 @@ export function useHttpErrorHandler() {
       status
     } = response
 
-    let content
+    const severity = determineSeverity(status)
+    const dataIsString = typeof data === 'string' || data instanceof String
 
-    if ((typeof data === 'string' || data instanceof String) && data.includes('ECONNREFUSED')) {
-      content = t('messages.500.server-unavailable')
-    } else if (status === 401) {
-      content = t('messages.401.no-authentication')
-    } else {
-      content = t(data.message)
+    if (dataIsString && data.includes('ECONNREFUSED')) {
+      displayToast(t('messages.500.server-unavailable'), severity)
+    } else if (status > 500) {
+      displayToast(t('messages.500.server-error'), severity)
+    } else if (status === 422) {
+      displayToast(t(data.message), severity)
     }
+  }
 
-    const message = {
-      type: determineSeverity(status),
+  function displayToast(content, severity) {
+    messagingStore.handleMessage({
+      type: severity,
       content: content
-    }
-
-    messagingStore.handleMessage(message)
+    })
   }
 
   return {

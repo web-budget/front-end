@@ -14,6 +14,6 @@ import ErrorPage from '@/components/page/ErrorPage'
 import router from '@/router'
 
 function goBack() {
-  router.go(-1)
+  router.push({ name: 'home' })
 }
 </script>
