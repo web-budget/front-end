@@ -21,8 +21,12 @@ const authInterceptor = config => {
 }
 
 const loggingInterceptor = config => {
-  const params = JSON.stringify(config.params)
-  console.info(`Sending [${config.method.toUpperCase()}] to [${config.baseURL}/${config.url}] with params [${params}]`)
+  const requestData = {
+    method: config.method.toUpperCase(),
+    url: `${config.baseURL}${config.url}`,
+    params: config.params || null
+  }
+  console.info(requestData)
   return config
 }
 

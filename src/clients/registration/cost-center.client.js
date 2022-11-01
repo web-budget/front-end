@@ -15,7 +15,7 @@ export default class CostCenterClient extends ApiClient {
   }
 
   findById(id) {
-    return super.get(`${id}`)
+    return super.get(`/${id}`)
   }
 
   create(values) {
@@ -23,10 +23,10 @@ export default class CostCenterClient extends ApiClient {
   }
 
   update(id, values) {
-    return super.put(`${id}`, values)
+    return super.put(`/${id}`, values)
   }
 
   delete(id) {
-    return super.delete(`${id}`)
+    return super.delete(`/${id}`)
   }
 }

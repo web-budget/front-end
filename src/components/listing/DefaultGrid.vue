@@ -12,10 +12,9 @@
     :loading='props.loading'
     @sort='fireTableSorted($event)'
     :rowsPerPageOptions='[15,30,60]'
-    v-model:selection='selectedRowValue'
     :totalRecords='props.totalElements'
     :currentPageReportTemplate='translatePageReport()'
-    @row-select="$emit('rowSelected', selectedRowValue)"
+    @row-select="$emit('rowSelected', $event)"
     class='table card-table table-vcenter text-nowrap datatable'
     @page="$emit('pageChanged', { currentPage: $event.page, pageSize: $event.rows })"
     paginatorTemplate='CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'>
@@ -38,7 +37,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import Column from 'primevue/column'
@@ -47,8 +45,6 @@ import DataTable from 'primevue/datatable'
 import StatusBadge from '@/components/listing/StatusBadge.vue'
 
 const { t } = useI18n()
-
-const selectedRowValue = reactive({})
 
 const props = defineProps({
   loading: {
