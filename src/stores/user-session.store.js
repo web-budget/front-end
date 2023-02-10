@@ -6,12 +6,9 @@ import jwtDecode from 'jwt-decode'
 
 export const useUserSession = defineStore('userSessionStore', {
   state: () => ({
-    session: useStorage(
-      'auth_session',
-      null,
-      localStorage,
-      { serializer: StorageSerializers.object }
-    )
+    session: useStorage('auth_session', null, localStorage, {
+      serializer: StorageSerializers.object,
+    }),
   }),
   actions: {
     login(subject) {
@@ -26,6 +23,6 @@ export const useUserSession = defineStore('userSessionStore', {
         return !(Date.now() >= exp * 1000)
       }
       return false
-    }
-  }
+    },
+  },
 })

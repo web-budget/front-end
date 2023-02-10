@@ -1,5 +1,5 @@
-import LoginTemplate from '@/components/templates/LoginTemplate'
-import ErrorTemplate from '@/components/templates/ErrorTemplate'
+import LoginTemplate from '@/components/templates/LoginTemplate.vue'
+import ErrorTemplate from '@/components/templates/ErrorTemplate.vue'
 
 const routes = [
   {
@@ -11,22 +11,29 @@ const routes = [
         path: '',
         name: 'login',
         meta: { public: true },
-        component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue')
+        component: () =>
+          import(/* webpackChunkName: "login" */ '../views/LoginView.vue'),
       },
       {
         path: 'forgot-password',
         name: 'forgot-password',
         meta: { public: true },
-        component: () => import(/* webpackChunkName: "login" */ '../views/ForgotPasswordView.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "login" */ '../views/ForgotPasswordView.vue'
+          ),
       },
       {
         props: true,
         path: 'recover-password/:token',
         name: 'recover-password',
         meta: { public: true },
-        component: () => import(/* webpackChunkName: "login" */ '../views/RecoverPasswordView.vue')
-      }
-    ]
+        component: () =>
+          import(
+            /* webpackChunkName: "login" */ '../views/RecoverPasswordView.vue'
+          ),
+      },
+    ],
   },
   {
     path: '/error',
@@ -36,16 +43,22 @@ const routes = [
         path: 'session-expired',
         name: 'session-expired',
         meta: { public: true },
-        component: () => import(/* webpackChunkName: "errors" */ '../views/error/SessionExpiredView.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "errors" */ '../views/error/SessionExpiredView.vue'
+          ),
       },
       {
         path: 'unauthorized',
         name: 'unauthorized',
         meta: { public: true },
-        component: () => import(/* webpackChunkName: "errors" */ '../views/error/UnauthorizedView.vue')
-      }
-    ]
-  }
+        component: () =>
+          import(
+            /* webpackChunkName: "errors" */ '../views/error/UnauthorizedView.vue'
+          ),
+      },
+    ],
+  },
 ]
 
 export default routes

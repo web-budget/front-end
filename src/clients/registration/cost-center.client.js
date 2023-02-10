@@ -8,7 +8,7 @@ export default class CostCenterClient extends ApiClient {
   findAll(pageRequest) {
     const requestParams = {
       filter: pageRequest.filter,
-      status: pageRequest.status.toUpperCase()
+      status: pageRequest.status.toUpperCase(),
     }
 
     return super.get(pageRequest.buildRequestPath(), { params: requestParams })

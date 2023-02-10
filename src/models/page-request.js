@@ -1,5 +1,12 @@
 export default class PageRequest {
-  constructor(filter = '', status = 'ACTIVE', current = 0, size = 15, direction = 'asc', sortField) {
+  constructor(
+    filter = '',
+    status = 'ACTIVE',
+    current = 0,
+    size = 15,
+    direction = 'asc',
+    sortField
+  ) {
     this.filter = filter
     this.status = status
     this.current = current

@@ -1,30 +1,40 @@
 <template>
-  <page-content title='cost-center.title' action='pages.actions.listing'>
-    <div class='col-12'>
-      <div class='card'>
-        <div class='card-header'>
+  <page-content title="cost-center.title" action="pages.actions.listing">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
           <search-controls
-            @onAdd='changeToAdd()'
-            @onStatusChange='applyFilter()'
-            v-model:filter='pageRequest.filter'
-            v-model:status='pageRequest.status'
-            :placeholder="$t('cost-center.search.filters')" />
+            @onAdd="changeToAdd()"
+            @onStatusChange="applyFilter()"
+            v-model:filter="pageRequest.filter"
+            v-model:status="pageRequest.status"
+            :placeholder="$t('cost-center.search.filters')"
+          />
         </div>
-        <div class='card-body border-bottom p-0'>
+        <div class="card-body border-bottom p-0">
           <default-grid
-            :loading='loading'
-            :data='pageResponse.content'
-            @page-changed='onPageChange($event)'
-            @table-sorted='onTableSorted($event)'
-            @row-selected='changeToDetail($event)'
-            :total-elements='pageResponse.totalElements'>
+            :loading="loading"
+            :data="pageResponse.content"
+            @page-changed="onPageChange($event)"
+            @table-sorted="onTableSorted($event)"
+            @row-selected="changeToDetail($event)"
+            :total-elements="pageResponse.totalElements"
+          >
             <template #columns>
-              <Column field='name' :header="$t('cost-center.grid.name')" :sortable='true' />
-              <Column headerStyle='width: 12%' :header="$t('grid.columns.actions')">
-                <template #body='slotProps'>
+              <Column
+                field="name"
+                :header="$t('cost-center.grid.name')"
+                :sortable="true"
+              />
+              <Column
+                headerStyle="width: 12%"
+                :header="$t('grid.columns.actions')"
+              >
+                <template #body="slotProps">
                   <action-buttons
-                    @onEdit='changeToUpdate(slotProps.data.id)'
-                    @onDelete='changeToDelete(slotProps.data.id)' />
+                    @onEdit="changeToUpdate(slotProps.data.id)"
+                    @onDelete="changeToDelete(slotProps.data.id)"
+                  />
                 </template>
               </Column>
             </template>
@@ -91,14 +101,14 @@ function onTableSorted(event) {
 function changeToUpdate(id) {
   router.push({
     name: 'cost-centers.update',
-    params: { id: id }
+    params: { id: id },
   })
 }
 
 function changeToDelete(id) {
   router.push({
     name: 'cost-centers.delete',
-    params: { id: id }
+    params: { id: id },
   })
 }
 
@@ -106,7 +116,7 @@ function changeToDetail(event) {
   const { id } = event.data
   router.push({
     name: 'cost-centers.detail',
-    params: { id: id }
+    params: { id: id },
   })
 }
 

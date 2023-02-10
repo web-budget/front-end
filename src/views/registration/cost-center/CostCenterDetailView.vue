@@ -1,51 +1,60 @@
 <template>
-  <page-content title='cost-center.title' :action="deleting ? 'pages.actions.deleting' : 'pages.actions.detailing'">
-    <div class='col-12'>
-      <div class='card'>
-        <div class='card-header'>
-          <status-toggle name='active' disabled />
+  <page-content
+    title="cost-center.title"
+    :action="deleting ? 'pages.actions.deleting' : 'pages.actions.detailing'"
+  >
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <status-toggle name="active" disabled />
         </div>
-        <div class='card-body'>
-          <div class='row'>
-            <div class='col-12 mb-3'>
-              <form-field
-                disabled
-                name='name'
-                label='cost-center.form.name'
-              />
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 mb-3">
+              <form-field disabled name="name" label="cost-center.form.name" />
             </div>
-            <div class='col-12'>
+            <div class="col-12">
               <form-field
                 disabled
-                rows='4'
-                as='textarea'
-                name='description'
-                label='cost-center.form.description'
+                rows="4"
+                as="textarea"
+                name="description"
+                label="cost-center.form.description"
               />
             </div>
           </div>
         </div>
-        <div class='card-footer'>
-          <div v-if='deleting' class='row align-items-center'>
-            <div class='col text-end'>{{ $t('form.actions.delete-confirm') }}</div>
-            <div class='col-auto'>
-              <a @click.prevent='doDelete()' class='btn btn-danger me-3' :class="{ 'disabled': loading }">
+        <div class="card-footer">
+          <div v-if="deleting" class="row align-items-center">
+            <div class="col text-end">
+              {{ $t('form.actions.delete-confirm') }}
+            </div>
+            <div class="col-auto">
+              <a
+                @click.prevent="doDelete()"
+                class="btn btn-danger me-3"
+                :class="{ disabled: loading }"
+              >
                 {{ $t('form.actions.yes') }}
               </a>
-              <a @click.prevent='goBack()' class='btn btn-primary' :class="{ 'disabled': loading }">
+              <a
+                @click.prevent="goBack()"
+                class="btn btn-primary"
+                :class="{ disabled: loading }"
+              >
                 {{ $t('form.actions.no') }}
               </a>
             </div>
           </div>
-          <div v-else class='row'>
-            <div class='col text-end'>
-              <a class='btn btn-ghost-secondary me-3' @click.prevent='goBack()'>
+          <div v-else class="row">
+            <div class="col text-end">
+              <a class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">
                 {{ $t('form.actions.back') }}
               </a>
-              <a class='btn btn-primary me-3' @click.prevent='changeToUpdate()'>
+              <a class="btn btn-primary me-3" @click.prevent="changeToUpdate()">
                 {{ $t('form.actions.update') }}
               </a>
-              <a class='btn btn-danger' @click.prevent='changeToDelete()'>
+              <a class="btn btn-danger" @click.prevent="changeToDelete()">
                 {{ $t('form.actions.delete') }}
               </a>
             </div>
@@ -74,12 +83,12 @@ import CostCenterClient from '@/clients/registration/cost-center.client'
 const props = defineProps({
   id: {
     type: String,
-    default: null
+    default: null,
   },
   deleting: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const { setValues } = useForm()
@@ -106,14 +115,14 @@ async function doDelete() {
 function changeToUpdate() {
   router.push({
     name: 'cost-centers.update',
-    params: { id: props.id }
+    params: { id: props.id },
   })
 }
 
 function changeToDelete() {
   router.push({
     name: 'cost-centers.delete',
-    params: { id: props.id }
+    params: { id: props.id },
   })
 }
 
@@ -121,7 +130,7 @@ function goBack() {
   router.go(-1)
 }
 
-onMounted(async() => {
+onMounted(async () => {
   if (props.id) {
     try {
       const { data } = await costCenterClient.findById(props.id)
@@ -129,7 +138,7 @@ onMounted(async() => {
       setValues({
         name: data.name,
         active: data.active,
-        description: data.description
+        description: data.description,
       })
     } catch (error) {
       handleError(error.response)

@@ -5,6 +5,9 @@
 <script setup>
 import { POSITION, useToast } from 'vue-toastification'
 import { useMessagingStore } from '@/stores/messaging.store'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const toast = useToast()
 const messagingStore = useMessagingStore()
@@ -21,10 +24,10 @@ function displayMessage(message) {
     showCloseButtonOnHover: false,
     closeButton: 'button',
     icon: true,
-    type: message.type
+    type: message.type,
   }
 
-  toast(message.content, toastConfig)
+  toast(t(message.content), toastConfig)
 }
 
 messagingStore.$subscribe((mutation, state) => {

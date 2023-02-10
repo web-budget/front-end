@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomeTemplate from '@/components/templates/HomeTemplate'
+import HomeTemplate from '@/components/templates/HomeTemplate.vue'
 
 import publicRoutes from '@/router/public.routes.js'
 import registrationRoutes from '@/router/registration.routes.js'
@@ -16,31 +16,32 @@ const routes = [
       {
         path: '',
         name: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/HomeView.vue')
-      }
-    ]
+        component: () =>
+          import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
+      },
+    ],
   },
   ...publicRoutes,
-  ...registrationRoutes
+  ...registrationRoutes,
 ]
 
 const router = createRouter({
   routes,
   linkActiveClass: 'is-active',
   linkExactActiveClass: 'is-active',
-  history: createWebHistory(process.env.BASE_URL)
+  history: createWebHistory(import.meta.env.BASE_URL),
 })
 
 router.beforeEach((to, from, next) => {
   const userSession = useUserSession()
-  const publicRoute = to.matched.some(route => route.meta.public)
+  const publicRoute = to.matched.some((route) => route.meta.public)
 
   if (publicRoute || userSession.isValid()) {
     next()
   } else {
     next({
       name: 'login',
-      query: { redirect: to.path }
+      query: { redirect: to.path },
     })
   }
 })

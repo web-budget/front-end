@@ -1,7 +1,7 @@
 <template>
-  <div class='page'>
+  <div class="page">
     <main-menu />
-    <div class='page-wrapper'>
+    <div class="page-wrapper">
       <message-display />
       <router-view></router-view>
       <page-footer />

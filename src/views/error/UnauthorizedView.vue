@@ -1,10 +1,10 @@
 <template>
   <error-page
-    title='errors.403.title'
-    description='errors.403.description'
-    action='errors.403.action'
-    image='unauthorized.png'
-    @onAction='goBack()'
+    title="errors.403.title"
+    description="errors.403.description"
+    action="errors.403.action"
+    image="unauthorized.png"
+    @onAction="goBack()"
   />
 </template>
 

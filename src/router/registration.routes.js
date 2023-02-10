@@ -1,4 +1,4 @@
-import HomeTemplate from '@/components/templates/HomeTemplate'
+import HomeTemplate from '@/components/templates/HomeTemplate.vue'
 
 const routes = [
   {
@@ -9,39 +9,54 @@ const routes = [
       {
         path: '',
         name: 'cost-centers',
-        component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCentersListView.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCentersListView.vue'
+          ),
       },
       {
         path: 'create',
         name: 'cost-centers.create',
-        component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue'
+          ),
       },
       {
         path: ':id/update',
         name: 'cost-centers.update',
         props: (route) => ({
           id: route.params.id,
-          updating: true
+          updating: true,
         }),
-        component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue'
+          ),
       },
       {
         path: ':id/detail',
         name: 'cost-centers.detail',
         props: (route) => ({ id: route.params.id }),
-        component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue'
+          ),
       },
       {
         path: ':id/delete',
         name: 'cost-centers.delete',
         props: (route) => ({
           id: route.params.id,
-          deleting: true
+          deleting: true,
         }),
-        component: () => import(/* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue')
-      }
-    ]
-  }
+        component: () =>
+          import(
+            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue'
+          ),
+      },
+    ],
+  },
 ]
 
 export default routes

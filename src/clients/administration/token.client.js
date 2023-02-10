@@ -8,8 +8,9 @@ export default class TokenClient extends ApiClient {
   generate(credentials) {
     const config = {
       headers: {
-        Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`)
-      }
+        Authorization:
+          'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
+      },
     }
     return super.post('', '', config)
   }

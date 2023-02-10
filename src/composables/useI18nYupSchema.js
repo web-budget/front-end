@@ -7,16 +7,16 @@ export function useI18nYupSchema() {
   yup.setLocale({
     mixed: {
       default: ({ label }) => t('form.validation.invalid', { field: label }),
-      required: ({ label }) => t('form.validation.required', { field: label })
+      required: ({ label }) => t('form.validation.required', { field: label }),
     },
     string: {
       min: ({ min }) => t('form.validation.min-value', { min: min }),
-      max: ({ max }) => t('form.validation.max-value', { max: max })
+      max: ({ max }) => t('form.validation.max-value', { max: max }),
     },
     number: {
       min: ({ min }) => t('form.validation.min-value', { min: min }),
-      max: ({ max }) => t('form.validation.max-value', { max: max })
-    }
+      max: ({ max }) => t('form.validation.max-value', { max: max }),
+    },
   })
 
   return { yup }

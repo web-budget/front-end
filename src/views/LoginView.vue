@@ -1,41 +1,42 @@
 <template>
   <message-display />
-  <div class='card card-md'>
-    <div class='card-body'>
-      <h2 class='card-title text-center mb-4'>{{ $t('login.title') }}</h2>
-      <div class='mb-3'>
-        <label class='form-label'>
+  <div class="card card-md">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">{{ $t('login.title') }}</h2>
+      <div class="mb-3">
+        <label class="form-label">
           {{ $t('login.form.username') }}
         </label>
         <input-text
-          class='form-control'
-          v-model='credentials.username'
+          class="form-control"
+          v-model="credentials.username"
           :placeholder="$t('login.form.username-placeholder')"
         />
       </div>
-      <div class='mb-2'>
-        <label class='form-label'>
+      <div class="mb-2">
+        <label class="form-label">
           {{ $t('login.form.password') }}
-          <span class='form-label-description'>
+          <span class="form-label-description">
             <router-link :to="{ name: 'forgot-password' }">
               {{ $t('login.action.forgot-password') }}
             </router-link>
           </span>
         </label>
-        <div class='input-group input-group-flat'>
+        <div class="input-group input-group-flat">
           <password
-            :feedback='false'
-            input-class='form-control'
-            v-model='credentials.password'
+            :feedback="false"
+            input-class="form-control"
+            v-model="credentials.password"
             :placeholder="$t('login.form.password-placeholder')"
           />
         </div>
       </div>
-      <div class='form-footer'>
+      <div class="form-footer">
         <a
-          @click.prevent='doLogin()'
-          class='btn btn-primary w-100'
-          :class="{ 'disabled': loading }">
+          @click.prevent="doLogin()"
+          class="btn btn-primary w-100"
+          :class="{ disabled: loading }"
+        >
           {{ $t('login.action.sign-in') }}
         </a>
       </div>
@@ -52,7 +53,7 @@ import router from '@/router'
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 
-import MessageDisplay from '@/components/MessageDisplay'
+import MessageDisplay from '@/components/MessageDisplay.vue'
 
 import TokenClient from '@/clients/administration/token.client'
 
@@ -66,13 +67,10 @@ const userSession = useUserSession()
 const loading = ref(false)
 const credentials = reactive({
   username: '',
-  password: ''
+  password: '',
 })
 
-const {
-  displayError,
-  displayWarn
-} = useMessageHandler()
+const { displayError, displayWarn } = useMessageHandler()
 
 async function doLogin() {
   const tokenClient = new TokenClient()

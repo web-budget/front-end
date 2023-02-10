@@ -37,7 +37,7 @@ createApp(App)
   .use(Toast, {
     transition: 'Vue-Toastification__fade',
     maxToasts: 20,
-    newestOnTop: true
+    newestOnTop: true,
   })
   .use(VueGravatar)
   .directive('tooltip', Tooltip)

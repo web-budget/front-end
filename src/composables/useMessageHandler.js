@@ -2,7 +2,6 @@ import { useI18n } from 'vue-i18n'
 import { useMessagingStore } from '@/stores/messaging.store'
 
 export function useMessageHandler() {
-  const { t } = useI18n()
   const messagingStore = useMessagingStore()
 
   function displayWarn(detail) {
@@ -24,7 +23,7 @@ export function useMessageHandler() {
   function display(detail, type = 'default') {
     const message = {
       type: type,
-      content: t(detail)
+      content: detail,
     }
     messagingStore.handleMessage(message)
   }
@@ -34,6 +33,6 @@ export function useMessageHandler() {
     displayWarn,
     displayError,
     displayInfo,
-    displaySuccess
+    displaySuccess,
   }
 }
