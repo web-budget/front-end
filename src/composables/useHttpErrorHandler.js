@@ -11,6 +11,10 @@ export function useHttpErrorHandler() {
   }
 
   function handleError(response) {
+    if (response || response === undefined) {
+      return
+    }
+
     const { data, status } = response
 
     const severity = determineSeverity(status)

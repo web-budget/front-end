@@ -6,12 +6,15 @@ export default class CostCenterClient extends ApiClient {
   }
 
   findAll(pageRequest) {
+    const pageRequestParams = pageRequest.getPagebleParams()
+
     const requestParams = {
+      ...pageRequestParams,
       filter: pageRequest.filter,
       status: pageRequest.status.toUpperCase(),
     }
 
-    return super.get(pageRequest.buildRequestPath(), { params: requestParams })
+    return super.get('', { params: requestParams })
   }
 
   findById(id) {

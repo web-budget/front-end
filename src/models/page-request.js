@@ -5,7 +5,7 @@ export default class PageRequest {
     current = 0,
     size = 15,
     direction = 'asc',
-    sortField
+    sortField = ''
   ) {
     this.filter = filter
     this.status = status
@@ -15,17 +15,11 @@ export default class PageRequest {
     this.sortField = sortField
   }
 
-  isSortable() {
-    return Boolean(this.sortField)
-  }
-
-  buildRequestPath() {
-    let requestPath = `?page=${this.current}&size=${this.size}`
-
-    if (this.isSortable()) {
-      requestPath = `${requestPath}&sort=${this.sortField},${this.direction}`
+  getPagebleParams() {
+    return {
+      page: this.current,
+      size: this.size,
+      sort: `${this.sortField},${this.direction}`,
     }
-
-    return requestPath
   }
 }

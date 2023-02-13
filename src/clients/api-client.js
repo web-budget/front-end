@@ -1,17 +1,17 @@
 import axios from 'axios'
 
-import router from '@/router'
+// import router from '@/router'
 
 import { useUserSession } from '@/stores/user-session.store'
-import { useMessagingStore } from '@/stores/messaging.store'
+// import { useMessagingStore } from '@/stores/messaging.store'
 
 const userSession = useUserSession()
-const messagingStore = useMessagingStore()
+// const messagingStore = useMessagingStore()
 
 const configureClient = (context) => {
   const options = {
     baseURL: `http://localhost:${
-      import.meta.env.VITE_WEB_PORT || '8080'
+      import.meta.env.VITE_WEB_PORT || '8085' // FIXME remove it to use full URL
     }/${context}`,
   }
   return axios.create(options)
@@ -19,8 +19,6 @@ const configureClient = (context) => {
 
 const authInterceptor = (config) => {
   config.headers.Authorization = `Bearer ${userSession.session.token}`
-  config.headers.common.Accept = 'Application/json'
-  config.headers['Access-Control-Allow-Origin'] = '*'
   return config
 }
 
@@ -50,19 +48,20 @@ class ApiClient {
     this.client.interceptors.response.use(
       (success) => Promise.resolve(success),
       (error) => {
-        if (error.toJSON().message === 'Network Error') {
-          messagingStore.handleMessage({
-            type: 'error',
-            content: 'messages.500.server-unavailable',
-          })
-        } else {
-          const status = error.response.status
-          if (status === 401) {
-            router.push({ name: 'session-expired' })
-          } else if (status === 403) {
-            router.push({ name: 'unauthorized' })
-          }
-        }
+        console.log(error)
+        // if (error.toJSON().message === 'Network Error') {
+        //   messagingStore.handleMessage({
+        //     type: 'error',
+        //     content: 'messages.500.server-unavailable',
+        //   })
+        // } else {
+        //   const status = error.response.status
+        //   if (status === 401) {
+        //     router.push({ name: 'session-expired' })
+        //   } else if (status === 403) {
+        //     router.push({ name: 'unauthorized' })
+        //   }
+        // }
         return Promise.reject(error)
       }
     )
