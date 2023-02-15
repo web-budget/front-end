@@ -70,7 +70,7 @@ const credentials = reactive({
   password: '',
 })
 
-const { displayError, displayWarn } = useMessageHandler()
+const { displayWarn } = useMessageHandler()
 
 async function doLogin() {
   const tokenClient = new TokenClient()
@@ -81,17 +81,14 @@ async function doLogin() {
     userSession.login(data)
     doAfterLoginNavigation()
   } catch (error) {
-    handleLoginError(error.response)
+    if (error.response) {
+      const { status } = error.response
+      if (status === 401 || status === 403) {
+        displayWarn('login.errors.unauthorized')
+      }
+    }
   } finally {
     loading.value = false
-  }
-}
-
-function handleLoginError(response) {
-  if (response.status && (response.status === 401 || response.status === 403)) {
-    displayWarn('login.errors.unauthorized')
-  } else {
-    displayError('login.errors.failed-unknown')
   }
 }
 

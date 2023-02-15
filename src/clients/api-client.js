@@ -1,12 +1,11 @@
 import axios from 'axios'
 
-// import router from '@/router'
-
+import router from '@/router'
 import { useUserSession } from '@/stores/user-session.store'
-// import { useMessagingStore } from '@/stores/messaging.store'
+import { useMessagingStore } from '@/stores/messaging.store'
 
 const userSession = useUserSession()
-// const messagingStore = useMessagingStore()
+const messagingStore = useMessagingStore()
 
 const configureClient = (context) => {
   const options = {
@@ -48,20 +47,24 @@ class ApiClient {
     this.client.interceptors.response.use(
       (success) => Promise.resolve(success),
       (error) => {
-        console.log(error)
-        // if (error.toJSON().message === 'Network Error') {
-        //   messagingStore.handleMessage({
-        //     type: 'error',
-        //     content: 'messages.500.server-unavailable',
-        //   })
-        // } else {
-        //   const status = error.response.status
-        //   if (status === 401) {
-        //     router.push({ name: 'session-expired' })
-        //   } else if (status === 403) {
-        //     router.push({ name: 'unauthorized' })
-        //   }
-        // }
+        if (error.response) {
+          const { status } = error.response
+          if (status === 401) {
+            router.push({ name: 'login' })
+          } else if (status === 403) {
+            router.push({ name: 'unauthorized' })
+          }
+        } else {
+          messagingStore.handleMessage({
+            type: 'error',
+            content: 'errors.500.network-error',
+          })
+        }
+
+        if (debugEnabled) {
+          console.error(error)
+        }
+
         return Promise.reject(error)
       }
     )

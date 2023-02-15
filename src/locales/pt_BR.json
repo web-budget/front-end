@@ -29,6 +29,9 @@
       "title": "Não autorizado",
       "description": "Você não tem permissão para acessar a página ou recurso solicitado",
       "action": "Ir para a Home"
+    },
+    "500": {
+      "network-error": "Falha ao stabelecer conexão com o servidor"
     }
   },
   "user-menu": {
@@ -69,10 +72,6 @@
     }
   },
   "messages": {
-    "500": {
-      "server-unavailable": "Servidor indisponível no momento, tente novamente em instantes",
-      "server-error": "O servidor encontrou um erro ao processar sua requisição"
-    },
     "common": {
       "success": "Sucesso!",
       "error": "Erro",
