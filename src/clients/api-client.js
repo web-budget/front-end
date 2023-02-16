@@ -10,9 +10,7 @@ const messagingStore = useMessagingStore()
 
 const configureClient = (context) => {
   const options = {
-    baseURL: `http://localhost:${
-      import.meta.env.VITE_WEB_PORT || '8085' // FIXME remove it to use full URL
-    }/${context}`,
+    baseURL: `${import.meta.env.VITE_API_URL}/${context}`,
   }
   return axios.create(options)
 }
