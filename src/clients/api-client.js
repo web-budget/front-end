@@ -3,6 +3,7 @@ import axios from 'axios'
 import router from '@/router'
 import { useUserSession } from '@/stores/user-session.store'
 import { useMessagingStore } from '@/stores/messaging.store'
+import { useI18n } from 'vue-i18n'
 
 const userSession = useUserSession()
 const messagingStore = useMessagingStore()
@@ -55,9 +56,10 @@ class ApiClient {
             router.push({ name: 'unauthorized' })
           }
         } else {
+          const { t } = useI18n()
           messagingStore.handleMessage({
             type: 'error',
-            content: 'errors.500.network-error',
+            content: t('errors.network-error'),
           })
         }
 

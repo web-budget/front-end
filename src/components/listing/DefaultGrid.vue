@@ -92,16 +92,14 @@ function translatePageReport() {
   )
 }
 
-function fireTableSorted(event) {
-  const order =
-    event.sortOrder != null
-      ? event.sortOrder > 0
-        ? 'asc'
-        : 'desc'
-      : event.sortOrder
+function fireTableSorted({ sortOrder, sortField }) {
+  let order = 'desc'
+  if (sortOrder != null && sortOrder > 0) {
+    order = 'asc'
+  }
 
   emit('tableSorted', {
-    sortField: event.sortField,
+    sortField: sortField,
     direction: order,
   })
 }
@@ -111,6 +109,10 @@ function fireTableSorted(event) {
 ::v-deep(.p-paginator) {
   .p-paginator-current {
     margin-right: auto;
+  }
+
+  span.p-dropdown-label {
+    padding: 0;
   }
 }
 </style>

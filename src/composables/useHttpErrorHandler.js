@@ -1,7 +1,10 @@
 import { useMessagingStore } from '@/stores/messaging.store'
 
+import { useI18n } from 'vue-i18n'
+
 export function useHttpErrorHandler() {
   const messagingStore = useMessagingStore()
+  const { t } = useI18n()
 
   function determineSeverity(httpStatus) {
     if (httpStatus >= 400 && httpStatus < 500) {
@@ -11,26 +14,35 @@ export function useHttpErrorHandler() {
   }
 
   function handleError(response) {
-    if (response || response === undefined) {
-      return
-    }
+    if (response) {
+      const { data, status } = response
 
-    const { data, status } = response
+      const severity = determineSeverity(status)
 
-    const severity = determineSeverity(status)
-
-    if (status > 500) {
-      displayToast('messages.500.server-error', severity)
-    } else if (status === 422 || status === 409) {
-      displayToast(data.message, severity)
+      if (status > 500) {
+        displayToast({
+          type: severity,
+          content: 'errro.500.server-error',
+        })
+      } else if (status === 422) {
+        const errors = data.errors
+        errors.map((error) => t(error))
+        displayToast({
+          noLocalize: true,
+          type: severity,
+          content: errors.join(', '),
+        })
+      } else if (status === 409) {
+        displayToast({
+          type: severity,
+          content: data.error,
+        })
+      }
     }
   }
 
-  function displayToast(content, severity) {
-    messagingStore.handleMessage({
-      type: severity,
-      content: content,
-    })
+  function displayToast(message) {
+    messagingStore.handleMessage(message)
   }
 
   return {

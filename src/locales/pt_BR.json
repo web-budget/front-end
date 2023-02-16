@@ -20,6 +20,7 @@
     }
   },
   "errors": {
+    "network-error": "Falha ao stabelecer conexão com o servidor",
     "401": {
       "title": "Sessão expirada",
       "description": "Suas credênciais não são mais válidas para esta sessão, faça login e tente novamente",
@@ -31,7 +32,7 @@
       "action": "Ir para a Home"
     },
     "500": {
-      "network-error": "Falha ao stabelecer conexão com o servidor"
+      "server-error": "Servidor falhou ao executar a operação, tente novamente ou entre em conto com o administrador"
     }
   },
   "user-menu": {

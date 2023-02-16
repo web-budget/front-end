@@ -3,14 +3,14 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
 import { POSITION, useToast } from 'vue-toastification'
 import { useMessagingStore } from '@/stores/messaging.store'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
 
 const toast = useToast()
 const messagingStore = useMessagingStore()
+
+const { t } = useI18n()
 
 function displayMessage(message) {
   const toastConfig = {
@@ -27,7 +27,11 @@ function displayMessage(message) {
     type: message.type,
   }
 
-  toast(t(message.content), toastConfig)
+  if (message.noLocalize) {
+    toast(message.content, toastConfig)
+  } else {
+    toast(t(message.content), toastConfig)
+  }
 }
 
 messagingStore.$subscribe((mutation, state) => {
