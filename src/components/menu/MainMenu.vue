@@ -107,9 +107,9 @@
               </template>
               <template #items>
                 <div class="dropdown-menu-column">
-                  <a class="dropdown-item" href="#">
+                  <router-link class="dropdown-item" :to="{ name: 'users' }">
                     {{ $t('main-menu.configurations.users') }}
-                  </a>
+                  </router-link>
                   <a class="dropdown-item" href="#">
                     {{ $t('main-menu.configurations.parameters') }}
                   </a>

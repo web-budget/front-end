@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 
 import { StorageSerializers, useStorage } from '@vueuse/core'
 
+import router from '@/router'
+
 import jwtDecode from 'jwt-decode'
 
 export const useUserSession = defineStore('userSessionStore', {
@@ -16,11 +18,12 @@ export const useUserSession = defineStore('userSessionStore', {
     },
     logout() {
       this.session = null
+      router.push({ name: 'login' })
     },
     isValid() {
       if (this.session) {
         const { exp } = jwtDecode(this.session.token)
-        return !(Date.now() >= exp * 1000)
+        return Date.now() < exp * 1000
       }
       return false
     },

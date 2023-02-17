@@ -196,5 +196,11 @@
     "search": {
       "filters": "Nome ou descrição"
     }
+  },
+  "user": {
+    "grid": {
+      "name": "name",
+      "email": "E-mail"
+    }
   }
 }
