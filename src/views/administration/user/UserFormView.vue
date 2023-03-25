@@ -67,12 +67,12 @@
                   label="user.form.authorities"
                 />
                 <MultiSelect
-                  v-model="selectedAuthorities"
-                  :options="authorities"
+                  display="chip"
                   option-value="value"
+                  :options="authorities"
+                  v-model="selectedAuthorities"
                   :option-label="translateLabel"
                   :placeholder="$t('form.actions.select-one')"
-                  display="chip"
                 >
                   <template #option="slotProps">
                     {{ $t(slotProps.option.name) }}
