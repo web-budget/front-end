@@ -85,7 +85,6 @@ async function applyFilter() {
     const response = await userClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
-    console.log(error)
     handleError(error.response)
   } finally {
     loading.value = false

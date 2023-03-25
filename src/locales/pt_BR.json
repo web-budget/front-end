@@ -113,7 +113,8 @@
       "back": "Voltar",
       "yes": "Sim",
       "no": "Não",
-      "delete-confirm": "Confirma a exclusão do registro?"
+      "delete-confirm": "Confirma a exclusão do registro?",
+      "select-one": "Selecione..."
     },
     "messages": {
       "created": "Registro criado com sucesso!",
@@ -124,7 +125,8 @@
       "required": "Obrigatório",
       "min-value": "Tamanho mínimo {min} caracteres",
       "max-value": "Tamanho máximo {max} caracteres",
-      "invalid": "Valor inválido"
+      "invalid": "Valor inválido",
+      "must-match": "Deve ser igual a {matcher}"
     }
   },
   "search-controls": {
@@ -198,9 +200,30 @@
     }
   },
   "user": {
+    "title": "Usuários",
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "password": "Senha",
+      "confirmation": "Confirmação",
+      "authorities": "Autorizações"
+    },
     "grid": {
-      "name": "name",
+      "name": "Nome",
       "email": "E-mail"
+    },
+    "errors": {
+
+    },
+    "search": {
+      "filters": "Nome ou e-mail"
     }
+  },
+  "authority": {
+    "dashboards": "Dashboards",
+    "investments": "Investimentos",
+    "administration": "Administração",
+    "financial": "Financeiro",
+    "registration": "Cadastros"
   }
 }

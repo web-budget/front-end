@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import router from '@/router'
 
@@ -75,12 +75,16 @@ import { Form } from 'vee-validate'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
-import { useI18nYupSchema } from '@/composables/useI18nYupSchema.js'
 
 import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import CostCenterClient from '@/clients/registration/cost-center.client'
+
+import {
+  formDefaults,
+  validationSchema,
+} from '@/models/registration/cost-center.model.js'
 
 const props = defineProps({
   id: {
@@ -93,23 +97,12 @@ const props = defineProps({
   },
 })
 
-const { yup } = useI18nYupSchema()
 const { displaySuccess } = useMessageHandler()
 const { handleError } = useHttpErrorHandler()
 
 const costCenterClient = new CostCenterClient()
 
 const loading = ref(false)
-
-const formDefaults = reactive({
-  active: true,
-  name: '',
-  description: '',
-})
-
-const validationSchema = yup.object().shape({
-  name: yup.string().min(3).max(150).required(),
-})
 
 async function prepareForUpdate() {
   try {

@@ -15,8 +15,8 @@
             <status-toggle name="active" />
           </div>
           <div class="card-body">
-            <div class="row">
-              <div class="col-12 mb-3">
+            <div class="row mb-3">
+              <div class="col-6">
                 <form-field
                   type="text"
                   name="name"
@@ -25,14 +25,59 @@
                   label="user.form.name"
                 />
               </div>
-              <div class="col-12">
+              <div class="col-6">
                 <form-field
-                  rows="4"
-                  as="textarea"
-                  name="description"
-                  data-bs-toggle="autosize"
-                  label="user.form.description"
+                  type="text"
+                  name="email"
+                  autocomplete="off"
+                  :errors="errors.email"
+                  label="user.form.email"
                 />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-6">
+                    <form-field
+                      type="password"
+                      name="password"
+                      autocomplete="new-password"
+                      :errors="errors.password"
+                      label="user.form.password"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <form-field
+                      type="password"
+                      name="confirmation"
+                      autocomplete="new-password"
+                      :errors="errors.confirmation"
+                      label="user.form.confirmation"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <form-field
+                  type="text"
+                  name="authorities"
+                  autocomplete="off"
+                  :errors="errors.authorities"
+                  label="user.form.authorities"
+                />
+                <MultiSelect
+                  v-model="selectedAuthorities"
+                  :options="authorities"
+                  option-value="value"
+                  :option-label="translateLabel"
+                  :placeholder="$t('form.actions.select-one')"
+                  display="chip"
+                >
+                  <template #option="slotProps">
+                    {{ $t(slotProps.option.name) }}
+                  </template>
+                </MultiSelect>
               </div>
             </div>
           </div>
@@ -67,20 +112,30 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import router from '@/router'
 
 import { Form } from 'vee-validate'
 
+import MultiSelect from 'primevue/multiselect'
+
+import { useI18n } from 'vue-i18n'
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
-import { useI18nYupSchema } from '@/composables/useI18nYupSchema.js'
 
 import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
-import UserClient from '@/clients/administration/user.client.js'
+
+import UserClient from '@/clients/administration/user.client'
+
+import authorities from '@/models/administration/authorities.model'
+
+import {
+  formDefaults,
+  validationSchema,
+} from '@/models/administration/user.model.js'
 
 const props = defineProps({
   id: {
@@ -93,23 +148,18 @@ const props = defineProps({
   },
 })
 
-const { yup } = useI18nYupSchema()
+const { t } = useI18n()
 const { displaySuccess } = useMessageHandler()
 const { handleError } = useHttpErrorHandler()
 
 const userClient = new UserClient()
 
 const loading = ref(false)
+const selectedAuthorities = ref([])
 
-const formDefaults = reactive({
-  active: true,
-  name: '',
-  description: '',
-})
-
-const validationSchema = yup.object().shape({
-  name: yup.string().min(3).max(150).required(),
-})
+function translateLabel(selected) {
+  return t(selected.name)
+}
 
 async function prepareForUpdate() {
   try {
@@ -148,7 +198,7 @@ async function doUpdate(values) {
   try {
     loading.value = true
     await userClient.update(props.id, values)
-    prepareForUpdate()
+    await prepareForUpdate()
     displaySuccess('form.messages.updated')
   } catch (error) {
     handleError(error.response)

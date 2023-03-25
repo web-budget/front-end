@@ -1,9 +1,10 @@
 import * as yup from 'yup'
-import { useI18n } from 'vue-i18n'
+
+import i18n from '@/locales'
+
+const { t } = i18n.global
 
 export function useI18nYupSchema() {
-  const { t } = useI18n()
-
   yup.setLocale({
     mixed: {
       default: ({ label }) => t('form.validation.invalid', { field: label }),

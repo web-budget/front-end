@@ -27,9 +27,9 @@
   </div>
   <div class="text-center text-muted mt-3">
     <i18n-t tag="label" keypath="forgot-password.footer">
-      <router-link :to="{ name: 'login' }">{{
-        $t('forgot-password.action.send-me-back')
-      }}</router-link>
+      <router-link :to="{ name: 'login' }"
+        >{{ $t('forgot-password.action.send-me-back') }}
+      </router-link>
     </i18n-t>
   </div>
 </template>

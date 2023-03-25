@@ -10,6 +10,7 @@ const messagingStore = useMessagingStore()
 const configureClient = (context) => {
   const options = {
     baseURL: `${import.meta.env.VITE_API_URL}/${context}`,
+    timeout: 20000,
   }
   return axios.create(options)
 }

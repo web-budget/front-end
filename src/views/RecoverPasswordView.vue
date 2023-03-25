@@ -37,9 +37,9 @@
     </div>
   </div>
   <div class="text-center text-muted mt-3">
-    <router-link :to="{ name: 'login' }">{{
-      $t('recover-password.action.back-to-login')
-    }}</router-link>
+    <router-link :to="{ name: 'login' }"
+      >{{ $t('recover-password.action.back-to-login') }}
+    </router-link>
   </div>
 </template>
 
