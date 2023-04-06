@@ -59,25 +59,11 @@
                 </div>
               </div>
               <div class="col-6">
-                <form-field
-                  type="text"
+                <multi-value-form-field
                   name="authorities"
-                  autocomplete="off"
-                  :errors="errors.authorities"
                   label="user.form.authorities"
+                  :errors="errors.authorities"
                 />
-                <MultiSelect
-                  v-model="selectedAuthorities"
-                  :options="authorities"
-                  option-value="value"
-                  :option-label="translateLabel"
-                  :placeholder="$t('form.actions.select-one')"
-                  display="chip"
-                >
-                  <template #option="slotProps">
-                    {{ $t(slotProps.option.name) }}
-                  </template>
-                </MultiSelect>
               </div>
             </div>
           </div>
@@ -118,19 +104,15 @@ import router from '@/router'
 
 import { Form } from 'vee-validate'
 
-import MultiSelect from 'primevue/multiselect'
-
-import { useI18n } from 'vue-i18n'
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
 
 import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+import MultiValueFormField from '@/components/forms/MultiValueFormField.vue'
 
 import UserClient from '@/clients/administration/user.client'
-
-import authorities from '@/models/administration/authorities.model'
 
 import {
   formDefaults,
@@ -148,18 +130,12 @@ const props = defineProps({
   },
 })
 
-const { t } = useI18n()
 const { displaySuccess } = useMessageHandler()
 const { handleError } = useHttpErrorHandler()
 
 const userClient = new UserClient()
 
 const loading = ref(false)
-const selectedAuthorities = ref([])
-
-function translateLabel(selected) {
-  return t(selected.name)
-}
 
 async function prepareForUpdate() {
   try {

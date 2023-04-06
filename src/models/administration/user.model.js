@@ -25,6 +25,7 @@ const validationSchema = yup.object().shape({
       [yup.ref('password'), null],
       t('form.validation.must-match', { matcher: t('user.form.password') })
     ),
+  authorities: yup.array().min(1).required(),
 })
 
 export { formDefaults, validationSchema }

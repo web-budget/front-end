@@ -123,6 +123,7 @@
     },
     "validation": {
       "required": "Obrigatório",
+      "array-min-value": "Selecione ao menos {min} item",
       "min-value": "Tamanho mínimo {min} caracteres",
       "max-value": "Tamanho máximo {max} caracteres",
       "invalid": "Valor inválido",

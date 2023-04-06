@@ -18,6 +18,10 @@ export function useI18nYupSchema() {
       min: ({ min }) => t('form.validation.min-value', { min: min }),
       max: ({ max }) => t('form.validation.max-value', { max: max }),
     },
+    array: {
+      required: ({ label }) => t('form.validation.required', { field: label }),
+      min: ({ min }) => t('form.validation.array-min-value', { min: min }),
+    },
   })
 
   return { yup }
