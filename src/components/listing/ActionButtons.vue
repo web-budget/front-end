@@ -14,6 +14,7 @@
     >
       <trash-icon />
     </button>
+    <slot></slot>
   </div>
 </template>
 

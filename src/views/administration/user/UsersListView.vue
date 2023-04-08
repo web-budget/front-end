@@ -32,14 +32,22 @@
                 :sortable="true"
               />
               <Column
-                headerStyle="width: 12%"
+                headerStyle="width: 18%"
                 :header="$t('grid.columns.actions')"
               >
                 <template #body="slotProps">
                   <action-buttons
                     @onEdit="changeToUpdate(slotProps.data.id)"
                     @onDelete="changeToDelete(slotProps.data.id)"
-                  />
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-ghost-secondary btn-icon ms-2"
+                      @click="openChangePasswordDialog(slotProps.data.id)"
+                    >
+                      <key-icon />
+                    </button>
+                  </action-buttons>
                 </template>
               </Column>
             </template>
@@ -57,6 +65,8 @@ import router from '@/router'
 
 import Column from 'primevue/column'
 
+import { KeyIcon } from 'vue-tabler-icons'
+
 import PageContent from '@/components/page/PageContent.vue'
 
 import DefaultGrid from '@/components/listing/DefaultGrid.vue'
@@ -70,9 +80,9 @@ import UserClient from '@/clients/administration/user.client'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 
-const loading = ref(false)
-
 const { handleError } = useHttpErrorHandler()
+
+const loading = ref(false)
 
 const pageRequest = reactive(new PageRequest())
 const pageResponse = reactive(new PageResponse())
@@ -127,6 +137,10 @@ function changeToDetail(event) {
 
 function changeToAdd() {
   router.push({ name: 'users.create' })
+}
+
+function openChangePasswordDialog(id) {
+  console.log(id)
 }
 
 onMounted(() => {
