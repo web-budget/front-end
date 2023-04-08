@@ -15,7 +15,7 @@ const formDefaults = reactive({
   authorities: [],
 })
 
-const validationSchema = yup.object().shape({
+const createValidationSchema = yup.object().shape({
   name: yup.string().min(3).max(150).required(),
   email: yup.string().email().max(150).required(),
   password: yup.string().min(6).required(),
@@ -28,4 +28,10 @@ const validationSchema = yup.object().shape({
   authorities: yup.array().min(1).required(),
 })
 
-export { formDefaults, validationSchema }
+const updateValidationSchema = yup.object().shape({
+  name: yup.string().min(3).max(150).required(),
+  email: yup.string().email().max(150).required(),
+  authorities: yup.array().min(1).required(),
+})
+
+export { formDefaults, updateValidationSchema, createValidationSchema }

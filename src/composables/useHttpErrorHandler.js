@@ -32,7 +32,7 @@ export function useHttpErrorHandler() {
           type: severity,
           content: errors.join(', '),
         })
-      } else if (status === 409) {
+      } else if (status === 400 || status === 409) {
         displayToast({
           type: severity,
           content: data.error,

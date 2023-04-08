@@ -7,7 +7,9 @@
       v-slot="{ errors }"
       @submit="selectAction"
       :initial-values="formDefaults"
-      :validation-schema="validationSchema"
+      :validation-schema="
+        updating ? updateValidationSchema : createValidationSchema
+      "
     >
       <div class="col-12">
         <div class="card">
@@ -42,6 +44,7 @@
                     <form-field
                       type="password"
                       name="password"
+                      :disabled="updating"
                       autocomplete="new-password"
                       :errors="errors.password"
                       label="user.form.password"
@@ -51,6 +54,7 @@
                     <form-field
                       type="password"
                       name="confirmation"
+                      :disabled="updating"
                       autocomplete="new-password"
                       :errors="errors.confirmation"
                       label="user.form.confirmation"
@@ -116,7 +120,8 @@ import UserClient from '@/clients/administration/user.client'
 
 import {
   formDefaults,
-  validationSchema,
+  createValidationSchema,
+  updateValidationSchema,
 } from '@/models/administration/user.model.js'
 
 const props = defineProps({

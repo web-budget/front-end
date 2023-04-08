@@ -214,7 +214,7 @@
       "email": "E-mail"
     },
     "errors": {
-
+      "cannot-delete-admin": "Não é possível excluir o administrador"
     },
     "search": {
       "filters": "Nome ou e-mail"

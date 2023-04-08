@@ -9,17 +9,50 @@
           <status-toggle name="active" disabled />
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-12 mb-3">
-              <form-field disabled name="name" label="user.form.name" />
-            </div>
-            <div class="col-12">
+          <div class="row mb-3">
+            <div class="col-6">
               <form-field
                 disabled
-                rows="4"
-                as="textarea"
-                name="description"
-                label="user.form.description"
+                type="text"
+                name="name"
+                label="user.form.name"
+              />
+            </div>
+            <div class="col-6">
+              <form-field
+                disabled
+                type="text"
+                name="email"
+                label="user.form.email"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  <form-field
+                    disabled
+                    type="password"
+                    name="password"
+                    label="user.form.password"
+                  />
+                </div>
+                <div class="col-6">
+                  <form-field
+                    disabled
+                    type="password"
+                    name="confirmation"
+                    label="user.form.confirmation"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <multi-value-form-field
+                disabled
+                name="authorities"
+                label="user.form.authorities"
               />
             </div>
           </div>
@@ -79,6 +112,7 @@ import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import UserClient from '@/clients/administration/user.client.js'
+import MultiValueFormField from '@/components/forms/MultiValueFormField.vue'
 
 const props = defineProps({
   id: {
@@ -134,8 +168,13 @@ onMounted(async () => {
   if (props.id) {
     try {
       const { data } = await userClient.findById(props.id)
-
-      setValues({})
+      console.log(data)
+      setValues({
+        active: data.active,
+        name: data.name,
+        email: data.email,
+        authorities: data.authorities,
+      })
     } catch (error) {
       handleError(error.response)
     }

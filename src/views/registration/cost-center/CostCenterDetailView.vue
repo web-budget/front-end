@@ -134,7 +134,6 @@ onMounted(async () => {
   if (props.id) {
     try {
       const { data } = await costCenterClient.findById(props.id)
-
       setValues({
         name: data.name,
         active: data.active,
