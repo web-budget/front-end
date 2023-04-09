@@ -1,6 +1,6 @@
 <template>
   <div class="col-3 pe-2">
-    <div class="btn-group w-100">
+    <div class="btn-group w-100 bar-height">
       <input
         id="rdAll"
         type="radio"
@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="col-1">
-    <button type="button" class="btn btn-primary w-100" @click="$emit('onAdd')">
+    <button type="button" class="btn btn-primary w-100 bar-height" @click="$emit('onAdd')">
       {{ $t('search-controls.actions.create') }}
     </button>
   </div>
@@ -98,8 +98,11 @@ function fireStatusChanged() {
 }
 </script>
 
-<style scoped>
-.btn .icon {
-  margin: 0;
+<style lang="scss" scoped>
+.bar-height {
+  height: 40px;
+}
+label.btn {
+  border-color: var(--bs-btn-active-border-color) !important;
 }
 </style>

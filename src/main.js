@@ -23,8 +23,8 @@ import 'bootstrap/scss/bootstrap.scss'
 import 'vue-toastification/dist/index.css'
 
 // tabler (the real magic)
-import '@/assets/css/tabler.min.css'
-import '@/assets/js/tabler.min.js'
+import '@tabler/core/dist/css/tabler.min.css'
+import '@tabler/core/dist/js/tabler.min.js'
 
 // web-budget custom
 import '@/assets/scss/webbudget.scss'

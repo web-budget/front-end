@@ -111,8 +111,8 @@ function fireTableSorted({ sortOrder, sortField }) {
     margin-right: auto;
   }
 
-  span.p-dropdown-label {
-    padding: 0;
+  div.p-dropdown.p-paginator-rpp-options {
+    padding: 0 0 0 5px;
   }
 }
 </style>
