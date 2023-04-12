@@ -62,7 +62,7 @@ function translateLabel(selected) {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .p-multiselect {
   padding: 0;
   height: 36px;

@@ -39,15 +39,7 @@
                   <action-buttons
                     @onEdit="changeToUpdate(slotProps.data.id)"
                     @onDelete="changeToDelete(slotProps.data.id)"
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-ghost-secondary btn-icon ms-2"
-                      @click="openChangePasswordDialog(slotProps.data.id)"
-                    >
-                      <key-icon />
-                    </button>
-                  </action-buttons>
+                  />
                 </template>
               </Column>
             </template>
@@ -137,10 +129,6 @@ function changeToDetail(event) {
 
 function changeToAdd() {
   router.push({ name: 'users.create' })
-}
-
-function openChangePasswordDialog(id) {
-  console.log(id)
 }
 
 onMounted(() => {

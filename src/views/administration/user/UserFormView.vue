@@ -31,6 +31,7 @@
                 <form-field
                   type="text"
                   name="email"
+                  :disabled="updating"
                   autocomplete="off"
                   :errors="errors.email"
                   label="user.form.email"
@@ -73,6 +74,15 @@
           </div>
           <div class="card-footer">
             <div class="row">
+              <div class="col" v-show="updating">
+                <a
+                  class="btn btn-ghost-warning me-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#changePasswordDialog"
+                >
+                  {{ $t('form.actions.change-password') }}
+                </a>
+              </div>
               <div class="col text-end">
                 <a
                   class="btn btn-ghost-secondary me-3"
@@ -98,6 +108,7 @@
         </div>
       </div>
     </Form>
+    <change-password-dialog :userId="props.id" />
   </page-content>
 </template>
 
@@ -115,6 +126,8 @@ import FormField from '@/components/forms/FormField.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import MultiValueFormField from '@/components/forms/MultiValueFormField.vue'
+
+import ChangePasswordDialog from '@/views/administration/user/ChangePasswordDialog.vue'
 
 import UserClient from '@/clients/administration/user.client'
 

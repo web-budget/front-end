@@ -15,9 +15,7 @@ const formDefaults = reactive({
   authorities: [],
 })
 
-const createValidationSchema = yup.object().shape({
-  name: yup.string().min(3).max(150).required(),
-  email: yup.string().email().max(150).required(),
+const passwordSchema = yup.object().shape({
   password: yup.string().min(6).required(),
   confirmation: yup
     .string()
@@ -25,7 +23,6 @@ const createValidationSchema = yup.object().shape({
       [yup.ref('password'), null],
       t('form.validation.must-match', { matcher: t('user.form.password') })
     ),
-  authorities: yup.array().min(1).required(),
 })
 
 const updateValidationSchema = yup.object().shape({
@@ -34,4 +31,11 @@ const updateValidationSchema = yup.object().shape({
   authorities: yup.array().min(1).required(),
 })
 
-export { formDefaults, updateValidationSchema, createValidationSchema }
+const createValidationSchema = updateValidationSchema.concat(passwordSchema)
+
+export {
+  formDefaults,
+  updateValidationSchema,
+  createValidationSchema,
+  passwordSchema,
+}
