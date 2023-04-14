@@ -102,7 +102,4 @@ function fireStatusChanged() {
 .bar-height {
   height: 40px;
 }
-label.btn {
-  border-color: var(--bs-btn-active-border-color) !important;
-}
 </style>

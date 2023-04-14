@@ -135,3 +135,9 @@ import {
   EditIcon,
 } from 'vue-tabler-icons'
 </script>
+
+<style lang="scss" scoped>
+.navbar {
+  box-shadow: unset;
+}
+</style>

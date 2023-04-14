@@ -4,6 +4,7 @@
     :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'"
   >
     <Form
+      ref="form"
       v-slot="{ errors }"
       @submit="selectAction"
       :initial-values="formDefaults"
@@ -132,8 +133,8 @@ import ChangePasswordDialog from '@/views/administration/user/ChangePasswordDial
 import UserClient from '@/clients/administration/user.client'
 
 import {
-  formDefaults,
   createValidationSchema,
+  formDefaults,
   updateValidationSchema,
 } from '@/models/administration/user.model.js'
 
@@ -153,13 +154,14 @@ const { handleError } = useHttpErrorHandler()
 
 const userClient = new UserClient()
 
+const form = ref(null)
 const loading = ref(false)
 
 async function prepareForUpdate() {
   try {
     loading.value = true
     const { data } = await userClient.findById(props.id)
-    Object.assign(formDefaults, data)
+    form.value.setValues({ ...data })
   } catch (error) {
     handleError(error.response)
   } finally {

@@ -42,11 +42,18 @@
                 href="https://webbudget.com.br"
                 target="_blank"
                 class="link-secondary"
-                >webBudget</a
-              >. All rights reserved.
+              >
+                webBudget
+              </a>
+              . All rights reserved.
             </li>
             <li class="list-inline-item">
-              <a href="./changelog.html" class="link-secondary" rel="noopener">
+              <a
+                href="https://github.com/orgs/web-budget/projects/3/views/5"
+                class="link-secondary"
+                rel="noopener"
+                target="_blank"
+              >
                 v{{ packageInfo.version }}
               </a>
             </li>

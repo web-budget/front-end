@@ -4,6 +4,7 @@
     :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'"
   >
     <Form
+      ref="form"
       v-slot="{ errors }"
       @submit="selectAction"
       :initial-values="formDefaults"
@@ -102,13 +103,14 @@ const { handleError } = useHttpErrorHandler()
 
 const costCenterClient = new CostCenterClient()
 
+const form = ref(null)
 const loading = ref(false)
 
 async function prepareForUpdate() {
   try {
     loading.value = true
     const { data } = await costCenterClient.findById(props.id)
-    Object.assign(formDefaults, data)
+    form.value.setValues({ ...data })
   } catch (error) {
     handleError(error.response)
   } finally {

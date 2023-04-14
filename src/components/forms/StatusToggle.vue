@@ -45,9 +45,3 @@ const props = defineProps({
   },
 })
 </script>
-
-<style lang="scss" scoped>
-label.btn {
-  border-color: var(--bs-btn-active-border-color) !important;
-}
-</style>

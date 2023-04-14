@@ -14,7 +14,6 @@
     "@tabler/core": "^1.0.0-beta17",
     "@vueuse/core": "^9.12.0",
     "axios": "^1.3.2",
-    "bootstrap": "^5.2.3",
     "jwt-decode": "^3.1.2",
     "pinia": "^2.0.28",
     "primeicons": "^6.0.1",
