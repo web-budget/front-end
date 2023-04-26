@@ -168,7 +168,6 @@ onMounted(async () => {
   if (props.id) {
     try {
       const { data } = await userClient.findById(props.id)
-      console.log(data)
       setValues({
         active: data.active,
         name: data.name,

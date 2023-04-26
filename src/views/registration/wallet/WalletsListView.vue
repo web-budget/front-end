@@ -1,5 +1,5 @@
 <template>
-  <page-content title="cost-center.title" action="pages.actions.listing">
+  <page-content title="wallet.title" action="pages.actions.listing">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
@@ -8,7 +8,7 @@
             @onStatusChange="applyFilter()"
             v-model:filter="pageRequest.filter"
             v-model:status="pageRequest.status"
-            :placeholder="$t('cost-center.search.filters')"
+            :placeholder="$t('wallet.search.filters')"
           />
         </div>
         <div class="card-body border-bottom p-0">
@@ -23,9 +23,25 @@
             <template #columns>
               <Column
                 field="name"
-                :header="$t('cost-center.grid.name')"
+                :header="$t('wallet.grid.name')"
                 :sortable="true"
-              />
+              >
+                <template #body="{ data }">
+                  <span v-if="data.bank">
+                    {{ data.name + ' - ' + data.bank }}
+                  </span>
+                  <span v-else>{{ data.name }}</span>
+                </template>
+              </Column>
+              <Column
+                field="type"
+                :header="$t('wallet.grid.type')"
+                :sortable="true"
+              >
+                <template #body="{ data }">
+                  {{ $t(walletTypes[data.type]) }}
+                </template>
+              </Column>
               <Column
                 headerStyle="width: 12%"
                 :header="$t('grid.columns.actions')"
@@ -60,24 +76,24 @@ import ActionButtons from '@/components/listing/ActionButtons.vue'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
+import { walletTypes } from '@/models/registration/wallet.model'
 
-import CostCenterClient from '@/clients/registration/cost-center.client'
+import WalletClient from '@/clients/registration/wallet.client'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 
-const loading = ref(false)
-
 const { handleError } = useHttpErrorHandler()
 
+const loading = ref(false)
 const pageRequest = reactive(new PageRequest())
 const pageResponse = reactive(new PageResponse())
 
-const costCenterClient = new CostCenterClient()
+const walletClient = new WalletClient()
 
 async function applyFilter() {
   try {
     loading.value = true
-    const response = await costCenterClient.findAll(pageRequest)
+    const response = await walletClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
     handleError(error.response)
@@ -100,14 +116,14 @@ function onTableSorted(event) {
 
 function changeToUpdate(id) {
   router.push({
-    name: 'cost-centers.update',
+    name: 'wallets.update',
     params: { id: id },
   })
 }
 
 function changeToDelete(id) {
   router.push({
-    name: 'cost-centers.delete',
+    name: 'wallets.delete',
     params: { id: id },
   })
 }
@@ -115,13 +131,13 @@ function changeToDelete(id) {
 function changeToDetail(event) {
   const { id } = event.data
   router.push({
-    name: 'cost-centers.detail',
+    name: 'wallets.detail',
     params: { id: id },
   })
 }
 
 function changeToAdd() {
-  router.push({ name: 'cost-centers.create' })
+  router.push({ name: 'wallets.create' })
 }
 
 onMounted(() => {

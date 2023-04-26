@@ -1,6 +1,5 @@
 <template>
   <header
-    v-once
     class="navbar navbar-expand-md navbar-dark navbar-overlap d-print-none"
   >
     <div class="container-xl">
@@ -81,9 +80,9 @@
                   <a class="dropdown-item" href="#">
                     {{ $t('main-menu.registration.vehicles') }}
                   </a>
-                  <a class="dropdown-item" href="#">
+                  <router-link class="dropdown-item" :to="{ name: 'wallets' }">
                     {{ $t('main-menu.registration.wallets') }}
-                  </a>
+                  </router-link>
                   <a class="dropdown-item" href="#">
                     {{ $t('main-menu.registration.credit-cards') }}
                   </a>

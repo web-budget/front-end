@@ -1,6 +1,6 @@
 <template>
   <page-content
-    title="cost-center.title"
+    title="wallet.title"
     :action="updating ? 'pages.actions.updating' : 'pages.actions.creating'"
   >
     <Form
@@ -17,22 +17,64 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-12 mb-3">
-                <form-field
-                  type="text"
-                  name="name"
-                  autocomplete="off"
-                  :errors="errors.name"
-                  label="cost-center.form.name"
-                />
+              <div class="col-6">
+                <div class="col mb-3">
+                  <form-field
+                    type="text"
+                    name="name"
+                    autocomplete="off"
+                    :errors="errors.name"
+                    label="wallet.form.name"
+                  />
+                </div>
+                <div class="col mb-3">
+                  <form-select
+                    name="type"
+                    :errors="errors.type"
+                    :options="walletTypes"
+                    label="wallet.form.type"
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    <form-field
+                      type="text"
+                      name="bank"
+                      :required="false"
+                      autocomplete="off"
+                      :errors="errors.bank"
+                      label="wallet.form.bank"
+                    />
+                  </div>
+                  <div class="col-3">
+                    <form-field
+                      type="text"
+                      name="agency"
+                      :required="false"
+                      autocomplete="off"
+                      :errors="errors.agency"
+                      label="wallet.form.agency"
+                    />
+                  </div>
+                  <div class="col-4">
+                    <form-field
+                      type="text"
+                      name="number"
+                      :required="false"
+                      autocomplete="off"
+                      :errors="errors.number"
+                      label="wallet.form.number"
+                    />
+                  </div>
+                </div>
               </div>
-              <div class="col-12">
+              <div class="col-6">
                 <form-field
                   rows="4"
                   as="textarea"
                   name="description"
                   data-bs-toggle="autosize"
-                  label="cost-center.form.description"
+                  label="wallet.form.description"
                 />
               </div>
             </div>
@@ -41,10 +83,10 @@
             <div class="row">
               <div class="col text-end">
                 <a
-                  class="btn btn-ghost-secondary me-3"
-                  @click.prevent="goBack()"
+                  @click.prevent="changeToList()"
+                  class="btn btn-ghost-danger me-3"
                 >
-                  {{ $t('form.actions.back') }}
+                  {{ $t('form.actions.cancel') }}
                 </a>
                 <button
                   type="submit"
@@ -78,15 +120,17 @@ import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
 
 import FormField from '@/components/forms/FormField.vue'
+import FormSelect from '@/components/forms/FormSelect.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
-import CostCenterClient from '@/clients/registration/cost-center.client'
+import WalletClient from '@/clients/registration/wallet.client'
 
 import {
   formDefaults,
   validationSchema,
-} from '@/models/registration/cost-center.model.js'
+  walletTypes,
+} from '@/models/registration/wallet.model.js'
 
 const props = defineProps({
   id: {
@@ -102,7 +146,7 @@ const props = defineProps({
 const { displaySuccess } = useMessageHandler()
 const { handleError } = useHttpErrorHandler()
 
-const costCenterClient = new CostCenterClient()
+const walletClient = new WalletClient()
 
 const form = ref(null)
 const loading = ref(false)
@@ -110,7 +154,7 @@ const loading = ref(false)
 async function prepareForUpdate() {
   try {
     loading.value = true
-    const { data } = await costCenterClient.findById(props.id)
+    const { data } = await walletClient.findById(props.id)
     form.value.setValues({ ...data })
   } catch (error) {
     handleError(error.response)
@@ -130,7 +174,7 @@ function selectAction(values, { resetForm }) {
 async function doCreate(values, resetForm) {
   try {
     loading.value = true
-    await costCenterClient.create(values)
+    await walletClient.create(values)
     resetForm()
     displaySuccess('form.messages.created')
   } catch (error) {
@@ -143,7 +187,7 @@ async function doCreate(values, resetForm) {
 async function doUpdate(values) {
   try {
     loading.value = true
-    await costCenterClient.update(props.id, values)
+    await walletClient.update(props.id, values)
     prepareForUpdate()
     displaySuccess('form.messages.updated')
   } catch (error) {
@@ -153,8 +197,8 @@ async function doUpdate(values) {
   }
 }
 
-function goBack() {
-  router.go(-1)
+function changeToList() {
+  router.push({ name: 'wallets' })
 }
 
 onMounted(() => {

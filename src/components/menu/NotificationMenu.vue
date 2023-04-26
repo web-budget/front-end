@@ -1,5 +1,5 @@
 <template>
-  <div v-once class="d-none d-md-flex">
+  <div class="d-none d-md-flex">
     <div class="nav-item dropdown d-none d-md-flex me-3">
       <a
         href="#"

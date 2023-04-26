@@ -1,3 +1,18 @@
+<script setup>
+import { Field } from 'vee-validate'
+
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+})
+</script>
+
 <template>
   <div class="btn-group">
     <Field
@@ -30,18 +45,3 @@
     </label>
   </div>
 </template>
-
-<script setup>
-import { Field } from 'vee-validate'
-
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-})
-</script>

@@ -109,8 +109,9 @@
     "actions": {
       "create": "Criar",
       "update": "Atualizar",
+      "edit": "Editar",
       "delete": "Excluir",
-      "back": "Voltar",
+      "back-to-list": "Voltar para lista",
       "yes": "Sim",
       "no": "Não",
       "delete-confirm": "Confirma a exclusão do registro?",
@@ -235,6 +236,33 @@
   "modal": {
     "change-password": {
       "title": "Trocar senha"
+    }
+  },
+  "wallet": {
+    "title": "Carteiras",
+    "form": {
+      "name": "Nome",
+      "type": "Tipo",
+      "bank": "Banco",
+      "agency": "Agência",
+      "number": "Número",
+      "description": "Descrição"
+    },
+    "type": {
+      "personal": "Pessoal",
+      "investment": "Investimentos",
+      "bank-account": "Conta Bancária"
+    },
+    "errors": {
+      "duplicated-name": "Já existe uma carteira com esse nome cadastrada",
+      "duplicated-bank-info": "Já existe uma carteira cadastrada com este banco, agência e número"
+    },
+    "grid": {
+      "name": "Nome",
+      "type": "Tipo"
+    },
+    "search": {
+      "filters": "Nome, descrição, banco, agencia ou conta"
     }
   }
 }

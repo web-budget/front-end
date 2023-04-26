@@ -1,4 +1,4 @@
-<template v-once>
+<template>
   <div class="nav-item dropdown">
     <a
       href="#"

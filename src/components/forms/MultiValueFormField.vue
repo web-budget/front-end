@@ -1,24 +1,3 @@
-<template>
-  <label class="form-label required">{{ $t(props.label) }}</label>
-  <MultiSelect
-    display="chip"
-    v-bind="$attrs"
-    class="form-control"
-    v-model="inputValue"
-    option-value="value"
-    :disabled="disabled"
-    :options="authorities"
-    :option-label="translateLabel"
-    :class="{ 'is-invalid': errors }"
-    :placeholder="$t('form.actions.select-one')"
-  >
-    <template #option="slotProps">
-      {{ $t(slotProps.option.name) }}
-    </template>
-  </MultiSelect>
-  <div class="invalid-feedback">{{ props.errors }}</div>
-</template>
-
 <script setup>
 import { toRef } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -76,3 +55,24 @@ div.p-multiselect-label:not(.p-placeholder) {
   padding: 0.2rem 0.5rem !important;
 }
 </style>
+
+<template>
+  <label class="form-label required">{{ $t(props.label) }}</label>
+  <MultiSelect
+    display="chip"
+    v-bind="$attrs"
+    class="form-control"
+    v-model="inputValue"
+    option-value="value"
+    :disabled="disabled"
+    :options="authorities"
+    :option-label="translateLabel"
+    :class="{ 'is-invalid': errors }"
+    :placeholder="$t('form.actions.select-one')"
+  >
+    <template #option="slotProps">
+      {{ $t(slotProps.option.name) }}
+    </template>
+  </MultiSelect>
+  <div class="invalid-feedback">{{ props.errors }}</div>
+</template>

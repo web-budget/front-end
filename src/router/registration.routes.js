@@ -57,6 +57,62 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/registration/wallet',
+    redirect: 'wallets',
+    component: HomeTemplate,
+    children: [
+      {
+        path: '',
+        name: 'wallets',
+        component: () =>
+          import(
+            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletsListView.vue'
+          ),
+      },
+      {
+        path: 'create',
+        name: 'wallets.create',
+        component: () =>
+          import(
+            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletFormView.vue'
+          ),
+      },
+      {
+        path: ':id/update',
+        name: 'wallets.update',
+        props: (route) => ({
+          id: route.params.id,
+          updating: true,
+        }),
+        component: () =>
+          import(
+            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletFormView.vue'
+          ),
+      },
+      {
+        path: ':id/detail',
+        name: 'wallets.detail',
+        props: (route) => ({ id: route.params.id }),
+        component: () =>
+          import(
+            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletDetailView.vue'
+          ),
+      },
+      {
+        path: ':id/delete',
+        name: 'wallets.delete',
+        props: (route) => ({
+          id: route.params.id,
+          deleting: true,
+        }),
+        component: () =>
+          import(
+            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletDetailView.vue'
+          ),
+      },
+    ],
+  },
 ]
 
 export default routes
