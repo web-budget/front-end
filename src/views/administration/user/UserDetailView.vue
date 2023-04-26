@@ -71,7 +71,7 @@
                 {{ $t('form.actions.yes') }}
               </a>
               <a
-                @click.prevent="goBack()"
+                @click.prevent="changeToList()"
                 class="btn btn-primary"
                 :class="{ disabled: loading }"
               >
@@ -81,11 +81,14 @@
           </div>
           <div v-else class="row">
             <div class="col text-end">
-              <a class="btn btn-ghost-secondary me-3" @click.prevent="goBack()">
-                {{ $t('form.actions.back') }}
+              <a
+                class="btn btn-ghost-secondary me-3"
+                @click.prevent="changeToList()"
+              >
+                {{ $t('form.actions.back-to-list') }}
               </a>
               <a class="btn btn-primary me-3" @click.prevent="changeToUpdate()">
-                {{ $t('form.actions.update') }}
+                {{ $t('form.actions.edit') }}
               </a>
               <a class="btn btn-danger" @click.prevent="changeToDelete()">
                 {{ $t('form.actions.delete') }}
@@ -160,8 +163,8 @@ function changeToDelete() {
   })
 }
 
-function goBack() {
-  router.go(-1)
+function changeToList() {
+  router.push({ name: 'users' })
 }
 
 onMounted(async () => {

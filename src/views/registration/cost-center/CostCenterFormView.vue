@@ -41,10 +41,10 @@
             <div class="row">
               <div class="col text-end">
                 <a
-                  class="btn btn-ghost-secondary me-3"
-                  @click.prevent="goBack()"
+                  class="btn btn-ghost-danger me-3"
+                  @click.prevent="changeToList()"
                 >
-                  {{ $t('form.actions.back') }}
+                  {{ $t('form.actions.cancel') }}
                 </a>
                 <button
                   type="submit"
@@ -153,8 +153,8 @@ async function doUpdate(values) {
   }
 }
 
-function goBack() {
-  router.go(-1)
+function changeToList() {
+  router.push({ name: 'cost-centers' })
 }
 
 onMounted(() => {

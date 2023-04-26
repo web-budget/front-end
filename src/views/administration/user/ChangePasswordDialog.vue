@@ -89,7 +89,6 @@ const userClient = new UserClient()
 const props = defineProps({
   userId: {
     type: String,
-    default: null,
     required: true,
   },
 })
