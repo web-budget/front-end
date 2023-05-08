@@ -1,63 +1,111 @@
 <template>
   <div class="card card-md">
-    <div class="card-body">
-      <h2 class="card-title text-center mb-4">
-        {{ $t('recover-password.title') }}
-      </h2>
-      <p class="text-muted mb-4 text-center">
-        {{ $t('recover-password.subtitle') }}
-      </p>
-      <div class="mb-3">
-        <label class="form-label">
-          {{ $t('recover-password.form.password') }}
-        </label>
-        <password
-          :feedback="false"
-          input-class="form-control"
-          v-model="form.password"
-          :placeholder="$t('recover-password.form.password-placeholder')"
-        />
+    <Form
+      v-slot="{ errors }"
+      @submit="doPasswordRecover"
+      :initial-values="formDefaults"
+      :validation-schema="passwordSchema"
+    >
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">
+          {{ $t('recover-password.title') }}
+        </h2>
+        <p class="text-muted mb-4 text-center">
+          {{ $t('recover-password.subtitle') }}
+        </p>
+        <div class="mb-3">
+          <form-field
+            type="password"
+            name="password"
+            autocomplete="off"
+            :errors="errors.password"
+            label="recover-password.form.password"
+          />
+        </div>
+        <div class="mb-3">
+          <form-field
+            type="password"
+            autocomplete="off"
+            name="confirmation"
+            :errors="errors.confirmation"
+            label="recover-password.form.password-confirmation"
+          />
+        </div>
+        <div class="form-footer">
+          <button
+            type="submit"
+            :class="{ disabled: loading }"
+            class="btn btn-primary w-100"
+          >
+            {{ $t('recover-password.action.change-password') }}
+          </button>
+        </div>
       </div>
-      <div class="mb-3">
-        <label class="form-label">
-          {{ $t('recover-password.form.new-password') }}
-        </label>
-        <password
-          :feedback="false"
-          input-class="form-control"
-          v-model="form.newPassword"
-          :placeholder="$t('recover-password.form.new-password-placeholder')"
-        />
-      </div>
-      <div class="form-footer">
-        <button class="btn btn-primary w-100" @click="onSubmit()">
-          {{ $t('recover-password.action.change-password') }}
-        </button>
-      </div>
-    </div>
+    </Form>
   </div>
   <div class="text-center text-muted mt-3">
-    <router-link :to="{ name: 'login' }"
-      >{{ $t('recover-password.action.back-to-login') }}
+    <router-link :to="{ name: 'login' }">
+      {{ $t('recover-password.action.back-to-login') }}
     </router-link>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { onMounted, reactive, ref } from 'vue'
 
-import Password from 'primevue/password'
+import { Form } from 'vee-validate'
 
-const route = useRoute()
+import FormField from '@/components/forms/FormField.vue'
 
-const form = reactive({
-  password: '',
-  newPassword: '',
+import UserAccountClient from '@/clients/user-account.client'
+
+import { useMessageHandler } from '@/composables/useMessageHandler'
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
+
+import { passwordSchema } from '@/models/administration/user.model'
+
+const props = defineProps({
+  token: {
+    type: String,
+    default: null,
+  },
+  email: {
+    type: String,
+    default: null,
+  },
 })
 
-function onSubmit() {
-  console.log(form)
-  console.log(route.params.token)
+const formDefaults = reactive({
+  password: '',
+  confirmation: '',
+})
+
+const { displaySuccess } = useMessageHandler()
+const { handleError } = useHttpErrorHandler()
+
+const userAccountClient = new UserAccountClient()
+
+const loading = ref(false)
+
+async function doPasswordRecover(values, { resetForm }) {
+  try {
+    loading.value = true
+    await userAccountClient.recoverPassword({
+      token: props.token,
+      email: props.email,
+      password: values.password,
+    })
+    resetForm()
+    displaySuccess('recover-password.messages.recovered')
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
 }
+
+onMounted(() => {
+  console.log(props.token)
+  console.log(props.email)
+})
 </script>

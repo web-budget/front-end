@@ -171,8 +171,9 @@
   },
   "forgot-password": {
     "title": "Esqueci minha senha",
-    "subtitle": "Informe seu e-mail de cadastro para que possamos resetar sua senha de acesso",
+    "subtitle": "Informe seu e-mail cadastrado para recuperarmos sua senha",
     "footer": "Lembrei da minha senha! {0}",
+    "wait": "Solicitação enviada, verifique seu e-mail para continuar",
     "form": {
       "email": "E-mail",
       "email-placeholder": "Seu e-mail cadastrado"
@@ -187,9 +188,7 @@
     "subtitle": "Informe uma nova senha de acesso, ela deve conter números e ao menos uma letra maiúscula",
     "form": {
       "password": "Nova senha",
-      "password-placeholder": "Sua nova senha",
-      "new-password": "Confirmação",
-      "new-password-placeholder": "Confirme sua senha"
+      "password-confirmation": "Confirmação"
     },
     "action": {
       "change-password": "Trocar senha",

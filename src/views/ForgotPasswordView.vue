@@ -11,15 +11,15 @@
         <label class="form-label">
           {{ $t('forgot-password.form.email') }}
         </label>
-        <input-text
+        <input
           type="email"
+          v-model="email"
           class="form-control"
-          v-model="form.email"
           :placeholder="$t('forgot-password.form.email-placeholder')"
         />
       </div>
       <div class="form-footer">
-        <button class="btn btn-primary w-100" @click="onSubmit()">
+        <button class="btn btn-primary w-100" @click="doRecover()">
           {{ $t('forgot-password.action.send-email') }}
         </button>
       </div>
@@ -27,23 +27,39 @@
   </div>
   <div class="text-center text-muted mt-3">
     <i18n-t tag="label" keypath="forgot-password.footer">
-      <router-link :to="{ name: 'login' }"
-        >{{ $t('forgot-password.action.send-me-back') }}
+      <router-link :to="{ name: 'login' }">
+        {{ $t('forgot-password.action.send-me-back') }}
       </router-link>
     </i18n-t>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref } from 'vue'
 
-import InputText from 'primevue/inputtext'
+import UserAccountClient from '@/clients/user-account.client'
 
-const form = reactive({
-  email: '',
-})
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
+import { useMessageHandler } from '@/composables/useMessageHandler'
 
-function onSubmit() {
-  console.log(form)
+const userAccountClient = new UserAccountClient()
+
+const { displayInfo } = useMessageHandler()
+const { handleError } = useHttpErrorHandler()
+
+const email = ref('')
+const loading = ref(false)
+
+async function doRecover() {
+  try {
+    loading.value = true
+    await userAccountClient.forgotPassword(email.value)
+    email.value = ''
+    displayInfo('forgot-password.wait')
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
 }
 </script>

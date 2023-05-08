@@ -1,5 +1,4 @@
 <template>
-  <message-display />
   <div class="card card-md">
     <div class="card-body">
       <h2 class="card-title text-center mb-4">{{ $t('login.title') }}</h2>
@@ -52,8 +51,6 @@ import router from '@/router'
 
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
-
-import MessageDisplay from '@/components/MessageDisplay.vue'
 
 import TokenClient from '@/clients/administration/token.client'
 
