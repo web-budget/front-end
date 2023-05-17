@@ -51,7 +51,8 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { reactive, ref } from 'vue'
 
 import { Form } from 'vee-validate'
 
@@ -64,16 +65,7 @@ import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
 
 import { passwordSchema } from '@/models/administration/user.model'
 
-const props = defineProps({
-  token: {
-    type: String,
-    default: null,
-  },
-  email: {
-    type: String,
-    default: null,
-  },
-})
+const route = useRoute()
 
 const formDefaults = reactive({
   password: '',
@@ -91,21 +83,16 @@ async function doPasswordRecover(values, { resetForm }) {
   try {
     loading.value = true
     await userAccountClient.recoverPassword({
-      token: props.token,
-      email: props.email,
+      token: route.query.token,
+      email: route.query.email,
       password: values.password,
     })
     resetForm()
-    displaySuccess('recover-password.messages.recovered')
+    displaySuccess('recover-password.password-changed')
   } catch (error) {
     handleError(error.response)
   } finally {
     loading.value = false
   }
 }
-
-onMounted(() => {
-  console.log(props.token)
-  console.log(props.email)
-})
 </script>

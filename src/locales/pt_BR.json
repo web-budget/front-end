@@ -186,9 +186,13 @@
   "recover-password": {
     "title": "Trocar minha senha",
     "subtitle": "Informe uma nova senha de acesso, ela deve conter números e ao menos uma letra maiúscula",
+    "password-changed": "Senha alterada com sucesso!",
     "form": {
       "password": "Nova senha",
       "password-confirmation": "Confirmação"
+    },
+    "errors": {
+      "invalid-token": "Token de recuperação inválido ou expirado"
     },
     "action": {
       "change-password": "Trocar senha",

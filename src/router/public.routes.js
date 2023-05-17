@@ -25,7 +25,7 @@ const routes = [
       },
       {
         props: true,
-        path: 'recover-password/:token',
+        path: 'recover-password',
         name: 'recover-password',
         meta: { public: true },
         component: () =>
