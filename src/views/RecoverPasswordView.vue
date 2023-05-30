@@ -1,50 +1,3 @@
-<script setup>
-import { useRoute } from 'vue-router'
-import { reactive, ref } from 'vue'
-
-import { Form } from 'vee-validate'
-
-import FormField from '@/components/forms/FormField.vue'
-
-import UserAccountClient from '@/clients/user-account.client'
-
-import { useMessageHandler } from '@/composables/useMessageHandler'
-import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
-
-import { passwordSchema } from '@/models/administration/user.model'
-
-const route = useRoute()
-
-const formDefaults = reactive({
-  password: '',
-  confirmation: '',
-})
-
-const { displaySuccess } = useMessageHandler()
-const { handleError } = useHttpErrorHandler()
-
-const userAccountClient = new UserAccountClient()
-
-const loading = ref(false)
-
-async function doPasswordRecover(values, { resetForm }) {
-  try {
-    loading.value = true
-    await userAccountClient.recoverPassword({
-      token: route.query.token,
-      email: route.query.email,
-      password: values.password,
-    })
-    resetForm()
-    displaySuccess('recover-password.password-changed')
-  } catch (error) {
-    handleError(error.response)
-  } finally {
-    loading.value = false
-  }
-}
-</script>
-
 <template>
   <div class="card card-md">
     <Form
@@ -96,3 +49,50 @@ async function doPasswordRecover(values, { resetForm }) {
     </router-link>
   </div>
 </template>
+
+<script setup>
+import { useRoute } from 'vue-router'
+import { reactive, ref } from 'vue'
+
+import { Form } from 'vee-validate'
+
+import FormField from '@/components/forms/FormField.vue'
+
+import UserAccountClient from '@/clients/user-account.client'
+
+import { useMessageHandler } from '@/composables/useMessageHandler'
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
+
+import { passwordSchema } from '@/models/administration/user.model'
+
+const route = useRoute()
+
+const formDefaults = reactive({
+  password: '',
+  confirmation: '',
+})
+
+const { displaySuccess } = useMessageHandler()
+const { handleError } = useHttpErrorHandler()
+
+const userAccountClient = new UserAccountClient()
+
+const loading = ref(false)
+
+async function doPasswordRecover(values, { resetForm }) {
+  try {
+    loading.value = true
+    await userAccountClient.recoverPassword({
+      token: route.query.token,
+      email: route.query.email,
+      password: values.password,
+    })
+    resetForm()
+    displaySuccess('recover-password.password-changed')
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
+}
+</script>

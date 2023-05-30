@@ -1,13 +1,3 @@
-<script setup>
-import ErrorPage from '@/components/page/ErrorPage'
-
-import router from '@/router'
-
-function goBack() {
-  router.push({ name: 'home' })
-}
-</script>
-
 <template>
   <error-page
     title="errors.403.title"
@@ -17,3 +7,13 @@ function goBack() {
     @onAction="goBack()"
   />
 </template>
+
+<script setup>
+import ErrorPage from '@/components/page/ErrorPage'
+
+import router from '@/router'
+
+function goBack() {
+  router.push({ name: 'home' })
+}
+</script>

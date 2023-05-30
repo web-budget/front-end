@@ -1,3 +1,13 @@
+<template>
+  <error-page
+    title="errors.401.title"
+    description="errors.401.description"
+    action="errors.401.action"
+    image="session-expired.png"
+    @onAction="doLogoutAndRedirect()"
+  />
+</template>
+
 <script setup>
 import ErrorPage from '@/components/page/ErrorPage'
 
@@ -10,13 +20,3 @@ function doLogoutAndRedirect() {
   router.push({ name: 'login' })
 }
 </script>
-
-<template>
-  <error-page
-    title="errors.401.title"
-    description="errors.401.description"
-    action="errors.401.action"
-    image="session-expired.png"
-    @onAction="doLogoutAndRedirect()"
-  />
-</template>

@@ -1,33 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-
-import UserAccountClient from '@/clients/user-account.client'
-
-import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
-import { useMessageHandler } from '@/composables/useMessageHandler'
-
-const userAccountClient = new UserAccountClient()
-
-const { displayInfo } = useMessageHandler()
-const { handleError } = useHttpErrorHandler()
-
-const email = ref('')
-const loading = ref(false)
-
-async function doRecover() {
-  try {
-    loading.value = true
-    await userAccountClient.forgotPassword(email.value)
-    email.value = ''
-    displayInfo('forgot-password.wait')
-  } catch (error) {
-    handleError(error.response)
-  } finally {
-    loading.value = false
-  }
-}
-</script>
-
 <template>
   <div class="card card-md">
     <div class="card-body">
@@ -63,3 +33,33 @@ async function doRecover() {
     </i18n-t>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+import UserAccountClient from '@/clients/user-account.client'
+
+import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
+import { useMessageHandler } from '@/composables/useMessageHandler'
+
+const userAccountClient = new UserAccountClient()
+
+const { displayInfo } = useMessageHandler()
+const { handleError } = useHttpErrorHandler()
+
+const email = ref('')
+const loading = ref(false)
+
+async function doRecover() {
+  try {
+    loading.value = true
+    await userAccountClient.forgotPassword(email.value)
+    email.value = ''
+    displayInfo('forgot-password.wait')
+  } catch (error) {
+    handleError(error.response)
+  } finally {
+    loading.value = false
+  }
+}
+</script>
