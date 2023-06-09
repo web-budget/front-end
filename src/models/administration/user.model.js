@@ -13,6 +13,7 @@ const formDefaults = reactive({
   password: '',
   confirmation: '',
   authorities: [],
+  defaultLanguage: 'PT_BR',
 })
 
 const passwordSchema = yup.object().shape({
@@ -28,14 +29,21 @@ const passwordSchema = yup.object().shape({
 const updateValidationSchema = yup.object().shape({
   name: yup.string().min(3).max(150).required(),
   email: yup.string().email().max(150).required(),
+  defaultLanguage: yup.string().required(),
   authorities: yup.array().min(1).required(),
 })
 
 const createValidationSchema = updateValidationSchema.concat(passwordSchema)
+
+const defaultLanguages = {
+  EN_US: 'languages.type.english',
+  PT_BR: 'languages.type.portuguese',
+}
 
 export {
   formDefaults,
   updateValidationSchema,
   createValidationSchema,
   passwordSchema,
+  defaultLanguages,
 }

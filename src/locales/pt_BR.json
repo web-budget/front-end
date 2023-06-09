@@ -223,7 +223,8 @@
       "password": "Senha",
       "confirmation": "Confirmação",
       "authorities": "Autorizações",
-      "temporary-password": "Alterar senha no próximo login"
+      "temporary-password": "Alterar senha no próximo login",
+      "default-language": "Idioma padrão"
     },
     "grid": {
       "name": "Nome",
@@ -266,6 +267,12 @@
     },
     "search": {
       "filters": "Nome, descrição, banco, agencia ou conta"
+    }
+  },
+  "languages": {
+    "type": {
+      "english": "Inglês",
+      "portuguese": "Português"
     }
   }
 }

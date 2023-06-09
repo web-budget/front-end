@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <div class="row mb-3">
-            <div class="col-6">
+            <div class="col-5">
               <form-field
                 disabled
                 type="text"
@@ -18,12 +18,20 @@
                 label="user.form.name"
               />
             </div>
-            <div class="col-6">
+            <div class="col-4">
               <form-field
                 disabled
                 type="text"
                 name="email"
                 label="user.form.email"
+              />
+            </div>
+            <div class="col-3">
+              <form-select
+                disabled
+                name="defaultLanguage"
+                :options="defaultLanguages"
+                label="user.form.default-language"
               />
             </div>
           </div>
@@ -116,6 +124,9 @@ import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import UserClient from '@/clients/administration/user.client.js'
 import MultiValueFormField from '@/components/forms/MultiValueFormField.vue'
+import FormSelect from '@/components/forms/FormSelect.vue'
+
+import { defaultLanguages } from '@/models/administration/user.model'
 
 const props = defineProps({
   id: {
@@ -176,6 +187,7 @@ onMounted(async () => {
         name: data.name,
         email: data.email,
         authorities: data.authorities,
+        defaultLanguage: data.defaultLanguage,
       })
     } catch (error) {
       handleError(error.response)

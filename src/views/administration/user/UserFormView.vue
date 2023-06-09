@@ -19,7 +19,7 @@
           </div>
           <div class="card-body">
             <div class="row mb-3">
-              <div class="col-6">
+              <div class="col-5">
                 <form-field
                   type="text"
                   name="name"
@@ -28,7 +28,7 @@
                   label="user.form.name"
                 />
               </div>
-              <div class="col-6">
+              <div class="col-4">
                 <form-field
                   type="text"
                   name="email"
@@ -36,6 +36,14 @@
                   autocomplete="off"
                   :errors="errors.email"
                   label="user.form.email"
+                />
+              </div>
+              <div class="col-3">
+                <form-select
+                  name="defaultLanguage"
+                  :options="defaultLanguages"
+                  :errors="errors.defaultLanguage"
+                  label="user.form.default-language"
                 />
               </div>
             </div>
@@ -124,6 +132,7 @@ import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
 import { useMessageHandler } from '@/composables/useMessageHandler.js'
 
 import FormField from '@/components/forms/FormField.vue'
+import FormSelect from '@/components/forms/FormSelect.vue'
 import PageContent from '@/components/page/PageContent.vue'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 import MultiValueFormField from '@/components/forms/MultiValueFormField.vue'
@@ -133,9 +142,10 @@ import ChangePasswordDialog from '@/views/administration/user/ChangePasswordDial
 import UserClient from '@/clients/administration/user.client'
 
 import {
-  createValidationSchema,
   formDefaults,
+  defaultLanguages,
   updateValidationSchema,
+  createValidationSchema,
 } from '@/models/administration/user.model.js'
 
 const props = defineProps({
@@ -193,6 +203,7 @@ async function doCreate(values, resetForm) {
 async function doUpdate(values) {
   try {
     loading.value = true
+    console.log(values)
     await userClient.update(props.id, values)
     await prepareForUpdate()
     displaySuccess('form.messages.updated')
