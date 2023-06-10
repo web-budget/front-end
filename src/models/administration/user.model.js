@@ -1,3 +1,5 @@
+import YupPassword from 'yup-password'
+
 import { reactive } from 'vue'
 import { useI18nYupSchema } from '@/composables/useI18nYupSchema'
 
@@ -5,6 +7,8 @@ import i18n from '@/locales'
 
 const { t } = i18n.global
 const { yup } = useI18nYupSchema()
+
+YupPassword(yup)
 
 const formDefaults = reactive({
   active: true,
@@ -17,7 +21,11 @@ const formDefaults = reactive({
 })
 
 const passwordSchema = yup.object().shape({
-  password: yup.string().min(6).required(),
+  password: yup
+    .string()
+    .minNumbers(3, t('form.validation.min-3-numbers'))
+    .minLowercase(3, t('form.validation.min-3-lc-letters'))
+    .required(),
   confirmation: yup
     .string()
     .oneOf(

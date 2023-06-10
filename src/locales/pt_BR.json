@@ -132,7 +132,9 @@
       "min-value": "Tamanho mínimo {min} caracteres",
       "max-value": "Tamanho máximo {max} caracteres",
       "invalid": "Valor inválido",
-      "must-match": "Deve ser igual a {matcher}"
+      "must-match": "Deve ser igual a {matcher}",
+      "min-3-lc-letters": "Mínimo 3 letras",
+      "min-3-numbers": "Mínimo 3 números"
     }
   },
   "search-controls": {

@@ -25,7 +25,8 @@
     "vue-tabler-icons": "^2.19.0",
     "vue-toastification": "^2.0.0-rc.5",
     "vue3-gravatar": "^3.0.0",
-    "yup": "^1.0.0"
+    "yup": "^1.0.0",
+    "yup-password": "^0.2.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
