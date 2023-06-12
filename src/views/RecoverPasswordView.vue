@@ -60,7 +60,7 @@ import FormField from '@/components/forms/FormField.vue'
 
 import UserAccountClient from '@/clients/user-account.client'
 
-import { useMessageHandler } from '@/composables/useMessageHandler'
+import { useNotificationHandler } from '@/composables/useNotificationHandler'
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
 
 import { passwordSchema } from '@/models/administration/user.model'
@@ -72,7 +72,7 @@ const formDefaults = reactive({
   confirmation: '',
 })
 
-const { displaySuccess } = useMessageHandler()
+const { displaySuccess } = useNotificationHandler()
 const { handleError } = useHttpErrorHandler()
 
 const userAccountClient = new UserAccountClient()

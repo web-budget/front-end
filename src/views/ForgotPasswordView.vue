@@ -40,11 +40,11 @@ import { ref } from 'vue'
 import UserAccountClient from '@/clients/user-account.client'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
-import { useMessageHandler } from '@/composables/useMessageHandler'
+import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
 const userAccountClient = new UserAccountClient()
 
-const { displayInfo } = useMessageHandler()
+const { displayInfo } = useNotificationHandler()
 const { handleError } = useHttpErrorHandler()
 
 const email = ref('')

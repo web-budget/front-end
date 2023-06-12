@@ -129,7 +129,7 @@ import router from '@/router'
 import { Form } from 'vee-validate'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler.js'
-import { useMessageHandler } from '@/composables/useMessageHandler.js'
+import { useNotificationHandler } from '@/composables/useNotificationHandler.js'
 
 import FormField from '@/components/forms/FormField.vue'
 import FormSelect from '@/components/forms/FormSelect.vue'
@@ -159,7 +159,7 @@ const props = defineProps({
   },
 })
 
-const { displaySuccess } = useMessageHandler()
+const { displaySuccess } = useNotificationHandler()
 const { handleError } = useHttpErrorHandler()
 
 const userClient = new UserClient()

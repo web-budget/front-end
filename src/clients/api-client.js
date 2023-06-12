@@ -2,10 +2,12 @@ import axios from 'axios'
 
 import router from '@/router'
 import { useUserSession } from '@/stores/user-session.store'
-import { useMessagingStore } from '@/stores/messaging.store'
+
+import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
 const userSession = useUserSession()
-const messagingStore = useMessagingStore()
+
+const { displayError } = useNotificationHandler()
 
 const configureClient = (context) => {
   const options = {
@@ -54,10 +56,7 @@ class ApiClient {
             router.push({ name: 'unauthorized' })
           }
         } else {
-          messagingStore.handleMessage({
-            type: 'error',
-            content: 'errors.network-error',
-          })
+          displayError('errors.network-error')
         }
 
         if (debugEnabled) {

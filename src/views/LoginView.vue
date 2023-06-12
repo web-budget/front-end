@@ -54,7 +54,7 @@ import TokenClient from '@/clients/administration/token.client'
 
 import { useUserSession } from '@/stores/user-session.store'
 
-import { useMessageHandler } from '@/composables/useMessageHandler'
+import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
 const route = useRoute()
 const userSession = useUserSession()
@@ -65,7 +65,7 @@ const credentials = reactive({
   password: '',
 })
 
-const { displayWarn } = useMessageHandler()
+const { displayWarn } = useNotificationHandler()
 
 async function doLogin() {
   const tokenClient = new TokenClient()

@@ -3,16 +3,16 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { watch } from 'vue'
+
 import { POSITION, useToast } from 'vue-toastification'
-import { useMessagingStore } from '@/stores/messaging.store'
+import { useNotificationStore } from '@/stores/notification.store'
 
 const toast = useToast()
-const messagingStore = useMessagingStore()
 
-const { t } = useI18n()
+const notificationStore = useNotificationStore()
 
-function displayMessage(message) {
+function display(notification) {
   const toastConfig = {
     timeout: 5000,
     position: POSITION.TOP_CENTER,
@@ -24,17 +24,14 @@ function displayMessage(message) {
     showCloseButtonOnHover: false,
     closeButton: 'button',
     icon: true,
-    type: message.type,
+    type: notification.type,
   }
 
-  if (message.noLocalize) {
-    toast(message.content, toastConfig)
-  } else {
-    toast(t(message.content), toastConfig)
-  }
+  toast(notification.content, toastConfig)
 }
 
-messagingStore.$subscribe((mutation, state) => {
-  displayMessage(state.message)
-})
+watch(
+  () => notificationStore.notification,
+  () => display(notificationStore.notification)
+)
 </script>

@@ -68,7 +68,7 @@ import { reactive, ref } from 'vue'
 import { Form } from 'vee-validate'
 
 import { useHttpErrorHandler } from '@/composables/useHttpErrorHandler'
-import { useMessageHandler } from '@/composables/useMessageHandler'
+import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
 import SimpleModal from '@/components/SimpleModal.vue'
 import FormField from '@/components/forms/FormField.vue'
@@ -79,7 +79,7 @@ import UserClient from '@/clients/administration/user.client'
 import { passwordSchema } from '@/models/administration/user.model.js'
 
 const { handleError } = useHttpErrorHandler()
-const { displaySuccess } = useMessageHandler()
+const { displaySuccess } = useNotificationHandler()
 
 const form = ref(null)
 const loading = ref(false)

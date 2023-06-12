@@ -12,7 +12,7 @@
 <script setup>
 import { onMounted } from 'vue'
 
-import MessageDisplay from '@/components/MessageDisplay.vue'
+import MessageDisplay from '@/components/NotificationDisplay.vue'
 
 onMounted(() => {
   document.body.classList.add('d-flex', 'flex-column')
