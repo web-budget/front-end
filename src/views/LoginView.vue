@@ -56,8 +56,9 @@ import { useUserSession } from '@/stores/user-session.store'
 
 import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
+const { login, isValid } = useUserSession()
+
 const route = useRoute()
-const userSession = useUserSession()
 
 const loading = ref(false)
 const credentials = reactive({
@@ -73,7 +74,7 @@ async function doLogin() {
   try {
     loading.value = true
     const { data } = await tokenClient.generate(credentials)
-    userSession.login(data)
+    login(data)
     doAfterLoginNavigation()
   } catch (error) {
     if (error.response) {
@@ -98,7 +99,7 @@ function doAfterLoginNavigation() {
 }
 
 onMounted(() => {
-  if (userSession.isValid()) {
+  if (isValid()) {
     doAfterLoginNavigation()
   }
 })

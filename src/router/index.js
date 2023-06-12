@@ -35,10 +35,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const userSession = useUserSession()
+  const { isValid } = useUserSession()
   const publicRoute = to.matched.some((route) => route.meta.public)
 
-  if (publicRoute || userSession.isValid()) {
+  if (publicRoute || isValid()) {
     next()
   } else {
     next({

@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 import router from '@/router'
+
 import { useUserSession } from '@/stores/user-session.store'
 
 import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
-const userSession = useUserSession()
-
 const { displayError } = useNotificationHandler()
+const { userToken, logout } = useUserSession()
 
 const configureClient = (context) => {
   const options = {
@@ -18,7 +18,7 @@ const configureClient = (context) => {
 }
 
 const authInterceptor = (config) => {
-  config.headers.Authorization = `Bearer ${userSession.session.token}`
+  config.headers.Authorization = `Bearer ${userToken}`
   return config
 }
 
@@ -51,7 +51,7 @@ class ApiClient {
         if (error.response) {
           const { status } = error.response
           if (status === 401) {
-            userSession.logout()
+            logout()
           } else if (status === 403) {
             router.push({ name: 'unauthorized' })
           }
