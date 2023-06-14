@@ -10,17 +10,12 @@ const routes = [
         path: '',
         name: 'users',
         component: () =>
-          import(
-            /* webpackChunkName: "user" */ '@/views/administration/user/UsersListView.vue'
-          ),
+          import('@/views/administration/user/UsersListView.vue'),
       },
       {
         path: 'create',
         name: 'users.create',
-        component: () =>
-          import(
-            /* webpackChunkName: "user" */ '@/views/administration/user/UserFormView.vue'
-          ),
+        component: () => import('@/views/administration/user/UserFormView.vue'),
       },
       {
         path: ':id/update',
@@ -29,19 +24,14 @@ const routes = [
           id: route.params.id,
           updating: true,
         }),
-        component: () =>
-          import(
-            /* webpackChunkName: "user" */ '@/views/administration/user/UserFormView.vue'
-          ),
+        component: () => import('@/views/administration/user/UserFormView.vue'),
       },
       {
         path: ':id/detail',
         name: 'users.detail',
         props: (route) => ({ id: route.params.id }),
         component: () =>
-          import(
-            /* webpackChunkName: "user" */ '@/views/administration/user/UserDetailView.vue'
-          ),
+          import('@/views/administration/user/UserDetailView.vue'),
       },
       {
         path: ':id/delete',
@@ -51,9 +41,7 @@ const routes = [
           deleting: true,
         }),
         component: () =>
-          import(
-            /* webpackChunkName: "user" */ '@/views/administration/user/UserDetailView.vue'
-          ),
+          import('@/views/administration/user/UserDetailView.vue'),
       },
     ],
   },

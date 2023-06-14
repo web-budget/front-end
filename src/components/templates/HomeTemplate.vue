@@ -1,9 +1,9 @@
 <template>
-  <main-menu />
+  <main-menu v-once />
   <div class="page-wrapper">
     <message-display />
     <router-view></router-view>
-    <page-footer />
+    <page-footer v-once />
   </div>
 </template>
 

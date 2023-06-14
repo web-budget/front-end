@@ -10,17 +10,13 @@ const routes = [
         path: '',
         name: 'cost-centers',
         component: () =>
-          import(
-            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCentersListView.vue'
-          ),
+          import('@/views/registration/cost-center/CostCentersListView.vue'),
       },
       {
         path: 'create',
         name: 'cost-centers.create',
         component: () =>
-          import(
-            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue'
-          ),
+          import('@/views/registration/cost-center/CostCenterFormView.vue'),
       },
       {
         path: ':id/update',
@@ -30,18 +26,14 @@ const routes = [
           updating: true,
         }),
         component: () =>
-          import(
-            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterFormView.vue'
-          ),
+          import('@/views/registration/cost-center/CostCenterFormView.vue'),
       },
       {
         path: ':id/detail',
         name: 'cost-centers.detail',
         props: (route) => ({ id: route.params.id }),
         component: () =>
-          import(
-            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue'
-          ),
+          import('@/views/registration/cost-center/CostCenterDetailView.vue'),
       },
       {
         path: ':id/delete',
@@ -51,9 +43,7 @@ const routes = [
           deleting: true,
         }),
         component: () =>
-          import(
-            /* webpackChunkName: "cost-center" */ '@/views/registration/cost-center/CostCenterDetailView.vue'
-          ),
+          import('@/views/registration/cost-center/CostCenterDetailView.vue'),
       },
     ],
   },
@@ -66,17 +56,13 @@ const routes = [
         path: '',
         name: 'wallets',
         component: () =>
-          import(
-            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletsListView.vue'
-          ),
+          import('@/views/registration/wallet/WalletsListView.vue'),
       },
       {
         path: 'create',
         name: 'wallets.create',
         component: () =>
-          import(
-            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletFormView.vue'
-          ),
+          import('@/views/registration/wallet/WalletFormView.vue'),
       },
       {
         path: ':id/update',
@@ -86,18 +72,14 @@ const routes = [
           updating: true,
         }),
         component: () =>
-          import(
-            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletFormView.vue'
-          ),
+          import('@/views/registration/wallet/WalletFormView.vue'),
       },
       {
         path: ':id/detail',
         name: 'wallets.detail',
         props: (route) => ({ id: route.params.id }),
         component: () =>
-          import(
-            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletDetailView.vue'
-          ),
+          import('@/views/registration/wallet/WalletDetailView.vue'),
       },
       {
         path: ':id/delete',
@@ -107,9 +89,7 @@ const routes = [
           deleting: true,
         }),
         component: () =>
-          import(
-            /* webpackChunkName: "wallet" */ '@/views/registration/wallet/WalletDetailView.vue'
-          ),
+          import('@/views/registration/wallet/WalletDetailView.vue'),
       },
     ],
   },

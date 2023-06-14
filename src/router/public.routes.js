@@ -11,27 +11,20 @@ const routes = [
         path: '',
         name: 'login',
         meta: { public: true },
-        component: () =>
-          import(/* webpackChunkName: "login" */ '../views/LoginView.vue'),
+        component: () => import('../views/LoginView.vue'),
       },
       {
         path: 'forgot-password',
         name: 'forgot-password',
         meta: { public: true },
-        component: () =>
-          import(
-            /* webpackChunkName: "login" */ '../views/ForgotPasswordView.vue'
-          ),
+        component: () => import('../views/ForgotPasswordView.vue'),
       },
       {
         props: true,
         path: 'recover-password',
         name: 'recover-password',
         meta: { public: true },
-        component: () =>
-          import(
-            /* webpackChunkName: "login" */ '../views/RecoverPasswordView.vue'
-          ),
+        component: () => import('../views/RecoverPasswordView.vue'),
       },
     ],
   },
@@ -43,19 +36,13 @@ const routes = [
         path: 'session-expired',
         name: 'session-expired',
         meta: { public: true },
-        component: () =>
-          import(
-            /* webpackChunkName: "errors" */ '../views/error/SessionExpiredView.vue'
-          ),
+        component: () => import('../views/error/SessionExpiredView.vue'),
       },
       {
         path: 'unauthorized',
         name: 'unauthorized',
         meta: { public: true },
-        component: () =>
-          import(
-            /* webpackChunkName: "errors" */ '../views/error/UnauthorizedView.vue'
-          ),
+        component: () => import('../views/error/UnauthorizedView.vue'),
       },
     ],
   },

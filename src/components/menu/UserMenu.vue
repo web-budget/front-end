@@ -8,8 +8,8 @@
     >
       <vue-gravatar email="admin@admin.com" class="avatar avatar-sm" />
       <div class="d-none d-xl-block ps-2">
-        <div v-once>{{ userName }}</div>
-        <div v-once class="mt-1 small text-muted">
+        <div>{{ userName }}</div>
+        <div class="mt-1 small text-muted">
           {{ userEmail }}
         </div>
       </div>
