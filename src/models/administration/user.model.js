@@ -18,6 +18,7 @@ const formDefaults = reactive({
   confirmation: '',
   authorities: [],
   defaultLanguage: 'PT_BR',
+  sendActivationEmail: true,
 })
 
 const passwordSchema = yup.object().shape({

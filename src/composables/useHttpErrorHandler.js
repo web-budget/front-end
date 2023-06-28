@@ -10,8 +10,8 @@ export function useHttpErrorHandler() {
     if (response) {
       const { data, status } = response
 
-      if (status > 500) {
-        displayError('errro.500.server-error')
+      if (status >= 500) {
+        displayError('errors.500.server-error')
       } else if (status === 422) {
         const errors = data.errors
         errors.map((error) => t(error))

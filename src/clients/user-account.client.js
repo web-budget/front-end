@@ -9,8 +9,8 @@ export default class UserAccountClient extends ApiClient {
     return super.patch('/forgot-password', { email: email })
   }
 
-  activate(token) {
-    return super.patch('/activate', { activationToken: token })
+  activateAccount(values) {
+    return super.patch('/activate', { ...values })
   }
 
   recoverPassword(values) {

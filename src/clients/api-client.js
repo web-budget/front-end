@@ -7,7 +7,7 @@ import { useUserSession } from '@/stores/user-session.store'
 import { useNotificationHandler } from '@/composables/useNotificationHandler'
 
 const { displayError } = useNotificationHandler()
-const { userToken, logout } = useUserSession()
+const { authToken, logout } = useUserSession()
 
 const configureClient = (context) => {
   const options = {
@@ -18,7 +18,7 @@ const configureClient = (context) => {
 }
 
 const authInterceptor = (config) => {
-  config.headers.Authorization = `Bearer ${userToken}`
+  config.headers.Authorization = `Bearer ${authToken}`
   return config
 }
 

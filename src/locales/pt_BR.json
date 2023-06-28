@@ -226,7 +226,8 @@
       "confirmation": "Confirmação",
       "authorities": "Autorizações",
       "temporary-password": "Alterar senha no próximo login",
-      "default-language": "Idioma padrão"
+      "default-language": "Idioma padrão",
+      "request-account-activation": "Solicitar ativação da conta"
     },
     "grid": {
       "name": "Nome",
@@ -275,6 +276,17 @@
     "type": {
       "english": "Inglês",
       "portuguese": "Português"
+    }
+  },
+  "account-activation": {
+    "title-success": "Conta ativada!",
+    "title-error": "Falha ao ativar a conta!",
+    "subtitle-error": "Sua conta não pode ser ativada, entre em contato com um administrador para maiores detalhes",
+    "action": {
+      "send-me-back": "Clique aqui para fazer login"
+    },
+    "errors": {
+      "invalid-token": "Falha ao ativar a conta"
     }
   }
 }

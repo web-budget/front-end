@@ -92,6 +92,14 @@
                   {{ $t('form.actions.change-password') }}
                 </a>
               </div>
+              <div class="col" v-show="!updating">
+                <form-checkbox
+                  id="chNotifyActivation"
+                  :value="true"
+                  name="sendActivationEmail"
+                  label="user.form.request-account-activation"
+                />
+              </div>
               <div class="col text-end">
                 <a
                   class="btn btn-ghost-danger me-3"
@@ -147,6 +155,7 @@ import {
   updateValidationSchema,
   createValidationSchema,
 } from '@/models/administration/user.model.js'
+import FormCheckbox from '@/components/forms/FormCheckbox.vue'
 
 const props = defineProps({
   id: {
@@ -224,3 +233,10 @@ onMounted(() => {
   }
 })
 </script>
+
+<style scoped>
+#chNotifyActivation {
+  position: relative;
+  top: 8px;
+}
+</style>

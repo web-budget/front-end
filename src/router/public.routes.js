@@ -26,6 +26,13 @@ const routes = [
         meta: { public: true },
         component: () => import('../views/RecoverPasswordView.vue'),
       },
+      {
+        props: true,
+        path: 'account-activation',
+        name: 'account-activation',
+        meta: { public: true },
+        component: () => import('../views/AccountActivationView.vue'),
+      },
     ],
   },
   {
