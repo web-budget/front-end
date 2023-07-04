@@ -17,7 +17,7 @@ export function useHttpErrorHandler() {
         errors.map((error) => t(error))
         displayError(errors.join(', '), false)
       } else if (status === 400 || status === 409) {
-        displayWarn(data.error)
+        displayWarn(t(data.error))
       }
     }
   }

@@ -20,10 +20,12 @@
     }
   },
   "errors": {
-    "network-error": "Falha ao stabelecer conexão com o servidor",
+    "network-error": "Falha ao estabelecer conexão com o servidor",
+    "data-integrity-violation": "Este registro está em uso e não pode ser alterado e/ou excluído",
+    "unknown-error-call-admin": "Algo de errado aconteceu, entre em contato com o administrador para maiores detalhes",
     "401": {
       "title": "Sessão expirada",
-      "description": "Suas credênciais não são mais válidas para esta sessão, faça login e tente novamente",
+      "description": "Suas credenciais não são mais válidas para esta sessão, faça login e tente novamente",
       "action": "Login"
     },
     "403": {
