@@ -6,7 +6,7 @@ export default class BaseCrudClient extends ApiClient {
   }
 
   findAll(pageRequest) {
-    const pageRequestParams = pageRequest.getPagebleParams()
+    const pageRequestParams = pageRequest.getPageableParams()
 
     const requestParams = {
       ...pageRequestParams,

@@ -15,7 +15,7 @@ export default class PageRequest {
     this.sortField = sortField
   }
 
-  getPagebleParams() {
+  getPageableParams() {
     return {
       page: this.current,
       size: this.size,
