@@ -11,7 +11,7 @@ import { useNotificationHandler } from '@/composables/useNotificationHandler'
 const { displayError } = useNotificationHandler()
 const { authToken, logout } = useUserSession()
 
-const backendUrl = getEnvConfig('BACKEND_URL') || import.meta.env.VITE_API_URL
+const backendUrl = getEnvConfig('API_URL') || import.meta.env.VITE_API_URL
 const debugEnabled =
   getEnvConfig('LOG_REQUEST') || import.meta.env.VITE_LOG_REQUESTS || false
 

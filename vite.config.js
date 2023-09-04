@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [
     vue(),
     VueI18nPlugin(),
-    envConfig({ variables: ['BACKEND_URL', 'LOG_REQUEST'] }),
+    envConfig({ variables: ['API_URL', 'LOG_REQUEST'] }),
   ],
   server: {
     port: 8080,
