@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import ErrorPage from '@/components/page/ErrorPage'
+import ErrorPage from '@/components/page/ErrorPage.vue'
 
 import router from '@/router'
 
