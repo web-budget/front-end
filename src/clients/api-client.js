@@ -2,8 +2,6 @@ import axios from 'axios'
 
 import router from '@/router'
 
-import { getEnvConfig } from '@geprog/vite-plugin-env-config'
-
 import { useUserSession } from '@/stores/user-session.store'
 
 import { useNotificationHandler } from '@/composables/useNotificationHandler'
@@ -11,9 +9,8 @@ import { useNotificationHandler } from '@/composables/useNotificationHandler'
 const { displayError } = useNotificationHandler()
 const { authToken, logout } = useUserSession()
 
-const backendUrl = getEnvConfig('API_URL') || import.meta.env.VITE_API_URL
-const debugEnabled =
-  getEnvConfig('LOG_REQUEST') || import.meta.env.VITE_LOG_REQUESTS || false
+const backendUrl = import.meta.env.VITE_API_URL
+const debugEnabled = import.meta.env.VITE_LOG_REQUESTS || false
 
 const configureClient = (context) => {
   const options = {

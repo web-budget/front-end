@@ -5,14 +5,8 @@ import vue from '@vitejs/plugin-vue'
 
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
-import { envConfig } from '@geprog/vite-plugin-env-config'
-
 export default defineConfig({
-  plugins: [
-    vue(),
-    VueI18nPlugin(),
-    envConfig({ variables: ['API_URL', 'LOG_REQUEST'] }),
-  ],
+  plugins: [vue(), VueI18nPlugin()],
   server: {
     port: 8080,
   },

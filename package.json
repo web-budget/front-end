@@ -11,7 +11,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@geprog/vite-plugin-env-config": "^4.0.13",
     "@intlify/unplugin-vue-i18n": "^0.8.2",
     "@tabler/core": "^1.0.0-beta17",
     "@vueuse/core": "^9.12.0",
