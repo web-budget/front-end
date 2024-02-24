@@ -1,9 +1,6 @@
 import ApiClient from '@/clients/api-client'
 
 export default class BaseCrudClient extends ApiClient {
-  constructor(basePath, requireAuth) {
-    super(basePath, requireAuth)
-  }
 
   findAll(pageRequest) {
     const pageRequestParams = pageRequest.getPageableParams()
