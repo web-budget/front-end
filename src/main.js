@@ -1,43 +1,31 @@
 import { createApp } from 'vue'
-
-// pinia
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
+import router from './router'
 
-// utilities
-import router from '@/router'
-import i18n from '@/locales'
-
-// UI things (magic)
+import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
-import Tooltip from 'primevue/tooltip'
-import VueGravatar from 'vue3-gravatar'
-import Toast from 'vue-toastification'
+import ConfirmationService from 'primevue/confirmationservice'
+import ToastService from 'primevue/toastservice'
 
-// some css
-import 'primevue/resources/themes/saga-blue/theme.css'
-import 'primevue/resources/primevue.min.css'
-import 'primeicons/primeicons.css'
-import 'vue-toastification/dist/index.css'
+import '@/assets/styles.scss'
+import '@/assets/tailwind.css'
 
-// tabler (the real magic)
-import '@tabler/core/dist/css/tabler.min.css'
-import '@tabler/core/dist/js/tabler.min.js'
+const app = createApp(App)
 
-// web-budget custom
-import '@/assets/scss/webbudget.scss'
+app.use(createPinia())
+app.use(router)
 
-createApp(App)
-  .use(createPinia())
-  .use(i18n)
-  .use(router)
-  .use(PrimeVue)
-  .use(Toast, {
-    transition: 'Vue-Toastification__fade',
-    maxToasts: 20,
-    newestOnTop: true,
-  })
-  .use(VueGravatar)
-  .directive('tooltip', Tooltip)
-  .mount('#app')
+app.use(PrimeVue, {
+  theme: {
+    preset: Aura,
+    options: {
+      darkModeSelector: '.app-dark'
+    }
+  }
+});
+app.use(ToastService);
+app.use(ConfirmationService);
+
+app.mount('#app')

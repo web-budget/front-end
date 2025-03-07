@@ -2,13 +2,21 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueDevTools from 'vite-plugin-vue-devtools'
+import Components from 'unplugin-vue-components/dist/vite'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), VueI18nPlugin()],
-  server: {
-    port: 8080,
+  plugins: [
+    vue(),
+    vueDevTools(),
+    Components({
+      resolvers: [PrimeVueResolver()],
+    }),
+  ],
+  optimizeDeps: {
+    noDiscovery: true,
   },
   resolve: {
     alias: {
