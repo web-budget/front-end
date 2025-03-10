@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "0.0.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "primeicons": "^7.0.0",
     "primevue": "^4.3.1",
     "vue": "^3.5.13",
+    "vue-i18n": "^11.1.2",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {

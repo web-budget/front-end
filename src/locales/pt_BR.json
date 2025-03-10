@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "login": {
+      "subtitle": "Faça login para continuar",
+      "form": {
+        "email": "Email",
+        "email-placeholder": "Seu usuário",
+        "password": "Senha",
+        "password-placeholder": "Sua senha",
+        "remember-me": "Lembrar-me",
+        "forgot-password": "Esqueceu a senha?",
+        "sign-in": "Entrar"
+      }
+    }
+  }
+}
