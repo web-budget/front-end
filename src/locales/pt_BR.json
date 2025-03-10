@@ -12,5 +12,11 @@
         "sign-in": "Entrar"
       }
     }
+  },
+  "main-menu": {
+    "financial": "Financeiro",
+    "investments": "Investimentos",
+    "configurations": "Configurações",
+    "registration": "Cadastros"
   }
 }

@@ -2,7 +2,7 @@
 
 .layout-topbar {
     position: fixed;
-    height: 4rem;
+    height: 5rem;
     z-index: 997;
     left: 0;
     top: 0;
@@ -26,7 +26,6 @@
         border-radius: var(--content-border-radius);
         color: var(--text-color);
         font-weight: 500;
-        gap: 0.5rem;
 
         svg {
             width: 3rem;
@@ -94,6 +93,30 @@
     .layout-config-menu {
         display: flex;
         gap: 1rem;
+    }
+
+    .layout-main-menu {
+        display: flex;
+        gap: 1.4rem;
+
+        .layout-main-menu-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.2rem;
+            border-radius: var(--content-border-radius);
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .layout-main-menu-item:hover {
+            color: var(--primary-color);
+        }
+
+        a {
+            &.active-route {
+                color: var(--primary-color);
+            }
+        }
     }
 }
 
