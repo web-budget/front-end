@@ -1,13 +1,28 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import { useLayout } from '@/layout/composables/layout'
 
 const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout()
+
+const route = useRoute()
+
+function isActive(menu) {
+  return route.path.replace('/', '') === menu
+}
+
+function toggleMenuAction(event) {
+  if (route.path === '/') {
+    event.preventDefault()
+  } else {
+    toggleMenu()
+  }
+}
 </script>
 
 <template>
   <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
-      <button class="layout-menu-button layout-topbar-action" @click="toggleMenu">
+      <button class="layout-menu-button layout-topbar-action" @click="toggleMenuAction">
         <i class="pi pi-bars"></i>
       </button>
       <router-link to="/" class="layout-topbar-logo">
@@ -17,16 +32,28 @@ const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout()
     </div>
 
     <div class="layout-main-menu">
-      <router-link to="/registration" class="layout-main-menu-item">
+      <router-link
+        to="/registration"
+        :class="['layout-main-menu-item', { 'active-route': isActive('registration') }]"
+      >
         {{ $t('main-menu.registration') }}
       </router-link>
-      <router-link to="/financial" class="layout-main-menu-item">
+      <router-link
+        to="/financial"
+        :class="['layout-main-menu-item', { 'active-route': isActive('financial') }]"
+      >
         {{ $t('main-menu.financial') }}
       </router-link>
-      <router-link to="/investments" class="layout-main-menu-item">
+      <router-link
+        to="/investments"
+        :class="['layout-main-menu-item', { 'active-route': isActive('investments') }]"
+      >
         {{ $t('main-menu.investments') }}
       </router-link>
-      <router-link to="/configurations" class="layout-main-menu-item">
+      <router-link
+        to="/configurations"
+        :class="['layout-main-menu-item', { 'active-route': isActive('configurations') }]"
+      >
         {{ $t('main-menu.configurations') }}
       </router-link>
     </div>
