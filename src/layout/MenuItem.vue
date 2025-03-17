@@ -81,7 +81,7 @@ function checkActiveRoute(item) {
 <template>
   <li :class="{ 'layout-root-menuitem': root, 'active-menuitem': isActiveMenu }">
     <div v-if="root && item.visible !== false" class="layout-menuitem-root-text">
-      {{ item.label }}
+      {{ $t(item.label) }}
     </div>
     <a
       v-if="(!item.to || item.items) && item.visible !== false"
@@ -92,7 +92,7 @@ function checkActiveRoute(item) {
       tabindex="0"
     >
       <i :class="item.icon" class="layout-menuitem-icon"></i>
-      <span class="layout-menuitem-text">{{ item.label }}</span>
+      <span class="layout-menuitem-text">{{ $t(item.label) }}</span>
       <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items"></i>
     </a>
     <router-link
@@ -103,7 +103,7 @@ function checkActiveRoute(item) {
       :to="item.to"
     >
       <i :class="item.icon" class="layout-menuitem-icon"></i>
-      <span class="layout-menuitem-text">{{ item.label }}</span>
+      <span class="layout-menuitem-text">{{ $t(item.label) }}</span>
       <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items"></i>
     </router-link>
     <Transition v-if="item.items && item.visible !== false" name="layout-submenu">

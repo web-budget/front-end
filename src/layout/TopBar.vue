@@ -7,7 +7,7 @@ const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout()
 const route = useRoute()
 
 function isActive(menu) {
-  return route.path.replace('/', '') === menu
+  return route.path.includes(menu)
 }
 
 function toggleMenuAction(event) {
@@ -33,28 +33,28 @@ function toggleMenuAction(event) {
 
     <div class="layout-main-menu">
       <router-link
-        to="/registration"
-        :class="['layout-main-menu-item', { 'active-route': isActive('registration') }]"
+        to="/registrations"
+        :class="['layout-main-menu-item', { 'active-route': isActive('registrations') }]"
       >
-        {{ $t('main-menu.registration') }}
+        {{ $t('menu.registrations') }}
       </router-link>
       <router-link
         to="/financial"
         :class="['layout-main-menu-item', { 'active-route': isActive('financial') }]"
       >
-        {{ $t('main-menu.financial') }}
+        {{ $t('menu.financial') }}
       </router-link>
       <router-link
         to="/investments"
         :class="['layout-main-menu-item', { 'active-route': isActive('investments') }]"
       >
-        {{ $t('main-menu.investments') }}
+        {{ $t('menu.investments') }}
       </router-link>
       <router-link
         to="/configurations"
         :class="['layout-main-menu-item', { 'active-route': isActive('configurations') }]"
       >
-        {{ $t('main-menu.configurations') }}
+        {{ $t('menu.configurations') }}
       </router-link>
     </div>
 

@@ -5,7 +5,6 @@ import { useLayout } from '@/layout/composables/layout'
 
 import PageFooter from '@/layout/PageFooter.vue'
 import TopBar from '@/layout/TopBar.vue'
-import SideMenu from '@/layout/SideMenu.vue'
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout()
 
@@ -61,13 +60,22 @@ function isOutsideClicked(event) {
     topbarEl.contains(event.target)
   )
 }
+
+const props = defineProps({
+  enableSideMenu: {
+    type: Boolean,
+    default: true,
+  },
+})
 </script>
 
 <template>
-  <div class="layout-wrapper" :class="containerClass">
+  <div
+    :class="['layout-wrapper', props.enableSideMenu ? containerClass : 'layout-static layout-static-inactive']"
+  >
     <top-bar></top-bar>
-    <div class="layout-sidebar">
-      <side-menu></side-menu>
+    <div class="layout-sidebar" v-if="props.enableSideMenu">
+      <slot name="side-menu"></slot>
     </div>
     <div class="layout-main-container">
       <div class="layout-main">

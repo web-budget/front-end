@@ -1,22 +1,79 @@
 {
-  "auth": {
-    "login": {
-      "subtitle": "Faça login para continuar",
-      "form": {
-        "email": "Email",
-        "email-placeholder": "Seu usuário",
-        "password": "Senha",
-        "password-placeholder": "Sua senha",
-        "remember-me": "Lembrar-me",
-        "forgot-password": "Esqueceu a senha?",
-        "sign-in": "Entrar"
-      }
+  "login": {
+    "subtitle": "Faça login para continuar",
+    "form": {
+      "email": "Email",
+      "email-placeholder": "Seu usuário",
+      "password": "Senha",
+      "password-placeholder": "Sua senha",
+      "remember-me": "Lembrar-me",
+      "forgot-password": "Esqueceu a senha?",
+      "sign-in": "Entrar"
     }
   },
-  "main-menu": {
+  "menu": {
     "financial": "Financeiro",
     "investments": "Investimentos",
     "configurations": "Configurações",
-    "registration": "Cadastros"
+    "registrations": "Cadastros"
+  },
+  "pages": {
+    "quick-access": "Acesso rápido"
+  },
+  "integrations": {
+    "title": "Integrações",
+    "menu": "Integrações"
+  },
+  "users": {
+    "title": "Usuários",
+    "menu": "Usuários"
+  },
+  "stocks": {
+    "title": "Ações",
+    "menu": "Ações"
+  },
+  "funds": {
+    "title": "Fundos",
+    "menu": "Fundos"
+  },
+  "current-position": {
+    "title": "Posição atual",
+    "menu": "Posição atual"
+  },
+  "period-movements": {
+    "title": "Movimentos do período",
+    "menu": "Movimentos do período"
+  },
+  "recurrent-movements": {
+    "title": "Movimentos recorrentes",
+    "menu": "Movimentos recorrentes"
+  },
+  "credit-card-invoice": {
+    "title": "Fatura do cartão de crédito",
+    "menu": "Fatura do cartão de crédito"
+  },
+  "period-closing": {
+    "title": "Encerramento do período",
+    "menu": "Encerramento do período"
+  },
+  "wallets": {
+    "title": "Carteiras",
+    "menu": "Carteiras"
+  },
+  "cards": {
+    "title": "Cartões",
+    "menu": "Cartões"
+  },
+  "financial-periods": {
+    "title": "Períodos financeiros",
+    "menu": "Períodos financeiros"
+  },
+  "movement-classes": {
+    "title": "Classes de movimentos",
+    "menu": "Classes de movimentos"
+  },
+  "cost-centers": {
+    "title": "Centros de custos",
+    "menu": "Centros de custos"
   }
 }
