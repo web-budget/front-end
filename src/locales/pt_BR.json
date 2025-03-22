@@ -20,6 +20,39 @@
   "pages": {
     "quick-access": "Acesso rápido"
   },
+  "buttons": {
+    "actions": {
+      "new": "Novo",
+      "all": "Todos",
+      "active": "Ativos",
+      "inactive": "Inativos",
+      "search": "Buscar"
+    }
+  },
+  "data-table": {
+    "state": {
+      "empty": "Nenhum registro encontrado",
+      "loading": "Carregando..."
+    },
+    "columns": {
+      "actions": "Ações",
+      "status": "Status"
+    },
+    "footer": {
+      "showing": "Mostrando ",
+      "until": " de ",
+      "total": ", total "
+    },
+    "cost-centers": {
+      "name": "Nome",
+      "income-budget": "Income Budget",
+      "expense-budget": "Expense Budget"
+    }
+  },
+  "status-badge": {
+    "active": "Ativo",
+    "inactive": "Inativo"
+  },
   "integrations": {
     "title": "Integrações",
     "menu": "Integrações"
@@ -74,6 +107,9 @@
   },
   "cost-centers": {
     "title": "Centros de custos",
-    "menu": "Centros de custos"
+    "menu": "Centros de custos",
+    "search": {
+      "placeholder": "Nome"
+    }
   }
 }

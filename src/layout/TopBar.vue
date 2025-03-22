@@ -2,29 +2,18 @@
 import { useRoute } from 'vue-router'
 import { useLayout } from '@/layout/composables/layout'
 
-const { toggleMenu, toggleDarkMode, isDarkTheme } = useLayout()
+const { toggleDarkMode, isDarkTheme } = useLayout()
 
 const route = useRoute()
 
 function isActive(menu) {
   return route.path.includes(menu)
 }
-
-function toggleMenuAction(event) {
-  if (route.path === '/') {
-    event.preventDefault()
-  } else {
-    toggleMenu()
-  }
-}
 </script>
 
 <template>
   <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
-      <button class="layout-menu-button layout-topbar-action" @click="toggleMenuAction">
-        <i class="pi pi-bars"></i>
-      </button>
       <router-link to="/" class="layout-topbar-logo">
         <span class="wb-logo" style="font-size: 1.5em">web</span>
         <span class="wb-logo wb-logo-black" style="font-size: 1.5em">Budget</span>
