@@ -11,6 +11,9 @@ export default defineConfig({
   optimizeDeps: {
     noDiscovery: true,
   },
+  server: {
+    port: 8080,
+  },
   plugins: [
     vue(),
     vueDevTools(),

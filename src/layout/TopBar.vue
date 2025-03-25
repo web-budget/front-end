@@ -1,8 +1,11 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useLayout } from '@/layout/composables/layout'
+import { useSessionStore } from '@/stores/session.store'
 
 const { toggleDarkMode, isDarkTheme } = useLayout()
+
+const { logout } = useSessionStore()
 
 const route = useRoute()
 
@@ -78,7 +81,7 @@ function isActive(menu) {
             <i class="pi pi-inbox"></i>
             <span>Messages</span>
           </button>
-          <button type="button" class="layout-topbar-action">
+          <button type="button" class="layout-topbar-action" @click="logout()">
             <i class="pi pi-user"></i>
             <span>Profile</span>
           </button>

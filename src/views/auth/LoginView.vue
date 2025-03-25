@@ -1,9 +1,51 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { useSessionStore } from '@/stores/session.store'
+import { useRoute, useRouter } from 'vue-router'
+import TokenClient from '@/http/token.client'
 
-const email = ref('')
-const password = ref('')
-const checked = ref(false)
+const route = useRoute()
+const router = useRouter()
+
+const { isValid, login } = useSessionStore()
+
+const loading = ref(false)
+
+const credentials = reactive({
+  username: '',
+  password: '',
+  remember: false,
+})
+
+const tokenClient = new TokenClient()
+
+async function doLogin() {
+  try {
+    loading.value = true
+    const { data } = await tokenClient.generate(credentials)
+    login(data)
+    doAfterLoginNavigation()
+  } catch (error) {
+    console.log(error) // FIXME
+  } finally {
+    loading.value = false
+  }
+}
+
+function doAfterLoginNavigation() {
+  const redirectTo = route.query.redirect
+  if (redirectTo) {
+    router.push({ path: redirectTo })
+  } else {
+    router.push({ name: 'home' })
+  }
+}
+
+onMounted(() => {
+  if (isValid()) {
+    doAfterLoginNavigation()
+  }
+})
 </script>
 
 <template>
@@ -21,7 +63,7 @@ const checked = ref(false)
               <span class="wb-logo">web</span>
               <span class="wb-logo wb-logo-black">Budget</span>
             </div>
-            <span class="text-muted-color font-medium">{{ $t('auth.login.subtitle') }}</span>
+            <span class="text-muted-color font-medium">{{ $t('login.subtitle') }}</span>
           </div>
 
           <div>
@@ -29,44 +71,53 @@ const checked = ref(false)
               for="email"
               class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
             >
-              {{ $t('auth.login.form.email') }}
+              {{ $t('login.form.email') }}
             </label>
             <InputText
               id="email"
               type="text"
-              :placeholder="$t('auth.login.form.email-placeholder')"
+              v-model="credentials.username"
               class="w-full md:w-[30rem] mb-8"
-              v-model="email"
+              :placeholder="$t('login.form.email-placeholder')"
             />
 
             <label
               for="password"
               class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
             >
-              {{ $t('auth.login.form.password') }}
+              {{ $t('login.form.password') }}
             </label>
             <Password
-              id="password"
-              v-model="password"
-              :placeholder="$t('auth.login.form.password-placeholder')"
-              :toggleMask="true"
-              class="mb-4"
               fluid
+              id="password"
+              class="mb-4"
               :feedback="false"
+              :toggleMask="true"
+              v-model="credentials.password"
+              :placeholder="$t('login.form.password-placeholder')"
             ></Password>
 
             <div class="flex items-center justify-between mt-2 mb-8 gap-8">
               <div class="flex items-center">
-                <Checkbox v-model="checked" id="rememberme" binary class="mr-2"></Checkbox>
+                <Checkbox
+                  id="rememberme"
+                  binary
+                  class="mr-2"
+                  v-model="credentials.remember"
+                ></Checkbox>
                 <label for="rememberme">
-                  {{ $t('auth.login.form.remember-me') }}
+                  {{ $t('login.form.remember-me') }}
                 </label>
               </div>
               <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">
-                {{ $t('auth.login.form.forgot-password') }}
+                {{ $t('login.form.forgot-password') }}
               </span>
             </div>
-            <Button :label="$t('auth.login.form.sign-in')" class="w-full" as="router-link" to="/"></Button>
+            <Button
+              class="w-full"
+              @click="doLogin()"
+              :label="$t('login.form.sign-in')"
+            ></Button>
           </div>
         </div>
       </div>
