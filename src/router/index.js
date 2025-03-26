@@ -6,8 +6,8 @@ import HomeLayout from '@/layout/HomeLayout.vue'
 
 import registrationRoutes from '@/router/registration.routes'
 import financialRoutes from '@/router/financial.routes'
-import investmentsRoutes from '@/router/investments.routes'
-import configurationsRoutes from '@/router/configurations.routes'
+import investmentRoutes from '@/router/investment.routes'
+import configurationRoutes from '@/router/configuration.routes'
 import publicRoutes from '@/router/public.routes'
 
 const routes = [
@@ -24,9 +24,9 @@ const routes = [
   },
   ...publicRoutes,
   ...registrationRoutes,
-  ...configurationsRoutes,
+  ...configurationRoutes,
   ...financialRoutes,
-  ...investmentsRoutes,
+  ...investmentRoutes,
 ]
 
 const router = createRouter({

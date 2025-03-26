@@ -13,12 +13,16 @@
   },
   "menu": {
     "financial": "Financeiro",
-    "investments": "Investimentos",
-    "configurations": "Configurações",
-    "registrations": "Cadastros"
+    "investment": "Investimentos",
+    "configuration": "Configurações",
+    "registration": "Cadastros"
   },
   "pages": {
     "quick-access": "Acesso rápido"
+  },
+  "action-buttons": {
+    "delete": "Deletar",
+    "edit": "Editar"
   },
   "buttons": {
     "actions": {

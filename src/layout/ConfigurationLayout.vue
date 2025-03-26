@@ -6,11 +6,14 @@ import PageStructure from '@/components/PageStructure.vue'
 
 const items = ref([
   {
-    label: 'menu.investments',
+    label: 'menu.configuration',
     items: [
-      { label: 'stocks.menu', icon: 'pi pi-fw pi-bookmark', to: '#' },
-      { label: 'funds.menu', icon: 'pi pi-fw pi-shopping-bag', to: '#' },
-      { label: 'current-position.menu', icon: 'pi pi-fw pi-chart-bar', to: '#' }
+      { label: 'users.menu', icon: 'pi pi-fw pi-users', to: '#' },
+      {
+        label: 'integrations.menu',
+        icon: 'pi pi-fw pi-arrow-right-arrow-left',
+        to: '#',
+      },
     ],
   },
 ])

@@ -3,6 +3,8 @@ import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
+import CostCenterClient from '@/http/registration/cost-center.client'
+
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
@@ -29,10 +31,10 @@ const options = [
 
 const loading = ref(false)
 
-const data = []
-
 const pageRequest = reactive(new PageRequest())
 const pageResponse = reactive(new PageResponse())
+
+const costCenterClient = new CostCenterClient()
 
 function changeToAdd() {
   router.push({ name: 'cost-centers.create' })
@@ -61,7 +63,16 @@ function changeToDetail(event) {
 }
 
 async function applyFilters() {
-  console.log(pageRequest)
+  try {
+    loading.value = true
+    const response = await costCenterClient.findAll(pageRequest)
+    PageResponse.applyValues(response.data, pageResponse)
+    console.log(pageResponse)
+  } catch (error) {
+    console.log(error) // FIXME
+  } finally {
+    loading.value = false
+  }
 }
 
 function onPageChange(event) {
@@ -118,13 +129,13 @@ onMounted(() => {
     <DataTable
       :lazy="true"
       dataKey="id"
-      :rowHover="true"
-      :paginator="true"
-      :autoLayout="true"
-      :value="data"
-      :removableSort="true"
+      rowHover
+      paginator
+      autoLayout
+      :value="pageResponse.content"
+      removableSort
       selectionMode="single"
-      :rows="pageResponse.pageSize"
+      :rows="pageResponse.size"
       :loading="loading"
       @sort="onTableSorted"
       :rowsPerPageOptions="[15, 30, 60]"

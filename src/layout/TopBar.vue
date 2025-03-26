@@ -25,10 +25,10 @@ function isActive(menu) {
 
     <div class="layout-main-menu">
       <router-link
-        to="/registrations"
-        :class="['layout-main-menu-item', { 'active-route': isActive('registrations') }]"
+        to="/registration"
+        :class="['layout-main-menu-item', { 'active-route': isActive('registration') }]"
       >
-        {{ $t('menu.registrations') }}
+        {{ $t('menu.registration') }}
       </router-link>
       <router-link
         to="/financial"
@@ -37,16 +37,16 @@ function isActive(menu) {
         {{ $t('menu.financial') }}
       </router-link>
       <router-link
-        to="/investments"
-        :class="['layout-main-menu-item', { 'active-route': isActive('investments') }]"
+        to="/investment"
+        :class="['layout-main-menu-item', { 'active-route': isActive('investment') }]"
       >
-        {{ $t('menu.investments') }}
+        {{ $t('menu.investment') }}
       </router-link>
       <router-link
-        to="/configurations"
-        :class="['layout-main-menu-item', { 'active-route': isActive('configurations') }]"
+        to="/configuration"
+        :class="['layout-main-menu-item', { 'active-route': isActive('configuration') }]"
       >
-        {{ $t('menu.configurations') }}
+        {{ $t('menu.configuration') }}
       </router-link>
     </div>
 

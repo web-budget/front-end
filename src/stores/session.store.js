@@ -29,6 +29,7 @@ export const useSessionStore = defineStore('sessionStore', () => {
       const { exp } = jwtDecode(token)
       return Date.now() < exp * 1000
     }
+    session.value = null
     return false
   }
 

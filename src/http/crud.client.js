@@ -1,6 +1,6 @@
 import BaseClient from '@/http/base.client'
 
-export default class BaseCrudClient extends BaseClient {
+export default class CrudClient extends BaseClient {
 
   findAll(pageRequest) {
     const pageRequestParams = pageRequest.getPageableParams()

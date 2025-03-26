@@ -2,29 +2,29 @@ import RegistrationLayout from '@/layout/RegistrationLayout.vue'
 
 const routes = [
   {
-    path: '/registrations',
+    path: '/registration',
     component: RegistrationLayout,
     children: [
       {
-        path: '/registrations',
-        name: 'registrations',
-        component: () => import('@/views/registrations/RegistrationHomeView.vue'),
+        path: '/registration',
+        name: 'registration',
+        component: () => import('@/views/registration/RegistrationHomeView.vue'),
       },
     ],
   },
   {
-    path: '/registrations/cost-centers',
+    path: '/registration/cost-centers',
     component: RegistrationLayout,
     children: [
       {
         path: '',
         name: 'cost-centers',
-        component: () => import('@/views/registrations/cost-centers/CostCenterListView.vue'),
+        component: () => import('@/views/registration/cost-centers/CostCenterListView.vue'),
       },
       {
         path: 'create',
         name: 'cost-centers.create',
-        component: () => import('@/views/registrations/cost-centers/CostCenterFormView.vue'),
+        component: () => import('@/views/registration/cost-centers/CostCenterFormView.vue'),
       },
       {
         path: ':id/update',
@@ -33,13 +33,13 @@ const routes = [
           id: route.params.id,
           updating: true,
         }),
-        component: () => import('@/views/registrations/cost-centers/CostCenterFormView.vue'),
+        component: () => import('@/views/registration/cost-centers/CostCenterFormView.vue'),
       },
       {
         path: ':id/detail',
         name: 'cost-centers.detail',
         props: (route) => ({ id: route.params.id }),
-        component: () => import('@/views/registrations/cost-centers/CostCenterDetailView.vue'),
+        component: () => import('@/views/registration/cost-centers/CostCenterDetailView.vue'),
       },
       {
         path: ':id/delete',
@@ -48,7 +48,7 @@ const routes = [
           id: route.params.id,
           deleting: true,
         }),
-        component: () => import('@/views/registrations/cost-centers/CostCenterDetailView.vue'),
+        component: () => import('@/views/registration/cost-centers/CostCenterDetailView.vue'),
       },
     ],
   },

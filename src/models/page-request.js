@@ -5,7 +5,7 @@ export default class PageRequest {
     current = 0,
     size = 15,
     direction = 'asc',
-    sortField = ''
+    sortField = 'createdOn'
   ) {
     this.filterText = filterText
     this.status = status

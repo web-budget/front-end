@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 import { useSessionStore } from '@/stores/session.store'
-import { useRouter } from 'vue-router'
 
 const backendUrl = import.meta.env.VITE_API_URL
 const debugEnabled = import.meta.env.VITE_LOG_REQUESTS || false
 
-const { authToken, logout } = useSessionStore()
+const { authToken } = useSessionStore()
 
 const configureClient = (context) => {
   const options = {
@@ -16,48 +15,33 @@ const configureClient = (context) => {
   return axios.create(options)
 }
 
-const authInterceptor = (config) => {
-  config.headers.Authorization = `Bearer ${authToken}`
-  return config
-}
-
-const loggingInterceptor = (config) => {
-  const requestData = {
-    method: config.method.toUpperCase(),
-    url: `${config.baseURL}${config.url}`,
-    ...config.params,
-  }
-  console.info(requestData)
-  return config
-}
-
 class BaseClient {
   constructor(context = null, requireAuth = false) {
-    const router = useRouter()
-
     this.client = configureClient(context)
 
     if (requireAuth) {
-      this.client.interceptors.request.use(authInterceptor)
+      this.client.interceptors.request.use((request) => {
+        request.headers.Authorization = `Bearer ${authToken}`
+        return request
+      })
     }
 
     if (debugEnabled === 'true') {
-      this.client.interceptors.request.use(loggingInterceptor)
+      this.client.interceptors.request.use(request => {
+        const requestData = {
+          method: request.method.toUpperCase(),
+          url: `${request.baseURL}${request.url}`,
+          ...request.params,
+        }
+        console.info(requestData)
+        return request
+      })
     }
 
     this.client.interceptors.response.use(
       (success) => Promise.resolve(success),
       (error) => {
-        if (error.response) {
-          const { status } = error.response
-          if (status === 401) {
-            logout()
-          } else if (status === 403) {
-            router.push({ name: 'unauthorized' })
-          }
-        } else {
-          console.log(error) // FIXME
-        }
+        console.log(error) // FIXME
         return Promise.reject(error)
       },
     )
