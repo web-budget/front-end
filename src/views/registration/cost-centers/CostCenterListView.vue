@@ -10,24 +10,10 @@ import PageResponse from '@/models/page-response'
 
 import StatusBadge from '@/components/listing/StatusBadge.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
+import SearchControls from '@/components/listing/SearchControls.vue'
 
 const translation = useI18n()
 const router = useRouter()
-
-const options = [
-  {
-    label: translation.t('buttons.actions.all'),
-    value: 'ALL',
-  },
-  {
-    label: translation.t('buttons.actions.inactive'),
-    value: 'INACTIVE',
-  },
-  {
-    label: translation.t('buttons.actions.active'),
-    value: 'ACTIVE',
-  },
-]
 
 const loading = ref(false)
 
@@ -106,24 +92,12 @@ onMounted(() => {
 <template>
   <div class="card">
     <div class="flex flex-col md:flex-row gap-4 mb-6">
-      <SelectButton
-        v-model="pageRequest.status"
-        :options="options"
-        option-label="label"
-        option-value="value"
-      />
-      <InputGroup>
-        <InputText
-          v-model="pageRequest.filterText"
-          :placeholder="$t('cost-centers.search.placeholder')"
-        />
-        <Button @click="applyFilters()" :label="$t('buttons.actions.search')" />
-      </InputGroup>
-      <Button
-        class="w-1/12"
-        severity="success"
-        @click="changeToAdd()"
-        :label="$t('buttons.actions.new')"
+      <search-controls
+        @onNew="changeToAdd()"
+        @onFilterChange="applyFilters()"
+        v-model:status="pageRequest.status"
+        v-model:filter="pageRequest.filter"
+        :placeholder="$t('cost-centers.search.placeholder')"
       />
     </div>
     <DataTable

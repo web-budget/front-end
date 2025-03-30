@@ -24,14 +24,14 @@
     "delete": "Deletar",
     "edit": "Editar"
   },
-  "buttons": {
+  "search-controls": {
     "actions": {
       "new": "Novo",
-      "all": "Todos",
-      "active": "Ativos",
-      "inactive": "Inativos",
       "search": "Buscar"
-    }
+    },
+    "all": "Todos",
+    "active": "Ativos",
+    "inactive": "Inativos"
   },
   "data-table": {
     "state": {
