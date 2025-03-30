@@ -39,7 +39,7 @@ const options = [
   },
 ]
 
-const emit = defineEmits(['update:status', 'onFilterChange'])
+const emit = defineEmits(['update:status', 'onFilterChange', 'onNew'])
 
 function fireFilterChange() {
   emit('update:status', statusValue.value)

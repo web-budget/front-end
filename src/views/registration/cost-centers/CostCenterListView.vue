@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 import CostCenterClient from '@/http/registration/cost-center.client'
@@ -8,11 +7,11 @@ import CostCenterClient from '@/http/registration/cost-center.client'
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
-import StatusBadge from '@/components/listing/StatusBadge.vue'
-import ActionButtons from '@/components/listing/ActionButtons.vue'
+import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
+import ActionButtons from '@/components/listing/ActionButtons.vue'
+import CurrencyValue from '@/components/common/CurrencyValue.vue'
 
-const translation = useI18n()
 const router = useRouter()
 
 const loading = ref(false)
@@ -69,19 +68,8 @@ function onPageChange(event) {
 
 function onTableSorted(event) {
   pageRequest.sortField = event.sortField
-  pageRequest.direction = event.direction
+  pageRequest.direction = event.sortOrder
   applyFilters()
-}
-
-function translatePageReport() {
-  return (
-    translation.t('data-table.footer.showing') +
-    '{first}' +
-    translation.t('data-table.footer.until') +
-    '{last}' +
-    translation.t('data-table.footer.total') +
-    '{totalRecords}'
-  )
 }
 
 onMounted(() => {
@@ -100,61 +88,35 @@ onMounted(() => {
         :placeholder="$t('cost-centers.search.placeholder')"
       />
     </div>
-    <DataTable
-      :lazy="true"
-      dataKey="id"
-      rowHover
-      paginator
-      autoLayout
-      :value="pageResponse.content"
-      removableSort
-      selectionMode="single"
-      :rows="pageResponse.size"
+    <items-table
       :loading="loading"
-      @sort="onTableSorted"
-      :rowsPerPageOptions="[15, 30, 60]"
-      :totalRecords="pageResponse.totalElements"
-      :currentPageReportTemplate="translatePageReport()"
-      @row-select="changeToDetail"
-      @page="onPageChange"
-      paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+      :data="pageResponse.content"
+      @pageChanged="onPageChange($event)"
+      @tableSorted="onTableSorted($event)"
+      @rowSelected="changeToDetail($event)"
+      :totalElements="pageResponse.totalElements"
     >
-      <template #empty>
-        {{ $t('data-table.state.empty') }}
+      <template #columns>
+        <Column field="name" :header="$t('cost-centers.items-table.name')" :sortable="true" />
+        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.income-budget')">
+          <template #body="slotProps">
+            <currency-value :value="slotProps.data.incomeBudget"/>
+          </template>
+        </Column>
+        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.expense-budget')">
+          <template #body="slotProps">
+            <currency-value :value="slotProps.data.expenseBudget"/>
+          </template>
+        </Column>
+        <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">
+          <template #body="slotProps">
+            <action-buttons
+              @onEdit="changeToUpdate(slotProps.data.id)"
+              @onDelete="changeToDelete(slotProps.data.id)"
+            />
+          </template>
+        </Column>
       </template>
-      <template #loading>
-        {{ $t('data-table.state.loading') }}
-      </template>
-
-      <Column
-        field="active"
-        headerStyle="width: 10%"
-        :header="$t('data-table.columns.status')"
-        :sortable="true"
-      >
-        <template #body="slotProps">
-          <status-badge :active="slotProps.data.active" />
-        </template>
-      </Column>
-      <Column field="name" :header="$t('data-table.cost-centers.name')" :sortable="true" />
-      <Column
-        field="incomeBudget"
-        headerStyle="width: 15%"
-        :header="$t('data-table.cost-centers.income-budget')"
-      />
-      <Column
-        field="expenseBudget"
-        headerStyle="width: 15%"
-        :header="$t('data-table.cost-centers.expense-budget')"
-      />
-      <Column headerStyle="width: 12%" :header="$t('data-table.columns.actions')">
-        <template #body="slotProps">
-          <action-buttons
-            @onEdit="changeToUpdate(slotProps.data.id)"
-            @onDelete="changeToDelete(slotProps.data.id)"
-          />
-        </template>
-      </Column>
-    </DataTable>
+    </items-table>
   </div>
 </template>

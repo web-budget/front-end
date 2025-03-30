@@ -33,7 +33,7 @@
     "active": "Ativos",
     "inactive": "Inativos"
   },
-  "data-table": {
+  "items-table": {
     "state": {
       "empty": "Nenhum registro encontrado",
       "loading": "Carregando..."
@@ -43,14 +43,8 @@
       "status": "Status"
     },
     "footer": {
-      "showing": "Mostrando ",
-      "until": " de ",
+      "until": " até ",
       "total": ", total "
-    },
-    "cost-centers": {
-      "name": "Nome",
-      "income-budget": "Income Budget",
-      "expense-budget": "Expense Budget"
     }
   },
   "status-badge": {
@@ -114,6 +108,11 @@
     "menu": "Centros de custos",
     "search": {
       "placeholder": "Nome"
+    },
+    "items-table": {
+      "name": "Nome",
+      "income-budget": "Income Budget",
+      "expense-budget": "Expense Budget"
     }
   }
 }
