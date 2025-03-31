@@ -10,7 +10,7 @@ import PageResponse from '@/models/page-response'
 import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
-import CurrencyValue from '@/components/common/CurrencyValue.vue'
+import CurrencyDisplay from '@/components/common/CurrencyDisplay.vue'
 
 const router = useRouter()
 
@@ -39,11 +39,10 @@ function changeToDelete(id) {
   })
 }
 
-function changeToDetail(event) {
-  const { id } = event.data
+function changeToDetail({ data }) {
   router.push({
     name: 'cost-centers.detail',
-    params: { id: id },
+    params: { id: data.id },
   })
 }
 
@@ -99,12 +98,12 @@ onMounted(() => {
         <Column field="name" :header="$t('cost-centers.items-table.name')" :sortable="true" />
         <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.income-budget')">
           <template #body="slotProps">
-            <currency-value :value="slotProps.data.incomeBudget"/>
+            <currency-display :value="slotProps.data.incomeBudget" />
           </template>
         </Column>
         <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.expense-budget')">
           <template #body="slotProps">
-            <currency-value :value="slotProps.data.expenseBudget"/>
+            <currency-display :value="slotProps.data.expenseBudget" />
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

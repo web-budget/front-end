@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import CostCenterClient from '@/http/registration/cost-center.client'
+import WalletClient from '@/http/registration/wallet.client'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
@@ -10,7 +10,6 @@ import PageResponse from '@/models/page-response'
 import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
-import CurrencyValue from '@/components/common/CurrencyValue.vue'
 
 const router = useRouter()
 
@@ -19,38 +18,37 @@ const loading = ref(false)
 const pageRequest = reactive(new PageRequest())
 const pageResponse = reactive(new PageResponse())
 
-const costCenterClient = new CostCenterClient()
+const walletClient = new WalletClient()
 
 function changeToAdd() {
-  router.push({ name: 'cost-centers.create' })
+  router.push({ name: 'wallets.create' })
 }
 
 function changeToUpdate(id) {
   router.push({
-    name: 'cost-centers.update',
+    name: 'wallets.update',
     params: { id: id },
   })
 }
 
 function changeToDelete(id) {
   router.push({
-    name: 'cost-centers.delete',
+    name: 'wallets.delete',
     params: { id: id },
   })
 }
 
-function changeToDetail(event) {
-  const { id } = event.data
+function changeToDetail({ data }) {
   router.push({
-    name: 'cost-centers.detail',
-    params: { id: id },
+    name: 'wallets.detail',
+    params: { id: data.id },
   })
 }
 
 async function applyFilters() {
   try {
     loading.value = true
-    const response = await costCenterClient.findAll(pageRequest)
+    const response = await walletClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
     console.log(error) // FIXME
@@ -84,7 +82,7 @@ onMounted(() => {
         @onFilterChange="applyFilters()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
-        :placeholder="$t('cost-centers.search.placeholder')"
+        :placeholder="$t('wallets.search.placeholder')"
       />
     </div>
     <items-table
@@ -96,15 +94,10 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('cost-centers.items-table.name')" :sortable="true" />
-        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.income-budget')">
+        <Column field="name" :header="$t('wallets.items-table.name')" :sortable="true" />
+        <Column field="type" :header="$t('cards.items-table.type')" :sortable="true">
           <template #body="slotProps">
-            <currency-value :value="slotProps.data.incomeBudget"/>
-          </template>
-        </Column>
-        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.expense-budget')">
-          <template #body="slotProps">
-            <currency-value :value="slotProps.data.expenseBudget"/>
+            {{ $t(`wallets.types.${slotProps.data.type.toLowerCase().replaceAll('_', '-')}`) }}
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

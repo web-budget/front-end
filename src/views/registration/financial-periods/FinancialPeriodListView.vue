@@ -2,55 +2,60 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import CostCenterClient from '@/http/registration/cost-center.client'
+import FinancialPeriodClient from '@/http/registration/financial-period.client'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
 import ItemsTable from '@/components/listing/ItemsTable.vue'
-import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
-import CurrencyValue from '@/components/common/CurrencyValue.vue'
+import DateTimeDisplay from '@/components/common/DateTimeDisplay.vue'
+import SearchControls from '@/components/listing/SearchControls.vue'
+
+const statusOptions = [
+  { label: 'financial-periods.options.all', value: 'ALL' },
+  { label: 'financial-periods.options.open', value: 'OPEN' },
+  { label: 'financial-periods.options.accounted', value: 'ACCOUNTED' },
+]
 
 const router = useRouter()
 
 const loading = ref(false)
 
-const pageRequest = reactive(new PageRequest())
+const pageRequest = reactive(new PageRequest('', 'OPEN', 0, 15, 'asc', 'createdOn'))
 const pageResponse = reactive(new PageResponse())
 
-const costCenterClient = new CostCenterClient()
+const financialPeriodClient = new FinancialPeriodClient()
 
 function changeToAdd() {
-  router.push({ name: 'cost-centers.create' })
+  router.push({ name: 'financial-periods.create' })
 }
 
 function changeToUpdate(id) {
   router.push({
-    name: 'cost-centers.update',
+    name: 'financial-periods.update',
     params: { id: id },
   })
 }
 
 function changeToDelete(id) {
   router.push({
-    name: 'cost-centers.delete',
+    name: 'financial-periods.delete',
     params: { id: id },
   })
 }
 
-function changeToDetail(event) {
-  const { id } = event.data
+function changeToDetail({ data }) {
   router.push({
-    name: 'cost-centers.detail',
-    params: { id: id },
+    name: 'financial-periods.detail',
+    params: { id: data.id },
   })
 }
 
 async function applyFilters() {
   try {
     loading.value = true
-    const response = await costCenterClient.findAll(pageRequest)
+    const response = await financialPeriodClient.findAll(pageRequest)
     PageResponse.applyValues(response.data, pageResponse)
   } catch (error) {
     console.log(error) // FIXME
@@ -81,14 +86,16 @@ onMounted(() => {
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <search-controls
         @onNew="changeToAdd()"
+        :status-options="statusOptions"
         @onFilterChange="applyFilters()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
-        :placeholder="$t('cost-centers.search.placeholder')"
+        :placeholder="$t('financial-periods.search.placeholder')"
       />
     </div>
     <items-table
       :loading="loading"
+      :show-status="false"
       :data="pageResponse.content"
       @pageChanged="onPageChange($event)"
       @tableSorted="onTableSorted($event)"
@@ -96,15 +103,38 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('cost-centers.items-table.name')" :sortable="true" />
-        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.income-budget')">
+        <Column
+          :sortable="true"
+          headerStyle="width: 13%"
+          :header="$t('financial-periods.items-table.status')"
+        >
           <template #body="slotProps">
-            <currency-value :value="slotProps.data.incomeBudget"/>
+            <Tag
+              v-if="slotProps.data.status === 'ACTIVE'"
+              :value="$t('financial-periods.status.active')"
+              severity="success"
+            />
+            <Tag
+              v-if="slotProps.data.status === 'ENDED'"
+              :value="$t('financial-periods.status.ended')"
+              severity="warn"
+            />
+            <Tag
+              v-if="slotProps.data.status === 'ACCOUNTED'"
+              :value="$t('financial-periods.status.accounted')"
+              severity="danger"
+            />
           </template>
         </Column>
-        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.expense-budget')">
+        <Column field="name" :header="$t('financial-periods.items-table.name')" :sortable="true" />
+        <Column headerStyle="width: 15%" :header="$t('financial-periods.items-table.starting-at')">
           <template #body="slotProps">
-            <currency-value :value="slotProps.data.expenseBudget"/>
+            <date-time-display :fix-time="true" :value="slotProps.data.startingAt" />
+          </template>
+        </Column>
+        <Column headerStyle="width: 15%" :header="$t('financial-periods.items-table.ending-at')">
+          <template #body="slotProps">
+            <date-time-display :fix-time="true" :value="slotProps.data.endingAt" />
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

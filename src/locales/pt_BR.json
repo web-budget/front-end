@@ -89,19 +89,74 @@
   },
   "wallets": {
     "title": "Carteiras",
-    "menu": "Carteiras"
+    "menu": "Carteiras",
+    "search": {
+      "placeholder": "Nome, descrição, banco, agência ou número"
+    },
+    "items-table": {
+      "name": "Nome",
+      "type": "Tipo"
+    },
+    "types": {
+      "bank-account": "Conta Corrente",
+      "personal": "Pessoal",
+      "investment": "Investimento"
+    }
   },
   "cards": {
     "title": "Cartões",
-    "menu": "Cartões"
+    "menu": "Cartões",
+    "search": {
+      "placeholder": "Nome, últimos 4 dígitos ou bandeira"
+    },
+    "items-table": {
+      "name": "Nome",
+      "type": "Tipo",
+      "flag": "Bandeira"
+    },
+    "types": {
+      "debit": "Débito",
+      "credit": "Crédito"
+    }
   },
   "financial-periods": {
     "title": "Períodos financeiros",
-    "menu": "Períodos financeiros"
+    "menu": "Períodos financeiros",
+    "search": {
+      "placeholder": "Nome"
+    },
+    "items-table": {
+      "name": "Nome",
+      "starting-at": "Início",
+      "ending-at": "Fim",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Ativo",
+      "ended": "Encerrado",
+      "accounted": "Contabilizado"
+    },
+    "options": {
+      "all": "Todos",
+      "open": "Abertos",
+      "accounted": "Contabilizados"
+    }
   },
   "movement-classes": {
     "title": "Classes de movimentos",
-    "menu": "Classes de movimentos"
+    "menu": "Classes de movimentos",
+    "search": {
+      "placeholder": "Nome ou descrição"
+    },
+    "items-table": {
+      "name": "Nome",
+      "type": "Tipo",
+      "cost-center": "Centro de custo"
+    },
+    "types": {
+      "income": "Receita",
+      "expense": "Despesa"
+    }
   },
   "cost-centers": {
     "title": "Centros de custos",

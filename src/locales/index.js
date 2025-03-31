@@ -28,8 +28,30 @@ const numberFormats = {
   }
 }
 
+const datetimeFormats = {
+  'en-US': {
+    short: {
+      year: 'numeric', month: 'numeric', day: 'numeric'
+    },
+    long: {
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric'
+    }
+  },
+  'pt-BR': {
+    short: {
+      year: 'numeric', month: 'numeric', day: 'numeric'
+    },
+    long: {
+      year: 'numeric', month: 'short', day: 'numeric',
+      weekday: 'short', hour: 'numeric', minute: 'numeric'
+    }
+  }
+}
+
 export default createI18n({
-  numberFormats,
+  numberFormats: numberFormats,
+  datetimeFormats: datetimeFormats,
   legacy: false,
   locale: 'pt-BR',
   fallbackLocale: 'pt-BR',

@@ -1,8 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-const translation = useI18n()
 
 const props = defineProps({
   filter: {
@@ -19,25 +16,19 @@ const props = defineProps({
     type: String,
     default: 'search-controls.filter-not-defined',
   },
+  statusOptions: {
+    type: Array,
+    default: () => [
+      { label: 'search-controls.all', value: 'ALL' },
+      { label: 'search-controls.inactive', value: 'INACTIVE' },
+      { label: 'search-controls.active', value: 'ACTIVE' },
+    ],
+    required: true,
+  },
 })
 
 const statusValue = ref(props.status)
 const filterValue = ref(props.filter)
-
-const options = [
-  {
-    label: translation.t('search-controls.all'),
-    value: 'ALL',
-  },
-  {
-    label: translation.t('search-controls.inactive'),
-    value: 'INACTIVE',
-  },
-  {
-    label: translation.t('search-controls.active'),
-    value: 'ACTIVE',
-  },
-]
 
 const emit = defineEmits(['update:status', 'onFilterChange', 'onNew'])
 
@@ -58,12 +49,15 @@ function resetFilter() {
 
 <template>
   <SelectButton
-    v-model="statusValue"
-    :options="options"
-    option-label="label"
     option-value="value"
+    v-model="statusValue"
+    :options="props.statusOptions"
     @change="fireFilterChange()"
-  />
+  >
+    <template #option="slotProps">
+      {{ $t(slotProps.option.label) }}
+    </template>
+  </SelectButton>
   <InputGroup>
     <InputText
       v-model="filterValue"
