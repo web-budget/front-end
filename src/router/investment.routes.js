@@ -1,4 +1,4 @@
-import investmentLayout from '@/layout/InvestmentLayout.vue'
+import investmentLayout from '@/components/layout/InvestmentLayout.vue'
 
 const routes = [
   {

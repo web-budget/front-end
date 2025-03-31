@@ -1,10 +1,10 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 
-import { useLayout } from '@/layout/composables/layout'
+import { useLayout } from '@/components/layout/composables/layout'
 
-import PageFooter from '@/layout/PageFooter.vue'
-import TopBar from '@/layout/TopBar.vue'
+import PageFooter from '@/components/layout/PageFooter.vue'
+import TopBar from '@/components/layout/TopBar.vue'
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout()
 

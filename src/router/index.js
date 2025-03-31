@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import { useSessionStore } from '@/stores/session.store'
 
-import HomeLayout from '@/layout/HomeLayout.vue'
+import HomeLayout from '@/components/layout/HomeLayout.vue'
 
 import registrationRoutes from '@/router/registration.routes'
 import financialRoutes from '@/router/financial.routes'

@@ -1,4 +1,4 @@
-import FinancialLayout from '@/layout/FinancialLayout.vue'
+import FinancialLayout from '@/components/layout/FinancialLayout.vue'
 
 const routes = [
   {

@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 const props = defineProps({
   value: {
-    type: Number,
+    type: [Number, null],
     default: null,
     required: true,
   },

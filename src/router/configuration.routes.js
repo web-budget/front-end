@@ -1,4 +1,4 @@
-import ConfigurationLayout from '@/layout/ConfigurationLayout.vue'
+import ConfigurationLayout from '@/components/layout/ConfigurationLayout.vue'
 
 const routes = [
   {
