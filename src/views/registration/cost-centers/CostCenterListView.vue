@@ -80,6 +80,7 @@ onMounted(() => {
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <search-controls
         @onNew="changeToAdd()"
+        @onFilterReset="applyFilters()"
         @onFilterChange="applyFilters()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"

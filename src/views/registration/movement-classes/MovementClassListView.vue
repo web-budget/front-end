@@ -80,6 +80,7 @@ onMounted(() => {
       <search-controls
         @onNew="changeToAdd()"
         @onFilterChange="applyFilters()"
+        @onFilterReset="applyFilters()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
         :placeholder="$t('movement-classes.search.placeholder')"

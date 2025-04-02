@@ -14,8 +14,8 @@ import SearchControls from '@/components/listing/SearchControls.vue'
 
 const statusOptions = [
   { label: 'financial-periods.options.all', value: 'ALL' },
-  { label: 'financial-periods.options.open', value: 'OPEN' },
   { label: 'financial-periods.options.accounted', value: 'ACCOUNTED' },
+  { label: 'financial-periods.options.open', value: 'OPEN' },
 ]
 
 const router = useRouter()
@@ -86,8 +86,10 @@ onMounted(() => {
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <search-controls
         @onNew="changeToAdd()"
+        status-initial-value="OPEN"
         :status-options="statusOptions"
         @onFilterChange="applyFilters()"
+        @onFilterReset="applyFilters()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
         :placeholder="$t('financial-periods.search.placeholder')"

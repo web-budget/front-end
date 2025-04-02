@@ -23,14 +23,23 @@ const props = defineProps({
       { label: 'search-controls.inactive', value: 'INACTIVE' },
       { label: 'search-controls.active', value: 'ACTIVE' },
     ],
-    required: true,
+  },
+  statusInitialValue: {
+    type: String,
+    default: 'ACTIVE',
   },
 })
 
 const statusValue = ref(props.status)
 const filterValue = ref(props.filter)
 
-const emit = defineEmits(['update:status', 'onFilterChange', 'onNew'])
+const emit = defineEmits([
+  'update:status',
+  'update:filter',
+  'onFilterChange',
+  'onFilterReset',
+  'onNew',
+])
 
 function fireFilterChange() {
   emit('update:status', statusValue.value)
@@ -38,17 +47,18 @@ function fireFilterChange() {
 }
 
 function resetFilter() {
-  statusValue.value = 'ACTIVE'
-  filterValue.value = null
+  statusValue.value = props.statusInitialValue
+  filterValue.value = ''
 
   emit('update:status', statusValue.value)
   emit('update:filter', filterValue.value)
-  emit('onFilterChange')
+  emit('onFilterReset')
 }
 </script>
 
 <template>
   <SelectButton
+    option-label="label"
     option-value="value"
     v-model="statusValue"
     :options="props.statusOptions"
