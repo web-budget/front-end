@@ -85,8 +85,8 @@ function fireTableSorted({ order, field }) {
       headerStyle="width: 10%"
       :header="$t('items-table.columns.status')"
     >
-      <template #body="slotProps">
-        <status-badge :active="slotProps.data.active" />
+      <template #body="{ data }">
+        <status-badge :active="data.active" />
       </template>
     </Column>
 

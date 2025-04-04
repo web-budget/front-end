@@ -98,20 +98,20 @@ onMounted(() => {
       <template #columns>
         <Column field="name" :header="$t('cost-centers.items-table.name')" :sortable="true" />
         <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.income-budget')">
-          <template #body="slotProps">
-            <currency-display :value="slotProps.data.incomeBudget" />
+          <template #body="{ data }">
+            <currency-display :value="data.incomeBudget" />
           </template>
         </Column>
         <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.expense-budget')">
-          <template #body="slotProps">
-            <currency-display :value="slotProps.data.expenseBudget" />
+          <template #body="{ data }">
+            <currency-display :value="data.expenseBudget" />
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">
-          <template #body="slotProps">
+          <template #body="{ data }">
             <action-buttons
-              @onEdit="changeToUpdate(slotProps.data.id)"
-              @onDelete="changeToDelete(slotProps.data.id)"
+              @onEdit="changeToUpdate(data.id)"
+              @onDelete="changeToDelete(data.id)"
             />
           </template>
         </Column>

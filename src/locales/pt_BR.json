@@ -24,6 +24,13 @@
     "delete": "Deletar",
     "edit": "Editar"
   },
+  "form": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "back": "Voltar"
+  },
   "search-controls": {
     "actions": {
       "new": "Novo",
@@ -163,6 +170,12 @@
     "menu": "Centros de custos",
     "search": {
       "placeholder": "Nome"
+    },
+    "form": {
+      "new": "Novo centro de custo",
+      "editing": "Editando {what}",
+      "name": "Nome",
+      "description": "Descrição"
     },
     "items-table": {
       "name": "Nome",
