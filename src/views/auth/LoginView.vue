@@ -1,8 +1,14 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
-import { useSessionStore } from '@/stores/session.store'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+import { zodResolver } from '@primevue/forms/resolvers/zod'
+
+import { useSessionStore } from '@/stores/session.store'
+
 import TokenClient from '@/http/token.client'
+
+import { formValues, validationSchema } from '@/models/credentials.model'
 
 const route = useRoute()
 const router = useRouter()
@@ -11,18 +17,14 @@ const { isValid, login } = useSessionStore()
 
 const loading = ref(false)
 
-const credentials = reactive({
-  username: '',
-  password: '',
-  remember: false,
-})
+const resolver = zodResolver(validationSchema)
 
 const tokenClient = new TokenClient()
 
-async function doLogin() {
+async function doLogin({ values }) {
   try {
     loading.value = true
-    const { data } = await tokenClient.generate(credentials)
+    const { data } = await tokenClient.generate(values)
     login(data)
     doAfterLoginNavigation()
   } catch (error) {
@@ -66,7 +68,7 @@ onMounted(() => {
             <span class="text-muted-color font-medium">{{ $t('login.subtitle') }}</span>
           </div>
 
-          <div>
+          <Form v-slot="$form" :initialValues="formValues" :resolver="resolver" @submit="doLogin">
             <label
               for="email"
               class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
@@ -75,12 +77,11 @@ onMounted(() => {
             </label>
             <InputText
               id="email"
-              type="text"
-              v-model="credentials.username"
+              type="email"
+              name="username"
               class="w-full md:w-[30rem] mb-8"
               :placeholder="$t('login.form.email-placeholder')"
             />
-
             <label
               for="password"
               class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
@@ -93,32 +94,26 @@ onMounted(() => {
               class="mb-4"
               :feedback="false"
               :toggleMask="true"
-              v-model="credentials.password"
+              name="password"
               :placeholder="$t('login.form.password-placeholder')"
             ></Password>
-
-            <div class="flex items-center justify-between mt-2 mb-8 gap-8">
+            <div class="flex items-center justify-between mt-8 mb-6 gap-8">
               <div class="flex items-center">
-                <Checkbox
-                  id="rememberme"
-                  binary
-                  class="mr-2"
-                  v-model="credentials.remember"
-                ></Checkbox>
-                <label for="rememberme">
-                  {{ $t('login.form.remember-me') }}
-                </label>
+                <Checkbox binary class="mr-2" id="rememberme" name="remember"></Checkbox>
+                <label for="rememberme">{{ $t('login.form.remember-me') }}</label>
               </div>
               <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">
                 {{ $t('login.form.forgot-password') }}
               </span>
             </div>
             <Button
+              type="submit"
               class="w-full"
-              @click="doLogin()"
+              :loading="loading"
+              :disabled="!$form.valid"
               :label="$t('login.form.sign-in')"
-            ></Button>
-          </div>
+            />
+          </Form>
         </div>
       </div>
     </div>
