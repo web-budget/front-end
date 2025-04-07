@@ -83,7 +83,7 @@ function applyFormValues(data) {
   })
 }
 
-function changeToListing() {
+function changeToList() {
   router.push({ name: 'cost-centers' })
 }
 
@@ -142,7 +142,7 @@ onMounted(() => {
             :disabled="loading"
             severity="secondary"
             :label="$t('form.back')"
-            @click.prevent="changeToListing()"
+            @click.prevent="changeToList()"
           />
         </div>
         <div class="flex flex-nowrap w-32">

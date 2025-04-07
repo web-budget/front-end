@@ -29,7 +29,9 @@
     "cancel": "Cancelar",
     "edit": "Editar",
     "delete": "Excluir",
-    "back": "Voltar"
+    "back": "Voltar",
+    "yes": "Sim",
+    "no": "Não"
   },
   "search-controls": {
     "actions": {
@@ -174,6 +176,8 @@
     "form": {
       "new": "Novo centro de custo",
       "editing": "Editando centro de custo",
+      "detailing": "Detalhando centro de custo",
+      "deleting": "Excluindo centro de custo",
       "name": "Nome",
       "description": "Descrição",
       "income-budget": "Orçamento receitas",
