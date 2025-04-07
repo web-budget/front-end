@@ -1,6 +1,6 @@
 <template>
-  <Tag v-if="props.active" :value="$t('status-badge.active')" severity="success"></Tag>
-  <Tag v-else :value="$t('status-badge.inactive')" severity="danger"></Tag>
+  <Tag v-if="props.active" :value="$t('status.active')" severity="success"></Tag>
+  <Tag v-else :value="$t('status.inactive')" severity="danger"></Tag>
 </template>
 
 <script setup>

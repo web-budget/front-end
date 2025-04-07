@@ -10,6 +10,7 @@ import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 export default defineConfig({
   optimizeDeps: {
     noDiscovery: true,
+    include: ['yup'],
   },
   server: {
     port: 8080,

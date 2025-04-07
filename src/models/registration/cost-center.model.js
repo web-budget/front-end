@@ -1,16 +1,20 @@
-import { z } from 'zod'
+import * as yup from 'yup'
 import { reactive } from 'vue'
 
-const formValues = reactive({
+import { yupResolver } from '@primevue/forms/resolvers/yup'
+
+const formDefaults = reactive({
   active: true,
-  name: '',
-  description: '',
+  name: null,
+  description: null,
+  incomeBudget: null,
+  expenseBudget: null,
 })
 
-const validationSchema = z.object({
-  name: z.string().min(3).max(150),
-  active: z.boolean().default(true),
-  description: z.string().optional()
-})
+const validationSchema = yupResolver(
+  yup.object().shape({
+    name: yup.string().min(3).max(150).required(),
+  }),
+)
 
-export { formValues, validationSchema }
+export { formDefaults, validationSchema }

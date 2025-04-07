@@ -54,7 +54,7 @@
       "total": ", total "
     }
   },
-  "status-badge": {
+  "status": {
     "active": "Ativo",
     "inactive": "Inativo"
   },
@@ -173,14 +173,16 @@
     },
     "form": {
       "new": "Novo centro de custo",
-      "editing": "Editando {what}",
+      "editing": "Editando centro de custo",
       "name": "Nome",
-      "description": "Descrição"
+      "description": "Descrição",
+      "income-budget": "Orçamento receitas",
+      "expense-budget": "Orçamento despesas"
     },
     "items-table": {
       "name": "Nome",
-      "income-budget": "Income Budget",
-      "expense-budget": "Expense Budget"
+      "income-budget": "Orçamento receitas",
+      "expense-budget": "Orçamento despesas"
     }
   }
 }

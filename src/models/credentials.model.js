@@ -1,15 +1,19 @@
-import { z } from 'zod'
 import { reactive } from 'vue'
+import * as yup from 'yup'
 
-const formValues = reactive({
+import { yupResolver } from '@primevue/forms/resolvers/yup'
+
+const formDefaults = reactive({
   username: '',
   password: '',
-  remember: false
+  remember: false,
 })
 
-const validationSchema = z.object({
-  username: z.string().email().min(5),
-  password: z.string().min(1)
-})
+const validationSchema = yupResolver(
+  yup.object().shape({
+    username: yup.string().email().required(),
+    password: yup.string().required(),
+  }),
+)
 
-export { formValues, validationSchema }
+export { formDefaults, validationSchema }

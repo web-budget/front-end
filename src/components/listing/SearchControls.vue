@@ -78,12 +78,12 @@ function resetFilter() {
     <Button @click="resetFilter()" icon="pi pi-times" severity="danger" />
   </InputGroup>
   <Button
-    class="w-1/12"
+    class="w-32"
     @click="fireFilterChange()"
     :label="$t('search-controls.actions.search')"
   />
   <Button
-    class="w-1/12"
+    class="w-32"
     severity="success"
     @click="$emit('onNew')"
     :label="$t('search-controls.actions.new')"

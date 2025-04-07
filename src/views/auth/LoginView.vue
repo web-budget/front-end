@@ -2,13 +2,11 @@
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { zodResolver } from '@primevue/forms/resolvers/zod'
-
 import { useSessionStore } from '@/stores/session.store'
 
 import TokenClient from '@/http/token.client'
 
-import { formValues, validationSchema } from '@/models/credentials.model'
+import { formDefaults, validationSchema } from '@/models/credentials.model'
 
 const route = useRoute()
 const router = useRouter()
@@ -16,8 +14,6 @@ const router = useRouter()
 const { isValid, login } = useSessionStore()
 
 const loading = ref(false)
-
-const resolver = zodResolver(validationSchema)
 
 const tokenClient = new TokenClient()
 
@@ -68,7 +64,7 @@ onMounted(() => {
             <span class="text-muted-color font-medium">{{ $t('login.subtitle') }}</span>
           </div>
 
-          <Form v-slot="$form" :initialValues="formValues" :resolver="resolver" @submit="doLogin">
+          <Form @submit="doLogin" :initialValues="formDefaults" :resolver="validationSchema">
             <label
               for="email"
               class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
@@ -110,7 +106,6 @@ onMounted(() => {
               type="submit"
               class="w-full"
               :loading="loading"
-              :disabled="!$form.valid"
               :label="$t('login.form.sign-in')"
             />
           </Form>
