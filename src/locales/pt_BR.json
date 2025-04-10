@@ -106,7 +106,20 @@
       "name": "Nome",
       "type": "Tipo"
     },
-    "types": {
+    "form": {
+      "new": "Nova carteira",
+      "editing": "Editando carteira",
+      "detailing": "Detalhando carteira",
+      "deleting": "Excluindo carteira",
+      "name": "Nome",
+      "description": "Descrição",
+      "type": "Tipo",
+      "bank": "Banco",
+      "agency": "Agência",
+      "number": "Número da conta",
+      "type-placeholder": "Selecione um tipo"
+    },
+    "type": {
       "bank-account": "Conta Corrente",
       "personal": "Pessoal",
       "investment": "Investimento"

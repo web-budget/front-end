@@ -5,8 +5,6 @@ import { useSessionStore } from '@/stores/session.store'
 const backendUrl = import.meta.env.VITE_API_URL
 const debugEnabled = import.meta.env.VITE_LOG_REQUESTS || false
 
-const { authToken } = useSessionStore()
-
 const configureClient = (context) => {
   const options = {
     baseURL: `${backendUrl}/${context}`,
@@ -18,6 +16,8 @@ const configureClient = (context) => {
 class BaseClient {
   constructor(context = null, requireAuth = false) {
     this.client = configureClient(context)
+
+    const { authToken } = useSessionStore()
 
     if (requireAuth) {
       this.client.interceptors.request.use((request) => {

@@ -98,7 +98,7 @@ onMounted(() => {
         <Column field="name" :header="$t('wallets.items-table.name')" :sortable="true" />
         <Column field="type" :header="$t('cards.items-table.type')" :sortable="true">
           <template #body="slotProps">
-            {{ $t(`wallets.types.${slotProps.data.type.toLowerCase().replaceAll('_', '-')}`) }}
+            {{ $t(`wallets.type.${slotProps.data.type.toLowerCase().replaceAll('_', '-')}`) }}
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

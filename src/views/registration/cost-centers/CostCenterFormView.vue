@@ -52,7 +52,7 @@ async function create(values) {
 async function update(values) {
   try {
     await costCenterClient.update(props.id, values)
-    prepareForUpdate()
+    await prepareForUpdate()
     // TODO show success message
   } catch (error) {
     console.log(error) // FIXME
@@ -107,7 +107,7 @@ onMounted(() => {
         <span v-else>{{ $t('cost-centers.form.new') }}</span>
       </div>
 
-      <div v-if="updating" class="flex flex-col md:flex-row gap-4 mb-6">
+      <div v-if="props.updating" class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
           <status-toggle name="active" />
         </div>
