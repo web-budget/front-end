@@ -31,7 +31,8 @@
     "delete": "Excluir",
     "back": "Voltar",
     "yes": "Sim",
-    "no": "Não"
+    "no": "Não",
+    "confirm-delete": "Confirma a exclusão do registro?"
   },
   "search-controls": {
     "actions": {

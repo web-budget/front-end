@@ -128,7 +128,9 @@ onMounted(() => {
 
       <div v-if="deleting" class="flex flex-col md:flex-row gap-4 justify-end">
         <div class="flex flex-nowrap w-full justify-end items-center">
-          <span class="font-semibold">Confirma a exclusão do registro?</span>
+          <Message severity="contrast" variant="simple">
+            {{ $t('form.confirm-delete') }}
+          </Message>
         </div>
         <div class="flex flex-nowrap w-32">
           <Button
