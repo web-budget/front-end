@@ -2,10 +2,13 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { useNotification } from '@/composables/userNotifications'
+
 import CostCenterClient from '@/http/registration/cost-center.client'
 
-import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+
+import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
 
 const props = defineProps({
   id: {
@@ -25,12 +28,14 @@ const router = useRouter()
 const theForm = ref()
 const loading = ref(false)
 
+const { success } = useNotification()
+
 async function deleteRecord() {
   try {
     loading.value = true
     await costCenterClient.delete(props.id)
+    success('notifications.record-deleted', 'notifications.cost-center.deleted')
     router.push({ name: 'cost-centers' })
-    // TODO show success message
   } catch (error) {
     console.log(error) // FIXME
   } finally {
@@ -129,7 +134,7 @@ onMounted(() => {
       <div v-if="deleting" class="flex flex-col md:flex-row gap-4 justify-end">
         <div class="flex flex-nowrap w-full justify-end items-center">
           <Message severity="contrast" variant="simple">
-            {{ $t('form.confirm-delete') }}
+            {{ $t('notifications.confirm-delete') }}
           </Message>
         </div>
         <div class="flex flex-nowrap w-32">

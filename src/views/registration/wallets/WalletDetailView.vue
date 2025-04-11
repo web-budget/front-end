@@ -158,7 +158,7 @@ onMounted(() => {
       <div v-if="deleting" class="flex flex-col md:flex-row gap-4 justify-end">
         <div class="flex flex-nowrap w-full justify-end items-center">
           <Message severity="contrast" variant="simple">
-            {{ $t('form.confirm-delete') }}
+            {{ $t('notifications.confirm-delete') }}
           </Message>
         </div>
         <div class="flex flex-nowrap w-32">

@@ -85,5 +85,5 @@ const props = defineProps({
     </div>
     <div class="layout-mask animate-fadein"></div>
   </div>
-  <Toast />
+  <Toast position="top-center"/>
 </template>

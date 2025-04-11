@@ -31,8 +31,23 @@
     "delete": "Excluir",
     "back": "Voltar",
     "yes": "Sim",
-    "no": "Não",
-    "confirm-delete": "Confirma a exclusão do registro?"
+    "no": "Não"
+  },
+  "notifications": {
+    "confirm-delete": "Confirma a exclusão do registro?",
+    "record-deleted": "Registro excluído",
+    "record-created": "Registro criado",
+    "record-updated": "Registro atualizado",
+    "cost-center": {
+      "deleted": "Centro de custo excluído com sucesso",
+      "created": "Centro de custo criado com sucesso",
+      "updated": "Centro de custo atualizado com sucesso"
+    },
+    "wallet": {
+      "deleted": "Carteira excluída com sucesso",
+      "created": "Carteira criada com sucesso",
+      "updated": "Carteira atualizada com sucesso"
+    }
   },
   "search-controls": {
     "actions": {

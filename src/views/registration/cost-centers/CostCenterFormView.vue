@@ -2,10 +2,13 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { useNotification } from '@/composables/userNotifications'
+
 import CostCenterClient from '@/http/registration/cost-center.client'
 
-import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+
+import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
 
 const props = defineProps({
   id: {
@@ -25,6 +28,8 @@ const router = useRouter()
 const theForm = ref()
 const loading = ref(false)
 
+const { success } = useNotification()
+
 function selectAction({ valid, values }) {
   if (!valid) return
 
@@ -41,7 +46,7 @@ async function create(values) {
   try {
     await costCenterClient.create(values)
     theForm.value.reset()
-    // TODO show success message
+    success('notifications.record-created', 'notifications.cost-center.created')
   } catch (error) {
     console.log(error) // FIXME
   } finally {
@@ -53,7 +58,7 @@ async function update(values) {
   try {
     await costCenterClient.update(props.id, values)
     await prepareForUpdate()
-    // TODO show success message
+    success('notifications.record-updated', 'notifications.cost-center.updated')
   } catch (error) {
     console.log(error) // FIXME
   } finally {
