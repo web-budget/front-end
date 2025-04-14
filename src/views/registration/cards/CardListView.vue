@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import CardClient from '@/http/registration/card.client'
+import CardClient from '@/services/registration/card.client'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'

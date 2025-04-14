@@ -14,12 +14,4 @@ export default class PageRequest {
     this.direction = direction
     this.sortField = sortField
   }
-
-  getPageableParams() {
-    return {
-      page: this.current,
-      size: this.size,
-      sort: `${this.sortField},${this.direction}`,
-    }
-  }
 }

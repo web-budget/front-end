@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import FinancialPeriodClient from '@/http/registration/financial-period.client'
+import FinancialPeriodClient from '@/services/registration/financial-period.client'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'

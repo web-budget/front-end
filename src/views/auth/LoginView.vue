@@ -1,33 +1,19 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { useSessionStore } from '@/stores/session.store'
-
-import TokenClient from '@/http/token.client'
 
 import { formDefaults, validationSchema } from '@/models/credentials.model'
 
 const route = useRoute()
 const router = useRouter()
 
-const { isValid, login } = useSessionStore()
-
-const loading = ref(false)
-
-const tokenClient = new TokenClient()
+const { isSessionValid, login, loading } = useSessionStore()
 
 async function doLogin({ values }) {
-  try {
-    loading.value = true
-    const { data } = await tokenClient.generate(values)
-    login(data)
-    doAfterLoginNavigation()
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
+  await login(values)
+  validateSession()
 }
 
 function doAfterLoginNavigation() {
@@ -39,10 +25,15 @@ function doAfterLoginNavigation() {
   }
 }
 
-onMounted(() => {
-  if (isValid()) {
+function validateSession() {
+  const isValid = isSessionValid()
+  if (isValid) {
     doAfterLoginNavigation()
   }
+}
+
+onMounted(async () => {
+  validateSession()
 })
 </script>
 

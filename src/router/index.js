@@ -35,11 +35,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const { isValid } = useSessionStore()
+  const { isSessionValid } = useSessionStore()
 
   const isPublicRoute = to.matched.some((route) => route.meta.public)
 
-  if (!isPublicRoute && !isValid()) {
+  if (!isPublicRoute && !isSessionValid()) {
     next({ name: 'login', query: { redirect: to.path } })
     return
   }

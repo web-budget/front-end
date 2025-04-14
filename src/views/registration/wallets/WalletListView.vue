@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import WalletClient from '@/http/registration/wallet.client'
+import WalletClient from '@/services/registration/wallet.client'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'

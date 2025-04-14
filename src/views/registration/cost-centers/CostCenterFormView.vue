@@ -2,9 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useNotification } from '@/composables/userNotifications'
-
-import CostCenterClient from '@/http/registration/cost-center.client'
+import { useCostCenterStore } from '@/stores/cost-center.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
@@ -21,61 +19,25 @@ const props = defineProps({
   },
 })
 
-const costCenterClient = new CostCenterClient()
+const theForm = ref()
 
 const router = useRouter()
 
-const theForm = ref()
-const loading = ref(false)
-
-const { success } = useNotification()
+const { create, update, costCenter, findOne, loading } = useCostCenterStore()
 
 function selectAction({ valid, values }) {
   if (!valid) return
 
-  loading.value = true
-
   if (props.updating) {
-    update(values)
+    update(props.id, values)
   } else {
     create(values)
   }
 }
 
-async function create(values) {
-  try {
-    await costCenterClient.create(values)
-    theForm.value.reset()
-    success('notifications.record-created', 'notifications.cost-center.created')
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
-}
-
-async function update(values) {
-  try {
-    await costCenterClient.update(props.id, values)
-    await prepareForUpdate()
-    success('notifications.record-updated', 'notifications.cost-center.updated')
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
-}
-
 async function prepareForUpdate() {
-  try {
-    loading.value = true
-    const { data } = await costCenterClient.findById(props.id)
-    applyFormValues(data)
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
+  await findOne(props.id)
+  applyFormValues(costCenter)
 }
 
 function applyFormValues(data) {

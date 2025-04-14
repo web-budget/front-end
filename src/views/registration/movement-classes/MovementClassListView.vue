@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import MovementClassClient from '@/http/registration/movement-class.client'
+import MovementClassClient from '@/services/registration/movement-class.client'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'

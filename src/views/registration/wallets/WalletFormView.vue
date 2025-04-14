@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import WalletClient from '@/http/registration/wallet.client'
+import WalletClient from '@/services/registration/wallet.client'
 
 import { formDefaults, validationSchema } from '@/models/registration/wallet.model'
 
