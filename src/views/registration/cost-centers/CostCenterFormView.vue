@@ -7,6 +7,7 @@ import { useCostCenterStore } from '@/stores/cost-center.store'
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
 import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   id: {
@@ -23,7 +24,8 @@ const theForm = ref()
 
 const router = useRouter()
 
-const { create, update, costCenter, findOne, loading } = useCostCenterStore()
+const { create, update, findOne } = useCostCenterStore()
+const { costCenter, loading } = storeToRefs(useCostCenterStore())
 
 function selectAction({ valid, values }) {
   if (!valid) return
@@ -37,7 +39,7 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  applyFormValues(costCenter)
+  applyFormValues(costCenter.value)
 }
 
 function applyFormValues(data) {
@@ -55,7 +57,7 @@ function changeToList() {
 }
 
 onMounted(() => {
-  if (props.updating) {
+  if (props.updating && props.id) {
     prepareForUpdate()
   }
 })

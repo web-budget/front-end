@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import { useCostCenterStore } from '@/stores/cost-center.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   id: {
@@ -19,7 +20,8 @@ const props = defineProps({
 
 const router = useRouter()
 
-const { remove, findOne, costCenter, loading } = useCostCenterStore()
+const { remove, findOne } = useCostCenterStore()
+const { costCenter, loading } = storeToRefs(useCostCenterStore())
 
 function changeToUpdate() {
   router.push({

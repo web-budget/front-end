@@ -8,12 +8,4 @@ export default class PageResponse {
     this.last = last
     this.empty = empty
   }
-
-  static parseValues(json) {
-    return Object.assign(new PageResponse(), json)
-  }
-
-  static applyValues(json, target) {
-    return Object.assign(target, json)
-  }
 }

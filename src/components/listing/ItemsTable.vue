@@ -8,11 +8,6 @@ const translation = useI18n()
 const emit = defineEmits(['pageChanged', 'rowSelected', 'tableSorted'])
 
 const props = defineProps({
-  loading: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
   showStatus: {
     type: Boolean,
     default: true,
@@ -62,7 +57,6 @@ function fireTableSorted({ order, field }) {
     removableSort
     selectionMode="single"
     :rows="props.pageSize"
-    :loading="props.loading"
     @sort="fireTableSorted({ field: $event.sortField, order: $event.sortOrder })"
     :rowsPerPageOptions="[15, 30, 60]"
     :totalRecords="props.totalElements"

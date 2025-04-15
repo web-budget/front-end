@@ -18,14 +18,8 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   })
 
   async function findAll() {
-    await get({
-      page: pageRequest.current,
-      size: pageRequest.size,
-      sort: `${pageRequest.sortField},${pageRequest.direction}`,
-      filter: pageRequest.filter,
-      status: pageRequest.status.toUpperCase(),
-    })
-    PageResponse.applyValues(data.value, pageResponse)
+    await get(pageRequest.toQueryParameters())
+    Object.assign(pageResponse, data.value)
   }
 
   async function findOne(id) {

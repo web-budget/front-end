@@ -5,11 +5,13 @@ import { useRoute, useRouter } from 'vue-router'
 import { useSessionStore } from '@/stores/session.store'
 
 import { formDefaults, validationSchema } from '@/models/credentials.model'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const router = useRouter()
 
-const { isSessionValid, login, loading } = useSessionStore()
+const { loading } = storeToRefs(useSessionStore())
+const { isSessionValid, login } = useSessionStore()
 
 async function doLogin({ values }) {
   await login(values)

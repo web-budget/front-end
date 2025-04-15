@@ -8,10 +8,12 @@ import ActionButtons from '@/components/listing/ActionButtons.vue'
 import CurrencyDisplay from '@/components/common/CurrencyDisplay.vue'
 
 import { useCostCenterStore } from '@/stores/cost-center.store'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 
-const { findAll, loading, pageResponse, pageRequest } = useCostCenterStore()
+const { findAll } = useCostCenterStore()
+const { loading, pageResponse, pageRequest } = storeToRefs(useCostCenterStore())
 
 function changeToAdd() {
   router.push({ name: 'cost-centers.create' })
@@ -63,7 +65,7 @@ onMounted(() => {
         @onFilterReset="findAll()"
         @onFilterChange="findAll()"
         v-model:status="pageRequest.status"
-        v-model:filter="pageRequest.filter"
+        v-model:filter="pageRequest.filterText"
         :placeholder="$t('cost-centers.search.placeholder')"
       />
     </div>
