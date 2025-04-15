@@ -1,28 +1,32 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+
+import { useNotification } from '@/composables/useNotification'
 
 import { useCostCenterStore } from '@/stores/cost-center.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
 import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
-import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   updating: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const theForm = ref()
 
 const router = useRouter()
+
+const { showSuccess } = useNotification()
 
 const { create, update, findOne } = useCostCenterStore()
 const { costCenter, loading } = storeToRefs(useCostCenterStore())
@@ -31,9 +35,15 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, values)
+    update(props.id, values, () => {
+      showSuccess('notifications.record-updated', 'notifications.cost-center.updated')
+      prepareForUpdate()
+    })
   } else {
-    create(values)
+    create(values, () => {
+      showSuccess('notifications.record-created', 'notifications.cost-center.created')
+      theForm.value.reset() // FIXME
+    })
   }
 }
 
@@ -48,7 +58,7 @@ function applyFormValues(data) {
     name: data.name,
     description: data.description,
     expenseBudget: data.expenseBudget,
-    incomeBudget: data.incomeBudget,
+    incomeBudget: data.incomeBudget
   })
 }
 

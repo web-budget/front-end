@@ -27,16 +27,16 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
     Object.assign(costCenter, data.value)
   }
 
-  async function create(values) {
-    await post(values)
+  async function create(values, onSuccess = () => {}, onError = () => {}) {
+    await post(values, onSuccess, onError)
   }
 
-  async function update(id, values) {
-    await put(values, { urlSuffix: `/${id}` })
+  async function update(id, values, onSuccess = () => {}, onError = () => {}) {
+    await put(values, { urlSuffix: `/${id}` }, onSuccess, onError)
   }
 
-  async function remove(id) {
-    await del({}, { urlSuffix: `/${id}` })
+  async function remove(id, onSuccess = () => {}, onError = () => {}) {
+    await del({}, { urlSuffix: `/${id}` }, onSuccess, onError)
   }
 
   return {

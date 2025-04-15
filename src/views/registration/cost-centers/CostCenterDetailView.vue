@@ -1,11 +1,13 @@
 <script setup>
 import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+
+import { useNotification } from '@/composables/useNotification'
 
 import { useCostCenterStore } from '@/stores/cost-center.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
-import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   id: {
@@ -20,8 +22,17 @@ const props = defineProps({
 
 const router = useRouter()
 
+const { showSuccess } = useNotification()
+
 const { remove, findOne } = useCostCenterStore()
 const { costCenter, loading } = storeToRefs(useCostCenterStore())
+
+function doDelete() {
+  remove(props.id, () => {
+    showSuccess('notifications.record-deleted', 'notifications.cost-center.deleted')
+    router.push({ name: 'cost-centers' })
+  })
+}
 
 function changeToUpdate() {
   router.push({
@@ -101,7 +112,7 @@ onMounted(async () => {
           severity="danger"
           :loading="loading"
           :label="$t('form.yes')"
-          @click.prevent="remove(props.id)"
+          @click.prevent="doDelete()"
         />
       </div>
     </div>

@@ -20,24 +20,31 @@ http.interceptors.response.use(
 
       switch (status) {
         case 400:
-          showError('error.bad-request.title', 'TODO add details')
+          showError('errors.bad-request.title', '') // TODO get details from response
+          break
+        case 422:
+          showError('errors.unprocessable-entity.title', '') // TODO get details from response
+          break
+        case 409:
+          showError('errors.conflict.title', '') // TODO get details from response
           break
         case 401:
-          showError('error.unauthorized.title', 'error.unauthorized.details')
           logout()
           break
         case 403:
-          showError('error.unauthorized.title', 'error.unauthorized.details')
+          // TODO redirect to 403 page
           break
         case 404:
-          showError('error.unauthorized.title', 'error.unauthorized.details')
+          // TODO redirect to 404 page
           break
         case 500:
-          showError('error.unauthorized.title', 'error.unauthorized.details')
+          // TODO redirect to 500 page
           break
         default:
-          showError('error.unknown.title', 'error.unknown.details')
+          showError('errors.unknown.title', 'error.unknown.details')
       }
+    } else if (error.code.includes('ERR_NETWORK')) {
+      showError('errors.connection-failure.title', 'errors.connection-failure.details')
     }
 
     return Promise.reject(error)

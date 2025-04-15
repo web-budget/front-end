@@ -1,4 +1,23 @@
 {
+  "errors": {
+    "unknown": {
+      "title": "Erro desconhecido",
+      "details": "Um erro inesperado aconteceu, entre em contato com o administrador"
+    },
+    "connection-failure": {
+      "title": "Falha na conexão",
+      "details": "Não foi possível se conectar ao servidor, tente novamente mais tarde"
+    },
+    "conflict": {
+      "title": "Conflito"
+    },
+    "unprocessable-entity": {
+      "title": "Conflito"
+    },
+    "bad-request": {
+      "title": "Requisição inválida"
+    }
+  },
   "login": {
     "subtitle": "Faça login para continuar",
     "form": {

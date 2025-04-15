@@ -106,6 +106,7 @@ onMounted(async () => {
       </div>
     </div>
   </div>
+  <Toast position="top-center"/>
 </template>
 
 <style scoped>

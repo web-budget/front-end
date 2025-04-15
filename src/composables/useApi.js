@@ -40,7 +40,7 @@ export function useApi({ path, requiresAuth = true }) {
     }
   }
 
-  const post = async (payload = {}, options = {}) => {
+  const post = async (payload = {}, options = {}, onSuccess = () => {}, onError = () => {}) => {
     loading.value = true
     error.value = null
     try {
@@ -52,14 +52,16 @@ export function useApi({ path, requiresAuth = true }) {
         ...options,
       })
       data.value = response.data
+      onSuccess()
     } catch (exception) {
       error.value = exception
+      onError()
     } finally {
       loading.value = false
     }
   }
 
-  const put = async (payload = {}, options = {}) => {
+  const put = async (payload = {}, options = {}, onSuccess = () => {}, onError = () => {}) => {
     loading.value = true
     error.value = null
     try {
@@ -68,14 +70,16 @@ export function useApi({ path, requiresAuth = true }) {
         headers: getHeaders(),
       })
       data.value = response.data
+      onSuccess()
     } catch (exception) {
       error.value = exception
+      onError()
     } finally {
       loading.value = false
     }
   }
 
-  const del = async (params = {}, options = {}) => {
+  const del = async (params = {}, options = {}, onSuccess = () => {}, onError = () => {}) => {
     loading.value = true
     error.value = null
     try {
@@ -85,8 +89,10 @@ export function useApi({ path, requiresAuth = true }) {
         headers: getHeaders(),
       })
       data.value = response.data
+      onSuccess()
     } catch (exception) {
       error.value = exception
+      onError()
     } finally {
       loading.value = false
     }
