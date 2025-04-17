@@ -28,7 +28,7 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
-    await post(values, onSuccess, onError)
+    await post(values, {}, onSuccess, onError)
   }
 
   async function update(id, values, onSuccess = () => {}, onError = () => {}) {

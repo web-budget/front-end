@@ -18,6 +18,8 @@ http.interceptors.response.use(
     if (error.response) {
       const status = error.response.status
 
+      console.log(error.response)
+
       switch (status) {
         case 400:
           showError('errors.bad-request.title', '') // TODO get details from response
