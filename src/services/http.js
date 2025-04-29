@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useSessionStore } from '@/stores/session.store'
 
 import { useNotification } from '@/composables/useNotification'
+import { useErrorHandler } from '@/composables/userErrorHandler'
 
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -12,23 +13,22 @@ const http = axios.create({
 http.interceptors.response.use(
   (response) => response,
   (error) => {
-    const { showError } = useNotification()
     const { logout } = useSessionStore()
 
+    const { showError } = useNotification()
+    const { handleConflict, handleBadRequest, handleUnprocessableEntity } = useErrorHandler()
+
     if (error.response) {
-      const status = error.response.status
-
-      console.log(error.response)
-
+      const { status, data } = error.response
       switch (status) {
         case 400:
-          showError('errors.bad-request.title', '') // TODO get details from response
+          handleBadRequest(data)
           break
         case 422:
-          showError('errors.unprocessable-entity.title', '') // TODO get details from response
+          handleUnprocessableEntity(data.violations)
           break
         case 409:
-          showError('errors.conflict.title', '') // TODO get details from response
+          handleConflict(data.conflicts)
           break
         case 401:
           logout()

@@ -9,13 +9,19 @@
       "details": "Não foi possível se conectar ao servidor, tente novamente mais tarde"
     },
     "conflict": {
-      "title": "Conflito"
+      "title": "Conflito",
+      "no-specific-detail": "Revise os dados e tente novamente"
     },
     "unprocessable-entity": {
       "title": "Conflito"
     },
     "bad-request": {
       "title": "Requisição inválida"
+    }
+  },
+  "conflicts": {
+    "cost-center": {
+      "name": "Nome \"{name}\" já esta em uso"
     }
   },
   "login": {

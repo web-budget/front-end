@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useSessionStore } from '@/stores/session.store'
 
 import HomeLayout from '@/components/layout/HomeLayout.vue'
+import ErrorLayout from '@/components/layout/ErrorLayout.vue'
 
 import registrationRoutes from '@/router/registration.routes'
 import financialRoutes from '@/router/financial.routes'
@@ -19,6 +20,27 @@ const routes = [
         path: '/',
         name: 'home',
         component: () => import('@/views/HomeView.vue'),
+      },
+    ],
+  },
+  {
+    path: '/error',
+    component: ErrorLayout,
+    children: [
+      {
+        path: 'not-found',
+        name: '404',
+        component: () => import('@/views/errors/NotFoundView.vue'),
+      },
+      {
+        path: 'forbidden',
+        name: '403',
+        component: () => import('@/views/errors/ForbiddenView.vue'),
+      },
+      {
+        path: 'unauthorized',
+        name: '401',
+        component: () => import('@/views/errors/UnauthorizedView.vue'),
       },
     ],
   },
