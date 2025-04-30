@@ -16,7 +16,14 @@ http.interceptors.response.use(
     const { logout } = useSessionStore()
 
     const { showError } = useNotification()
-    const { handleConflict, handleBadRequest, handleUnprocessableEntity } = useErrorHandler()
+
+    const {
+      handleConflict,
+      handleBadRequest,
+      handleUnprocessableEntity,
+      handleForbidden,
+      handleInternalServerError,
+    } = useErrorHandler()
 
     if (error.response) {
       const { status, data } = error.response
@@ -25,7 +32,7 @@ http.interceptors.response.use(
           handleBadRequest(data)
           break
         case 422:
-          handleUnprocessableEntity(data.violations)
+          handleUnprocessableEntity(data)
           break
         case 409:
           handleConflict(data.conflicts)
@@ -34,13 +41,10 @@ http.interceptors.response.use(
           logout()
           break
         case 403:
-          // TODO redirect to 403 page
-          break
-        case 404:
-          // TODO redirect to 404 page
+          handleForbidden()
           break
         case 500:
-          // TODO redirect to 500 page
+          handleInternalServerError(data)
           break
         default:
           showError('errors.unknown.title', 'error.unknown.details')

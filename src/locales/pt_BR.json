@@ -13,10 +13,28 @@
       "no-specific-detail": "Revise os dados e tente novamente"
     },
     "unprocessable-entity": {
-      "title": "Conflito"
+      "title": "Falha na requisição",
+      "details": "Revise os dados e tente novamente"
     },
     "bad-request": {
-      "title": "Requisição inválida"
+      "title": "Requisição inválida",
+      "no-specific-detail": "Revise os dados e tente novamente"
+    },
+    "not-found": {
+      "detail": "Não encontrado",
+      "description": "O recurso solicitado não existe"
+    },
+    "forbidden": {
+      "detail": "Não autorizado",
+      "description": "Você não tem permissão para acessar este recurso"
+    },
+    "unauthorized": {
+      "detail": "Não autorizado",
+      "description": "Faça login e tente novamente"
+    },
+    "server-error": {
+      "detail": "Falha no servidor",
+      "description": "Tente novamente mais tarde ou entre em contato com o administrador"
     }
   },
   "conflicts": {
@@ -47,7 +65,9 @@
   },
   "action-buttons": {
     "delete": "Deletar",
-    "edit": "Editar"
+    "edit": "Editar",
+    "go-home": "Ir para home",
+    "go-login": "Ir para login"
   },
   "form": {
     "save": "Salvar",
