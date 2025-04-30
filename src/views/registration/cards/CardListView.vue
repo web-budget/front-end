@@ -1,24 +1,18 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-
-import CardClient from '@/services/registration/card.client'
-
-import PageRequest from '@/models/page-request'
-import PageResponse from '@/models/page-response'
 
 import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
 
+import { useCardStore } from '@/stores/card.store'
+
 const router = useRouter()
 
-const loading = ref(false)
-
-const pageRequest = reactive(new PageRequest())
-const pageResponse = reactive(new PageResponse())
-
-const cardClient = new CardClient()
+const { findAll } = useCardStore()
+const { loading, pageResponse, pageRequest } = storeToRefs(useCardStore())
 
 function changeToAdd() {
   router.push({ name: 'cards.create' })
@@ -45,32 +39,20 @@ function changeToDetail({ data }) {
   })
 }
 
-async function applyFilters() {
-  try {
-    loading.value = true
-    const response = await cardClient.findAll(pageRequest)
-    PageResponse.applyValues(response.data, pageResponse)
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
-}
-
 function onPageChange(event) {
   pageRequest.size = event.pageSize
   pageRequest.current = event.currentPage
-  applyFilters()
+  findAll()
 }
 
 function onTableSorted(event) {
   pageRequest.sortField = event.sortField
   pageRequest.direction = event.sortOrder
-  applyFilters()
+  findAll()
 }
 
 onMounted(() => {
-  applyFilters()
+  findAll()
 })
 </script>
 
@@ -79,8 +61,8 @@ onMounted(() => {
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <search-controls
         @onNew="changeToAdd()"
-        @onFilterReset="applyFilters()"
-        @onFilterChange="applyFilters()"
+        @onFilterReset="findAll()"
+        @onFilterChange="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
         :placeholder="$t('cards.search.placeholder')"

@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
 import ItemsTable from '@/components/listing/ItemsTable.vue'
@@ -8,7 +9,6 @@ import ActionButtons from '@/components/listing/ActionButtons.vue'
 import CurrencyDisplay from '@/components/common/CurrencyDisplay.vue'
 
 import { useCostCenterStore } from '@/stores/cost-center.store'
-import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 

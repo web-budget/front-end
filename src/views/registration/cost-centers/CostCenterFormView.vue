@@ -42,7 +42,7 @@ function selectAction({ valid, values }) {
   } else {
     create(values, () => {
       showSuccess('notifications.record-created', 'notifications.cost-center.created')
-      theForm.value.reset() // FIXME
+      theForm.value.reset()
     })
   }
 }
@@ -81,7 +81,7 @@ onMounted(() => {
       :resolver="validationSchema"
       :initialValues="formDefaults"
     >
-      <div class="font-semibold text-xl mb-8">
+      <div class="font-semibold text-xl mb-6">
         <span v-if="props.updating">{{ $t('cost-centers.form.editing') }}</span>
         <span v-else>{{ $t('cost-centers.form.new') }}</span>
       </div>

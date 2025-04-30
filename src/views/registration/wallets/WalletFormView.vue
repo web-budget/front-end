@@ -2,12 +2,15 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-
-import WalletClient from '@/services/registration/wallet.client'
-
-import { formDefaults, validationSchema } from '@/models/registration/wallet.model'
+import { storeToRefs } from 'pinia'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+
+import { useWalletStore } from '@/stores/wallet.store'
+
+import { useNotification } from '@/composables/useNotification'
+
+import { formDefaults, validationSchema } from '@/models/registration/wallet.model'
 
 const props = defineProps({
   id: {
@@ -20,13 +23,15 @@ const props = defineProps({
   },
 })
 
-const walletClient = new WalletClient()
-
 const i18n = useI18n()
 const router = useRouter()
 
+const { showSuccess } = useNotification()
+
 const theForm = ref()
-const loading = ref(false)
+
+const { create, update, findOne } = useWalletStore()
+const { wallet, loading } = storeToRefs(useWalletStore())
 
 const walletTypes = [
   { label: i18n.t('wallets.type.personal'), value: 'PERSONAL' },
@@ -37,49 +42,22 @@ const walletTypes = [
 function selectAction({ valid, values }) {
   if (!valid) return
 
-  loading.value = true
-
   if (props.updating) {
-    update(values)
+    update(props.id, values, () => {
+      showSuccess('notifications.record-updated', 'notifications.wallet.updated')
+      prepareForUpdate()
+    })
   } else {
-    create(values)
-  }
-}
-
-async function create(values) {
-  try {
-    await walletClient.create(values)
-    theForm.value.reset()
-    // TODO show success message
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
-}
-
-async function update(values) {
-  try {
-    await walletClient.update(props.id, values)
-    await prepareForUpdate()
-    // TODO show success message
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
+    create(values, () => {
+      showSuccess('notifications.record-created', 'notifications.wallet.created')
+      theForm.value.reset()
+    })
   }
 }
 
 async function prepareForUpdate() {
-  try {
-    loading.value = true
-    const { data } = await walletClient.findById(props.id)
-    applyFormValues(data)
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
+  await findOne(props.id)
+  applyFormValues(wallet.value)
 }
 
 function applyFormValues(data) {
@@ -99,7 +77,7 @@ function changeToList() {
 }
 
 onMounted(() => {
-  if (props.updating) {
+  if (props.updating && props.id) {
     prepareForUpdate()
   }
 })
@@ -113,7 +91,7 @@ onMounted(() => {
       :resolver="validationSchema"
       :initialValues="formDefaults"
     >
-      <div class="font-semibold text-xl mb-8">
+      <div class="font-semibold text-xl mb-6">
         <span v-if="props.updating">{{ $t('wallets.form.editing') }}</span>
         <span v-else>{{ $t('wallets.form.new') }}</span>
       </div>

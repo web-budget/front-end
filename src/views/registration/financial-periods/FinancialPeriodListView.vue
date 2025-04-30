@@ -1,16 +1,17 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-
-import FinancialPeriodClient from '@/services/registration/financial-period.client'
-
-import PageRequest from '@/models/page-request'
-import PageResponse from '@/models/page-response'
 
 import ItemsTable from '@/components/listing/ItemsTable.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
 import DateTimeDisplay from '@/components/common/DateTimeDisplay.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
+
+import { useFinancialPeriodStore } from '@/stores/financial-period.store'
+
+const { findAll } = useFinancialPeriodStore()
+const { loading, pageResponse, pageRequest } = storeToRefs(useFinancialPeriodStore())
 
 const statusOptions = [
   { label: 'financial-periods.options.all', value: 'ALL' },
@@ -19,13 +20,6 @@ const statusOptions = [
 ]
 
 const router = useRouter()
-
-const loading = ref(false)
-
-const pageRequest = reactive(new PageRequest('', 'OPEN', 0, 15, 'asc', 'createdOn'))
-const pageResponse = reactive(new PageResponse())
-
-const financialPeriodClient = new FinancialPeriodClient()
 
 function changeToAdd() {
   router.push({ name: 'financial-periods.create' })
@@ -52,32 +46,20 @@ function changeToDetail({ data }) {
   })
 }
 
-async function applyFilters() {
-  try {
-    loading.value = true
-    const response = await financialPeriodClient.findAll(pageRequest)
-    PageResponse.applyValues(response.data, pageResponse)
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
-}
-
 function onPageChange(event) {
   pageRequest.size = event.pageSize
   pageRequest.current = event.currentPage
-  applyFilters()
+  findAll()
 }
 
 function onTableSorted(event) {
   pageRequest.sortField = event.sortField
   pageRequest.direction = event.sortOrder
-  applyFilters()
+  findAll()
 }
 
 onMounted(() => {
-  applyFilters()
+  findAll()
 })
 </script>
 
@@ -88,8 +70,8 @@ onMounted(() => {
         @onNew="changeToAdd()"
         status-initial-value="OPEN"
         :status-options="statusOptions"
-        @onFilterChange="applyFilters()"
-        @onFilterReset="applyFilters()"
+        @onFilterChange="findAll()"
+        @onFilterReset="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
         :placeholder="$t('financial-periods.search.placeholder')"

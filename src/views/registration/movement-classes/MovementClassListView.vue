@@ -1,24 +1,18 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-
-import MovementClassClient from '@/services/registration/movement-class.client'
-
-import PageRequest from '@/models/page-request'
-import PageResponse from '@/models/page-response'
 
 import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
 
+import { useMovementClassStore } from '@/stores/movement-class.store'
+
 const router = useRouter()
 
-const loading = ref(false)
-
-const pageRequest = reactive(new PageRequest())
-const pageResponse = reactive(new PageResponse())
-
-const costCenterClient = new MovementClassClient()
+const { findAll } = useMovementClassStore()
+const { loading, pageResponse, pageRequest } = storeToRefs(useMovementClassStore())
 
 function changeToAdd() {
   router.push({ name: 'movement-classes.create' })
@@ -45,32 +39,20 @@ function changeToDetail({ data }) {
   })
 }
 
-async function applyFilters() {
-  try {
-    loading.value = true
-    const response = await costCenterClient.findAll(pageRequest)
-    PageResponse.applyValues(response.data, pageResponse)
-  } catch (error) {
-    console.log(error) // FIXME
-  } finally {
-    loading.value = false
-  }
-}
-
 function onPageChange(event) {
   pageRequest.size = event.pageSize
   pageRequest.current = event.currentPage
-  applyFilters()
+  findAll()
 }
 
 function onTableSorted(event) {
   pageRequest.sortField = event.sortField
   pageRequest.direction = event.sortOrder
-  applyFilters()
+  findAll()
 }
 
 onMounted(() => {
-  applyFilters()
+  findAll()
 })
 </script>
 
@@ -79,8 +61,8 @@ onMounted(() => {
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <search-controls
         @onNew="changeToAdd()"
-        @onFilterChange="applyFilters()"
-        @onFilterReset="applyFilters()"
+        @onFilterChange="findAll()"
+        @onFilterReset="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
         :placeholder="$t('movement-classes.search.placeholder')"
