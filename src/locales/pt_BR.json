@@ -39,7 +39,13 @@
   },
   "conflicts": {
     "cost-center": {
-      "name": "Nome \"{name}\" já esta em uso"
+      "name": "Nome \"{value}\" já esta em uso"
+    },
+    "wallet": {
+      "name": "Nome \"{value}\" já esta em uso",
+      "bank": "Banco \"{value} já esta em uso",
+      "agency": "Agência \"{value}\" já esta em uso",
+      "number": "Número de conta \"{value}\" já esta em uso"
     }
   },
   "login": {
