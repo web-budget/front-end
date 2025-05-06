@@ -6,13 +6,13 @@ import ErrorPage from '@/components/ErrorPage.vue'
   <error-page>
     <template #error-title>401</template>
     <template #error-detail>
-      {{ $t('errors.unauthorized.detail') }}
+      {{ $t('error.unauthorized.detail') }}
     </template>
     <template #error-description>
-      {{ $t('errors.unauthorized.description') }}
+      {{ $t('error.unauthorized.description') }}
     </template>
     <template #action>
-      <Button as="router-link" :label="$t('action-buttons.go-login')" to="/auth/login" />
+      <Button as="router-link" :label="$t('action-button.go-login')" to="/auth/login" />
     </template>
   </error-page>
 </template>

@@ -29,7 +29,7 @@ const { costCenter, loading } = storeToRefs(useCostCenterStore())
 
 function doDelete() {
   remove(props.id, () => {
-    showSuccess('notifications.record-deleted', 'notifications.cost-center.deleted')
+    showSuccess('notification.record-deleted', 'notification.cost-center.deleted')
     router.push({ name: 'cost-centers' })
   })
 }
@@ -60,8 +60,8 @@ onMounted(async () => {
 <template>
   <Fluid class="card flex flex-col gap-4 w-full">
     <div class="font-semibold text-xl mb-6">
-      <span v-if="props.deleting">{{ $t('cost-centers.form.deleting') }}</span>
-      <span v-else>{{ $t('cost-centers.form.detailing') }}</span>
+      <span v-if="props.deleting">{{ $t('cost-center.form.deleting') }}</span>
+      <span v-else>{{ $t('cost-center.form.detailing') }}</span>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
@@ -72,22 +72,22 @@ onMounted(async () => {
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="name">{{ $t('cost-centers.form.name') }}</label>
+        <label for="name">{{ $t('cost-center.form.name') }}</label>
         <InputText id="name" type="text" v-model="costCenter.name" />
       </div>
       <div class="flex flex-wrap gap-2 w-1/8">
-        <label for="incomeBudget">{{ $t('cost-centers.form.income-budget') }}</label>
+        <label for="incomeBudget">{{ $t('cost-center.form.income-budget') }}</label>
         <InputNumber id="incomeBudget" :minFractionDigits="2" v-model="costCenter.incomeBudget" />
       </div>
       <div class="flex flex-wrap gap-2 w-1/8">
-        <label for="expenseBudget">{{ $t('cost-centers.form.expense-budget') }}</label>
+        <label for="expenseBudget">{{ $t('cost-center.form.expense-budget') }}</label>
         <InputNumber id="expenseBudget" :minFractionDigits="2" v-model="costCenter.expenseBudget" />
       </div>
     </div>
 
     <div class="flex mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="description">{{ $t('cost-centers.form.description') }}</label>
+        <label for="description">{{ $t('cost-center.form.description') }}</label>
         <Textarea id="description" v-model="costCenter.description" rows="4" />
       </div>
     </div>
@@ -95,7 +95,7 @@ onMounted(async () => {
     <div v-if="deleting" class="flex flex-col md:flex-row gap-4 justify-end">
       <div class="flex flex-nowrap w-full justify-end items-center">
         <Message severity="contrast" variant="simple">
-          {{ $t('notifications.confirm-delete') }}
+          {{ $t('notification.confirm-delete') }}
         </Message>
       </div>
       <div class="flex flex-nowrap w-32">

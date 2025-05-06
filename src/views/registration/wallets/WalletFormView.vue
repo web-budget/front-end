@@ -44,12 +44,12 @@ function selectAction({ valid, values }) {
 
   if (props.updating) {
     update(props.id, values, () => {
-      showSuccess('notifications.record-updated', 'notifications.wallet.updated')
+      showSuccess('notification.record-updated', 'notification.wallet.updated')
       prepareForUpdate()
     })
   } else {
     create(values, () => {
-      showSuccess('notifications.record-created', 'notifications.wallet.created')
+      showSuccess('notification.record-created', 'notification.wallet.created')
       theForm.value.reset()
     })
   }

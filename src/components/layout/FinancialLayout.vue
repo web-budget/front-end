@@ -8,8 +8,8 @@ const items = ref([
   {
     label: 'menu.financial',
     items: [
-      { label: 'period-movements.menu', icon: 'pi pi-fw pi-calendar', to: '#' },
-      { label: 'recurrent-movements.menu', icon: 'pi pi-fw pi-sync', to: '#' },
+      { label: 'period-movement.menu', icon: 'pi pi-fw pi-calendar', to: '#' },
+      { label: 'recurrent-movement.menu', icon: 'pi pi-fw pi-sync', to: '#' },
       { label: 'credit-card-invoice.menu', icon: 'pi pi-fw pi-credit-card', to: '#' },
       { label: 'period-closing.menu', icon: 'pi pi-fw pi-chart-line', to: '#' },
     ],

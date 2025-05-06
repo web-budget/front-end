@@ -5,11 +5,12 @@ import { useApi } from '@/composables/useApi'
 
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
+import { FinancialPeriod } from '@/models/registration/financial-period.model'
 
 export const useFinancialPeriodStore = defineStore('financialPeriodStore', () => {
   const financialPeriod = reactive({})
 
-  const pageRequest = reactive(new PageRequest('', 'OPEN', 0, 15, 'asc', 'createdOn'))
+  const pageRequest = reactive(new PageRequest('', 'OPEN', 0, 15, 'desc', 'startingAt'))
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
@@ -24,7 +25,7 @@ export const useFinancialPeriodStore = defineStore('financialPeriodStore', () =>
 
   async function findOne(id) {
     await get({}, { urlSuffix: `/${id}` })
-    Object.assign(financialPeriod, data.value)
+    Object.assign(financialPeriod, new FinancialPeriod(data.value))
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {

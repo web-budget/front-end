@@ -1,5 +1,5 @@
 {
-  "errors": {
+  "error": {
     "unknown": {
       "title": "Erro desconhecido",
       "details": "Um erro inesperado aconteceu, entre em contato com o administrador"
@@ -17,8 +17,7 @@
       "details": "Revise os dados e tente novamente"
     },
     "bad-request": {
-      "title": "Requisição inválida",
-      "no-specific-detail": "Revise os dados e tente novamente"
+      "title": "Requisição inválida"
     },
     "not-found": {
       "detail": "Não encontrado",
@@ -37,7 +36,7 @@
       "description": "Tente novamente mais tarde ou entre em contato com o administrador"
     }
   },
-  "conflicts": {
+  "conflict": {
     "cost-center": {
       "name": "Nome \"{value}\" já esta em uso"
     },
@@ -66,10 +65,10 @@
     "configuration": "Configurações",
     "registration": "Cadastros"
   },
-  "pages": {
+  "page": {
     "quick-access": "Acesso rápido"
   },
-  "action-buttons": {
+  "action-button": {
     "delete": "Deletar",
     "edit": "Editar",
     "go-home": "Ir para home",
@@ -84,7 +83,7 @@
     "yes": "Sim",
     "no": "Não"
   },
-  "notifications": {
+  "notification": {
     "confirm-delete": "Confirma a exclusão do registro?",
     "record-deleted": "Registro excluído",
     "record-created": "Registro criado",
@@ -98,9 +97,14 @@
       "deleted": "Carteira excluída com sucesso",
       "created": "Carteira criada com sucesso",
       "updated": "Carteira atualizada com sucesso"
+    },
+    "financial-period": {
+      "deleted": "Período financeiro excluído com sucesso",
+      "created": "Período financeiro criado com sucesso",
+      "updated": "Período financeiro atualizado com sucesso"
     }
   },
-  "search-controls": {
+  "search-control": {
     "actions": {
       "new": "Novo",
       "search": "Buscar"
@@ -147,11 +151,11 @@
     "title": "Posição atual",
     "menu": "Posição atual"
   },
-  "period-movements": {
+  "period-movement": {
     "title": "Movimentos do período",
     "menu": "Movimentos do período"
   },
-  "recurrent-movements": {
+  "recurrent-movement": {
     "title": "Movimentos recorrentes",
     "menu": "Movimentos recorrentes"
   },
@@ -163,13 +167,13 @@
     "title": "Encerramento do período",
     "menu": "Encerramento do período"
   },
-  "wallets": {
+  "wallet": {
     "title": "Carteiras",
     "menu": "Carteiras",
     "search": {
       "placeholder": "Nome, descrição, banco, agência ou número"
     },
-    "items-table": {
+    "table-columns": {
       "name": "Nome",
       "type": "Tipo"
     },
@@ -192,13 +196,13 @@
       "investment": "Investimento"
     }
   },
-  "cards": {
+  "card": {
     "title": "Cartões",
     "menu": "Cartões",
     "search": {
       "placeholder": "Nome, últimos 4 dígitos ou bandeira"
     },
-    "items-table": {
+    "table-columns": {
       "name": "Nome",
       "type": "Tipo",
       "flag": "Bandeira"
@@ -208,13 +212,13 @@
       "credit": "Crédito"
     }
   },
-  "financial-periods": {
+  "financial-period": {
     "title": "Períodos financeiros",
     "menu": "Períodos financeiros",
     "search": {
       "placeholder": "Nome"
     },
-    "items-table": {
+    "table-columns": {
       "name": "Nome",
       "starting-at": "Início",
       "ending-at": "Fim",
@@ -229,15 +233,31 @@
       "all": "Todos",
       "open": "Abertos",
       "accounted": "Contabilizados"
+    },
+    "form": {
+      "new": "Novo período financeiro",
+      "editing": "Editando período financeiro",
+      "detailing": "Detalhando período financeiro",
+      "deleting": "Excluindo período financeiro",
+      "name": "Nome",
+      "starting-at": "Início",
+      "ending-at": "Fim",
+      "expenses-goal": "Meta de despesas",
+      "revenues-goal": "Meta de receitas"
+    },
+    "errors": {
+      "overlapping-dates": "Data de início e fim estão sobrepondo com outro período financeiro existente",
+      "invalid-dates": "Data de início e fim são inválidas",
+      "period-not-open": "Período financeiro não está aberto e não pode ser alterado ou excluído"
     }
   },
-  "movement-classes": {
+  "movement-class": {
     "title": "Classes de movimentos",
     "menu": "Classes de movimentos",
     "search": {
       "placeholder": "Nome ou descrição"
     },
-    "items-table": {
+    "table-columns": {
       "name": "Nome",
       "type": "Tipo",
       "cost-center": "Centro de custo"
@@ -247,7 +267,7 @@
       "expense": "Despesa"
     }
   },
-  "cost-centers": {
+  "cost-center": {
     "title": "Centros de custos",
     "menu": "Centros de custos",
     "search": {
@@ -263,7 +283,7 @@
       "income-budget": "Orçamento receitas",
       "expense-budget": "Orçamento despesas"
     },
-    "items-table": {
+    "table-columns": {
       "name": "Nome",
       "income-budget": "Orçamento receitas",
       "expense-budget": "Orçamento despesas"

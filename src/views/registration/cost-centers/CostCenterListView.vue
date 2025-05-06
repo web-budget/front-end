@@ -66,7 +66,7 @@ onMounted(() => {
         @onFilterChange="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filterText"
-        :placeholder="$t('cost-centers.search.placeholder')"
+        :placeholder="$t('cost-center.search.placeholder')"
       />
     </div>
     <items-table
@@ -78,13 +78,13 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('cost-centers.items-table.name')" :sortable="true" />
-        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.income-budget')">
+        <Column field="name" :header="$t('cost-center.table-columns.name')" :sortable="true" />
+        <Column headerStyle="width: 15%" :header="$t('cost-center.table-columns.income-budget')">
           <template #body="{ data }">
             <currency-display :value="data.incomeBudget" />
           </template>
         </Column>
-        <Column headerStyle="width: 15%" :header="$t('cost-centers.items-table.expense-budget')">
+        <Column headerStyle="width: 15%" :header="$t('cost-center.table-columns.expense-budget')">
           <template #body="{ data }">
             <currency-display :value="data.expenseBudget" />
           </template>

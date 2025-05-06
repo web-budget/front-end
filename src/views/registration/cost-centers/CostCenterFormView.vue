@@ -36,12 +36,12 @@ function selectAction({ valid, values }) {
 
   if (props.updating) {
     update(props.id, values, () => {
-      showSuccess('notifications.record-updated', 'notifications.cost-center.updated')
+      showSuccess('notification.record-updated', 'notification.cost-center.updated')
       prepareForUpdate()
     })
   } else {
     create(values, () => {
-      showSuccess('notifications.record-created', 'notifications.cost-center.created')
+      showSuccess('notification.record-created', 'notification.cost-center.created')
       theForm.value.reset()
     })
   }
@@ -82,8 +82,8 @@ onMounted(() => {
       :initialValues="formDefaults"
     >
       <div class="font-semibold text-xl mb-6">
-        <span v-if="props.updating">{{ $t('cost-centers.form.editing') }}</span>
-        <span v-else>{{ $t('cost-centers.form.new') }}</span>
+        <span v-if="props.updating">{{ $t('cost-center.form.editing') }}</span>
+        <span v-else>{{ $t('cost-center.form.new') }}</span>
       </div>
 
       <div v-if="props.updating" class="flex flex-col md:flex-row gap-4 mb-6">
@@ -94,22 +94,22 @@ onMounted(() => {
 
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
-          <label for="name">{{ $t('cost-centers.form.name') }}</label>
+          <label for="name">{{ $t('cost-center.form.name') }}</label>
           <InputText id="name" type="text" name="name" />
         </div>
         <div class="flex flex-wrap gap-2 w-1/8">
-          <label for="incomeBudget">{{ $t('cost-centers.form.income-budget') }}</label>
+          <label for="incomeBudget">{{ $t('cost-center.form.income-budget') }}</label>
           <InputNumber id="incomeBudget" :minFractionDigits="2" name="incomeBudget" />
         </div>
         <div class="flex flex-wrap gap-2 w-1/8">
-          <label for="expenseBudget">{{ $t('cost-centers.form.expense-budget') }}</label>
+          <label for="expenseBudget">{{ $t('cost-center.form.expense-budget') }}</label>
           <InputNumber id="expenseBudget" :minFractionDigits="2" name="expenseBudget" />
         </div>
       </div>
 
       <div class="flex mb-6">
         <div class="flex flex-wrap gap-2 w-full">
-          <label for="description">{{ $t('cost-centers.form.description') }}</label>
+          <label for="description">{{ $t('cost-center.form.description') }}</label>
           <Textarea id="description" name="description" rows="4" />
         </div>
       </div>

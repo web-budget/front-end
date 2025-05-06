@@ -47,10 +47,10 @@ http.interceptors.response.use(
           handleInternalServerError(data)
           break
         default:
-          showError('errors.unknown.title', 'error.unknown.details')
+          showError('error.unknown.title', 'error.unknown.details')
       }
     } else if (error.code.includes('ERR_NETWORK')) {
-      showError('errors.connection-failure.title', 'errors.connection-failure.details')
+      showError('error.connection-failure.title', 'error.connection-failure.details')
     }
 
     return Promise.reject(error)

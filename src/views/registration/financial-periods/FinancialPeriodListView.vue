@@ -14,9 +14,9 @@ const { findAll } = useFinancialPeriodStore()
 const { loading, pageResponse, pageRequest } = storeToRefs(useFinancialPeriodStore())
 
 const statusOptions = [
-  { label: 'financial-periods.options.all', value: 'ALL' },
-  { label: 'financial-periods.options.accounted', value: 'ACCOUNTED' },
-  { label: 'financial-periods.options.open', value: 'OPEN' },
+  { label: 'financial-period.options.all', value: 'ALL' },
+  { label: 'financial-period.options.accounted', value: 'ACCOUNTED' },
+  { label: 'financial-period.options.open', value: 'OPEN' },
 ]
 
 const router = useRouter()
@@ -74,7 +74,7 @@ onMounted(() => {
         @onFilterReset="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
-        :placeholder="$t('financial-periods.search.placeholder')"
+        :placeholder="$t('financial-period.search.placeholder')"
       />
     </div>
     <items-table
@@ -90,33 +90,33 @@ onMounted(() => {
         <Column
           :sortable="true"
           headerStyle="width: 13%"
-          :header="$t('financial-periods.items-table.status')"
+          :header="$t('financial-period.table-columns.status')"
         >
           <template #body="slotProps">
             <Tag
               v-if="slotProps.data.status === 'ACTIVE'"
-              :value="$t('financial-periods.status.active')"
+              :value="$t('financial-period.status.active')"
               severity="success"
             />
             <Tag
               v-if="slotProps.data.status === 'ENDED'"
-              :value="$t('financial-periods.status.ended')"
+              :value="$t('financial-period.status.ended')"
               severity="warn"
             />
             <Tag
               v-if="slotProps.data.status === 'ACCOUNTED'"
-              :value="$t('financial-periods.status.accounted')"
+              :value="$t('financial-period.status.accounted')"
               severity="danger"
             />
           </template>
         </Column>
-        <Column field="name" :header="$t('financial-periods.items-table.name')" :sortable="true" />
-        <Column headerStyle="width: 15%" :header="$t('financial-periods.items-table.starting-at')">
+        <Column field="name" :header="$t('financial-period.table-columns.name')" :sortable="true" />
+        <Column headerStyle="width: 15%" :header="$t('financial-period.table-columns.starting-at')">
           <template #body="slotProps">
             <date-time-display :fix-time="true" :value="slotProps.data.startingAt" />
           </template>
         </Column>
-        <Column headerStyle="width: 15%" :header="$t('financial-periods.items-table.ending-at')">
+        <Column headerStyle="width: 15%" :header="$t('financial-period.table-columns.ending-at')">
           <template #body="slotProps">
             <date-time-display :fix-time="true" :value="slotProps.data.endingAt" />
           </template>

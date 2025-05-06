@@ -65,7 +65,7 @@ onMounted(() => {
         @onFilterReset="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
-        :placeholder="$t('movement-classes.search.placeholder')"
+        :placeholder="$t('movement-class.search.placeholder')"
       />
     </div>
     <items-table
@@ -77,13 +77,13 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('movement-classes.items-table.name')" :sortable="true" />
+        <Column field="name" :header="$t('movement-class.table-columns.name')" :sortable="true" />
         <Column
           :sortable="true"
           field="costCenter.name"
-          :header="$t('movement-classes.items-table.cost-center')"
+          :header="$t('movement-class.table-columns.cost-center')"
         />
-        <Column field="type" :header="$t('cards.items-table.type')" :sortable="true">
+        <Column field="type" :header="$t('card.table-columns.type')" :sortable="true">
           <template #body="slotProps">
             {{ $t(`movement-classes.types.${slotProps.data.type.toLowerCase()}`) }}
           </template>

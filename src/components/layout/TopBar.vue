@@ -10,7 +10,8 @@ const { logout } = useSessionStore()
 const route = useRoute()
 
 function isActive(menu) {
-  return route.path.includes(menu)
+  const match = route.path.match(/^\/[^\/]+/)
+  return (match ? match[0] : '/') === menu
 }
 </script>
 
@@ -26,25 +27,25 @@ function isActive(menu) {
     <div class="layout-main-menu">
       <router-link
         to="/registration"
-        :class="['layout-main-menu-item', { 'active-route': isActive('registration') }]"
+        :class="['layout-main-menu-item', { 'active-route': isActive('/registration') }]"
       >
         {{ $t('menu.registration') }}
       </router-link>
       <router-link
         to="/financial"
-        :class="['layout-main-menu-item', { 'active-route': isActive('financial') }]"
+        :class="['layout-main-menu-item', { 'active-route': isActive('/financial') }]"
       >
         {{ $t('menu.financial') }}
       </router-link>
       <router-link
         to="/investment"
-        :class="['layout-main-menu-item', { 'active-route': isActive('investment') }]"
+        :class="['layout-main-menu-item', { 'active-route': isActive('/investment') }]"
       >
         {{ $t('menu.investment') }}
       </router-link>
       <router-link
         to="/configuration"
-        :class="['layout-main-menu-item', { 'active-route': isActive('configuration') }]"
+        :class="['layout-main-menu-item', { 'active-route': isActive('/configuration') }]"
       >
         {{ $t('menu.configuration') }}
       </router-link>

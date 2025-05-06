@@ -17,19 +17,27 @@ export function useErrorHandler() {
       })
       detail = messages.join('\n')
     } else {
-      detail = t('errors.conflict.no-specific-detail')
+      detail = t('error.conflict.no-specific-detail')
     }
-    showError(t('errors.conflict.title'), detail, false)
+
+    showError(t('error.conflict.title'), detail, false)
   }
 
   const handleBadRequest = (data) => {
-    console.error(data) // FIXME show bad request errors
-    showError('errors.bad-request.title', '')
+    let detail
+
+    if (data.code) {
+      detail = t(data.code)
+    } else {
+      detail = data.message
+    }
+
+    showError(t('error.bad-request.title'), detail, false)
   }
 
   const handleUnprocessableEntity = (data) => {
     console.error(data)
-    showError('errors.unprocessable-entity.title', 'errors.unprocessable-entity.detail')
+    showError('error.unprocessable-entity.title', 'error.unprocessable-entity.detail')
   }
 
   const handleForbidden = () => {

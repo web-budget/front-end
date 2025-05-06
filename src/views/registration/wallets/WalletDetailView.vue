@@ -38,7 +38,7 @@ const walletTypes = [
 
 function doDelete() {
   remove(props.id, () => {
-    showSuccess('notifications.record-deleted', 'notifications.wallet.deleted')
+    showSuccess('notification.record-deleted', 'notification.wallet.deleted')
     router.push({ name: 'wallets' })
   })
 }
@@ -122,7 +122,7 @@ onMounted(async () => {
     <div v-if="deleting" class="flex flex-col md:flex-row gap-4 justify-end">
       <div class="flex flex-nowrap w-full justify-end items-center">
         <Message severity="contrast" variant="simple">
-          {{ $t('notifications.confirm-delete') }}
+          {{ $t('notification.confirm-delete') }}
         </Message>
       </div>
       <div class="flex flex-nowrap w-32">

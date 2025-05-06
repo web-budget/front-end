@@ -65,7 +65,7 @@ onMounted(() => {
         @onFilterChange="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
-        :placeholder="$t('cards.search.placeholder')"
+        :placeholder="$t('card.search.placeholder')"
       />
     </div>
     <items-table
@@ -77,11 +77,11 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('cards.items-table.name')" :sortable="true" />
-        <Column field="flag" :header="$t('cards.items-table.flag')" :sortable="true" />
-        <Column field="type" :header="$t('cards.items-table.type')" :sortable="true">
+        <Column field="name" :header="$t('card.table-columns.name')" :sortable="true" />
+        <Column field="flag" :header="$t('card.table-columns.flag')" :sortable="true" />
+        <Column field="type" :header="$t('card.table-columns.type')" :sortable="true">
           <template #body="slotProps">
-            {{ $t(`cards.types.${slotProps.data.type.toLowerCase()}`) }}
+            {{ $t(`card.types.${slotProps.data.type.toLowerCase()}`) }}
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

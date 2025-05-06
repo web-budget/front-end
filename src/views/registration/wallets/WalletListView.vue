@@ -77,10 +77,10 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('wallets.items-table.name')" :sortable="true" />
-        <Column field="type" :header="$t('cards.items-table.type')" :sortable="true">
+        <Column field="name" :header="$t('wallet.table-columns.name')" :sortable="true" />
+        <Column field="type" :header="$t('wallet.table-columns.type')" :sortable="true">
           <template #body="slotProps">
-            {{ $t(`wallets.type.${slotProps.data.type.toLowerCase().replaceAll('_', '-')}`) }}
+            {{ $t(`wallet.type.${slotProps.data.type.toLowerCase().replaceAll('_', '-')}`) }}
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

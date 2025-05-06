@@ -14,14 +14,14 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'search-controls.filter-not-defined',
+    default: 'search-control.filter-not-defined',
   },
   statusOptions: {
     type: Array,
     default: () => [
-      { label: 'search-controls.all', value: 'ALL' },
-      { label: 'search-controls.inactive', value: 'INACTIVE' },
-      { label: 'search-controls.active', value: 'ACTIVE' },
+      { label: 'search-control.all', value: 'ALL' },
+      { label: 'search-control.inactive', value: 'INACTIVE' },
+      { label: 'search-control.active', value: 'ACTIVE' },
     ],
   },
   statusInitialValue: {
@@ -80,12 +80,12 @@ function resetFilter() {
   <Button
     class="w-32"
     @click="fireFilterChange()"
-    :label="$t('search-controls.actions.search')"
+    :label="$t('search-control.actions.search')"
   />
   <Button
     class="w-32"
     severity="success"
     @click="$emit('onNew')"
-    :label="$t('search-controls.actions.new')"
+    :label="$t('search-control.actions.new')"
   />
 </template>
