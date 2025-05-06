@@ -13,7 +13,7 @@ export function useErrorHandler() {
 
     if (conflicts) {
       const messages = Object.entries(conflicts).map(([key, value]) => {
-        return t(`conflicts.${key}`, { value: value })
+        return t(`conflict.${key}`, { value: value })
       })
       detail = messages.join('\n')
     } else {

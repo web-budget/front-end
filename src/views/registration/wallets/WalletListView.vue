@@ -65,7 +65,7 @@ onMounted(() => {
         @onFilterChange="findAll()"
         v-model:status="pageRequest.status"
         v-model:filter="pageRequest.filter"
-        :placeholder="$t('wallets.search.placeholder')"
+        :placeholder="$t('wallet.search.placeholder')"
       />
     </div>
     <items-table

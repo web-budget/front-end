@@ -37,7 +37,6 @@ function selectAction({ valid, values }) {
   if (props.updating) {
     update(props.id, values, () => {
       showSuccess('notification.record-updated', 'notification.cost-center.updated')
-      prepareForUpdate()
     })
   } else {
     create(values, () => {

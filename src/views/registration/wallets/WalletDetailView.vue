@@ -31,9 +31,9 @@ const { remove, findOne } = useWalletStore()
 const { wallet, loading } = storeToRefs(useWalletStore())
 
 const walletTypes = [
-  { label: i18n.t('wallets.type.personal'), value: 'PERSONAL' },
-  { label: i18n.t('wallets.type.investment'), value: 'INVESTMENT' },
-  { label: i18n.t('wallets.type.bank-account'), value: 'BANK_ACCOUNT' },
+  { label: i18n.t('wallet.type.personal'), value: 'PERSONAL' },
+  { label: i18n.t('wallet.type.investment'), value: 'INVESTMENT' },
+  { label: i18n.t('wallet.type.bank-account'), value: 'BANK_ACCOUNT' },
 ]
 
 function doDelete() {
@@ -45,14 +45,14 @@ function doDelete() {
 
 function changeToUpdate() {
   router.push({
-    name: 'wallets.update',
+    name: 'wallet.update',
     params: { id: props.id },
   })
 }
 
 function changeToDelete() {
   router.push({
-    name: 'wallets.delete',
+    name: 'wallet.delete',
     params: { id: props.id },
   })
 }
@@ -69,8 +69,8 @@ onMounted(async () => {
 <template>
   <Fluid class="card flex flex-col gap-4 w-full">
     <div class="font-semibold text-xl mb-6">
-      <span v-if="props.deleting">{{ $t('wallets.form.deleting') }}</span>
-      <span v-else>{{ $t('wallets.form.detailing') }}</span>
+      <span v-if="props.deleting">{{ $t('wallet.form.deleting') }}</span>
+      <span v-else>{{ $t('wallet.form.detailing') }}</span>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
@@ -81,40 +81,40 @@ onMounted(async () => {
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="name">{{ $t('wallets.form.name') }}</label>
+        <label for="name">{{ $t('wallet.form.name') }}</label>
         <InputText id="name" type="text" v-model="wallet.name" />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="type">{{ $t('wallets.form.type') }}</label>
+        <label for="type">{{ $t('wallet.form.type') }}</label>
         <Select
           v-model="wallet.type"
           optionValue="value"
           optionLabel="label"
           :options="walletTypes"
           :disabled="props.updating"
-          :placeholder="$t('wallets.form.type-placeholder')"
+          :placeholder="$t('wallet.form.type-placeholder')"
         />
       </div>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="bank">{{ $t('wallets.form.bank') }}</label>
+        <label for="bank">{{ $t('wallet.form.bank') }}</label>
         <InputText id="bank" type="text" v-model="wallet.bank" />
       </div>
       <div class="flex flex-wrap gap-2 w-1/4">
-        <label for="agency">{{ $t('wallets.form.agency') }}</label>
+        <label for="agency">{{ $t('wallet.form.agency') }}</label>
         <InputNumber id="agency" v-model="wallet.agency" :use-grouping="false" />
       </div>
       <div class="flex flex-wrap gap-2 w-1/4">
-        <label for="number">{{ $t('wallets.form.number') }}</label>
+        <label for="number">{{ $t('wallet.form.number') }}</label>
         <InputNumber id="number" v-model="wallet.number" :use-grouping="false" />
       </div>
     </div>
 
     <div class="flex mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="description">{{ $t('wallets.form.description') }}</label>
+        <label for="description">{{ $t('wallet.form.description') }}</label>
         <Textarea id="description" v-model="wallet.description" rows="4" />
       </div>
     </div>
