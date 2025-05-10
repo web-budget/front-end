@@ -64,7 +64,7 @@ onMounted(() => {
         @onFilterChange="findAll()"
         @onFilterReset="findAll()"
         v-model:status="pageRequest.status"
-        v-model:filter="pageRequest.filter"
+        v-model:filter="pageRequest.filterText"
         :placeholder="$t('movement-class.search.placeholder')"
       />
     </div>

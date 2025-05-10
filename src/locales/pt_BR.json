@@ -210,6 +210,18 @@
     "types": {
       "debit": "Débito",
       "credit": "Crédito"
+    },
+    "form": {
+      "new": "Novo cartão",
+      "editing": "Editando cartão",
+      "detailing": "Detalhando cartão",
+      "deleting": "Excluindo cartão",
+      "name": "Nome",
+      "type": "Tipo",
+      "flag": "Bandeira",
+      "last-four-digits": "Últimos 4 dígitos",
+      "wallet": "Carteira",
+      "invoice-payment-day": "Dia do vencimento"
     }
   },
   "financial-period": {
