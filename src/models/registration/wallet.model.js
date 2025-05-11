@@ -24,4 +24,17 @@ const validationSchema = yupResolver(
   }),
 )
 
-export { formDefaults, validationSchema }
+class Wallet {
+  constructor({ id, name, active, description, type, bank, agency, number }) {
+    this.id = id
+    this.name = name
+    this.active = active
+    this.description = description
+    this.type = type
+    this.bank = bank
+    this.agency = agency
+    this.number = number
+  }
+}
+
+export { formDefaults, validationSchema, Wallet }

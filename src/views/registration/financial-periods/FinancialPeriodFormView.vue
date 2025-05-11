@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { useFinancialPeriodStore } from '@/stores/financial-period.store'
+import { useFinancialPeriodStore } from '@/stores/registration/financial-period.store'
 
 import { formDefaults, validationSchema } from '@/models/registration/financial-period.model'
 

@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
-import { useWalletStore } from '@/stores/wallet.store'
+import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 

@@ -6,14 +6,16 @@ import { useApi } from '@/composables/useApi'
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
-export const useWalletStore = defineStore('walletStore', () => {
-  const wallet = reactive({})
+import { Card } from '@/models/registration/card.model'
+
+export const useCardStore = defineStore('cardStore', () => {
+  const card = reactive({})
 
   const pageRequest = reactive(new PageRequest())
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/wallets',
+    path: 'api/registration/cards',
     requiresAuth: true,
   })
 
@@ -24,7 +26,7 @@ export const useWalletStore = defineStore('walletStore', () => {
 
   async function findOne(id) {
     await get({}, { urlSuffix: `/${id}` })
-    Object.assign(wallet, data.value)
+    Object.assign(card, new Card(data.value))
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
@@ -46,7 +48,7 @@ export const useWalletStore = defineStore('walletStore', () => {
     update,
     remove,
     loading,
-    wallet,
+    card,
     pageRequest,
     pageResponse,
   }

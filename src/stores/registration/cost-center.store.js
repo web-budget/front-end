@@ -6,14 +6,16 @@ import { useApi } from '@/composables/useApi'
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
-export const useMovementClassStore = defineStore('movementClassStore', () => {
-  const movementClass = reactive({})
+import { CostCenter } from '@/models/registration/cost-center.model'
+
+export const useCostCenterStore = defineStore('costCenterStore', () => {
+  const costCenter = reactive({})
 
   const pageRequest = reactive(new PageRequest())
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/movement-classes',
+    path: 'api/registration/cost-centers',
     requiresAuth: true,
   })
 
@@ -24,7 +26,7 @@ export const useMovementClassStore = defineStore('movementClassStore', () => {
 
   async function findOne(id) {
     await get({}, { urlSuffix: `/${id}` })
-    Object.assign(movementClass, data.value)
+    Object.assign(costCenter, new CostCenter(data.value))
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
@@ -46,7 +48,7 @@ export const useMovementClassStore = defineStore('movementClassStore', () => {
     update,
     remove,
     loading,
-    movementClass,
+    costCenter,
     pageRequest,
     pageResponse,
   }

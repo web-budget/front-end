@@ -6,26 +6,27 @@ import { useApi } from '@/composables/useApi'
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
-export const useCardStore = defineStore('cardStore', () => {
-  const card = reactive({})
+import { MovementClass } from '@/models/registration/movement-class.model'
+
+export const useMovementClassStore = defineStore('movementClassStore', () => {
+  const movementClass = reactive({})
 
   const pageRequest = reactive(new PageRequest())
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/cards',
+    path: 'api/registration/movement-classes',
     requiresAuth: true,
   })
 
   async function findAll() {
-    console.log(pageRequest)
     await get(pageRequest.toQueryParameters())
     Object.assign(pageResponse, data.value)
   }
 
   async function findOne(id) {
     await get({}, { urlSuffix: `/${id}` })
-    Object.assign(card, data.value)
+    Object.assign(movementClass, new MovementClass(data.value))
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
@@ -47,7 +48,7 @@ export const useCardStore = defineStore('cardStore', () => {
     update,
     remove,
     loading,
-    card,
+    movementClass,
     pageRequest,
     pageResponse,
   }

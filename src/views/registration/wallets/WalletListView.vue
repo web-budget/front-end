@@ -7,7 +7,7 @@ import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
 
-import { useWalletStore } from '@/stores/wallet.store'
+import { useWalletStore } from '@/stores/registration/wallet.store'
 
 const router = useRouter()
 

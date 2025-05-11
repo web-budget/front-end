@@ -1,9 +1,9 @@
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
-import { useCardStore } from '@/stores/card.store'
+import { useCardStore } from '@/stores/registration/card.store'
 
 import { useNotification } from '@/composables/useNotification'
 
@@ -26,6 +26,10 @@ const { showSuccess } = useNotification()
 
 const { remove, findOne } = useCardStore()
 const { card, loading } = storeToRefs(useCardStore())
+
+const cardWalletName = computed(() => {
+  return card.value.wallet ? card.value.wallet.name : null
+})
 
 function doDelete() {
   remove(props.id, () => {
@@ -74,6 +78,29 @@ onMounted(async () => {
       <div class="flex flex-wrap gap-2 w-full">
         <label for="name">{{ $t('card.form.name') }}</label>
         <InputText id="name" type="text" v-model="card.name" />
+      </div>
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="type">{{ $t('card.form.type') }}</label>
+        <InputText id="type" type="text" v-model="card.type" />
+      </div>
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="wallet">{{ $t('card.form.wallet') }}</label>
+        <InputText id="wallet" type="text" v-model="cardWalletName" />
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="invoicePaymentDay">{{ $t('card.form.invoice-payment-day') }}</label>
+        <InputText id="invoicePaymentDay" type="text" v-model="card.invoicePaymentDay" />
+      </div>
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="lastFourDigits">{{ $t('card.form.last-four-digits') }}</label>
+        <InputText id="lastFourDigits" type="text" v-model="card.lastFourDigits" />
+      </div>
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="flag">{{ $t('card.form.flag') }}</label>
+        <InputText id="flag" type="text" v-model="card.flag" />
       </div>
     </div>
 

@@ -8,7 +8,7 @@ import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
 import CurrencyDisplay from '@/components/common/CurrencyDisplay.vue'
 
-import { useCostCenterStore } from '@/stores/cost-center.store'
+import { useCostCenterStore } from '@/stores/registration/cost-center.store'
 
 const router = useRouter()
 

@@ -6,14 +6,16 @@ import { useApi } from '@/composables/useApi'
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
-export const useCostCenterStore = defineStore('costCenterStore', () => {
-  const costCenter = reactive({})
+import { Wallet } from '@/models/registration/wallet.model'
+
+export const useWalletStore = defineStore('walletStore', () => {
+  const wallet = reactive({})
 
   const pageRequest = reactive(new PageRequest())
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/cost-centers',
+    path: 'api/registration/wallets',
     requiresAuth: true,
   })
 
@@ -24,7 +26,7 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
 
   async function findOne(id) {
     await get({}, { urlSuffix: `/${id}` })
-    Object.assign(costCenter, data.value)
+    Object.assign(wallet, new Wallet(data.value))
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
@@ -46,7 +48,7 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
     update,
     remove,
     loading,
-    costCenter,
+    wallet,
     pageRequest,
     pageResponse,
   }

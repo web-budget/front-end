@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
-import { useCardStore } from '@/stores/card.store'
+import { useCardStore } from '@/stores/registration/card.store'
 
 import { useNotification } from '@/composables/useNotification'
 
@@ -97,6 +97,29 @@ onMounted(() => {
         <div class="flex flex-wrap gap-2 w-full">
           <label for="name">{{ $t('card.form.name') }}</label>
           <InputText id="name" type="text" name="name" />
+        </div>
+        <div class="flex flex-wrap gap-2 w-full">
+          <label for="type">{{ $t('card.form.type') }}</label>
+          <InputText id="type" type="text" name="type" />
+        </div>
+        <div class="flex flex-wrap gap-2 w-full">
+          <label for="wallet">{{ $t('card.form.wallet') }}</label>
+          <InputText id="wallet" type="text" name="wallet" />
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-4 mb-6">
+        <div class="flex flex-wrap gap-2 w-full">
+          <label for="invoicePaymentDay">{{ $t('card.form.invoice-payment-day') }}</label>
+          <InputText id="invoicePaymentDay" type="text" name="invoicePaymentDay" />
+        </div>
+        <div class="flex flex-wrap gap-2 w-full">
+          <label for="lastFourDigits">{{ $t('card.form.last-four-digits') }}</label>
+          <InputText id="lastFourDigits" type="text" name="lastFourDigits" />
+        </div>
+        <div class="flex flex-wrap gap-2 w-full">
+          <label for="flag">{{ $t('card.form.flag') }}</label>
+          <InputText id="flag" type="text" name="flag" />
         </div>
       </div>
 

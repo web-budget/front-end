@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { useCostCenterStore } from '@/stores/cost-center.store'
+import { useCostCenterStore } from '@/stores/registration/cost-center.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 

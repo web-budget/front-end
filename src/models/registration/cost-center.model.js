@@ -17,4 +17,15 @@ const validationSchema = yupResolver(
   }),
 )
 
-export { formDefaults, validationSchema }
+class CostCenter {
+  constructor({ id, name, active, description, expenseBudget, incomeBudget }) {
+    this.id = id
+    this.name = name
+    this.active = active
+    this.description = description
+    this.expenseBudget = expenseBudget
+    this.incomeBudget = incomeBudget
+  }
+}
+
+export { formDefaults, validationSchema, CostCenter }

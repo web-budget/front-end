@@ -7,7 +7,7 @@ import ItemsTable from '@/components/listing/ItemsTable.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 import ActionButtons from '@/components/listing/ActionButtons.vue'
 
-import { useMovementClassStore } from '@/stores/movement-class.store'
+import { useMovementClassStore } from '@/stores/registration/movement-class.store'
 
 const router = useRouter()
 

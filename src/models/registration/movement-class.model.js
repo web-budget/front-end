@@ -6,11 +6,7 @@ import { yupResolver } from '@primevue/forms/resolvers/yup'
 const formDefaults = reactive({
   active: true,
   name: null,
-  lastFourDigits: null,
-  invoicePaymentDay: null,
   type: null,
-  wallet: null,
-  flag: null,
 })
 
 const validationSchema = yupResolver(
@@ -19,17 +15,13 @@ const validationSchema = yupResolver(
   }),
 )
 
-class Card {
-  constructor({ id, name, active, lastFourDigits, invoicePaymentDay, type, wallet, flag }) {
+class MovementClass {
+  constructor({ id, name, active, type }) {
     this.id = id
     this.name = name
     this.active = active
-    this.lastFourDigits = lastFourDigits
-    this.invoicePaymentDay = invoicePaymentDay
     this.type = type
-    this.wallet = wallet
-    this.flag = flag
   }
 }
 
-export { formDefaults, validationSchema, Card }
+export { formDefaults, validationSchema, MovementClass }

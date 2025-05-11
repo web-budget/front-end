@@ -8,7 +8,7 @@ import ActionButtons from '@/components/listing/ActionButtons.vue'
 import DateTimeDisplay from '@/components/common/DateTimeDisplay.vue'
 import SearchControls from '@/components/listing/SearchControls.vue'
 
-import { useFinancialPeriodStore } from '@/stores/financial-period.store'
+import { useFinancialPeriodStore } from '@/stores/registration/financial-period.store'
 
 const { findAll } = useFinancialPeriodStore()
 const { loading, pageResponse, pageRequest } = storeToRefs(useFinancialPeriodStore())
