@@ -33,10 +33,6 @@ const cardWalletName = computed(() => {
   return card.value.wallet ? card.value.wallet.name : null
 })
 
-const isDebitCard = computed(() => {
-  return card.value.type === 'DEBIT'
-})
-
 function doDelete() {
   remove(props.id, () => {
     showSuccess('notification.record-deleted', 'notification.card.deleted')
@@ -88,16 +84,22 @@ onMounted(async () => {
       <div class="flex flex-wrap gap-2 w-full">
         <label for="type">{{ $t('card.form.type') }}</label>
         <Select
+          disabled
           v-model="card.type"
           optionValue="value"
           optionLabel="label"
           :options="cardTypes"
-          :disabled="props.updating"
+          :placeholder="$t('card.form.type-placeholder')"
         />
       </div>
-      <div class="flex flex-wrap gap-2 w-full">
+      <div class="flex flex-col flex-wrap gap-2 w-full">
         <label for="wallet">{{ $t('card.form.wallet') }}</label>
-        <InputText id="wallet" type="text" v-model="cardWalletName" />
+        <InputText
+          id="wallet"
+          type="text"
+          v-model="cardWalletName"
+          :disabled="card.type ? card.type === 'CREDIT' : false"
+        />
       </div>
     </div>
 
@@ -107,13 +109,13 @@ onMounted(async () => {
         <InputText
           id="invoicePaymentDay"
           type="text"
-          :disabled="isDebitCard"
           v-model="card.invoicePaymentDay"
+          :disabled="card.type ? card.type === 'DEBIT' : false"
         />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
         <label for="lastFourDigits">{{ $t('card.form.last-four-digits') }}</label>
-        <InputText id="lastFourDigits" type="text" v-model="card.lastFourDigits" />
+        <InputMask id="lastFourDigits" v-model="card.lastFourDigits" mask="9999" />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
         <label for="flag">{{ $t('card.form.flag') }}</label>
