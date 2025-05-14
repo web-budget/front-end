@@ -39,10 +39,11 @@ function translatePageReport() {
 }
 
 function fireTableSorted({ order, field }) {
-  emit('tableSorted', {
+  const event = {
     sortField: field == null ? 'createdOn' : field,
     sortOrder: order == null || order > 0 ? 'asc' : 'desc',
-  })
+  }
+  emit('tableSorted', event)
 }
 </script>
 

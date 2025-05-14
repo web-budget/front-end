@@ -47,14 +47,14 @@ function changeToDetail({ data }) {
 }
 
 function onPageChange(event) {
-  pageRequest.size = event.pageSize
-  pageRequest.current = event.currentPage
+  pageRequest.value.size = event.pageSize
+  pageRequest.value.current = event.currentPage
   findAll()
 }
 
 function onTableSorted(event) {
-  pageRequest.sortField = event.sortField
-  pageRequest.direction = event.sortOrder
+  pageRequest.value.sortField = event.sortField
+  pageRequest.value.direction = event.sortOrder
   findAll()
 }
 
