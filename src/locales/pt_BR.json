@@ -191,7 +191,7 @@
       "type-placeholder": "Selecione um tipo"
     },
     "type": {
-      "bank-account": "Conta Corrente",
+      "bank-account": "Conta Bancária",
       "personal": "Pessoal",
       "investment": "Investimento"
     }
