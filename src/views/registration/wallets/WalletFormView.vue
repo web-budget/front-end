@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
@@ -10,7 +9,7 @@ import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { formDefaults, validationSchema } from '@/models/registration/wallet.model'
+import { formDefaults, validationSchema, walletTypes } from '@/models/registration/wallet.model'
 
 const props = defineProps({
   id: {
@@ -23,7 +22,6 @@ const props = defineProps({
   },
 })
 
-const i18n = useI18n()
 const router = useRouter()
 
 const { showSuccess } = useNotification()
@@ -32,12 +30,6 @@ const theForm = ref()
 
 const { create, update, findOne } = useWalletStore()
 const { wallet, loading } = storeToRefs(useWalletStore())
-
-const walletTypes = [
-  { label: i18n.t('wallet.type.personal'), value: 'PERSONAL' },
-  { label: i18n.t('wallet.type.investment'), value: 'INVESTMENT' },
-  { label: i18n.t('wallet.type.bank-account'), value: 'BANK_ACCOUNT' },
-]
 
 function selectAction({ valid, values }) {
   if (!valid) return
@@ -56,10 +48,7 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  applyFormValues(wallet.value)
-}
-
-function applyFormValues(data) {
+  const data = wallet.value
   theForm.value.setValues({
     active: data.active,
     name: data.name,

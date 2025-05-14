@@ -1,6 +1,8 @@
 import { reactive } from 'vue'
 import * as yup from 'yup'
 
+import i18n from '@/locales'
+
 import { yupResolver } from '@primevue/forms/resolvers/yup'
 
 const formDefaults = reactive({
@@ -24,6 +26,12 @@ const validationSchema = yupResolver(
   }),
 )
 
+const walletTypes = [
+  { label: i18n.global.t('wallet.type.personal'), value: 'PERSONAL' },
+  { label: i18n.global.t('wallet.type.investment'), value: 'INVESTMENT' },
+  { label: i18n.global.t('wallet.type.bank-account'), value: 'BANK_ACCOUNT' },
+]
+
 class Wallet {
   constructor({ id, name, active, description, type, bank, agency, number }) {
     this.id = id
@@ -37,4 +45,4 @@ class Wallet {
   }
 }
 
-export { formDefaults, validationSchema, Wallet }
+export { formDefaults, validationSchema, walletTypes, Wallet }

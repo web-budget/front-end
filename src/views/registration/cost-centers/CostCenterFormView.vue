@@ -14,12 +14,12 @@ import { formDefaults, validationSchema } from '@/models/registration/cost-cente
 const props = defineProps({
   id: {
     type: String,
-    default: null
+    default: null,
   },
   updating: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const theForm = ref()
@@ -48,16 +48,13 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  applyFormValues(costCenter.value)
-}
-
-function applyFormValues(data) {
+  const data = costCenter.value
   theForm.value.setValues({
     active: data.active,
     name: data.name,
     description: data.description,
     expenseBudget: data.expenseBudget,
-    incomeBudget: data.incomeBudget
+    incomeBudget: data.incomeBudget,
   })
 }
 

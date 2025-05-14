@@ -2,13 +2,14 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useI18n } from 'vue-i18n'
 
 import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+
+import { walletTypes } from '@/models/registration/wallet.model'
 
 const props = defineProps({
   id: {
@@ -23,18 +24,10 @@ const props = defineProps({
 
 const router = useRouter()
 
-const i18n = useI18n()
-
 const { showSuccess } = useNotification()
 
 const { remove, findOne } = useWalletStore()
 const { wallet, loading } = storeToRefs(useWalletStore())
-
-const walletTypes = [
-  { label: i18n.t('wallet.type.personal'), value: 'PERSONAL' },
-  { label: i18n.t('wallet.type.investment'), value: 'INVESTMENT' },
-  { label: i18n.t('wallet.type.bank-account'), value: 'BANK_ACCOUNT' },
-]
 
 function doDelete() {
   remove(props.id, () => {

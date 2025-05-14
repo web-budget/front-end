@@ -2,13 +2,14 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useI18n } from 'vue-i18n'
 
 import { useCardStore } from '@/stores/registration/card.store'
 
 import { useNotification } from '@/composables/useNotification'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
+
+import { cardTypes } from '@/models/registration/card.model'
 
 const props = defineProps({
   id: {
@@ -21,7 +22,6 @@ const props = defineProps({
   },
 })
 
-const i18n = useI18n()
 const router = useRouter()
 
 const { showSuccess } = useNotification()
@@ -36,11 +36,6 @@ const cardWalletName = computed(() => {
 const isDebitCard = computed(() => {
   return card.value.type === 'DEBIT'
 })
-
-const cardTypes = [
-  { label: i18n.t('card.type.debit'), value: 'DEBIT' },
-  { label: i18n.t('card.type.credit'), value: 'CREDIT' },
-]
 
 function doDelete() {
   remove(props.id, () => {

@@ -1,6 +1,8 @@
 import * as yup from 'yup'
 import { reactive } from 'vue'
 
+import i18n from '@/locales'
+
 import { yupResolver } from '@primevue/forms/resolvers/yup'
 
 const formDefaults = reactive({
@@ -21,6 +23,11 @@ const validationSchema = yupResolver(
   }),
 )
 
+const cardTypes = [
+  { label: i18n.global.t('card.type.debit'), value: 'DEBIT' },
+  { label: i18n.global.t('card.type.credit'), value: 'CREDIT' },
+]
+
 class Card {
   constructor({ id, name, active, lastFourDigits, invoicePaymentDay, type, wallet, flag }) {
     this.id = id
@@ -34,4 +41,4 @@ class Card {
   }
 }
 
-export { formDefaults, validationSchema, Card }
+export { formDefaults, validationSchema, cardTypes, Card }

@@ -46,10 +46,7 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  applyFormValues(financialPeriod.value)
-}
-
-function applyFormValues(data) {
+  const data = financialPeriod.value
   theForm.value.setValues({
     name: data.name,
     startingAt: data.startingAt,

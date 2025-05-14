@@ -2,7 +2,6 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useI18n } from 'vue-i18n'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
@@ -11,7 +10,7 @@ import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { formDefaults, validationSchema } from '@/models/registration/card.model'
+import { cardTypes, formDefaults, validationSchema } from '@/models/registration/card.model'
 
 const props = defineProps({
   id: {
@@ -24,7 +23,6 @@ const props = defineProps({
   },
 })
 
-const i18n = useI18n()
 const router = useRouter()
 
 const { showSuccess } = useNotification()
@@ -36,11 +34,6 @@ const { wallets } = storeToRefs(useWalletStore())
 
 const { create, update, findOne } = useCardStore()
 const { card, loading } = storeToRefs(useCardStore())
-
-const cardTypes = [
-  { label: i18n.t('card.type.debit'), value: 'DEBIT' },
-  { label: i18n.t('card.type.credit'), value: 'CREDIT' },
-]
 
 function selectAction({ valid, values }) {
   if (!valid) return
