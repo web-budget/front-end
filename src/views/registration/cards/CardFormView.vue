@@ -2,10 +2,12 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
 import { useCardStore } from '@/stores/registration/card.store'
+import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
@@ -22,24 +24,36 @@ const props = defineProps({
   },
 })
 
+const i18n = useI18n()
 const router = useRouter()
 
 const { showSuccess } = useNotification()
 
 const theForm = ref()
 
+const { findByName } = useWalletStore()
+const { wallets } = storeToRefs(useWalletStore())
+
 const { create, update, findOne } = useCardStore()
 const { card, loading } = storeToRefs(useCardStore())
+
+const cardTypes = [
+  { label: i18n.t('card.type.debit'), value: 'DEBIT' },
+  { label: i18n.t('card.type.credit'), value: 'CREDIT' },
+]
 
 function selectAction({ valid, values }) {
   if (!valid) return
 
+  const toCreate = { ...values }
+  toCreate.wallet = values.wallet ? values.wallet.id : null
+
   if (props.updating) {
-    update(props.id, values, () => {
+    update(props.id, toCreate, () => {
       showSuccess('notification.record-updated', 'notification.card.updated')
     })
   } else {
-    create(values, () => {
+    create(toCreate, () => {
       showSuccess('notification.record-created', 'notification.card.created')
       theForm.value.reset()
     })
@@ -48,23 +62,26 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  applyFormValues(card.value)
-}
 
-function applyFormValues(data) {
+  const wallet = card.value.wallet
+
   theForm.value.setValues({
-    active: data.active,
-    name: data.name,
-    lastFourDigits: data.lastFourDigits,
-    invoicePaymentDay: data.invoicePaymentDay,
-    type: data.type,
-    wallet: data.wallet.id,
-    flag: data.flag,
+    active: card.value.active,
+    name: card.value.name,
+    lastFourDigits: card.value.lastFourDigits,
+    invoicePaymentDay: card.value.invoicePaymentDay,
+    type: card.value.type,
+    wallet: wallet ? wallet.id : null,
+    flag: card.value.flag,
   })
 }
 
 function changeToList() {
   router.push({ name: 'cards' })
+}
+
+function onWalletSearch(event) {
+  findByName(event.query)
 }
 
 onMounted(() => {
@@ -78,6 +95,7 @@ onMounted(() => {
   <Fluid class="card flex flex-col gap-4 w-full">
     <Form
       ref="theForm"
+      v-slot="$form"
       @submit="selectAction"
       :resolver="validationSchema"
       :initialValues="formDefaults"
@@ -100,22 +118,44 @@ onMounted(() => {
         </div>
         <div class="flex flex-wrap gap-2 w-full">
           <label for="type">{{ $t('card.form.type') }}</label>
-          <InputText id="type" type="text" name="type" />
+          <Select
+            name="type"
+            optionValue="value"
+            optionLabel="label"
+            :options="cardTypes"
+            :disabled="props.updating"
+            :placeholder="$t('card.form.type-placeholder')"
+          />
         </div>
-        <div class="flex flex-wrap gap-2 w-full">
+        <div class="flex flex-col flex-wrap gap-2 w-full">
           <label for="wallet">{{ $t('card.form.wallet') }}</label>
-          <InputText id="wallet" type="text" name="wallet" />
+          <AutoComplete
+            id="wallet"
+            name="wallet"
+            :min-length="3"
+            option-label="name"
+            :suggestions="wallets"
+            @complete="onWalletSearch"
+            :emptySearchMessage="$t('card.form.wallet-search-empty')"
+            :disabled="$form.type ? $form.type.value === 'CREDIT' : false"
+            :virtual-scroller-options="{ lazy: true, itemSize: 40, autoSize: true }"
+          />
         </div>
       </div>
 
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
           <label for="invoicePaymentDay">{{ $t('card.form.invoice-payment-day') }}</label>
-          <InputText id="invoicePaymentDay" type="text" name="invoicePaymentDay" />
+          <InputText
+            id="invoicePaymentDay"
+            type="text"
+            name="invoicePaymentDay"
+            :disabled="$form.type ? $form.type.value === 'DEBIT' : false"
+          />
         </div>
         <div class="flex flex-wrap gap-2 w-full">
           <label for="lastFourDigits">{{ $t('card.form.last-four-digits') }}</label>
-          <InputText id="lastFourDigits" type="text" name="lastFourDigits" />
+          <InputMask id="lastFourDigits" name="lastFourDigits" mask="9999" />
         </div>
         <div class="flex flex-wrap gap-2 w-full">
           <label for="flag">{{ $t('card.form.flag') }}</label>

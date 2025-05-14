@@ -207,7 +207,7 @@
       "type": "Tipo",
       "flag": "Bandeira"
     },
-    "types": {
+    "type": {
       "debit": "Débito",
       "credit": "Crédito"
     },
@@ -221,7 +221,9 @@
       "flag": "Bandeira",
       "last-four-digits": "Últimos 4 dígitos",
       "wallet": "Carteira",
-      "invoice-payment-day": "Dia do vencimento"
+      "invoice-payment-day": "Dia do vencimento",
+      "type-placeholder": "Selecione um tipo",
+      "wallet-search-empty": "Nenhuma carteira encontrada"
     }
   },
   "financial-period": {

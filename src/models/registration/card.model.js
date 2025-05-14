@@ -16,6 +16,8 @@ const formDefaults = reactive({
 const validationSchema = yupResolver(
   yup.object().shape({
     name: yup.string().min(3).max(150).required(),
+    lastFourDigits: yup.string().min(1).max(4).required(),
+    type: yup.string().required(),
   }),
 )
 

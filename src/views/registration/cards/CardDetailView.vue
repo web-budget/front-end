@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 
 import { useCardStore } from '@/stores/registration/card.store'
 
@@ -20,6 +21,7 @@ const props = defineProps({
   },
 })
 
+const i18n = useI18n()
 const router = useRouter()
 
 const { showSuccess } = useNotification()
@@ -31,6 +33,15 @@ const cardWalletName = computed(() => {
   return card.value.wallet ? card.value.wallet.name : null
 })
 
+const isDebitCard = computed(() => {
+  return card.value.type === 'DEBIT'
+})
+
+const cardTypes = [
+  { label: i18n.t('card.type.debit'), value: 'DEBIT' },
+  { label: i18n.t('card.type.credit'), value: 'CREDIT' },
+]
+
 function doDelete() {
   remove(props.id, () => {
     showSuccess('notification.record-deleted', 'notification.card.deleted')
@@ -40,14 +51,14 @@ function doDelete() {
 
 function changeToUpdate() {
   router.push({
-    name: 'card.update',
+    name: 'cards.update',
     params: { id: props.id },
   })
 }
 
 function changeToDelete() {
   router.push({
-    name: 'card.delete',
+    name: 'cards.delete',
     params: { id: props.id },
   })
 }
@@ -81,7 +92,13 @@ onMounted(async () => {
       </div>
       <div class="flex flex-wrap gap-2 w-full">
         <label for="type">{{ $t('card.form.type') }}</label>
-        <InputText id="type" type="text" v-model="card.type" />
+        <Select
+          v-model="card.type"
+          optionValue="value"
+          optionLabel="label"
+          :options="cardTypes"
+          :disabled="props.updating"
+        />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
         <label for="wallet">{{ $t('card.form.wallet') }}</label>
@@ -92,7 +109,12 @@ onMounted(async () => {
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
         <label for="invoicePaymentDay">{{ $t('card.form.invoice-payment-day') }}</label>
-        <InputText id="invoicePaymentDay" type="text" v-model="card.invoicePaymentDay" />
+        <InputText
+          id="invoicePaymentDay"
+          type="text"
+          :disabled="isDebitCard"
+          v-model="card.invoicePaymentDay"
+        />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
         <label for="lastFourDigits">{{ $t('card.form.last-four-digits') }}</label>

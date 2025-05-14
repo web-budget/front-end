@@ -1,5 +1,6 @@
 :root {
-    --p-form-field-disabled-background: #eceef1 !important;
+    --p-form-field-disabled-background: #edf1f5 !important;
+    --p-inputtext-disabled-background: #edf1f5 !important;
 }
 
 @font-face {
@@ -31,4 +32,8 @@
 .layout-main {
     flex: 1 1 auto;
     padding-bottom: 2rem;
+}
+
+.p-autocomplete.p-disabled {
+    opacity: 1;
 }

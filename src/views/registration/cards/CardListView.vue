@@ -81,7 +81,7 @@ onMounted(() => {
         <Column field="flag" :header="$t('card.table-columns.flag')" :sortable="true" />
         <Column field="type" :header="$t('card.table-columns.type')" :sortable="true">
           <template #body="slotProps">
-            {{ $t(`card.types.${slotProps.data.type.toLowerCase()}`) }}
+            {{ $t(`card.type.${slotProps.data.type.toLowerCase()}`) }}
           </template>
         </Column>
         <Column headerStyle="width: 12%" :header="$t('items-table.columns.actions')">

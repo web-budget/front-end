@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import { useApi } from '@/composables/useApi'
@@ -9,6 +9,7 @@ import PageResponse from '@/models/page-response'
 import { Wallet } from '@/models/registration/wallet.model'
 
 export const useWalletStore = defineStore('walletStore', () => {
+  const wallets = ref([])
   const wallet = reactive({})
 
   const pageRequest = reactive(new PageRequest())
@@ -22,6 +23,14 @@ export const useWalletStore = defineStore('walletStore', () => {
   async function findAll() {
     await get(pageRequest.toQueryParameters())
     Object.assign(pageResponse, data.value)
+  }
+
+  async function findByName(text) {
+    await get({
+      filter: text,
+      status: 'ACTIVE',
+    })
+    wallets.value = data.value.content
   }
 
   async function findOne(id) {
@@ -43,12 +52,14 @@ export const useWalletStore = defineStore('walletStore', () => {
 
   return {
     findAll,
+    findByName,
     findOne,
     create,
     update,
     remove,
     loading,
     wallet,
+    wallets,
     pageRequest,
     pageResponse,
   }
