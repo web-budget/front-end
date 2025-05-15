@@ -45,6 +45,10 @@
       "bank": "Banco \"{value} já esta em uso",
       "agency": "Agência \"{value}\" já esta em uso",
       "number": "Número de conta \"{value}\" já esta em uso"
+    },
+    "card": {
+      "type": "Tipo já esta em uso",
+      "last-four-digits": "Últimos dígitos \"{value}\" já esta em uso"
     }
   },
   "login": {
