@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import { useApi } from '@/composables/useApi'
@@ -10,6 +10,7 @@ import { CostCenter } from '@/models/registration/cost-center.model'
 
 export const useCostCenterStore = defineStore('costCenterStore', () => {
   const costCenter = reactive({})
+  const costCenters = ref([])
 
   const pageRequest = reactive(new PageRequest())
   const pageResponse = reactive(new PageResponse())
@@ -22,6 +23,14 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   async function findAll() {
     await get(pageRequest.toQueryParameters())
     Object.assign(pageResponse, data.value)
+  }
+
+  async function findByName(text) {
+    await get({
+      filter: text,
+      status: 'ACTIVE',
+    })
+    costCenters.value = data.value.content
   }
 
   async function findOne(id) {
@@ -43,12 +52,14 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
 
   return {
     findAll,
+    findByName,
     findOne,
     create,
     update,
     remove,
     loading,
     costCenter,
+    costCenters,
     pageRequest,
     pageResponse,
   }

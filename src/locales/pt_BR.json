@@ -102,10 +102,20 @@
       "created": "Carteira criada com sucesso",
       "updated": "Carteira atualizada com sucesso"
     },
+    "card": {
+      "deleted": "Cartão excluído com sucesso",
+      "created": "Cartão criado com sucesso",
+      "updated": "Cartão atualizado com sucesso"
+    },
     "financial-period": {
       "deleted": "Período financeiro excluído com sucesso",
       "created": "Período financeiro criado com sucesso",
       "updated": "Período financeiro atualizado com sucesso"
+    },
+    "movement-class": {
+      "deleted": "Classe de movimento excluída com sucesso",
+      "created": "Classe de movimento criada com sucesso",
+      "updated": "Classe de movimento atualizada com sucesso"
     }
   },
   "search-control": {
@@ -227,7 +237,8 @@
       "wallet": "Carteira",
       "invoice-payment-day": "Dia do vencimento",
       "type-placeholder": "Selecione um tipo",
-      "wallet-search-empty": "Nenhuma carteira encontrada"
+      "wallet-search-empty": "Nenhuma carteira encontrada",
+      "wallet-search-placeholder": "Digite o nome"
     }
   },
   "financial-period": {
@@ -280,9 +291,23 @@
       "type": "Tipo",
       "cost-center": "Centro de custo"
     },
-    "types": {
+    "type": {
       "income": "Receita",
       "expense": "Despesa"
+    },
+    "form": {
+      "new": "Novo centro de custo",
+      "editing": "Editando centro de custo",
+      "detailing": "Detalhando centro de custo",
+      "deleting": "Excluindo centro de custo",
+      "name": "Nome",
+      "description": "Descrição",
+      "type": "Tipo",
+      "cost-center": "Centro de custo",
+      "budget": "Orçamento",
+      "cost-center-search-empty": "Nenhum centro de custo encontrado",
+      "type-placeholder": "Selecione um tipo",
+      "cost-center-search-placeholder": "Digite o nome"
     }
   },
   "cost-center": {

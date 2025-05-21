@@ -38,15 +38,15 @@ const { card, loading } = storeToRefs(useCardStore())
 function selectAction({ valid, values }) {
   if (!valid) return
 
-  const toCreate = { ...values }
-  toCreate.wallet = values.wallet ? values.wallet.id : null
+  Object.assign(card, values)
+  card.wallet = values.wallet ? values.wallet.id : null
 
   if (props.updating) {
-    update(props.id, toCreate, () => {
+    update(props.id, card, () => {
       showSuccess('notification.record-updated', 'notification.card.updated')
     })
   } else {
-    create(toCreate, () => {
+    create(card, () => {
       showSuccess('notification.record-created', 'notification.card.created')
       theForm.value.reset()
     })
@@ -125,10 +125,11 @@ onMounted(() => {
           <AutoComplete
             id="wallet"
             name="wallet"
-            :min-length="3"
+            :min-length="2"
             option-label="name"
             :suggestions="wallets"
             @complete="onWalletSearch"
+            :placeholder="$t('card.form.wallet-search-placeholder')"
             :emptySearchMessage="$t('card.form.wallet-search-empty')"
             :disabled="$form.type ? $form.type.value === 'CREDIT' : false"
             :virtual-scroller-options="{ lazy: true, itemSize: 40, autoSize: true }"

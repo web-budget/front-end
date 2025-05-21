@@ -1,11 +1,12 @@
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
 import { useMovementClassStore } from '@/stores/registration/movement-class.store'
+import { movementClassTypes } from '@/models/registration/movement-class.model'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
@@ -26,6 +27,10 @@ const { showSuccess } = useNotification()
 
 const { remove, findOne } = useMovementClassStore()
 const { movementClass, loading } = storeToRefs(useMovementClassStore())
+
+const costCenterName = computed(() => {
+  return movementClass.value.costCenter ? movementClass.value.costCenter.name : null
+})
 
 function doDelete() {
   remove(props.id, () => {
@@ -75,21 +80,26 @@ onMounted(async () => {
         <label for="name">{{ $t('movement-class.form.name') }}</label>
         <InputText id="name" type="text" v-model="movementClass.name" />
       </div>
-      <div class="flex flex-wrap gap-2 w-1/8">
-        <label for="incomeBudget">{{ $t('movement-class.form.income-budget') }}</label>
-        <InputNumber
-          id="incomeBudget"
-          :minFractionDigits="2"
-          v-model="movementClass.incomeBudget"
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="type">{{ $t('movement-class.form.type') }}</label>
+        <Select
+          optionValue="value"
+          optionLabel="label"
+          v-model="movementClass.type"
+          :options="movementClassTypes"
+          :placeholder="$t('movement-class.form.type-placeholder')"
         />
       </div>
-      <div class="flex flex-wrap gap-2 w-1/8">
-        <label for="expenseBudget">{{ $t('movement-class.form.expense-budget') }}</label>
-        <InputNumber
-          id="expenseBudget"
-          :minFractionDigits="2"
-          v-model="movementClass.expenseBudget"
-        />
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
+      <div class="flex flex-col flex-wrap gap-2 w-full">
+        <label for="costCenter">{{ $t('movement-class.form.cost-center') }}</label>
+        <InputText id="costCenter" type="text" v-model="costCenterName" />
+      </div>
+      <div class="flex flex-wrap gap-2 w-full">
+        <label for="budget">{{ $t('movement-class.form.budget') }}</label>
+        <InputNumber id="budget" :minFractionDigits="2" v-model="movementClass.budget" />
       </div>
     </div>
 
