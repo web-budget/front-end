@@ -16,7 +16,7 @@ const validationSchema = yupResolver(
   yup.object().shape({
     name: yup.string().min(3).max(150).required(),
     type: yup.string().min(6).max(7).required(),
-    costCenter: yup.object().required(),
+    costCenter: yup.object().default(null).required(),
   }),
 )
 
