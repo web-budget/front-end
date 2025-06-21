@@ -6,38 +6,25 @@ import { useNotification } from '@/composables/useNotification'
 
 export function useErrorHandler() {
   const router = useRouter()
-  const { showError } = useNotification()
+  const { showWarn } = useNotification()
 
-  const handleConflict = (conflicts) => {
-    let detail
+  const handleConflict = (message) => {
+    const parameters = Object.entries(message.parameters).map(([key, value]) => {
+      return t(`error.conflict.${key}`, { value: value })
+    })
+    const detail = parameters.join('\n')
 
-    if (conflicts) {
-      const messages = Object.entries(conflicts).map(([key, value]) => {
-        return t(`conflict.${key}`, { value: value })
-      })
-      detail = messages.join('\n')
-    } else {
-      detail = t('error.conflict.no-specific-detail')
-    }
-
-    showError(t('error.conflict.title'), detail, false)
+    showWarn(t(`error.conflict.title`), detail, false)
   }
 
-  const handleBadRequest = (data) => {
-    let detail
-
-    if (data.code) {
-      detail = t(data.code)
-    } else {
-      detail = data.message
-    }
-
-    showError(t('error.bad-request.title'), detail, false)
+  const handleBadRequest = (message) => {
+    const detail = t(`error.bad-request.${message.key}`, message.parameters)
+    showWarn(t('error.bad-request.title'), detail, false)
   }
 
   const handleUnprocessableEntity = (data) => {
     console.error(data)
-    showError('error.unprocessable-entity.title', 'error.unprocessable-entity.detail')
+    showWarn('error.unprocessable-entity.title', 'error.unprocessable-entity.detail')
   }
 
   const handleForbidden = () => {

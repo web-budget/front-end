@@ -10,14 +10,35 @@
     },
     "conflict": {
       "title": "Conflito",
-      "no-specific-detail": "Revise os dados e tente novamente"
+      "cost-center": {
+        "name": "Nome \"{value}\" já esta em uso"
+      },
+      "wallet": {
+        "name": "Nome \"{value}\" já esta em uso",
+        "bank": "Banco \"{value} já esta em uso",
+        "agency": "Agência \"{value}\" já esta em uso",
+        "number": "Número de conta \"{value}\" já esta em uso"
+      },
+      "card": {
+        "type": "Tipo já esta em uso",
+        "last-four-digits": "Últimos dígitos \"{value}\" já esta em uso"
+      }
     },
     "unprocessable-entity": {
       "title": "Falha na requisição",
       "details": "Revise os dados e tente novamente"
     },
     "bad-request": {
-      "title": "Requisição inválida"
+      "title": "Requisição inválida",
+      "budget-limit-exceeded": "O orçamento disponível no centro de custo para o tipo selecionado é ${available-budget}",
+      "overlapping-start-end-dates": "Já existe um período financeiro que compreende a data de inicio e fim selecionada",
+      "start-date-after-end-date": "Data de início precisa ser antes da data de fim",
+      "debit-card-without-wallet": "O cartão de débito deve estar vinculado a uma carteira",
+      "invalid-invoice-payment-day": "{payment-day} não é um dia do mês válido, use algo entre 1 e 30",
+      "financial-period-not-open": "O período financeiro não esta aberto e não pode receber modificações",
+      "invalid-apportionments": "",
+      "accounted-period-movement": "",
+      "invalid-token": ""
     },
     "not-found": {
       "detail": "Não encontrado",
@@ -34,21 +55,6 @@
     "server-error": {
       "detail": "Falha no servidor",
       "description": "Tente novamente mais tarde ou entre em contato com o administrador"
-    }
-  },
-  "conflict": {
-    "cost-center": {
-      "name": "Nome \"{value}\" já esta em uso"
-    },
-    "wallet": {
-      "name": "Nome \"{value}\" já esta em uso",
-      "bank": "Banco \"{value} já esta em uso",
-      "agency": "Agência \"{value}\" já esta em uso",
-      "number": "Número de conta \"{value}\" já esta em uso"
-    },
-    "card": {
-      "type": "Tipo já esta em uso",
-      "last-four-digits": "Últimos dígitos \"{value}\" já esta em uso"
     }
   },
   "login": {

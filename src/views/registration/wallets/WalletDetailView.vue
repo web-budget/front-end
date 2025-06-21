@@ -38,14 +38,14 @@ function doDelete() {
 
 function changeToUpdate() {
   router.push({
-    name: 'wallet.update',
+    name: 'wallets.update',
     params: { id: props.id },
   })
 }
 
 function changeToDelete() {
   router.push({
-    name: 'wallet.delete',
+    name: 'wallets.delete',
     params: { id: props.id },
   })
 }

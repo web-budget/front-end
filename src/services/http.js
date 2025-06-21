@@ -29,13 +29,13 @@ http.interceptors.response.use(
       const { status, data } = error.response
       switch (status) {
         case 400:
-          handleBadRequest(data)
+          handleBadRequest(data.message)
           break
         case 422:
-          handleUnprocessableEntity(data)
+          handleUnprocessableEntity(data.message)
           break
         case 409:
-          handleConflict(data.conflicts)
+          handleConflict(data.message)
           break
         case 401:
           logout()
