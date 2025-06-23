@@ -58,7 +58,7 @@
     }
   },
   "login": {
-    "subtitle": "Faça login para continuar",
+    "title": "Faça login para continuar",
     "form": {
       "email": "Email",
       "email-placeholder": "Seu usuário",
@@ -68,6 +68,12 @@
       "forgot-password": "Esqueceu a senha?",
       "sign-in": "Entrar"
     }
+  },
+  "forgot-password": {
+    "title": "Recuperar senha"
+  },
+  "account-activation": {
+    "title": "Ativar conta"
   },
   "menu": {
     "financial": "Financeiro",

@@ -1,14 +1,35 @@
+import AuthLayout from '@/components/layout/AuthLayout.vue'
+
 const routes = [
   {
-    path: '/auth/login',
-    name: 'login',
-    meta: { public: true },
-    component: () => import('@/views/auth/LoginView.vue'),
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    meta: { public: true },
-    component: () => import('@/views/errors/NotFoundView.vue'),
+    path: '/auth',
+    component: AuthLayout,
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        meta: { public: true },
+        component: () => import('@/views/auth/LoginView.vue'),
+      },
+      {
+        path: 'forgot-password',
+        name: 'forgot-password',
+        meta: { public: true },
+        props: (route) => ({
+          token: route.params.token,
+        }),
+        component: () => import('@/views/auth/ForgotPasswordView.vue'),
+      },
+      {
+        path: 'account-activation',
+        name: 'account-activation',
+        meta: { public: true },
+        props: (route) => ({
+          token: route.params.token,
+        }),
+        component: () => import('@/views/auth/AccountActivationView.vue'),
+      },
+    ],
   },
   {
     path: '/error/not-found',
@@ -33,6 +54,11 @@ const routes = [
     name: '500',
     meta: { public: true },
     component: () => import('@/views/errors/ServerErrorView.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    meta: { public: true },
+    component: () => import('@/views/errors/NotFoundView.vue'),
   },
 ]
 
