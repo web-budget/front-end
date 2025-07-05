@@ -75,9 +75,12 @@ onMounted(async () => {
         <Checkbox binary class="mr-2" id="rememberme" name="remember"></Checkbox>
         <label for="rememberme">{{ $t('login.form.remember-me') }}</label>
       </div>
-      <span class="font-medium no-underline ml-2 text-right cursor-pointer text-primary">
+      <RouterLink
+        :to="{ name: 'forgot-password' }"
+        class="font-medium no-underline ml-2 text-right cursor-pointer text-primary"
+      >
         {{ $t('login.form.forgot-password') }}
-      </span>
+      </RouterLink>
     </div>
     <Button type="submit" class="w-full" :loading="loading" :label="$t('login.form.sign-in')" />
   </Form>

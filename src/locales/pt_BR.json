@@ -70,7 +70,12 @@
     }
   },
   "forgot-password": {
-    "title": "Recuperar senha"
+    "title": "Recuperar senha",
+    "form": {
+      "email": "Email",
+      "recover": "Recuperar",
+      "back": "Voltar"
+    }
   },
   "account-activation": {
     "title": "Ativar conta"
@@ -97,7 +102,8 @@
     "delete": "Excluir",
     "back": "Voltar",
     "yes": "Sim",
-    "no": "Não"
+    "no": "Não",
+    "recover": "Recuperar"
   },
   "notification": {
     "confirm-delete": "Confirma a exclusão do registro?",
