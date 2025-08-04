@@ -79,6 +79,24 @@ export function useApi({ path, requiresAuth = true }) {
     }
   }
 
+  const patch = async (payload = {}, options = {}, onSuccess = () => {}, onError = () => {}) => {
+    loading.value = true
+    error.value = null
+    try {
+      const url = `${path}${options.urlSuffix || ''}`
+      const response = await http.patch(url, payload, {
+        headers: getHeaders(),
+      })
+      data.value = response.data
+      onSuccess()
+    } catch (exception) {
+      error.value = exception
+      onError()
+    } finally {
+      loading.value = false
+    }
+  }
+
   const del = async (params = {}, options = {}, onSuccess = () => {}, onError = () => {}) => {
     loading.value = true
     error.value = null
@@ -105,6 +123,7 @@ export function useApi({ path, requiresAuth = true }) {
     get,
     post,
     put,
+    patch,
     del,
   }
 }

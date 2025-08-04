@@ -28,6 +28,7 @@ export function useErrorHandler() {
   }
 
   const handleForbidden = () => {
+    console.error('error.forbidden')
     router.push({ name: '403' })
   }
 

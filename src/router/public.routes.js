@@ -29,6 +29,15 @@ const routes = [
         }),
         component: () => import('@/views/auth/AccountActivationView.vue'),
       },
+      {
+        path: 'recover-password',
+        name: 'recover-password',
+        meta: { public: true },
+        props: (route) => ({
+          token: route.params.token,
+        }),
+        component: () => import('@/views/auth/RecoverPasswordView.vue'),
+      },
     ],
   },
   {

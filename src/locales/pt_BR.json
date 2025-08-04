@@ -74,11 +74,24 @@
     "form": {
       "email": "Email",
       "recover": "Recuperar",
-      "back": "Voltar"
+      "back": "Voltar",
+      "email-placeholder": "Informe seu email cadastrado"
+    }
+  },
+  "recover-password": {
+    "title": "Recuperar senha",
+    "form": {
+      "confirmation": "Confirmação",
+      "confirmation-placeholder": "Digite sua nova senha novamente",
+      "password": "Senha",
+      "password-placeholder": "Digite sua nova senha"
     }
   },
   "account-activation": {
-    "title": "Ativar conta"
+    "success": "Conta ativada com sucesso!",
+    "error": "Falha ao ativar conta, entre em contato com um administrador",
+    "activating": "Ativando conta, aguarde...",
+    "back-to-login": "Voltar ao login"
   },
   "menu": {
     "financial": "Financeiro",
@@ -106,6 +119,7 @@
     "recover": "Recuperar"
   },
   "notification": {
+    "success": "Sucesso!",
     "confirm-delete": "Confirma a exclusão do registro?",
     "record-deleted": "Registro excluído",
     "record-created": "Registro criado",
@@ -134,6 +148,12 @@
       "deleted": "Classe de movimento excluída com sucesso",
       "created": "Classe de movimento criada com sucesso",
       "updated": "Classe de movimento atualizada com sucesso"
+    },
+    "forgot-password": {
+      "requested": "Solicitação realizada, aguarde pelo email de recuperação"
+    },
+    "recover-password": {
+      "success": "Senha recuperada, realize login para continuar"
     }
   },
   "search-control": {
