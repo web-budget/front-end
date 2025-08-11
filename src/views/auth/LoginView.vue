@@ -22,7 +22,7 @@ async function doLogin({ values }) {
   await login(
     values,
     () => {
-      router.push({ name: 'home' })
+      doAfterLoginNavigation()
     },
     () => {
       showError('error.login.detail', 'error.login.description')

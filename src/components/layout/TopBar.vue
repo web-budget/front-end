@@ -1,6 +1,8 @@
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+
 import { useLayout } from '@/components/layout/composables/layout'
+
 import { useSessionStore } from '@/stores/session.store'
 
 const { toggleDarkMode, isDarkTheme } = useLayout()
@@ -8,10 +10,16 @@ const { toggleDarkMode, isDarkTheme } = useLayout()
 const { logout } = useSessionStore()
 
 const route = useRoute()
+const router = useRouter()
 
 function isActive(menu) {
   const match = route.path.match(/^\/[^\/]+/)
   return (match ? match[0] : '/') === menu
+}
+
+function logoutAndRedirect() {
+  logout()
+  router.push({ name: 'login' })
 }
 </script>
 
@@ -82,7 +90,7 @@ function isActive(menu) {
             <i class="pi pi-inbox"></i>
             <span>Messages</span>
           </button>
-          <button type="button" class="layout-topbar-action" @click="logout()">
+          <button type="button" class="layout-topbar-action" @click="logoutAndRedirect()">
             <i class="pi pi-user"></i>
             <span>Profile</span>
           </button>
