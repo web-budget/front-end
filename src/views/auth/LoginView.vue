@@ -66,26 +66,13 @@ onMounted(async () => {
       class="w-full md:w-[30rem] mb-8"
       :placeholder="$t('login.form.email-placeholder')"
     />
-    <label
-      for="password"
-      class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
-    >
-      {{ $t('login.form.password') }}
-    </label>
-    <Password
-      fluid
-      id="password"
-      class="mb-4"
-      :feedback="false"
-      :toggleMask="true"
-      name="password"
-      :placeholder="$t('login.form.password-placeholder')"
-    ></Password>
-    <div class="flex items-center justify-between mt-8 mb-6 gap-8">
-      <div class="flex items-center">
-        <Checkbox binary class="mr-2" id="rememberme" name="remember"></Checkbox>
-        <label for="rememberme">{{ $t('login.form.remember-me') }}</label>
-      </div>
+    <div class="flex justify-between items-center mb-2">
+      <label
+        for="password"
+        class="text-surface-900 dark:text-surface-0 font-medium text-xl"
+      >
+        {{ $t('login.form.password') }}
+      </label>
       <RouterLink
         :to="{ name: 'forgot-password' }"
         class="font-medium no-underline ml-2 text-right cursor-pointer text-primary"
@@ -93,6 +80,15 @@ onMounted(async () => {
         {{ $t('login.form.forgot-password') }}
       </RouterLink>
     </div>
+    <Password
+      fluid
+      id="password"
+      class="mb-10"
+      name="password"
+      :feedback="false"
+      :toggleMask="true"
+      :placeholder="$t('login.form.password-placeholder')"
+    ></Password>
     <Button type="submit" class="w-full" :loading="loading" :label="$t('login.form.sign-in')" />
   </Form>
 </template>
