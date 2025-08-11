@@ -24,14 +24,16 @@ export const useSessionStore = defineStore('sessionStore', () => {
     requiresAuth: false,
   })
 
-  async function login({ username, password }) {
+  async function login(credentials, onSuccess = () => {}, onError = () => {}) {
     await post(
       {},
       {
         headers: {
-          Authorization: 'Basic ' + btoa(`${username}:${password}`),
+          Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
         },
       },
+      onSuccess,
+      onError,
     )
 
     if (data.value?.token) {

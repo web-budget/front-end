@@ -3,6 +3,8 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 
+import { useNotification } from '@/composables/useNotification'
+
 import { useSessionStore } from '@/stores/session.store'
 
 import { formDefaults, validationSchema } from '@/models/credentials.model'
@@ -14,9 +16,18 @@ const { loading } = storeToRefs(useSessionStore())
 
 const { isSessionValid, login } = useSessionStore()
 
+const { showError } = useNotification()
+
 async function doLogin({ values }) {
-  await login(values)
-  validateSession()
+  await login(
+    values,
+    () => {
+      router.push({ name: 'home' })
+    },
+    () => {
+      showError('error.login.detail', 'error.login.description')
+    },
+  )
 }
 
 function doAfterLoginNavigation() {

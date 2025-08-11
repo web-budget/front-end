@@ -55,6 +55,10 @@
     "server-error": {
       "detail": "Falha no servidor",
       "description": "Tente novamente mais tarde ou entre em contato com o administrador"
+    },
+    "login": {
+      "detail": "Falha ao realizar login",
+      "description": "Verifique os dados informados e tente novamente"
     }
   },
   "login": {
