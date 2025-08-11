@@ -66,29 +66,29 @@ onMounted(async () => {
       class="w-full md:w-[30rem] mb-8"
       :placeholder="$t('login.form.email-placeholder')"
     />
-    <div class="flex justify-between items-center mb-2">
-      <label
-        for="password"
-        class="text-surface-900 dark:text-surface-0 font-medium text-xl"
-      >
-        {{ $t('login.form.password') }}
-      </label>
+    <label
+      for="password"
+      class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
+    >
+      {{ $t('login.form.password') }}
+    </label>
+    <Password
+      fluid
+      id="password"
+      class="mb-4"
+      :feedback="false"
+      :toggleMask="true"
+      name="password"
+      :placeholder="$t('login.form.password-placeholder')"
+    ></Password>
+    <Button type="submit" class="w-full mt-6" :loading="loading" :label="$t('login.form.sign-in')" />
+    <div class="flex justify-center mt-8">
       <RouterLink
         :to="{ name: 'forgot-password' }"
-        class="font-medium no-underline ml-2 text-right cursor-pointer text-primary"
+        class="font-medium no-underline cursor-pointer text-primary"
       >
         {{ $t('login.form.forgot-password') }}
       </RouterLink>
     </div>
-    <Password
-      fluid
-      id="password"
-      class="mb-10"
-      name="password"
-      :feedback="false"
-      :toggleMask="true"
-      :placeholder="$t('login.form.password-placeholder')"
-    ></Password>
-    <Button type="submit" class="w-full" :loading="loading" :label="$t('login.form.sign-in')" />
   </Form>
 </template>
