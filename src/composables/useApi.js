@@ -2,22 +2,10 @@ import { ref } from 'vue'
 
 import http from '@/services/http'
 
-import { useSessionStore } from '@/stores/session.store'
-
-export function useApi({ path, requiresAuth = true }) {
+export function useApi({ path }) {
   const data = ref(null)
   const error = ref(null)
   const loading = ref(false)
-
-  const { token } = useSessionStore()
-
-  const getHeaders = () => {
-    const headers = {}
-    if (requiresAuth) {
-      headers['Authorization'] = `Bearer ${token}`
-    }
-    return headers
-  }
 
   const get = async (params = {}, options = {}) => {
     loading.value = true
@@ -27,7 +15,6 @@ export function useApi({ path, requiresAuth = true }) {
       const response = await http.get(url, {
         params,
         headers: {
-          ...getHeaders(),
           ...(options.headers || {}),
         },
         ...options,
@@ -44,12 +31,11 @@ export function useApi({ path, requiresAuth = true }) {
     loading.value = true
     error.value = null
     try {
-      const response = await http.post(path, payload, {
+      const url = `${path}${options.urlSuffix || ''}`
+      const response = await http.post(url, payload, {
         headers: {
-          ...getHeaders(),
           ...(options.headers || {}),
         },
-        ...options,
       })
       data.value = response.data
       onSuccess()
@@ -66,9 +52,7 @@ export function useApi({ path, requiresAuth = true }) {
     error.value = null
     try {
       const url = `${path}${options.urlSuffix || ''}`
-      const response = await http.put(url, payload, {
-        headers: getHeaders(),
-      })
+      const response = await http.put(url, payload)
       data.value = response.data
       onSuccess()
     } catch (exception) {
@@ -84,9 +68,7 @@ export function useApi({ path, requiresAuth = true }) {
     error.value = null
     try {
       const url = `${path}${options.urlSuffix || ''}`
-      const response = await http.patch(url, payload, {
-        headers: getHeaders(),
-      })
+      const response = await http.patch(url, payload)
       data.value = response.data
       onSuccess()
     } catch (exception) {
@@ -104,7 +86,6 @@ export function useApi({ path, requiresAuth = true }) {
       const url = `${path}${options.urlSuffix || ''}`
       const response = await http.delete(url, {
         params,
-        headers: getHeaders(),
       })
       data.value = response.data
       onSuccess()

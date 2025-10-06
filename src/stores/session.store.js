@@ -1,69 +1,91 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { jwtDecode } from 'jwt-decode'
-
-import { useSessionStorage } from '@vueuse/core'
 
 import { useApi } from '@/composables/useApi'
 
-function isTokenExpired(token) {
-  const { exp } = jwtDecode(token)
-  const now = Math.floor(Date.now() / 1000)
-  return exp < now
-}
-
 export const useSessionStore = defineStore('sessionStore', () => {
-  const token = useSessionStorage('auth_token', null)
-
   const user = ref(null)
+  const sessionValid = ref(null)
 
-  const isAuthenticated = computed(() => !!token.value)
+  const isAuthenticated = computed(() => !!user.value)
 
-  const { data, loading, post } = useApi({
-    path: '/token',
-    requiresAuth: false,
+  const { post: loginPost, loading: loginLoading } = useApi({
+    path: 'auth/login',
+  })
+
+  const { post: logoutPost } = useApi({
+    path: 'auth/logout',
+  })
+
+  const {
+    loading: meLoading,
+    get: meGet,
+    data: meData,
+  } = useApi({
+    path: 'auth/me',
   })
 
   async function login(credentials, onSuccess = () => {}, onError = () => {}) {
-    await post(
-      {},
-      {
-        headers: {
-          Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
+    try {
+      await loginPost(
+        {},
+        {
+          headers: {
+            Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
+          },
+          withCredentials: false,
         },
-      },
-      onSuccess,
-      onError,
-    )
+        async () => {
+          await fetchUserInfo()
+          sessionValid.value = true
+          onSuccess()
+        },
+        () => {
+          sessionValid.value = false
+          onError()
+        },
+      )
+    } catch (error) {
+      sessionValid.value = false
+      throw error
+    }
+  }
 
-    if (data.value?.token) {
-      token.value = data.value.token
-      user.value = {
-        name: data.value.name,
-        email: data.value.email,
+  async function fetchUserInfo() {
+    try {
+      await meGet()
+      if (meLoading.value === false && meData.value) {
+        user.value = {
+          name: meData.value.name,
+          email: meData.value.email,
+        }
+        sessionValid.value = true
+        return true
       }
-    } else {
-      throw new Error('Login failed')
+    } catch (error) {
+      user.value = null
+      sessionValid.value = false
+      throw error
     }
   }
 
-  function logout() {
-    token.value = null
-    user.value = null
+  async function logout() {
+    logoutPost().finally(() => {
+      user.value = null
+      sessionValid.value = false
+    })
   }
 
-  function isSessionValid() {
-    if (!token.value || isTokenExpired(token.value)) {
-      logout()
-      return false
+  async function isSessionValid() {
+    if (sessionValid.value !== null) {
+      return sessionValid.value
     }
-    return true
+    return await fetchUserInfo()
   }
 
   return {
-    token,
     user,
-    loading,
+    loading: computed(() => loginLoading.value || meLoading.value),
     isAuthenticated,
     login,
     logout,

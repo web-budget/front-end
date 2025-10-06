@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { useSessionStore } from '@/stores/session.store'
+import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 import { useErrorHandler } from '@/composables/userErrorHandler'
@@ -8,12 +8,12 @@ import { useErrorHandler } from '@/composables/userErrorHandler'
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   timeout: 20000,
+  withCredentials: true
 })
 
 http.interceptors.response.use(
   (response) => response,
   (error) => {
-    const { logout } = useSessionStore()
 
     const { showError } = useNotification()
 
@@ -38,7 +38,7 @@ http.interceptors.response.use(
           handleConflict(data.message)
           break
         case 401:
-          logout()
+
           break
         case 403:
           handleForbidden()

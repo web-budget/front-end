@@ -4,10 +4,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { useLayout } from '@/components/layout/composables/layout'
 
 import { useSessionStore } from '@/stores/session.store'
+import { onMounted, watch } from 'vue'
 
 const { toggleDarkMode, isDarkTheme } = useLayout()
 
-const { logout } = useSessionStore()
+const { logout, isSessionValid } = useSessionStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -21,6 +22,27 @@ function logoutAndRedirect() {
   logout()
   router.push({ name: 'login' })
 }
+
+async function validateSession() {
+  const sessionValid = await isSessionValid()
+  if (!sessionValid) {
+    redirectToLogin()
+  }
+}
+
+function redirectToLogin() {
+  router.push({ name: 'login', query: { redirect: router.currentRoute.value.fullPath } })
+}
+
+watch(isSessionValid, (isValid) => {
+  if (!isValid) {
+    redirectToLogin()
+  }
+})
+
+onMounted(async () => {
+  await validateSession()
+})
 </script>
 
 <template>

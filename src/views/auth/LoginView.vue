@@ -39,15 +39,15 @@ function doAfterLoginNavigation() {
   }
 }
 
-function validateSession() {
-  const isValid = isSessionValid()
+async function validateSession() {
+  const isValid = await isSessionValid()
   if (isValid) {
     doAfterLoginNavigation()
   }
 }
 
 onMounted(async () => {
-  validateSession()
+  await validateSession()
 })
 </script>
 
