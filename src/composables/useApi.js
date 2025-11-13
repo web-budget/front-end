@@ -7,7 +7,7 @@ export function useApi({ path }) {
   const error = ref(null)
   const loading = ref(false)
 
-  const get = async (params = {}, options = {}) => {
+  const get = async (params = {}, options = {}, onSuccess = () => {}, onError = () => {}) => {
     loading.value = true
     error.value = null
     try {
@@ -20,8 +20,10 @@ export function useApi({ path }) {
         ...options,
       })
       data.value = response.data
+      onSuccess()
     } catch (err) {
       error.value = err
+      onError()
     } finally {
       loading.value = false
     }

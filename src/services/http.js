@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-import { useRouter } from 'vue-router'
-
 import { useNotification } from '@/composables/useNotification'
 import { useErrorHandler } from '@/composables/userErrorHandler'
 
@@ -14,6 +12,8 @@ const http = axios.create({
 http.interceptors.response.use(
   (response) => response,
   (error) => {
+
+    if (error.config.url.includes('auth/me')) return Promise.reject(error)
 
     const { showError } = useNotification()
 
@@ -47,6 +47,7 @@ http.interceptors.response.use(
           handleInternalServerError(data)
           break
         default:
+          console.log(error)
           showError('error.unknown.title', 'error.unknown.details')
       }
     } else if (error.code.includes('ERR_NETWORK')) {

@@ -20,7 +20,6 @@ function isActive(menu) {
 
 function logoutAndRedirect() {
   logout()
-  router.push({ name: 'login' })
 }
 
 async function validateSession() {

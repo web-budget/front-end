@@ -6,6 +6,7 @@ import { useNotification } from '@/composables/useNotification'
 
 export function useErrorHandler() {
   const router = useRouter()
+
   const { showWarn } = useNotification()
 
   const handleConflict = (message) => {
@@ -22,18 +23,15 @@ export function useErrorHandler() {
     showWarn(t('error.bad-request.title'), detail, false)
   }
 
-  const handleUnprocessableEntity = (data) => {
-    console.error(data)
+  const handleUnprocessableEntity = () => {
     showWarn('error.unprocessable-entity.title', 'error.unprocessable-entity.detail')
   }
 
   const handleForbidden = () => {
-    console.error('error.forbidden')
     router.push({ name: '403' })
   }
 
-  const handleInternalServerError = (data) => {
-    console.error(data)
+  const handleInternalServerError = () => {
     router.push({ name: '500' })
   }
 

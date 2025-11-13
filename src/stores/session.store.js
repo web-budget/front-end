@@ -1,9 +1,12 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
+import { useRouter } from 'vue-router'
 
 import { useApi } from '@/composables/useApi'
 
 export const useSessionStore = defineStore('sessionStore', () => {
+  const router = useRouter()
+
   const user = ref(null)
   const sessionValid = ref(null)
 
@@ -20,59 +23,56 @@ export const useSessionStore = defineStore('sessionStore', () => {
   const {
     loading: meLoading,
     get: meGet,
+    error: meError,
     data: meData,
   } = useApi({
     path: 'auth/me',
   })
 
   async function login(credentials, onSuccess = () => {}, onError = () => {}) {
-    try {
-      await loginPost(
-        {},
-        {
-          headers: {
-            Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
-          },
-          withCredentials: false,
+    await loginPost(
+      {},
+      {
+        headers: {
+          Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
         },
-        async () => {
-          await fetchUserInfo()
-          sessionValid.value = true
-          onSuccess()
-        },
-        () => {
-          sessionValid.value = false
-          onError()
-        },
-      )
-    } catch (error) {
-      sessionValid.value = false
-      throw error
-    }
+        withCredentials: false,
+      },
+      async () => {
+        await fetchUserInfo()
+        sessionValid.value = true
+        onSuccess()
+      },
+      () => {
+        sessionValid.value = false
+        onError()
+      },
+    )
   }
 
   async function fetchUserInfo() {
-    try {
-      await meGet()
-      if (meLoading.value === false && meData.value) {
+    await meGet(
+      {},
+      {},
+      () => {
         user.value = {
           name: meData.value.name,
           email: meData.value.email,
         }
         sessionValid.value = true
-        return true
+      },
+      () => {
+        user.value = null
+        sessionValid.value = false
       }
-    } catch (error) {
-      user.value = null
-      sessionValid.value = false
-      throw error
-    }
+    )
   }
 
   async function logout() {
     logoutPost().finally(() => {
       user.value = null
       sessionValid.value = false
+      router.push({ name: 'login' })
     })
   }
 
