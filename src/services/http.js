@@ -38,7 +38,7 @@ http.interceptors.response.use(
           handleConflict(data.message)
           break
         case 401:
-
+          // TODO logout and go to login?
           break
         case 403:
           handleForbidden()
