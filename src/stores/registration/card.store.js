@@ -16,7 +16,7 @@ export const useCardStore = defineStore('cardStore', () => {
 
   const { data, loading, post, put, get, del } = useApi({
     path: 'api/registration/cards',
-    requiresAuth: true,
+    requiresAuth: true
   })
 
   async function findAll() {
@@ -50,6 +50,6 @@ export const useCardStore = defineStore('cardStore', () => {
     loading,
     card,
     pageRequest,
-    pageResponse,
+    pageResponse
   }
 })

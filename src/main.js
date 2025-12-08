@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from '@/App.vue'
+import App from './App.vue'
 
 import router from '@/router'
 import i18n from '@/locales'
@@ -10,25 +10,29 @@ import PrimeVue from 'primevue/config'
 import ConfirmationService from 'primevue/confirmationservice'
 import ToastService from 'primevue/toastservice'
 
-import '@/assets/styles.scss'
 import '@/assets/tailwind.css'
+import '@/assets/styles.scss'
 
-import defaultPreset from '@/primevue/default-preset'
-import localizationPtBR from '@/primevue/localization_pt-BR.json'
+import defaultPreset from '@/utilities/primevue/default-preset'
+import localizationPtBR from '@/utilities/primevue/localization_pt-BR.json'
 
-createApp(App)
-  .use(createPinia())
-  .use(i18n)
-  .use(router)
-  .use(PrimeVue, {
+const app = createApp(App)
+
+app.use(createPinia())
+
+app.use(router)
+app.use(i18n)
+
+app.use(PrimeVue, {
     locale: { ...localizationPtBR },
     theme: {
-      preset: defaultPreset,
-      options: {
-        darkModeSelector: '.app-dark',
-      },
-    },
-  })
-  .use(ToastService)
-  .use(ConfirmationService)
-  .mount('#app')
+        preset: defaultPreset,
+        options: {
+            darkModeSelector: '.app-dark'
+        }
+    }
+})
+app.use(ToastService)
+app.use(ConfirmationService)
+
+app.mount('#app')

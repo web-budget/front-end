@@ -2,7 +2,7 @@
 
 .layout-topbar {
     position: fixed;
-    height: 5rem;
+    height: 4rem;
     z-index: 997;
     left: 0;
     top: 0;
@@ -40,7 +40,6 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        color: var(--text-color-secondary);
         border-radius: 50%;
         width: 2.5rem;
         height: 2.5rem;
@@ -95,29 +94,29 @@
         gap: 1rem;
     }
 
-    .layout-main-menu {
-        display: flex;
-        gap: 1.4rem;
+  .layout-main-menu {
+    display: flex;
+    gap: 1.4rem;
 
-        .layout-main-menu-item {
-            display: inline-flex;
-            align-items: center;
-            font-size: 1.2rem;
-            border-radius: var(--content-border-radius);
-            color: var(--text-color);
-            font-weight: 700;
-        }
-
-        .layout-main-menu-item:hover {
-            color: var(--primary-color);
-        }
-
-        a {
-            &.active-route {
-                color: var(--primary-color);
-            }
-        }
+    .layout-main-menu-item {
+      display: inline-flex;
+      align-items: center;
+      font-size: 1.2rem;
+      border-radius: var(--content-border-radius);
+      color: var(--text-color);
+      font-weight: 700;
     }
+
+    .layout-main-menu-item:hover {
+      color: var(--primary-color);
+    }
+
+    a {
+      &.active-route {
+        color: var(--primary-color);
+      }
+    }
+  }
 }
 
 @media (max-width: 991px) {

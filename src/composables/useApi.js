@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import http from '@/services/http'
+import http from '@/utilities/http'
 
 export function useApi({ path }) {
   const data = ref(null)
@@ -15,9 +15,9 @@ export function useApi({ path }) {
       const response = await http.get(url, {
         params,
         headers: {
-          ...(options.headers || {}),
+          ...(options.headers || {})
         },
-        ...options,
+        ...options
       })
       data.value = response.data
       onSuccess()
@@ -36,8 +36,8 @@ export function useApi({ path }) {
       const url = `${path}${options.urlSuffix || ''}`
       const response = await http.post(url, payload, {
         headers: {
-          ...(options.headers || {}),
-        },
+          ...(options.headers || {})
+        }
       })
       data.value = response.data
       onSuccess()
@@ -87,7 +87,7 @@ export function useApi({ path }) {
     try {
       const url = `${path}${options.urlSuffix || ''}`
       const response = await http.delete(url, {
-        params,
+        params
       })
       data.value = response.data
       onSuccess()
@@ -107,6 +107,6 @@ export function useApi({ path }) {
     post,
     put,
     patch,
-    del,
+    del
   }
 }

@@ -1,23 +1,23 @@
 :root {
-    --p-form-field-disabled-background: #edf1f5 !important;
-    --p-inputtext-disabled-background: #edf1f5 !important;
+  --p-form-field-disabled-background: #edf1f5 !important;
+  --p-inputtext-disabled-background: #edf1f5 !important;
 }
 
 @font-face {
-    font-family: 'ReklameScript';
-    font-style: normal;
-    font-weight: normal;
-    src: local('ReklameScript'), url("../fonts/ReklameScript.otf") format('truetype');
+  font-family: 'ReklameScript';
+  font-style: normal;
+  font-weight: normal;
+  src: local('ReklameScript'), url("../fonts/ReklameScript.otf") format('truetype');
 }
 
 .wb-logo {
-    font-size: 6em;
-    font-family: 'ReklameScript', serif;
-    color: #0284c7;
+  font-size: 6em;
+  font-family: 'ReklameScript', serif;
+  color: #0284c7;
 }
 
 .wb-logo-black {
-    color: black;
+  color: black;
 }
 
 .layout-main-container {
@@ -25,7 +25,7 @@
     flex-direction: column;
     min-height: 100vh;
     justify-content: space-between;
-    padding: 7rem 2rem 0 2rem;
+    padding: 6rem 2rem 0 2rem;
     transition: margin-left var(--layout-section-transition-duration);
 }
 

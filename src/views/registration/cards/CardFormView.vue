@@ -3,6 +3,8 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
+import { Form } from '@primevue/forms'
+
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
 import { useCardStore } from '@/stores/registration/card.store'
@@ -15,12 +17,12 @@ import { cardTypes, formDefaults, validationSchema } from '@/models/registration
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   updating: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const router = useRouter()
@@ -65,7 +67,7 @@ async function prepareForUpdate() {
     invoicePaymentDay: card.value.invoicePaymentDay,
     type: card.value.type,
     wallet: wallet ? wallet.id : null,
-    flag: card.value.flag,
+    flag: card.value.flag
   })
 }
 
@@ -140,9 +142,9 @@ onMounted(() => {
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
           <label for="invoicePaymentDay">{{ $t('card.form.invoice-payment-day') }}</label>
-          <InputText
+          <InputMask
             id="invoicePaymentDay"
-            type="text"
+            mask="9?9"
             name="invoicePaymentDay"
             :disabled="$form.type ? $form.type.value === 'DEBIT' : false"
           />

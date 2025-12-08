@@ -14,12 +14,12 @@ import { formDefaults, validationSchema } from '@/models/registration/cost-cente
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   updating: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const theForm = ref()
@@ -54,7 +54,7 @@ async function prepareForUpdate() {
     name: data.name,
     description: data.description,
     expenseBudget: data.expenseBudget,
-    incomeBudget: data.incomeBudget,
+    incomeBudget: data.incomeBudget
   })
 }
 
@@ -93,11 +93,11 @@ onMounted(() => {
           <label for="name">{{ $t('cost-center.form.name') }}</label>
           <InputText id="name" type="text" name="name" />
         </div>
-        <div class="flex flex-wrap gap-2 w-1/8">
+        <div class="flex flex-wrap gap-2 w-1/6">
           <label for="incomeBudget">{{ $t('cost-center.form.income-budget') }}</label>
           <InputNumber id="incomeBudget" :minFractionDigits="2" name="incomeBudget" />
         </div>
-        <div class="flex flex-wrap gap-2 w-1/8">
+        <div class="flex flex-wrap gap-2 w-1/6">
           <label for="expenseBudget">{{ $t('cost-center.form.expense-budget') }}</label>
           <InputNumber id="expenseBudget" :minFractionDigits="2" name="expenseBudget" />
         </div>

@@ -1,6 +1,6 @@
-import { definePreset } from '@primevue/themes'
+import { definePreset } from '@primeuix/themes'
 
-import Lara from '@primevue/themes/lara'
+import Lara from '@primeuix/themes/lara';
 
 export default definePreset(Lara, {
   semantic: {

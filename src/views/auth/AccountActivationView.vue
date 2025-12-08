@@ -15,7 +15,7 @@ const activationSucceed = ref(false)
 function activateAccount() {
   const values = {
     token: route.query.token,
-    email: route.query.email,
+    email: route.query.email
   }
 
   activate(values, () => {
