@@ -12,7 +12,7 @@ const formDefaults = reactive({
   type: undefined,
   bank: undefined,
   agency: undefined,
-  number: undefined,
+  number: undefined
 })
 
 const validationSchema = yupResolver(
@@ -22,14 +22,14 @@ const validationSchema = yupResolver(
     bank: yup.string().max(150),
     agency: yup.string().max(10).nullable(),
     number: yup.string().max(16).nullable(),
-    description: yup.string().max(255),
-  }),
+    description: yup.string().max(255)
+  })
 )
 
 const walletTypes = [
   { label: i18n.global.t('wallet.type.personal'), value: 'PERSONAL' },
   { label: i18n.global.t('wallet.type.investment'), value: 'INVESTMENT' },
-  { label: i18n.global.t('wallet.type.bank-account'), value: 'BANK_ACCOUNT' },
+  { label: i18n.global.t('wallet.type.bank-account'), value: 'BANK_ACCOUNT' }
 ]
 
 class Wallet {

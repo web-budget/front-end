@@ -21,21 +21,21 @@ function changeToAdd() {
 function changeToUpdate(id) {
   router.push({
     name: 'wallets.update',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDelete(id) {
   router.push({
     name: 'wallets.delete',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDetail({ data }) {
   router.push({
     name: 'wallets.detail',
-    params: { id: data.id },
+    params: { id: data.id }
   })
 }
 

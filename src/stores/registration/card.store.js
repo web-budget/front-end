@@ -15,8 +15,7 @@ export const useCardStore = defineStore('cardStore', () => {
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/cards',
-    requiresAuth: true
+    path: 'api/registration/cards'
   })
 
   async function findAll() {

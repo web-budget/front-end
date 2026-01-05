@@ -10,20 +10,20 @@ const { layoutState, setActiveMenuItem, toggleMenu } = useLayout()
 const props = defineProps({
   item: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   index: {
     type: Number,
-    default: 0,
+    default: 0
   },
   root: {
     type: Boolean,
-    default: true,
+    default: true
   },
   parentItemKey: {
     type: String,
-    default: null,
-  },
+    default: null
+  }
 })
 
 const isActiveMenu = ref(false)
@@ -44,7 +44,7 @@ watch(
   () => layoutState.activeMenuItem,
   (newVal) => {
     isActiveMenu.value = newVal === itemKey.value || newVal.startsWith(itemKey.value + '-')
-  },
+  }
 )
 
 function itemClick(event, item) {

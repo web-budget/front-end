@@ -18,20 +18,20 @@ const routes = [
       {
         path: '/',
         name: 'home',
-        component: () => import('@/views/HomeView.vue'),
-      },
-    ],
+        component: () => import('@/views/HomeView.vue')
+      }
+    ]
   },
   ...publicRoutes,
   ...registrationRoutes,
   ...configurationRoutes,
   ...financialRoutes,
-  ...investmentRoutes,
+  ...investmentRoutes
 ]
 
 const router = createRouter({
   routes: routes,
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL)
 })
 
 router.beforeEach((to, from, next) => {

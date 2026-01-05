@@ -12,10 +12,10 @@ const items = ref([
       {
         label: 'integrations.menu',
         icon: 'pi pi-fw pi-arrow-right-arrow-left',
-        to: '#',
-      },
-    ],
-  },
+        to: '#'
+      }
+    ]
+  }
 ])
 </script>
 

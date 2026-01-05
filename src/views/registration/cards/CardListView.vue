@@ -21,21 +21,21 @@ function changeToAdd() {
 function changeToUpdate(id) {
   router.push({
     name: 'cards.update',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDelete(id) {
   router.push({
     name: 'cards.delete',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDetail({ data }) {
   router.push({
     name: 'cards.detail',
-    params: { id: data.id },
+    params: { id: data.id }
   })
 }
 

@@ -4,8 +4,8 @@ import MenuItem from '@/components/layout/MenuItem.vue'
 const props = defineProps({
   items: {
     type: Array,
-    required: true,
-  },
+    required: true
+  }
 })
 </script>
 

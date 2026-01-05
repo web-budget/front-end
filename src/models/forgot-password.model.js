@@ -9,8 +9,8 @@ const formDefaults = reactive({
 
 const validationSchema = yupResolver(
   yup.object().shape({
-    email: yup.string().email().required(),
-  }),
+    email: yup.string().email().required()
+  })
 )
 
 export { formDefaults, validationSchema }

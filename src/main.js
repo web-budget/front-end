@@ -9,6 +9,8 @@ import i18n from '@/locales'
 import PrimeVue from 'primevue/config'
 import ConfirmationService from 'primevue/confirmationservice'
 import ToastService from 'primevue/toastservice'
+import Tooltip from 'primevue/tooltip'
+import StyleClass from 'primevue/styleclass'
 
 import '@/assets/tailwind.css'
 import '@/assets/styles.scss'
@@ -24,15 +26,18 @@ app.use(router)
 app.use(i18n)
 
 app.use(PrimeVue, {
-    locale: { ...localizationPtBR },
-    theme: {
-        preset: defaultPreset,
-        options: {
-            darkModeSelector: '.app-dark'
-        }
+  locale: { ...localizationPtBR },
+  theme: {
+    preset: defaultPreset,
+    options: {
+      darkModeSelector: '.app-dark'
     }
+  }
 })
 app.use(ToastService)
 app.use(ConfirmationService)
+
+app.directive('tooltip', Tooltip)
+app.directive('styleclass', StyleClass)
 
 app.mount('#app')

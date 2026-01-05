@@ -12,12 +12,12 @@ import { formDefaults, validationSchema } from '@/models/registration/financial-
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   updating: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const theForm = ref()
@@ -52,7 +52,7 @@ async function prepareForUpdate() {
     startingAt: data.startingAt,
     endingAt: data.endingAt,
     revenuesGoal: data.revenuesGoal,
-    expensesGoal: data.expensesGoal,
+    expensesGoal: data.expensesGoal
   })
 }
 

@@ -13,20 +13,20 @@ export const useSessionStore = defineStore('sessionStore', () => {
   const isAuthenticated = computed(() => !!user.value)
 
   const { post: loginPost, loading: loginLoading } = useApi({
-    path: 'auth/login',
+    path: 'auth/login'
   })
 
   const { post: logoutPost } = useApi({
-    path: 'auth/logout',
+    path: 'auth/logout'
   })
 
   const {
     loading: meLoading,
     get: meGet,
     error: meError,
-    data: meData,
+    data: meData
   } = useApi({
-    path: 'auth/me',
+    path: 'auth/me'
   })
 
   async function login(credentials, onSuccess = () => {}, onError = () => {}) {
@@ -34,9 +34,9 @@ export const useSessionStore = defineStore('sessionStore', () => {
       {},
       {
         headers: {
-          Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`),
+          Authorization: 'Basic ' + btoa(`${credentials.username}:${credentials.password}`)
         },
-        withCredentials: false,
+        withCredentials: false
       },
       async () => {
         await fetchUserInfo()
@@ -46,7 +46,7 @@ export const useSessionStore = defineStore('sessionStore', () => {
       () => {
         sessionValid.value = false
         onError()
-      },
+      }
     )
   }
 
@@ -57,7 +57,7 @@ export const useSessionStore = defineStore('sessionStore', () => {
       () => {
         user.value = {
           name: meData.value.name,
-          email: meData.value.email,
+          email: meData.value.email
         }
         sessionValid.value = true
       },
@@ -89,6 +89,6 @@ export const useSessionStore = defineStore('sessionStore', () => {
     isAuthenticated,
     login,
     logout,
-    isSessionValid,
+    isSessionValid
   }
 })

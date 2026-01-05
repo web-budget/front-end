@@ -8,10 +8,10 @@ const routes = [
       {
         path: '/configuration',
         name: 'configuration',
-        component: () => import('@/views/configuration/ConfigurationHomeView.vue'),
-      },
-    ],
-  },
+        component: () => import('@/views/configuration/ConfigurationHomeView.vue')
+      }
+    ]
+  }
 ]
 
 export default routes

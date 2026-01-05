@@ -16,7 +16,7 @@ const { loading, pageResponse, pageRequest } = storeToRefs(useFinancialPeriodSto
 const statusOptions = [
   { label: 'financial-period.options.all', value: 'ALL' },
   { label: 'financial-period.options.accounted', value: 'ACCOUNTED' },
-  { label: 'financial-period.options.open', value: 'OPEN' },
+  { label: 'financial-period.options.open', value: 'OPEN' }
 ]
 
 const router = useRouter()
@@ -28,21 +28,21 @@ function changeToAdd() {
 function changeToUpdate(id) {
   router.push({
     name: 'financial-periods.update',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDelete(id) {
   router.push({
     name: 'financial-periods.delete',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDetail({ data }) {
   router.push({
     name: 'financial-periods.detail',
-    params: { id: data.id },
+    params: { id: data.id }
   })
 }
 

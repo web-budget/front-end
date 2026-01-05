@@ -8,13 +8,13 @@ const formDefaults = reactive({
   name: null,
   description: null,
   incomeBudget: null,
-  expenseBudget: null,
+  expenseBudget: null
 })
 
 const validationSchema = yupResolver(
   yup.object().shape({
-    name: yup.string().min(3).max(150).required(),
-  }),
+    name: yup.string().min(3).max(150).required()
+  })
 )
 
 class CostCenter {

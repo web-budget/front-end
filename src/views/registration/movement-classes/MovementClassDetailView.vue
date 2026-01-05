@@ -13,12 +13,12 @@ import StatusToggle from '@/components/forms/StatusToggle.vue'
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   deleting: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const router = useRouter()
@@ -42,14 +42,14 @@ function doDelete() {
 function changeToUpdate() {
   router.push({
     name: 'movement-classes.update',
-    params: { id: props.id },
+    params: { id: props.id }
   })
 }
 
 function changeToDelete() {
   router.push({
     name: 'movement-classes.delete',
-    params: { id: props.id },
+    params: { id: props.id }
   })
 }
 

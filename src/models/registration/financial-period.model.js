@@ -16,8 +16,8 @@ const validationSchema = yupResolver(
   yup.object().shape({
     name: yup.string().min(3).max(150).required(),
     startingAt: yup.date().required(),
-    endingAt: yup.date().required(),
-  }),
+    endingAt: yup.date().required()
+  })
 )
 
 class FinancialPeriod {

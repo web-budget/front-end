@@ -5,29 +5,29 @@ const props = defineProps({
   filter: {
     type: String,
     default: '',
-    required: true,
+    required: true
   },
   status: {
     type: String,
     default: 'ACTIVE',
-    required: true,
+    required: true
   },
   placeholder: {
     type: String,
-    default: 'search-control.filter-not-defined',
+    default: 'search-control.filter-not-defined'
   },
   statusOptions: {
     type: Array,
     default: () => [
       { label: 'search-control.all', value: 'ALL' },
       { label: 'search-control.inactive', value: 'INACTIVE' },
-      { label: 'search-control.active', value: 'ACTIVE' },
-    ],
+      { label: 'search-control.active', value: 'ACTIVE' }
+    ]
   },
   statusInitialValue: {
     type: String,
-    default: 'ACTIVE',
-  },
+    default: 'ACTIVE'
+  }
 })
 
 const statusValue = ref(props.status)
@@ -38,7 +38,7 @@ const emit = defineEmits([
   'update:filter',
   'onFilterChange',
   'onFilterReset',
-  'onNew',
+  'onNew'
 ])
 
 function fireFilterChange() {
@@ -77,11 +77,7 @@ function resetFilter() {
     />
     <Button @click="resetFilter()" icon="pi pi-times" severity="danger" />
   </InputGroup>
-  <Button
-    class="w-32"
-    @click="fireFilterChange()"
-    :label="$t('search-control.actions.search')"
-  />
+  <Button class="w-32" @click="fireFilterChange()" :label="$t('search-control.actions.search')" />
   <Button
     class="w-32"
     severity="success"

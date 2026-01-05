@@ -14,12 +14,12 @@ import { formDefaults, validationSchema, walletTypes } from '@/models/registrati
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   updating: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const router = useRouter()
@@ -56,7 +56,7 @@ async function prepareForUpdate() {
     type: data.type,
     bank: data.bank,
     agency: data.agency,
-    number: data.number,
+    number: data.number
   })
 }
 

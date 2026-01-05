@@ -15,8 +15,7 @@ export const useMovementClassStore = defineStore('movementClassStore', () => {
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/movement-classes',
-    requiresAuth: true,
+    path: 'api/registration/movement-classes'
   })
 
   async function findAll() {
@@ -50,6 +49,6 @@ export const useMovementClassStore = defineStore('movementClassStore', () => {
     loading,
     movementClass,
     pageRequest,
-    pageResponse,
+    pageResponse
   }
 })

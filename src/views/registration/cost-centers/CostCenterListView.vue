@@ -22,21 +22,21 @@ function changeToAdd() {
 function changeToUpdate(id) {
   router.push({
     name: 'cost-centers.update',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDelete(id) {
   router.push({
     name: 'cost-centers.delete',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDetail({ data }) {
   router.push({
     name: 'cost-centers.detail',
-    params: { id: data.id },
+    params: { id: data.id }
   })
 }
 

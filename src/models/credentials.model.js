@@ -6,14 +6,14 @@ import { yupResolver } from '@primevue/forms/resolvers/yup'
 const formDefaults = reactive({
   username: '',
   password: '',
-  remember: false,
+  remember: false
 })
 
 const validationSchema = yupResolver(
   yup.object().shape({
     username: yup.string().email().required(),
-    password: yup.string().required(),
-  }),
+    password: yup.string().required()
+  })
 )
 
 export { formDefaults, validationSchema }

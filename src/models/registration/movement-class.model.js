@@ -9,20 +9,20 @@ const formDefaults = reactive({
   active: true,
   name: null,
   type: null,
-  costCenter: null,
+  costCenter: null
 })
 
 const validationSchema = yupResolver(
   yup.object().shape({
     name: yup.string().min(3).max(150).required(),
     type: yup.string().min(6).max(7).required(),
-    costCenter: yup.object().default(null).required(),
-  }),
+    costCenter: yup.object().default(null).required()
+  })
 )
 
 const movementClassTypes = [
   { label: i18n.global.t('movement-class.type.income'), value: 'INCOME' },
-  { label: i18n.global.t('movement-class.type.expense'), value: 'EXPENSE' },
+  { label: i18n.global.t('movement-class.type.expense'), value: 'EXPENSE' }
 ]
 
 class MovementClass {

@@ -5,11 +5,11 @@ const props = defineProps({
   value: {
     type: [Number, null],
     default: null,
-    required: true,
+    required: true
   },
   zeroIfNull: {
     type: Boolean,
-    default: false,
+    default: false
   }
 })
 

@@ -26,7 +26,7 @@ async function doLogin({ values }) {
     },
     () => {
       showError('error.login.detail', 'error.login.description')
-    },
+    }
   )
 }
 
@@ -63,7 +63,7 @@ onMounted(async () => {
       id="email"
       type="email"
       name="username"
-      class="w-full md:w-[30rem] mb-8"
+      class="w-full md:w-120 mb-8"
       :placeholder="$t('login.form.email-placeholder')"
     />
     <label
@@ -81,7 +81,12 @@ onMounted(async () => {
       name="password"
       :placeholder="$t('login.form.password-placeholder')"
     ></Password>
-    <Button type="submit" class="w-full mt-6" :loading="loading" :label="$t('login.form.sign-in')" />
+    <Button
+      type="submit"
+      class="w-full mt-6"
+      :loading="loading"
+      :label="$t('login.form.sign-in')"
+    />
     <div class="flex justify-center mt-8">
       <RouterLink
         :to="{ name: 'forgot-password' }"

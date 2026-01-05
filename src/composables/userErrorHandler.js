@@ -44,6 +44,6 @@ export function useErrorHandler() {
     handleForbidden,
     handleBadRequest,
     handleUnprocessableEntity,
-    handleInternalServerError,
+    handleInternalServerError
   }
 }

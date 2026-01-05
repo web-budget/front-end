@@ -25,7 +25,7 @@ const containerClass = computed(() => {
     'layout-static-inactive':
       layoutState.staticMenuDesktopInactive && layoutConfig.menuMode === 'static',
     'layout-overlay-active': layoutState.overlayMenuActive,
-    'layout-mobile-active': layoutState.staticMenuMobileActive,
+    'layout-mobile-active': layoutState.staticMenuMobileActive
   }
 })
 
@@ -64,14 +64,17 @@ function isOutsideClicked(event) {
 const props = defineProps({
   enableSideMenu: {
     type: Boolean,
-    default: true,
-  },
+    default: true
+  }
 })
 </script>
 
 <template>
   <div
-    :class="['layout-wrapper', props.enableSideMenu ? containerClass : 'layout-static layout-static-inactive']"
+    :class="[
+      'layout-wrapper',
+      props.enableSideMenu ? containerClass : 'layout-static layout-static-inactive'
+    ]"
   >
     <top-bar></top-bar>
     <div class="layout-sidebar" v-if="props.enableSideMenu">
@@ -85,5 +88,5 @@ const props = defineProps({
     </div>
     <div class="layout-mask animate-fadein"></div>
   </div>
-  <Toast position="top-center"/>
+  <Toast position="top-center" />
 </template>

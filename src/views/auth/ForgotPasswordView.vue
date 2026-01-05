@@ -48,7 +48,7 @@ function backToLogin() {
       id="email"
       type="email"
       name="email"
-      class="w-full md:w-[30rem] mb-2"
+      class="w-full md:w-120 mb-2"
       :placeholder="$t('forgot-password.form.email-placeholder')"
     />
     <div class="flex items-center justify-between mt-8 mb-6 gap-8">

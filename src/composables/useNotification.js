@@ -3,7 +3,6 @@ import i18n from '@/locales'
 import { ToastEventBus } from 'primevue'
 
 export function useNotification() {
-
   function showSuccess(title, detail, localize = true) {
     showToast('success', title, detail, localize)
   }
@@ -25,7 +24,7 @@ export function useNotification() {
       severity: severity,
       summary: localize ? i18n.global.t(summary) : summary,
       detail: localize ? i18n.global.t(detail) : detail,
-      life: 4000,
+      life: 4000
     })
   }
 
@@ -33,6 +32,6 @@ export function useNotification() {
     showWarn,
     showSuccess,
     showInfo,
-    showError,
+    showError
   }
 }

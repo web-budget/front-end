@@ -8,10 +8,10 @@ const routes = [
       {
         path: '/investment',
         name: 'investment',
-        component: () => import('@/views/investment/InvestmentHomeView.vue'),
-      },
-    ],
-  },
+        component: () => import('@/views/investment/InvestmentHomeView.vue')
+      }
+    ]
+  }
 ]
 
 export default routes

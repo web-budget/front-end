@@ -10,22 +10,22 @@ const emit = defineEmits(['pageChanged', 'rowSelected', 'tableSorted'])
 const props = defineProps({
   showStatus: {
     type: Boolean,
-    default: true,
+    default: true
   },
   data: {
     type: Array,
     required: true,
-    default: () => [],
+    default: () => []
   },
   totalElements: {
     type: Number,
     required: true,
-    default: 0,
+    default: 0
   },
   pageSize: {
     type: Number,
-    default: 15,
-  },
+    default: 15
+  }
 })
 
 function translatePageReport() {
@@ -41,7 +41,7 @@ function translatePageReport() {
 function fireTableSorted({ order, field }) {
   const event = {
     sortField: field == null ? 'createdOn' : field,
-    sortOrder: order == null || order > 0 ? 'asc' : 'desc',
+    sortOrder: order == null || order > 0 ? 'asc' : 'desc'
   }
   emit('tableSorted', event)
 }

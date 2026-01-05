@@ -95,7 +95,7 @@ onMounted(async () => {
           enterActiveClass: 'animate-scalein',
           leaveToClass: 'hidden',
           leaveActiveClass: 'animate-fadeout',
-          hideOnOutsideClick: true,
+          hideOnOutsideClick: true
         }"
       >
         <i class="pi pi-ellipsis-v"></i>

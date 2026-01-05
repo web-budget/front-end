@@ -11,8 +11,8 @@ const items = ref([
       { label: 'stocks.menu', icon: 'pi pi-fw pi-bookmark', to: '#' },
       { label: 'funds.menu', icon: 'pi pi-fw pi-shopping-bag', to: '#' },
       { label: 'current-position.menu', icon: 'pi pi-fw pi-chart-bar', to: '#' }
-    ],
-  },
+    ]
+  }
 ])
 </script>
 

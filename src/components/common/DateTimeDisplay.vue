@@ -4,16 +4,16 @@ import { computed } from 'vue'
 const props = defineProps({
   value: {
     type: String,
-    required: true,
+    required: true
   },
   type: {
     type: String,
-    default: 'short',
+    default: 'short'
   },
   fixTime: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const valueToDisplay = computed(() => {

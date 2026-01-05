@@ -4,8 +4,7 @@ import { useApi } from '@/composables/useApi'
 
 export const useAccountStore = defineStore('accountStore', () => {
   const { loading, patch } = useApi({
-    path: 'accounts',
-    requiresAuth: false,
+    path: 'accounts'
   })
 
   async function forgotPassword(values, onSuccess = () => {}, onError = () => {}) {
@@ -24,6 +23,6 @@ export const useAccountStore = defineStore('accountStore', () => {
     activate,
     forgotPassword,
     recoverPassword,
-    loading,
+    loading
   }
 })

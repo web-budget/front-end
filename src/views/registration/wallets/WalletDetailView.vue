@@ -14,12 +14,12 @@ import { walletTypes } from '@/models/registration/wallet.model'
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   deleting: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const router = useRouter()
@@ -39,14 +39,14 @@ function doDelete() {
 function changeToUpdate() {
   router.push({
     name: 'wallets.update',
-    params: { id: props.id },
+    params: { id: props.id }
   })
 }
 
 function changeToDelete() {
   router.push({
     name: 'wallets.delete',
-    params: { id: props.id },
+    params: { id: props.id }
   })
 }
 

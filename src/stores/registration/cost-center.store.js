@@ -16,8 +16,7 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/cost-centers',
-    requiresAuth: true,
+    path: 'api/registration/cost-centers'
   })
 
   async function findAll() {
@@ -28,7 +27,7 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   async function findByName(text) {
     await get({
       filter: text,
-      status: 'ACTIVE',
+      status: 'ACTIVE'
     })
     costCenters.value = data.value.content
   }
@@ -61,6 +60,6 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
     costCenter,
     costCenters,
     pageRequest,
-    pageResponse,
+    pageResponse
   }
 })

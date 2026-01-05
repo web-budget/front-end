@@ -21,7 +21,7 @@ function recover({ valid, values }) {
   const data = {
     token: route.query.token,
     email: route.query.email,
-    password: values.password,
+    password: values.password
   }
 
   recoverPassword(data, () => {
@@ -43,7 +43,7 @@ function recover({ valid, values }) {
       id="password"
       type="password"
       name="password"
-      class="w-full md:w-[30rem] mb-6"
+      class="w-full md:w-120 mb-6"
       :placeholder="$t('recover-password.form.password-placeholder')"
     />
     <label for="email" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">
@@ -53,7 +53,7 @@ function recover({ valid, values }) {
       id="confirmation"
       type="password"
       name="confirmation"
-      class="w-full md:w-[30rem] mb-2"
+      class="w-full md:w-120 mb-2"
       :placeholder="$t('recover-password.form.confirmation-placeholder')"
     />
     <div class="flex items-center justify-between mt-8 mb-6 gap-8">

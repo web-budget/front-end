@@ -21,21 +21,21 @@ function changeToAdd() {
 function changeToUpdate(id) {
   router.push({
     name: 'movement-classes.update',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDelete(id) {
   router.push({
     name: 'movement-classes.delete',
-    params: { id: id },
+    params: { id: id }
   })
 }
 
 function changeToDetail({ data }) {
   router.push({
     name: 'movement-classes.detail',
-    params: { id: data.id },
+    params: { id: data.id }
   })
 }
 

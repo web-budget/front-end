@@ -6,24 +6,35 @@ import pt from './pt_BR.json'
 const numberFormats = {
   'en-US': {
     currency: {
-      style: 'currency', currency: 'USD', notation: 'standard'
+      style: 'currency',
+      currency: 'USD',
+      notation: 'standard'
     },
     decimal: {
-      style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     },
     percent: {
-      style: 'percent', useGrouping: false
+      style: 'percent',
+      useGrouping: false
     }
   },
   'pt-BR': {
     currency: {
-      style: 'currency', currency: 'BRL', useGrouping: true, currencyDisplay: 'symbol'
+      style: 'currency',
+      currency: 'BRL',
+      useGrouping: true,
+      currencyDisplay: 'symbol'
     },
     decimal: {
-      style: 'decimal', minimumSignificantDigits: 2, maximumSignificantDigits: 2
+      style: 'decimal',
+      minimumSignificantDigits: 2,
+      maximumSignificantDigits: 2
     },
     percent: {
-      style: 'percent', useGrouping: false
+      style: 'percent',
+      useGrouping: false
     }
   }
 }
@@ -31,20 +42,32 @@ const numberFormats = {
 const datetimeFormats = {
   'en-US': {
     short: {
-      year: 'numeric', month: 'numeric', day: 'numeric'
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      weekday: 'short',
+      hour: 'numeric',
+      minute: 'numeric'
     }
   },
   'pt-BR': {
     short: {
-      year: 'numeric', month: 'numeric', day: 'numeric'
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
     },
     long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      weekday: 'short',
+      hour: 'numeric',
+      minute: 'numeric'
     }
   }
 }
@@ -57,7 +80,6 @@ export default createI18n({
   fallbackLocale: 'pt-BR',
   messages: {
     pt,
-    en,
-  },
+    en
+  }
 })
-

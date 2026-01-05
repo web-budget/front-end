@@ -15,7 +15,7 @@
           <div class="text-surface-600 dark:text-surface-200 mb-8">
             <slot name="error-description" />
           </div>
-          <slot name="action"/>
+          <slot name="action" />
         </div>
       </div>
     </div>

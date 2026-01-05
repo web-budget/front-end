@@ -13,18 +13,18 @@ import StatusToggle from '@/components/forms/StatusToggle.vue'
 import {
   formDefaults,
   movementClassTypes,
-  validationSchema,
+  validationSchema
 } from '@/models/registration/movement-class.model'
 
 const props = defineProps({
   id: {
     type: String,
-    default: null,
+    default: null
   },
   updating: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const theForm = ref()
@@ -66,7 +66,7 @@ async function prepareForUpdate() {
     type: data.type,
     description: data.description,
     costCenter: data.costCenter,
-    budget: data.budget,
+    budget: data.budget
   })
 }
 

@@ -16,8 +16,7 @@ export const useWalletStore = defineStore('walletStore', () => {
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/wallets',
-    requiresAuth: true,
+    path: 'api/registration/wallets'
   })
 
   async function findAll() {
@@ -28,7 +27,7 @@ export const useWalletStore = defineStore('walletStore', () => {
   async function findByName(text) {
     await get({
       filter: text,
-      status: 'ACTIVE',
+      status: 'ACTIVE'
     })
     wallets.value = data.value.content
   }
@@ -61,6 +60,6 @@ export const useWalletStore = defineStore('walletStore', () => {
     wallet,
     wallets,
     pageRequest,
-    pageResponse,
+    pageResponse
   }
 })
