@@ -21,8 +21,8 @@ export function useApi({ path }) {
       })
       data.value = response.data
       onSuccess()
-    } catch (err) {
-      error.value = err
+    } catch (exception) {
+      error.value = exception
       onError()
     } finally {
       loading.value = false
