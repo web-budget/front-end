@@ -32,4 +32,28 @@ class FinancialPeriod {
   }
 }
 
-export { formDefaults, validationSchema, FinancialPeriod }
+class FinancialPeriodCreateForm {
+  constructor({ name, startingAt, endingAt, revenuesGoal, expensesGoal }) {
+    this.name = name
+    this.startingAt = new Date(startingAt + 'T00:00:00')
+    this.endingAt = new Date(endingAt + 'T00:00:00')
+    this.revenuesGoal = revenuesGoal
+    this.expensesGoal = expensesGoal
+  }
+}
+
+class FinancialPeriodUpdateForm {
+  constructor({ name, revenuesGoal, expensesGoal }) {
+    this.name = name
+    this.revenuesGoal = revenuesGoal
+    this.expensesGoal = expensesGoal
+  }
+}
+
+export {
+  formDefaults,
+  validationSchema,
+  FinancialPeriod,
+  FinancialPeriodCreateForm,
+  FinancialPeriodUpdateForm
+}

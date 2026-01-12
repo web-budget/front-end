@@ -9,7 +9,12 @@ import { useCostCenterStore } from '@/stores/registration/cost-center.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
-import { formDefaults, validationSchema } from '@/models/registration/cost-center.model'
+import {
+  CostCenterCreateForm,
+  CostCenterUpdateForm,
+  formDefaults,
+  validationSchema
+} from '@/models/registration/cost-center.model'
 
 const props = defineProps({
   id: {
@@ -35,11 +40,11 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, values, () => {
+    update(props.id, new CostCenterUpdateForm(values), () => {
       showSuccess('notification.record-updated', 'notification.cost-center.updated')
     })
   } else {
-    create(values, () => {
+    create(new CostCenterCreateForm(values), () => {
       showSuccess('notification.record-created', 'notification.cost-center.created')
       theForm.value.reset()
     })

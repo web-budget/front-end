@@ -12,7 +12,9 @@ import StatusToggle from '@/components/forms/StatusToggle.vue'
 
 import {
   formDefaults,
+  MovementClassCreateForm,
   movementClassTypes,
+  MovementClassUpdateForm,
   validationSchema
 } from '@/models/registration/movement-class.model'
 
@@ -42,15 +44,12 @@ const { costCenters } = storeToRefs(useCostCenterStore())
 function selectAction({ valid, values }) {
   if (!valid) return
 
-  Object.assign(movementClass, values)
-  movementClass.costCenter = values.costCenter.id
-
   if (props.updating) {
-    update(props.id, movementClass, () => {
+    update(props.id, new MovementClassUpdateForm(values), () => {
       showSuccess('notification.record-updated', 'notification.movement-class.updated')
     })
   } else {
-    create(movementClass, () => {
+    create(new MovementClassCreateForm(values), () => {
       showSuccess('notification.record-created', 'notification.movement-class.created')
       theForm.value.reset()
     })

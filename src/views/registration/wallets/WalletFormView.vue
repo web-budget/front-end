@@ -9,7 +9,13 @@ import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { formDefaults, validationSchema, walletTypes } from '@/models/registration/wallet.model'
+import {
+  formDefaults,
+  validationSchema,
+  WalletCreateForm,
+  walletTypes,
+  WalletUpdateForm
+} from '@/models/registration/wallet.model'
 
 const props = defineProps({
   id: {
@@ -35,11 +41,11 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, values, () => {
+    update(props.id, new WalletUpdateForm(values), () => {
       showSuccess('notification.record-updated', 'notification.wallet.updated')
     })
   } else {
-    create(values, () => {
+    create(new WalletCreateForm(values), () => {
       showSuccess('notification.record-created', 'notification.wallet.created')
       theForm.value.reset()
     })

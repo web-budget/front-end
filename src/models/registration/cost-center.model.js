@@ -28,4 +28,23 @@ class CostCenter {
   }
 }
 
-export { formDefaults, validationSchema, CostCenter }
+class CostCenterCreateForm {
+  constructor({ name, description, expenseBudget, incomeBudget }) {
+    this.name = name
+    this.description = description
+    this.expenseBudget = expenseBudget
+    this.incomeBudget = incomeBudget
+  }
+}
+
+class CostCenterUpdateForm {
+  constructor({ name, active, description, expenseBudget, incomeBudget }) {
+    this.name = name
+    this.description = description
+    this.expenseBudget = expenseBudget
+    this.incomeBudget = incomeBudget
+    this.active = active
+  }
+}
+
+export { formDefaults, validationSchema, CostCenter, CostCenterCreateForm, CostCenterUpdateForm }

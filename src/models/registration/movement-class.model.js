@@ -37,4 +37,31 @@ class MovementClass {
   }
 }
 
-export { formDefaults, validationSchema, movementClassTypes, MovementClass }
+class MovementClassCreateForm {
+  constructor({ name, type, costCenter, budget, description }) {
+    this.name = name
+    this.type = type
+    this.costCenter = costCenter.id
+    this.budget = budget
+    this.description = description
+  }
+}
+
+class MovementClassUpdateForm {
+  constructor({ name, active, costCenter, budget, description }) {
+    this.name = name
+    this.costCenter = costCenter.id
+    this.budget = budget
+    this.description = description
+    this.active = active
+  }
+}
+
+export {
+  formDefaults,
+  validationSchema,
+  movementClassTypes,
+  MovementClass,
+  MovementClassCreateForm,
+  MovementClassUpdateForm
+}

@@ -41,4 +41,26 @@ class Card {
   }
 }
 
-export { formDefaults, validationSchema, cardTypes, Card }
+class CardCreateForm {
+  constructor({ name, lastFourDigits, invoicePaymentDay, type, wallet, flag }) {
+    this.name = name
+    this.lastFourDigits = lastFourDigits
+    this.invoicePaymentDay = invoicePaymentDay
+    this.type = type
+    this.wallet = wallet ? wallet.id : null
+    this.flag = flag
+  }
+}
+
+class CardUpdateForm {
+  constructor({ name, active, lastFourDigits, invoicePaymentDay, wallet, flag }) {
+    this.name = name
+    this.lastFourDigits = lastFourDigits
+    this.invoicePaymentDay = invoicePaymentDay
+    this.wallet = wallet
+    this.flag = flag
+    this.active = active
+  }
+}
+
+export { formDefaults, validationSchema, cardTypes, Card, CardCreateForm, CardUpdateForm }

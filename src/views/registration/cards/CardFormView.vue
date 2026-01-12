@@ -12,7 +12,13 @@ import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { cardTypes, formDefaults, validationSchema } from '@/models/registration/card.model'
+import {
+  CardCreateForm,
+  cardTypes,
+  CardUpdateForm,
+  formDefaults,
+  validationSchema
+} from '@/models/registration/card.model'
 
 const props = defineProps({
   id: {
@@ -40,15 +46,12 @@ const { card, loading } = storeToRefs(useCardStore())
 function selectAction({ valid, values }) {
   if (!valid) return
 
-  Object.assign(card, values)
-  card.wallet = values.wallet ? values.wallet.id : null
-
   if (props.updating) {
-    update(props.id, card, () => {
+    update(props.id, new CardUpdateForm(values), () => {
       showSuccess('notification.record-updated', 'notification.card.updated')
     })
   } else {
-    create(card, () => {
+    create(new CardCreateForm(values), () => {
       showSuccess('notification.record-created', 'notification.card.created')
       theForm.value.reset()
     })

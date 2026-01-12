@@ -45,4 +45,26 @@ class Wallet {
   }
 }
 
-export { formDefaults, validationSchema, walletTypes, Wallet }
+class WalletCreateForm {
+  constructor({ name, description, type, bank, agency, number }) {
+    this.name = name
+    this.type = type
+    this.description = description
+    this.bank = bank
+    this.agency = agency
+    this.number = number
+  }
+}
+
+class WalletUpdateForm {
+  constructor({ name, active, description, bank, agency, number }) {
+    this.name = name
+    this.active = active
+    this.description = description
+    this.bank = bank
+    this.agency = agency
+    this.number = number
+  }
+}
+
+export { formDefaults, validationSchema, walletTypes, Wallet, WalletCreateForm, WalletUpdateForm }
