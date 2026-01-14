@@ -16,7 +16,7 @@ const validationSchema = yupResolver(
   yup.object().shape({
     name: yup.string().min(3).max(150).required(),
     startingAt: yup.date().required(),
-    endingAt: yup.date().required()
+    endingAt: yup.date().required().min(yup.ref('startingAt'))
   })
 )
 
@@ -35,8 +35,8 @@ class FinancialPeriod {
 class FinancialPeriodCreateForm {
   constructor({ name, startingAt, endingAt, revenuesGoal, expensesGoal }) {
     this.name = name
-    this.startingAt = new Date(startingAt + 'T00:00:00')
-    this.endingAt = new Date(endingAt + 'T00:00:00')
+    this.startingAt = startingAt
+    this.endingAt = endingAt
     this.revenuesGoal = revenuesGoal
     this.expensesGoal = expensesGoal
   }

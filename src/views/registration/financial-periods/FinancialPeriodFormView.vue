@@ -7,7 +7,12 @@ import { useNotification } from '@/composables/useNotification'
 
 import { useFinancialPeriodStore } from '@/stores/registration/financial-period.store'
 
-import { formDefaults, validationSchema } from '@/models/registration/financial-period.model'
+import {
+  FinancialPeriodCreateForm,
+  FinancialPeriodUpdateForm,
+  formDefaults,
+  validationSchema
+} from '@/models/registration/financial-period.model'
 
 const props = defineProps({
   id: {
@@ -19,6 +24,8 @@ const props = defineProps({
     default: false
   }
 })
+
+const formData = ref({ ...formDefaults })
 
 const theForm = ref()
 
@@ -33,11 +40,11 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, values, () => {
+    update(props.id, new FinancialPeriodUpdateForm(values), () => {
       showSuccess('notification.record-updated', 'notification.financial-period.updated')
     })
   } else {
-    create(values, () => {
+    create(new FinancialPeriodCreateForm(values), () => {
       showSuccess('notification.record-created', 'notification.financial-period.created')
       theForm.value.reset()
     })
@@ -46,23 +53,33 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  const data = financialPeriod.value
+
   theForm.value.setValues({
-    name: data.name,
-    startingAt: data.startingAt,
-    endingAt: data.endingAt,
-    revenuesGoal: data.revenuesGoal,
-    expensesGoal: data.expensesGoal
+    name: financialPeriod.value.name,
+    startingAt: financialPeriod.value.startingAt,
+    endingAt: financialPeriod.value.endingAt,
+    revenuesGoal: financialPeriod.value.revenuesGoal,
+    expensesGoal: financialPeriod.value.expensesGoal
   })
+
+  // FIXME a workaround to deal with this https://github.com/primefaces/primevue/issues/8370
+  // FIXME also, after this is fixed, we can remove the v-model from the components
+  formData.value = {
+    name: financialPeriod.value.name,
+    startingAt: financialPeriod.value.startingAt,
+    endingAt: financialPeriod.value.endingAt,
+    revenuesGoal: financialPeriod.value.revenuesGoal,
+    expensesGoal: financialPeriod.value.expensesGoal
+  }
 }
 
 function changeToList() {
   router.push({ name: 'financial-periods' })
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (props.updating && props.id) {
-    prepareForUpdate()
+    await prepareForUpdate()
   }
 })
 </script>
@@ -73,7 +90,7 @@ onMounted(() => {
       ref="theForm"
       @submit="selectAction"
       :resolver="validationSchema"
-      :initialValues="formDefaults"
+      :initialValues="formData"
     >
       <div class="font-semibold text-xl mb-6">
         <span v-if="props.updating">{{ $t('financial-period.form.editing') }}</span>
@@ -83,7 +100,7 @@ onMounted(() => {
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
           <label for="name">{{ $t('financial-period.form.name') }}</label>
-          <InputText id="name" type="text" name="name" />
+          <InputText id="name" type="text" name="name" v-model="formData.name" />
         </div>
       </div>
 
@@ -93,10 +110,11 @@ onMounted(() => {
           <DatePicker
             id="startingAt"
             show-icon
-            showButtonBar
+            show-button-bar
             name="startingAt"
-            iconDisplay="input"
-            dateFormat="dd/mm/yy"
+            v-model="formData.startingAt"
+            icon-display="input"
+            date-format="dd/mm/yy"
             :disabled="props.updating"
           />
         </div>
@@ -105,20 +123,31 @@ onMounted(() => {
           <DatePicker
             id="endingAt"
             show-icon
-            showButtonBar
+            show-button-bar
             name="endingAt"
-            iconDisplay="input"
-            dateFormat="dd/mm/yy"
+            v-model="formData.endingAt"
+            icon-display="input"
+            date-format="dd/mm/yy"
             :disabled="props.updating"
           />
         </div>
         <div class="flex flex-col flex-wrap gap-2 w-1/4">
           <label for="revenuesGoal">{{ $t('financial-period.form.revenues-goal') }}</label>
-          <InputNumber id="revenuesGoal" :minFractionDigits="2" name="revenuesGoal" />
+          <InputNumber
+            id="revenuesGoal"
+            :minFractionDigits="2"
+            name="revenuesGoal"
+            v-model="formData.revenuesGoal"
+          />
         </div>
         <div class="flex flex-col flex-wrap gap-2 w-1/4">
           <label for="expensesGoal">{{ $t('financial-period.form.expenses-goal') }}</label>
-          <InputNumber id="expensesGoal" :minFractionDigits="2" name="expensesGoal" />
+          <InputNumber
+            id="expensesGoal"
+            :minFractionDigits="2"
+            name="expensesGoal"
+            v-model="formData.expensesGoal"
+          />
         </div>
       </div>
 
