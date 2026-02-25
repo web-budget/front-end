@@ -231,7 +231,8 @@
     },
     "table-columns": {
       "name": "Nome",
-      "type": "Tipo"
+      "type": "Tipo",
+      "bank": "Banco"
     },
     "form": {
       "new": "Nova carteira",

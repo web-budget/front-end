@@ -78,6 +78,7 @@ onMounted(() => {
     >
       <template #columns>
         <Column field="name" :header="$t('wallet.table-columns.name')" :sortable="true" />
+        <Column field="bank" :header="$t('wallet.table-columns.bank')" :sortable="true" />
         <Column field="type" :header="$t('wallet.table-columns.type')" :sortable="true">
           <template #body="slotProps">
             {{ $t(`wallet.type.${slotProps.data.type.toLowerCase().replaceAll('_', '-')}`) }}
