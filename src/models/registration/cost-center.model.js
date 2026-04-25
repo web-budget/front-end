@@ -18,32 +18,35 @@ const validationSchema = yupResolver(
 )
 
 class CostCenter {
-  constructor({ id, name, active, description, expenseBudget, incomeBudget }) {
+  constructor({ id, name, active, description, expenseBudget, incomeBudget, parentCostCenter }) {
     this.id = id
     this.name = name
     this.active = active
     this.description = description
     this.expenseBudget = expenseBudget
     this.incomeBudget = incomeBudget
+    this.parentCostCenter = parentCostCenter
   }
 }
 
 class CostCenterCreateForm {
-  constructor({ name, description, expenseBudget, incomeBudget }) {
+  constructor({ name, description, expenseBudget, incomeBudget, parentCostCenter }) {
     this.name = name
     this.description = description
     this.expenseBudget = expenseBudget
     this.incomeBudget = incomeBudget
+    this.parentCostCenter = parentCostCenter ? parentCostCenter.id : null
   }
 }
 
 class CostCenterUpdateForm {
-  constructor({ name, active, description, expenseBudget, incomeBudget }) {
+  constructor({ name, active, description, expenseBudget, incomeBudget, parentCostCenter }) {
     this.name = name
     this.description = description
     this.expenseBudget = expenseBudget
     this.incomeBudget = incomeBudget
     this.active = active
+    this.parentCostCenter = parentCostCenter ? parentCostCenter.id : null
   }
 }
 

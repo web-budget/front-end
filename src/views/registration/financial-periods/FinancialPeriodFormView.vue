@@ -85,7 +85,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <Form
       ref="theForm"
       @submit="selectAction"

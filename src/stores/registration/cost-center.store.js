@@ -12,7 +12,9 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   const costCenter = reactive({})
   const costCenters = ref([])
 
-  const pageRequest = reactive(new PageRequest())
+  const pageRequest = reactive(
+    new PageRequest(undefined, undefined, undefined, undefined, 'asc', 'fullName')
+  )
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({

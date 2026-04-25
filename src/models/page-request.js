@@ -5,7 +5,7 @@ export default class PageRequest {
     current = 0,
     size = 15,
     direction = 'asc',
-    sortField = 'createdOn',
+    sortField = 'createdOn'
   ) {
     this.filterText = filterText
     this.status = status
@@ -21,7 +21,7 @@ export default class PageRequest {
       status: this.status.toUpperCase(),
       page: this.current,
       size: this.size,
-      sort: `${this.sortField},${this.direction}`,
+      sort: `${this.sortField},${this.direction}`
     }
   }
 }

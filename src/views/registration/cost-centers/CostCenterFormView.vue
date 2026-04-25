@@ -33,8 +33,8 @@ const router = useRouter()
 
 const { showSuccess } = useNotification()
 
-const { create, update, findOne } = useCostCenterStore()
-const { costCenter, loading } = storeToRefs(useCostCenterStore())
+const { create, update, findOne, findByName } = useCostCenterStore()
+const { costCenter, costCenters, loading } = storeToRefs(useCostCenterStore())
 
 function selectAction({ valid, values }) {
   if (!valid) return
@@ -59,12 +59,17 @@ async function prepareForUpdate() {
     name: data.name,
     description: data.description,
     expenseBudget: data.expenseBudget,
-    incomeBudget: data.incomeBudget
+    incomeBudget: data.incomeBudget,
+    parentCostCenter: data.parentCostCenter ? data.parentCostCenter : null
   })
 }
 
 function changeToList() {
   router.push({ name: 'cost-centers' })
+}
+
+function onParentCostCenterSearch(event) {
+  findByName(event.query)
 }
 
 onMounted(() => {
@@ -75,7 +80,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <Form
       ref="theForm"
       @submit="selectAction"
@@ -98,11 +103,25 @@ onMounted(() => {
           <label for="name">{{ $t('cost-center.form.name') }}</label>
           <InputText id="name" type="text" name="name" />
         </div>
-        <div class="flex flex-wrap gap-2 w-1/6">
+        <div class="flex flex-col flex-wrap gap-2 w-full">
+          <label for="parentCostCenter">{{ $t('cost-center.form.parent') }}</label>
+          <AutoComplete
+            id="parentCostCenter"
+            name="parentCostCenter"
+            :min-length="2"
+            option-label="name"
+            :suggestions="costCenters"
+            @complete="onParentCostCenterSearch"
+            :placeholder="$t('cost-center.form.parent-search-placeholder')"
+            :emptySearchMessage="$t('cost-center.form.parent-search-empty')"
+            :virtual-scroller-options="{ lazy: true, itemSize: 40, autoSize: true }"
+          />
+        </div>
+        <div class="flex flex-wrap gap-2 w-1/2">
           <label for="incomeBudget">{{ $t('cost-center.form.income-budget') }}</label>
           <InputNumber id="incomeBudget" :minFractionDigits="2" name="incomeBudget" />
         </div>
-        <div class="flex flex-wrap gap-2 w-1/6">
+        <div class="flex flex-wrap gap-2 w-1/2">
           <label for="expenseBudget">{{ $t('cost-center.form.expense-budget') }}</label>
           <InputNumber id="expenseBudget" :minFractionDigits="2" name="expenseBudget" />
         </div>

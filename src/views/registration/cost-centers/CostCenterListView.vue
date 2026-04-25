@@ -78,7 +78,11 @@ onMounted(() => {
       :totalElements="pageResponse.totalElements"
     >
       <template #columns>
-        <Column field="name" :header="$t('cost-center.table-columns.name')" :sortable="true" />
+        <Column
+          field="fullName"
+          :header="$t('cost-center.table-columns.full-name')"
+          :sortable="true"
+        />
         <Column headerStyle="width: 15%" :header="$t('cost-center.table-columns.income-budget')">
           <template #body="{ data }">
             <currency-display :value="data.incomeBudget" />
