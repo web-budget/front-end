@@ -78,8 +78,8 @@ onMounted(async () => {
         <InputText id="name" type="text" v-model="costCenter.name" />
       </div>
       <div class="flex flex-col flex-wrap gap-2 w-full">
-        <label for="wallet">{{ $t('cost-center.form.parent') }}</label>
-        <InputText id="name" type="text" v-model="parentCostCenterName" />
+        <label for="parentCostCenter">{{ $t('cost-center.form.parent') }}</label>
+        <InputText id="parentCostCenter" type="text" v-model="parentCostCenterName" />
       </div>
       <div class="flex flex-wrap gap-2 w-1/2">
         <label for="incomeBudget">{{ $t('cost-center.form.income-budget') }}</label>

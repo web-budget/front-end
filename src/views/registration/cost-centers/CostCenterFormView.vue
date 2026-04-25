@@ -104,7 +104,7 @@ onMounted(() => {
           <InputText id="name" type="text" name="name" />
         </div>
         <div class="flex flex-col flex-wrap gap-2 w-full">
-          <label for="wallet">{{ $t('cost-center.form.parent') }}</label>
+          <label for="parentCostCenter">{{ $t('cost-center.form.parent') }}</label>
           <AutoComplete
             id="parentCostCenter"
             name="parentCostCenter"
