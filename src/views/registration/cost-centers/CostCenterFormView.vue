@@ -59,7 +59,8 @@ async function prepareForUpdate() {
     name: data.name,
     description: data.description,
     expenseBudget: data.expenseBudget,
-    incomeBudget: data.incomeBudget
+    incomeBudget: data.incomeBudget,
+    parentCostCenter: data.parentCostCenter ? data.parentCostCenter : null
   })
 }
 
@@ -79,7 +80,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <Form
       ref="theForm"
       @submit="selectAction"

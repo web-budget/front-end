@@ -373,7 +373,7 @@
       "parent-search-placeholder": "Digite o nome"
     },
     "table-columns": {
-      "name": "Nome",
+      "full-name": "Nome",
       "income-budget": "Orçamento receitas",
       "expense-budget": "Orçamento despesas"
     }

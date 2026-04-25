@@ -40,12 +40,13 @@ class CostCenterCreateForm {
 }
 
 class CostCenterUpdateForm {
-  constructor({ name, active, description, expenseBudget, incomeBudget }) {
+  constructor({ name, active, description, expenseBudget, incomeBudget, parentCostCenter }) {
     this.name = name
     this.description = description
     this.expenseBudget = expenseBudget
     this.incomeBudget = incomeBudget
     this.active = active
+    this.parentCostCenter = parentCostCenter ? parentCostCenter.id : null
   }
 }
 

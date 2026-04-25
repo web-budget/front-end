@@ -56,7 +56,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <div class="font-semibold text-xl mb-6">
       <span v-if="props.deleting">{{ $t('financial-period.form.deleting') }}</span>
       <span v-else>{{ $t('financial-period.form.detailing') }}</span>

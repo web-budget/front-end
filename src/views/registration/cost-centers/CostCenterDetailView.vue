@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
@@ -26,6 +26,8 @@ const { showSuccess } = useNotification()
 
 const { remove, findOne } = useCostCenterStore()
 const { costCenter, loading } = storeToRefs(useCostCenterStore())
+
+const parentCostCenterName = computed(() => costCenter.value?.parentCostCenter?.name)
 
 function doDelete() {
   remove(props.id, () => {
@@ -58,7 +60,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <div class="font-semibold text-xl mb-6">
       <span v-if="props.deleting">{{ $t('cost-center.form.deleting') }}</span>
       <span v-else>{{ $t('cost-center.form.detailing') }}</span>
@@ -75,11 +77,15 @@ onMounted(async () => {
         <label for="name">{{ $t('cost-center.form.name') }}</label>
         <InputText id="name" type="text" v-model="costCenter.name" />
       </div>
-      <div class="flex flex-wrap gap-2 w-1/8">
+      <div class="flex flex-col flex-wrap gap-2 w-full">
+        <label for="wallet">{{ $t('cost-center.form.parent') }}</label>
+        <InputText id="name" type="text" v-model="parentCostCenterName" />
+      </div>
+      <div class="flex flex-wrap gap-2 w-1/2">
         <label for="incomeBudget">{{ $t('cost-center.form.income-budget') }}</label>
         <InputNumber id="incomeBudget" :minFractionDigits="2" v-model="costCenter.incomeBudget" />
       </div>
-      <div class="flex flex-wrap gap-2 w-1/8">
+      <div class="flex flex-wrap gap-2 w-1/2">
         <label for="expenseBudget">{{ $t('cost-center.form.expense-budget') }}</label>
         <InputNumber id="expenseBudget" :minFractionDigits="2" v-model="costCenter.expenseBudget" />
       </div>
