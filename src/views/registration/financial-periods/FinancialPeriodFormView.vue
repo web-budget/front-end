@@ -25,8 +25,6 @@ const props = defineProps({
   }
 })
 
-const formData = ref({ ...formDefaults })
-
 const theForm = ref()
 
 const router = useRouter()
@@ -61,16 +59,6 @@ async function prepareForUpdate() {
     revenuesGoal: financialPeriod.value.revenuesGoal,
     expensesGoal: financialPeriod.value.expensesGoal
   })
-
-  // FIXME a workaround to deal with this https://github.com/primefaces/primevue/issues/8370
-  // FIXME also, after this is fixed, we can remove the v-model from the components
-  formData.value = {
-    name: financialPeriod.value.name,
-    startingAt: financialPeriod.value.startingAt,
-    endingAt: financialPeriod.value.endingAt,
-    revenuesGoal: financialPeriod.value.revenuesGoal,
-    expensesGoal: financialPeriod.value.expensesGoal
-  }
 }
 
 function changeToList() {
@@ -90,7 +78,7 @@ onMounted(async () => {
       ref="theForm"
       @submit="selectAction"
       :resolver="validationSchema"
-      :initialValues="formData"
+      :initialValues="formDefaults"
     >
       <div class="font-semibold text-xl mb-6">
         <span v-if="props.updating">{{ $t('financial-period.form.editing') }}</span>
@@ -100,7 +88,7 @@ onMounted(async () => {
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
           <label for="name">{{ $t('financial-period.form.name') }}</label>
-          <InputText id="name" type="text" name="name" v-model="formData.name" />
+          <InputText id="name" type="text" name="name" />
         </div>
       </div>
 
@@ -112,7 +100,6 @@ onMounted(async () => {
             show-icon
             show-button-bar
             name="startingAt"
-            v-model="formData.startingAt"
             icon-display="input"
             date-format="dd/mm/yy"
             :disabled="props.updating"
@@ -125,7 +112,6 @@ onMounted(async () => {
             show-icon
             show-button-bar
             name="endingAt"
-            v-model="formData.endingAt"
             icon-display="input"
             date-format="dd/mm/yy"
             :disabled="props.updating"
@@ -133,21 +119,11 @@ onMounted(async () => {
         </div>
         <div class="flex flex-col flex-wrap gap-2 w-1/4">
           <label for="revenuesGoal">{{ $t('financial-period.form.revenues-goal') }}</label>
-          <InputNumber
-            id="revenuesGoal"
-            :minFractionDigits="2"
-            name="revenuesGoal"
-            v-model="formData.revenuesGoal"
-          />
+          <InputNumber id="revenuesGoal" :minFractionDigits="2" name="revenuesGoal" />
         </div>
         <div class="flex flex-col flex-wrap gap-2 w-1/4">
           <label for="expensesGoal">{{ $t('financial-period.form.expenses-goal') }}</label>
-          <InputNumber
-            id="expensesGoal"
-            :minFractionDigits="2"
-            name="expensesGoal"
-            v-model="formData.expensesGoal"
-          />
+          <InputNumber id="expensesGoal" :minFractionDigits="2" name="expensesGoal" />
         </div>
       </div>
 
