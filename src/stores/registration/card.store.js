@@ -20,7 +20,8 @@ export const useCardStore = defineStore('cardStore', () => {
 
   async function findAll() {
     await get(pageRequest.toQueryParameters())
-    Object.assign(pageResponse, data.value)
+    pageResponse.content = data.value.content
+    Object.assign(pageResponse, data.value.page)
   }
 
   async function findOne(id) {
