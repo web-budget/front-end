@@ -138,42 +138,42 @@ const routes = [
     ]
   },
   {
-    path: '/registration/movement-classes',
+    path: '/registration/classifications',
     component: RegistrationLayout,
     children: [
       {
         path: '',
-        name: 'movement-classes',
-        component: () => import('@/views/registration/movement-classes/MovementClassListView.vue')
+        name: 'classifications',
+        component: () => import('@/views/registration/classifications/ClassificationListView.vue')
       },
       {
         path: 'create',
-        name: 'movement-classes.create',
-        component: () => import('@/views/registration/movement-classes/MovementClassFormView.vue')
+        name: 'classifications.create',
+        component: () => import('@/views/registration/classifications/ClassificationFormView.vue')
       },
       {
         path: ':id/update',
-        name: 'movement-classes.update',
+        name: 'classifications.update',
         props: (route) => ({
           id: route.params.id,
           updating: true
         }),
-        component: () => import('@/views/registration/movement-classes/MovementClassFormView.vue')
+        component: () => import('@/views/registration/classifications/ClassificationFormView.vue')
       },
       {
         path: ':id/detail',
-        name: 'movement-classes.detail',
+        name: 'classifications.detail',
         props: (route) => ({ id: route.params.id }),
-        component: () => import('@/views/registration/movement-classes/MovementClassDetailView.vue')
+        component: () => import('@/views/registration/classifications/ClassificationDetailView.vue')
       },
       {
         path: ':id/delete',
-        name: 'movement-classes.delete',
+        name: 'classifications.delete',
         props: (route) => ({
           id: route.params.id,
           deleting: true
         }),
-        component: () => import('@/views/registration/movement-classes/MovementClassDetailView.vue')
+        component: () => import('@/views/registration/classifications/ClassificationDetailView.vue')
       }
     ]
   },

@@ -20,12 +20,12 @@ const validationSchema = yupResolver(
   })
 )
 
-const movementClassTypes = [
-  { label: i18n.global.t('movement-class.type.income'), value: 'INCOME' },
-  { label: i18n.global.t('movement-class.type.expense'), value: 'EXPENSE' }
+const classificationTypes = [
+  { label: i18n.global.t('classification.type.income'), value: 'INCOME' },
+  { label: i18n.global.t('classification.type.expense'), value: 'EXPENSE' }
 ]
 
-class MovementClass {
+class Classification {
   constructor({ id, name, active, type, costCenter, budget, description }) {
     this.id = id
     this.name = name
@@ -37,7 +37,7 @@ class MovementClass {
   }
 }
 
-class MovementClassCreateForm {
+class ClassificationCreateForm {
   constructor({ name, type, costCenter, budget, description }) {
     this.name = name
     this.type = type
@@ -47,7 +47,7 @@ class MovementClassCreateForm {
   }
 }
 
-class MovementClassUpdateForm {
+class ClassificationUpdateForm {
   constructor({ name, active, costCenter, budget, description }) {
     this.name = name
     this.costCenter = costCenter.id
@@ -60,8 +60,8 @@ class MovementClassUpdateForm {
 export {
   formDefaults,
   validationSchema,
-  movementClassTypes,
-  MovementClass,
-  MovementClassCreateForm,
-  MovementClassUpdateForm
+  classificationTypes,
+  Classification,
+  ClassificationCreateForm,
+  ClassificationUpdateForm
 }

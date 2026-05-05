@@ -148,10 +148,10 @@
       "created": "Período financeiro criado com sucesso",
       "updated": "Período financeiro atualizado com sucesso"
     },
-    "movement-class": {
-      "deleted": "Classe de movimento excluída com sucesso",
-      "created": "Classe de movimento criada com sucesso",
-      "updated": "Classe de movimento atualizada com sucesso"
+    "classification": {
+      "deleted": "Classificação excluída com sucesso",
+      "created": "Classificação criada com sucesso",
+      "updated": "Classificação atualizada com sucesso"
     },
     "forgot-password": {
       "requested": "Solicitação realizada, aguarde pelo email de recuperação"
@@ -323,9 +323,9 @@
       "period-not-open": "Período financeiro não está aberto e não pode ser alterado ou excluído"
     }
   },
-  "movement-class": {
-    "title": "Classes de movimentos",
-    "menu": "Classes de movimentos",
+  "classification": {
+    "title": "Classificações",
+    "menu": "Classificações",
     "search": {
       "placeholder": "Nome ou descrição"
     },
@@ -339,10 +339,10 @@
       "expense": "Despesa"
     },
     "form": {
-      "new": "Novo centro de custo",
-      "editing": "Editando centro de custo",
-      "detailing": "Detalhando centro de custo",
-      "deleting": "Excluindo centro de custo",
+      "new": "Nova classificação",
+      "editing": "Editando classificação",
+      "detailing": "Detalhando classificação",
+      "deleting": "Excluindo classificação",
       "name": "Nome",
       "description": "Descrição",
       "type": "Tipo",

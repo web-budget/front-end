@@ -5,8 +5,8 @@ import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { useMovementClassStore } from '@/stores/registration/movement-class.store'
-import { movementClassTypes } from '@/models/registration/movement-class.model'
+import { useClassificationStore } from '@/stores/registration/classification.store'
+import { classificationTypes } from '@/models/registration/classification.model'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
@@ -25,36 +25,36 @@ const router = useRouter()
 
 const { showSuccess } = useNotification()
 
-const { remove, findOne } = useMovementClassStore()
-const { movementClass, loading } = storeToRefs(useMovementClassStore())
+const { remove, findOne } = useClassificationStore()
+const { classification, loading } = storeToRefs(useClassificationStore())
 
 const costCenterName = computed(() => {
-  return movementClass.value.costCenter ? movementClass.value.costCenter.name : null
+  return classification.value.costCenter ? classification.value.costCenter.name : null
 })
 
 function doDelete() {
   remove(props.id, () => {
-    showSuccess('notification.record-deleted', 'notification.movement-class.deleted')
-    router.push({ name: 'movement-classes' })
+    showSuccess('notification.record-deleted', 'notification.classification.deleted')
+    router.push({ name: 'classifications' })
   })
 }
 
 function changeToUpdate() {
   router.push({
-    name: 'movement-classes.update',
+    name: 'classifications.update',
     params: { id: props.id }
   })
 }
 
 function changeToDelete() {
   router.push({
-    name: 'movement-classes.delete',
+    name: 'classifications.delete',
     params: { id: props.id }
   })
 }
 
 function changeToList() {
-  router.push({ name: 'movement-classes' })
+  router.push({ name: 'classifications' })
 }
 
 onMounted(async () => {
@@ -63,50 +63,50 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <div class="font-semibold text-xl mb-6">
-      <span v-if="props.deleting">{{ $t('movement-class.form.deleting') }}</span>
-      <span v-else>{{ $t('movement-class.form.detailing') }}</span>
+      <span v-if="props.deleting">{{ $t('classification.form.deleting') }}</span>
+      <span v-else>{{ $t('classification.form.detailing') }}</span>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <status-toggle v-model="movementClass.active" />
+        <status-toggle v-model="classification.active" />
       </div>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="name">{{ $t('movement-class.form.name') }}</label>
-        <InputText id="name" type="text" v-model="movementClass.name" />
+        <label for="name">{{ $t('classification.form.name') }}</label>
+        <InputText id="name" type="text" v-model="classification.name" />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="type">{{ $t('movement-class.form.type') }}</label>
+        <label for="type">{{ $t('classification.form.type') }}</label>
         <Select
           optionValue="value"
           optionLabel="label"
-          v-model="movementClass.type"
-          :options="movementClassTypes"
-          :placeholder="$t('movement-class.form.type-placeholder')"
+          v-model="classification.type"
+          :options="classificationTypes"
+          :placeholder="$t('classification.form.type-placeholder')"
         />
       </div>
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-col flex-wrap gap-2 w-full">
-        <label for="costCenter">{{ $t('movement-class.form.cost-center') }}</label>
+        <label for="costCenter">{{ $t('classification.form.cost-center') }}</label>
         <InputText id="costCenter" type="text" v-model="costCenterName" />
       </div>
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="budget">{{ $t('movement-class.form.budget') }}</label>
-        <InputNumber id="budget" :minFractionDigits="2" v-model="movementClass.budget" />
+        <label for="budget">{{ $t('classification.form.budget') }}</label>
+        <InputNumber id="budget" :minFractionDigits="2" v-model="classification.budget" />
       </div>
     </div>
 
     <div class="flex mb-6">
       <div class="flex flex-wrap gap-2 w-full">
-        <label for="description">{{ $t('movement-class.form.description') }}</label>
-        <Textarea id="description" v-model="movementClass.description" rows="4" />
+        <label for="description">{{ $t('classification.form.description') }}</label>
+        <Textarea id="description" v-model="classification.description" rows="4" />
       </div>
     </div>
 
