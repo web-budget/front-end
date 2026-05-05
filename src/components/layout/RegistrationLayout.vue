@@ -19,6 +19,11 @@ const items = ref([
         to: '/registration/wallets'
       },
       {
+        label: 'classification.menu',
+        icon: 'pi pi-fw pi-tag',
+        to: '/registration/classifications'
+      },
+      {
         label: 'cost-center.menu',
         icon: 'pi pi-fw pi-sitemap',
         to: '/registration/cost-centers'
@@ -27,11 +32,6 @@ const items = ref([
         label: 'financial-period.menu',
         icon: 'pi pi-fw pi-calendar',
         to: '/registration/financial-periods'
-      },
-      {
-        label: 'movement-class.menu',
-        icon: 'pi pi-fw pi-tag',
-        to: '/registration/movement-classes'
       }
     ]
   }

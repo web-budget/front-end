@@ -6,16 +6,16 @@ import { useApi } from '@/composables/useApi'
 import PageRequest from '@/models/page-request'
 import PageResponse from '@/models/page-response'
 
-import { MovementClass } from '@/models/registration/movement-class.model'
+import { Classification } from '@/models/registration/classification.model'
 
-export const useMovementClassStore = defineStore('movementClassStore', () => {
-  const movementClass = reactive({})
+export const useClassificationStore = defineStore('classificationStore', () => {
+  const classification = reactive({})
 
   const pageRequest = reactive(new PageRequest())
   const pageResponse = reactive(new PageResponse())
 
   const { data, loading, post, put, get, del } = useApi({
-    path: 'api/registration/movement-classes'
+    path: 'api/registration/classifications'
   })
 
   async function findAll() {
@@ -26,7 +26,7 @@ export const useMovementClassStore = defineStore('movementClassStore', () => {
 
   async function findOne(id) {
     await get({}, { urlSuffix: `/${id}` })
-    Object.assign(movementClass, new MovementClass(data.value))
+    Object.assign(classification, new Classification(data.value))
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
@@ -48,7 +48,7 @@ export const useMovementClassStore = defineStore('movementClassStore', () => {
     update,
     remove,
     loading,
-    movementClass,
+    classification,
     pageRequest,
     pageResponse
   }

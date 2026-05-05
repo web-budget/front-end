@@ -6,17 +6,17 @@ import { useRouter } from 'vue-router'
 import { useNotification } from '@/composables/useNotification'
 
 import { useCostCenterStore } from '@/stores/registration/cost-center.store'
-import { useMovementClassStore } from '@/stores/registration/movement-class.store'
+import { useClassificationStore } from '@/stores/registration/classification.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
 
 import {
   formDefaults,
-  MovementClassCreateForm,
-  movementClassTypes,
-  MovementClassUpdateForm,
+  ClassificationCreateForm,
+  classificationTypes,
+  ClassificationUpdateForm,
   validationSchema
-} from '@/models/registration/movement-class.model'
+} from '@/models/registration/classification.model'
 
 const props = defineProps({
   id: {
@@ -35,8 +35,8 @@ const router = useRouter()
 
 const { showSuccess } = useNotification()
 
-const { create, update, findOne } = useMovementClassStore()
-const { movementClass, loading } = storeToRefs(useMovementClassStore())
+const { create, update, findOne } = useClassificationStore()
+const { classification, loading } = storeToRefs(useClassificationStore())
 
 const { findByName } = useCostCenterStore()
 const { costCenters } = storeToRefs(useCostCenterStore())
@@ -45,12 +45,12 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, new MovementClassUpdateForm(values), () => {
-      showSuccess('notification.record-updated', 'notification.movement-class.updated')
+    update(props.id, new ClassificationUpdateForm(values), () => {
+      showSuccess('notification.record-updated', 'notification.classification.updated')
     })
   } else {
-    create(new MovementClassCreateForm(values), () => {
-      showSuccess('notification.record-created', 'notification.movement-class.created')
+    create(new ClassificationCreateForm(values), () => {
+      showSuccess('notification.record-created', 'notification.classification.created')
       theForm.value.reset()
     })
   }
@@ -58,7 +58,7 @@ function selectAction({ valid, values }) {
 
 async function prepareForUpdate() {
   await findOne(props.id)
-  const data = movementClass.value
+  const data = classification.value
   theForm.value.setValues({
     active: data.active,
     name: data.name,
@@ -70,7 +70,7 @@ async function prepareForUpdate() {
 }
 
 function changeToList() {
-  router.push({ name: 'movement-classes' })
+  router.push({ name: 'classifications' })
 }
 
 function onCostCenterSearch(event) {
@@ -85,7 +85,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Fluid class="card flex flex-col gap-4 w-full">
+  <Fluid class="card flex flex-col w-full">
     <Form
       ref="theForm"
       @submit="selectAction"
@@ -93,8 +93,8 @@ onMounted(() => {
       :initialValues="formDefaults"
     >
       <div class="font-semibold text-xl mb-6">
-        <span v-if="props.updating">{{ $t('movement-class.form.editing') }}</span>
-        <span v-else>{{ $t('movement-class.form.new') }}</span>
+        <span v-if="props.updating">{{ $t('classification.form.editing') }}</span>
+        <span v-else>{{ $t('classification.form.new') }}</span>
       </div>
 
       <div v-if="props.updating" class="flex flex-col md:flex-row gap-4 mb-6">
@@ -105,25 +105,25 @@ onMounted(() => {
 
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
-          <label for="name">{{ $t('movement-class.form.name') }}</label>
+          <label for="name">{{ $t('classification.form.name') }}</label>
           <InputText id="name" type="text" name="name" />
         </div>
         <div class="flex flex-wrap gap-2 w-full">
-          <label for="type">{{ $t('movement-class.form.type') }}</label>
+          <label for="type">{{ $t('classification.form.type') }}</label>
           <Select
             name="type"
             optionValue="value"
             optionLabel="label"
             :disabled="props.updating"
-            :options="movementClassTypes"
-            :placeholder="$t('movement-class.form.type-placeholder')"
+            :options="classificationTypes"
+            :placeholder="$t('classification.form.type-placeholder')"
           />
         </div>
       </div>
 
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-col flex-wrap gap-2 w-full">
-          <label for="costCenter">{{ $t('movement-class.form.cost-center') }}</label>
+          <label for="costCenter">{{ $t('classification.form.cost-center') }}</label>
           <AutoComplete
             id="costCenter"
             name="costCenter"
@@ -132,20 +132,20 @@ onMounted(() => {
             :suggestions="costCenters"
             :disabled="props.updating"
             @complete="onCostCenterSearch"
-            :placeholder="$t('movement-class.form.cost-center-search-placeholder')"
-            :emptySearchMessage="$t('movement-class.form.cost-center-search-empty')"
+            :placeholder="$t('classification.form.cost-center-search-placeholder')"
+            :emptySearchMessage="$t('classification.form.cost-center-search-empty')"
             :virtual-scroller-options="{ lazy: true, itemSize: 40, autoSize: true }"
           />
         </div>
         <div class="flex flex-wrap gap-2 w-full">
-          <label for="budget">{{ $t('movement-class.form.budget') }}</label>
+          <label for="budget">{{ $t('classification.form.budget') }}</label>
           <InputNumber id="budget" :minFractionDigits="2" name="budget" />
         </div>
       </div>
 
       <div class="flex mb-6">
         <div class="flex flex-wrap gap-2 w-full">
-          <label for="description">{{ $t('movement-class.form.description') }}</label>
+          <label for="description">{{ $t('classification.form.description') }}</label>
           <Textarea id="description" name="description" rows="4" />
         </div>
       </div>
