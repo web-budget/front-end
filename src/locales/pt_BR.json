@@ -331,8 +331,7 @@
     },
     "table-columns": {
       "name": "Nome",
-      "type": "Tipo",
-      "cost-center": "Centro de custo"
+      "type": "Tipo"
     },
     "type": {
       "income": "Receita",
@@ -346,11 +345,8 @@
       "name": "Nome",
       "description": "Descrição",
       "type": "Tipo",
-      "cost-center": "Centro de custo",
       "budget": "Orçamento",
-      "cost-center-search-empty": "Nenhum centro de custo encontrado",
-      "type-placeholder": "Selecione um tipo",
-      "cost-center-search-placeholder": "Digite o nome"
+      "type-placeholder": "Selecione um tipo"
     }
   },
   "cost-center": {

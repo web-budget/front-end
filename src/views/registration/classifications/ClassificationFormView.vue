@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { useCostCenterStore } from '@/stores/registration/cost-center.store'
 import { useClassificationStore } from '@/stores/registration/classification.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
@@ -38,9 +37,6 @@ const { showSuccess } = useNotification()
 const { create, update, findOne } = useClassificationStore()
 const { classification, loading } = storeToRefs(useClassificationStore())
 
-const { findByName } = useCostCenterStore()
-const { costCenters } = storeToRefs(useCostCenterStore())
-
 function selectAction({ valid, values }) {
   if (!valid) return
 
@@ -64,17 +60,12 @@ async function prepareForUpdate() {
     name: data.name,
     type: data.type,
     description: data.description,
-    costCenter: data.costCenter,
     budget: data.budget
   })
 }
 
 function changeToList() {
   router.push({ name: 'classifications' })
-}
-
-function onCostCenterSearch(event) {
-  findByName(event.query)
 }
 
 onMounted(() => {
@@ -122,21 +113,6 @@ onMounted(() => {
       </div>
 
       <div class="flex flex-col md:flex-row gap-4 mb-6">
-        <div class="flex flex-col flex-wrap gap-2 w-full">
-          <label for="costCenter">{{ $t('classification.form.cost-center') }}</label>
-          <AutoComplete
-            id="costCenter"
-            name="costCenter"
-            :min-length="2"
-            option-label="name"
-            :suggestions="costCenters"
-            :disabled="props.updating"
-            @complete="onCostCenterSearch"
-            :placeholder="$t('classification.form.cost-center-search-placeholder')"
-            :emptySearchMessage="$t('classification.form.cost-center-search-empty')"
-            :virtual-scroller-options="{ lazy: true, itemSize: 40, autoSize: true }"
-          />
-        </div>
         <div class="flex flex-wrap gap-2 w-full">
           <label for="budget">{{ $t('classification.form.budget') }}</label>
           <InputNumber id="budget" :minFractionDigits="2" name="budget" />

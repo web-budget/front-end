@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
@@ -27,10 +27,6 @@ const { showSuccess } = useNotification()
 
 const { remove, findOne } = useClassificationStore()
 const { classification, loading } = storeToRefs(useClassificationStore())
-
-const costCenterName = computed(() => {
-  return classification.value.costCenter ? classification.value.costCenter.name : null
-})
 
 function doDelete() {
   remove(props.id, () => {
@@ -93,10 +89,6 @@ onMounted(async () => {
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 mb-6">
-      <div class="flex flex-col flex-wrap gap-2 w-full">
-        <label for="costCenter">{{ $t('classification.form.cost-center') }}</label>
-        <InputText id="costCenter" type="text" v-model="costCenterName" />
-      </div>
       <div class="flex flex-wrap gap-2 w-full">
         <label for="budget">{{ $t('classification.form.budget') }}</label>
         <InputNumber id="budget" :minFractionDigits="2" v-model="classification.budget" />

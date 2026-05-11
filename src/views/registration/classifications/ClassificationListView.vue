@@ -78,11 +78,6 @@ onMounted(() => {
     >
       <template #columns>
         <Column field="name" :header="$t('classification.table-columns.name')" :sortable="true" />
-        <Column
-          :sortable="true"
-          field="costCenter.name"
-          :header="$t('classification.table-columns.cost-center')"
-        />
         <Column field="type" :header="$t('card.table-columns.type')" :sortable="true">
           <template #body="slotProps">
             {{ $t(`classification.type.${slotProps.data.type.toLowerCase()}`) }}
