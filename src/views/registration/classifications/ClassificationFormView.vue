@@ -99,7 +99,7 @@ onMounted(() => {
           <label for="name">{{ $t('classification.form.name') }}</label>
           <InputText id="name" type="text" name="name" />
         </div>
-        <div class="flex flex-wrap gap-2 w-full">
+        <div class="flex flex-wrap gap-2 w-1/2">
           <label for="type">{{ $t('classification.form.type') }}</label>
           <Select
             name="type"
@@ -110,10 +110,7 @@ onMounted(() => {
             :placeholder="$t('classification.form.type-placeholder')"
           />
         </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row gap-4 mb-6">
-        <div class="flex flex-wrap gap-2 w-full">
+        <div class="flex flex-wrap gap-2 w-1/2">
           <label for="budget">{{ $t('classification.form.budget') }}</label>
           <InputNumber id="budget" :minFractionDigits="2" name="budget" />
         </div>
