@@ -22,6 +22,9 @@
       "card": {
         "type": "Tipo já esta em uso",
         "last-four-digits": "Últimos dígitos \"{value}\" já esta em uso"
+      },
+      "classification": {
+        "name": "Nome \"{value}\" já esta em uso"
       }
     },
     "unprocessable-entity": {
@@ -36,7 +39,6 @@
       "debit-card-without-wallet": "O cartão de débito deve estar vinculado a uma carteira",
       "invalid-invoice-payment-day": "{payment-day} não é um dia do mês válido, use algo entre 1 e 30",
       "financial-period-not-open": "O período financeiro não esta aberto e não pode receber modificações",
-      "invalid-apportionments": "",
       "accounted-period-movement": "",
       "invalid-token": ""
     },
@@ -332,7 +334,7 @@
     "table-columns": {
       "name": "Nome",
       "type": "Tipo",
-      "cost-center": "Centro de custo"
+      "budget": "Orçamento"
     },
     "type": {
       "income": "Receita",
@@ -346,11 +348,8 @@
       "name": "Nome",
       "description": "Descrição",
       "type": "Tipo",
-      "cost-center": "Centro de custo",
       "budget": "Orçamento",
-      "cost-center-search-empty": "Nenhum centro de custo encontrado",
-      "type-placeholder": "Selecione um tipo",
-      "cost-center-search-placeholder": "Digite o nome"
+      "type-placeholder": "Selecione um tipo"
     }
   },
   "cost-center": {

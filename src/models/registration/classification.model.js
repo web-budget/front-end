@@ -8,15 +8,13 @@ import { yupResolver } from '@primevue/forms/resolvers/yup'
 const formDefaults = reactive({
   active: true,
   name: null,
-  type: null,
-  costCenter: null
+  type: null
 })
 
 const validationSchema = yupResolver(
   yup.object().shape({
     name: yup.string().min(3).max(150).required(),
-    type: yup.string().min(6).max(7).required(),
-    costCenter: yup.object().default(null).required()
+    type: yup.string().min(6).max(7).required()
   })
 )
 
@@ -26,31 +24,28 @@ const classificationTypes = [
 ]
 
 class Classification {
-  constructor({ id, name, active, type, costCenter, budget, description }) {
+  constructor({ id, name, active, type, budget, description }) {
     this.id = id
     this.name = name
     this.active = active
     this.type = type
-    this.costCenter = costCenter
     this.budget = budget
     this.description = description
   }
 }
 
 class ClassificationCreateForm {
-  constructor({ name, type, costCenter, budget, description }) {
+  constructor({ name, type, budget, description }) {
     this.name = name
     this.type = type
-    this.costCenter = costCenter.id
     this.budget = budget
     this.description = description
   }
 }
 
 class ClassificationUpdateForm {
-  constructor({ name, active, costCenter, budget, description }) {
+  constructor({ name, active, budget, description }) {
     this.name = name
-    this.costCenter = costCenter.id
     this.budget = budget
     this.description = description
     this.active = active
