@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
@@ -28,6 +28,8 @@ const { showSuccess } = useNotification()
 
 const { remove, findOne } = useWalletStore()
 const { wallet, loading } = storeToRefs(useWalletStore())
+
+const isBankType = computed(() => ['BANK_ACCOUNT', 'INVESTMENT'].includes(wallet.value?.type))
 
 function doDelete() {
   remove(props.id, () => {
@@ -90,7 +92,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-4 mb-6">
+    <div v-if="isBankType" class="flex flex-col md:flex-row gap-4 mb-6">
       <div class="flex flex-wrap gap-2 w-full">
         <label for="bank">{{ $t('wallet.form.bank') }}</label>
         <InputText id="bank" type="text" v-model="wallet.bank" />

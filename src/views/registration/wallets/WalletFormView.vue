@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
@@ -33,6 +33,8 @@ const router = useRouter()
 const { showSuccess } = useNotification()
 
 const theForm = ref()
+const selectedType = ref(null)
+const isBankType = computed(() => ['BANK_ACCOUNT', 'INVESTMENT'].includes(selectedType.value))
 
 const { create, update, findOne } = useWalletStore()
 const { wallet, loading } = storeToRefs(useWalletStore())
@@ -48,6 +50,7 @@ function selectAction({ valid, values }) {
     create(new WalletCreateForm(values), () => {
       showSuccess('notification.record-created', 'notification.wallet.created')
       theForm.value.reset()
+      selectedType.value = null
     })
   }
 }
@@ -64,6 +67,7 @@ async function prepareForUpdate() {
     agency: data.agency,
     number: data.number
   })
+  selectedType.value = data.type
 }
 
 function changeToList() {
@@ -110,6 +114,7 @@ onMounted(() => {
             :options="walletTypes"
             :disabled="props.updating"
             :placeholder="$t('wallet.form.type-placeholder')"
+            @change="selectedType = $event.value"
           />
         </div>
       </div>
@@ -117,15 +122,15 @@ onMounted(() => {
       <div class="flex flex-col md:flex-row gap-4 mb-6">
         <div class="flex flex-wrap gap-2 w-full">
           <label for="bank">{{ $t('wallet.form.bank') }}</label>
-          <InputText id="bank" type="text" name="bank" />
+          <InputText id="bank" type="text" name="bank" :disabled="!isBankType" />
         </div>
         <div class="flex flex-wrap gap-2 w-1/4">
           <label for="agency">{{ $t('wallet.form.agency') }}</label>
-          <InputNumber id="agency" name="agency" :use-grouping="false" />
+          <InputNumber id="agency" name="agency" :use-grouping="false" :disabled="!isBankType" />
         </div>
         <div class="flex flex-wrap gap-2 w-1/4">
           <label for="number">{{ $t('wallet.form.number') }}</label>
-          <InputNumber id="number" name="number" :use-grouping="false" />
+          <InputNumber id="number" name="number" :use-grouping="false" :disabled="!isBankType" />
         </div>
       </div>
 
