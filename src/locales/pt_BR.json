@@ -95,7 +95,7 @@
   },
   "account-activation": {
     "success": "Conta ativada com sucesso!",
-    "error": "Falha ao ativar conta, entre em contato com um administrador",
+    "error": "Token inválido ou expirado, entre em contato com o administrador",
     "activating": "Ativando conta, aguarde...",
     "back-to-login": "Voltar ao login"
   },
@@ -126,6 +126,7 @@
   },
   "notification": {
     "success": "Sucesso!",
+    "error": "Erro",
     "confirm-delete": "Confirma a exclusão do registro?",
     "record-deleted": "Registro excluído",
     "record-created": "Registro criado",
@@ -159,7 +160,8 @@
       "requested": "Solicitação realizada, aguarde pelo email de recuperação"
     },
     "recover-password": {
-      "success": "Senha recuperada, realize login para continuar"
+      "success": "Senha recuperada, realize login para continuar",
+      "error": "Falha ao recuperar senha, token inválido ou expirado"
     }
   },
   "search-control": {

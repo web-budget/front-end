@@ -10,7 +10,7 @@ import { formDefaults, validationSchema } from '@/models/recover-password.model'
 const route = useRoute()
 const router = useRouter()
 
-const { showSuccess } = useNotification()
+const { showSuccess, showError } = useNotification()
 
 const { recoverPassword } = useAccountStore()
 const { loading } = storeToRefs(useAccountStore())
@@ -24,10 +24,16 @@ function recover({ valid, values }) {
     password: values.password
   }
 
-  recoverPassword(data, () => {
-    showSuccess('notification.success', 'notification.recover-password.success')
-    router.push({ name: 'login' })
-  })
+  recoverPassword(
+    data,
+    () => {
+      showSuccess('notification.success', 'notification.recover-password.success')
+      router.push({ name: 'login' })
+    },
+    () => {
+      showError('notification.error', 'notification.recover-password.error')
+    }
+  )
 }
 </script>
 

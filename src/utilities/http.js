@@ -12,7 +12,8 @@ const http = axios.create({
 http.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.config.url.includes('auth/me')) return Promise.reject(error)
+    const ignoredUrls = ['auth/me', 'accounts/']
+    if (ignoredUrls.some((url) => error.config.url.includes(url))) return Promise.reject(error)
 
     const { showError } = useNotification()
 
