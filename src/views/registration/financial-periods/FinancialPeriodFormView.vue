@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
+import { applyServerValidation } from '@/utilities/formValidation'
+
 import { useFinancialPeriodStore } from '@/stores/registration/financial-period.store'
 
 import {
@@ -38,14 +40,23 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, new FinancialPeriodUpdateForm(values), () => {
-      showSuccess('notification.record-updated', 'notification.financial-period.updated')
-    })
+    update(
+      props.id,
+      new FinancialPeriodUpdateForm(values),
+      () => {
+        showSuccess('notification.record-updated', 'notification.financial-period.updated')
+      },
+      (error) => applyServerValidation(theForm, error)
+    )
   } else {
-    create(new FinancialPeriodCreateForm(values), () => {
-      showSuccess('notification.record-created', 'notification.financial-period.created')
-      theForm.value.reset()
-    })
+    create(
+      new FinancialPeriodCreateForm(values),
+      () => {
+        showSuccess('notification.record-created', 'notification.financial-period.created')
+        theForm.value.reset()
+      },
+      (error) => applyServerValidation(theForm, error)
+    )
   }
 }
 

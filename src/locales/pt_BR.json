@@ -33,6 +33,8 @@
     },
     "bad-request": {
       "title": "Requisição inválida",
+      "bad-request": "Não foi possível processar a requisição, revise os dados e tente novamente",
+      "data-integrity-violation": "Não foi possível concluir a operação pois o registro está vinculado a outros registros",
       "budget-limit-exceeded": "O orçamento disponível no centro de custo para o tipo selecionado é ${available-budget}",
       "overlapping-start-end-dates": "Já existe um período financeiro que compreende a data de inicio e fim selecionada",
       "start-date-after-end-date": "Data de início precisa ser antes da data de fim",
@@ -49,10 +51,6 @@
     "forbidden": {
       "detail": "Não autorizado",
       "description": "Você não tem permissão para acessar este recurso"
-    },
-    "unauthorized": {
-      "detail": "Não autorizado",
-      "description": "Faça login e tente novamente"
     },
     "server-error": {
       "detail": "Falha no servidor",

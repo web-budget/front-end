@@ -1,7 +1,21 @@
 import axios from 'axios'
 
-import { useNotification } from '@/composables/useNotification'
-import { useErrorHandler } from '@/composables/userErrorHandler'
+import { useErrorHandler } from '@/composables/useErrorHandler'
+
+// Endpoints that bootstrap or own the auth flow. They manage their own errors (including 401s),
+// so the global handler must stay out of their way to avoid redirect loops on the login screen.
+const SELF_HANDLED_URLS = ['auth/me', 'auth/login', 'accounts/']
+
+// Infrastructure problems are never delegated to the calling component.
+function isAlwaysGlobal(normalized) {
+  return (
+    normalized.isNetwork ||
+    normalized.status === null ||
+    normalized.status === 401 ||
+    normalized.status === 403 ||
+    normalized.status >= 500
+  )
+}
 
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -12,45 +26,24 @@ const http = axios.create({
 http.interceptors.response.use(
   (response) => response,
   (error) => {
-    const ignoredUrls = ['auth/me', 'accounts/']
-    if (ignoredUrls.some((url) => error.config.url.includes(url))) return Promise.reject(error)
+    const { normalize, handle } = useErrorHandler()
 
-    const { showError } = useNotification()
+    const normalized = normalize(error)
 
-    const {
-      handleConflict,
-      handleBadRequest,
-      handleUnprocessableEntity,
-      handleForbidden,
-      handleInternalServerError
-    } = useErrorHandler()
+    // Expose the normalized payload so components/stores can react to it without re-parsing.
+    error.normalized = normalized
 
-    if (error.response) {
-      const { status, data } = error.response
-      switch (status) {
-        case 400:
-          handleBadRequest(data.message)
-          break
-        case 422:
-          handleUnprocessableEntity(data.message)
-          break
-        case 409:
-          handleConflict(data.message)
-          break
-        case 401:
-          // TODO logout and go to login?
-          break
-        case 403:
-          handleForbidden()
-          break
-        case 500:
-          handleInternalServerError(data)
-          break
-        default:
-          showError('error.unknown.title', 'error.unknown.details')
+    const url = error.config?.url ?? ''
+    const isSelfHandled = SELF_HANDLED_URLS.some((ignored) => url.includes(ignored))
+
+    if (!isSelfHandled) {
+      const handledStatuses = error.config?.handledStatuses ?? []
+      const componentOwnsIt =
+        !isAlwaysGlobal(normalized) && handledStatuses.includes(normalized.status)
+
+      if (!componentOwnsIt) {
+        handle(normalized)
       }
-    } else if (error.code.includes('ERR_NETWORK')) {
-      showError('error.connection-failure.title', 'error.connection-failure.details')
     }
 
     return Promise.reject(error)

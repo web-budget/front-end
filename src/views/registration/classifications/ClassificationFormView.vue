@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 
 import { useNotification } from '@/composables/useNotification'
 
+import { applyServerValidation } from '@/utilities/formValidation'
+
 import { useClassificationStore } from '@/stores/registration/classification.store'
 
 import StatusToggle from '@/components/forms/StatusToggle.vue'
@@ -41,14 +43,23 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(props.id, new ClassificationUpdateForm(values), () => {
-      showSuccess('notification.record-updated', 'notification.classification.updated')
-    })
+    update(
+      props.id,
+      new ClassificationUpdateForm(values),
+      () => {
+        showSuccess('notification.record-updated', 'notification.classification.updated')
+      },
+      (error) => applyServerValidation(theForm, error)
+    )
   } else {
-    create(new ClassificationCreateForm(values), () => {
-      showSuccess('notification.record-created', 'notification.classification.created')
-      theForm.value.reset()
-    })
+    create(
+      new ClassificationCreateForm(values),
+      () => {
+        showSuccess('notification.record-created', 'notification.classification.created')
+        theForm.value.reset()
+      },
+      (error) => applyServerValidation(theForm, error)
+    )
   }
 }
 
