@@ -9,8 +9,6 @@ import { useWalletStore } from '@/stores/registration/wallet.store'
 
 import { useNotification } from '@/composables/useNotification'
 
-import { applyServerValidation } from '@/utilities/formValidation'
-
 import {
   formDefaults,
   validationSchema,
@@ -45,24 +43,15 @@ function selectAction({ valid, values }) {
   if (!valid) return
 
   if (props.updating) {
-    update(
-      props.id,
-      new WalletUpdateForm(values),
-      () => {
-        showSuccess('notification.record-updated', 'notification.wallet.updated')
-      },
-      (error) => applyServerValidation(theForm, error)
-    )
+    update(props.id, new WalletUpdateForm(values), () => {
+      showSuccess('notification.record-updated', 'notification.wallet.updated')
+    })
   } else {
-    create(
-      new WalletCreateForm(values),
-      () => {
-        showSuccess('notification.record-created', 'notification.wallet.created')
-        theForm.value.reset()
-        selectedType.value = null
-      },
-      (error) => applyServerValidation(theForm, error)
-    )
+    create(new WalletCreateForm(values), () => {
+      showSuccess('notification.record-created', 'notification.wallet.created')
+      theForm.value.reset()
+      selectedType.value = null
+    })
   }
 }
 

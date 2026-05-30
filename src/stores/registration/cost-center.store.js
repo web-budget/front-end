@@ -41,11 +41,11 @@ export const useCostCenterStore = defineStore('costCenterStore', () => {
   }
 
   async function create(values, onSuccess = () => {}, onError = () => {}) {
-    await post(values, { handledStatuses: [422] }, onSuccess, onError)
+    await post(values, {}, onSuccess, onError)
   }
 
   async function update(id, values, onSuccess = () => {}, onError = () => {}) {
-    await put(values, { urlSuffix: `/${id}`, handledStatuses: [422] }, onSuccess, onError)
+    await put(values, { urlSuffix: `/${id}` }, onSuccess, onError)
   }
 
   async function remove(id, onSuccess = () => {}, onError = () => {}) {
