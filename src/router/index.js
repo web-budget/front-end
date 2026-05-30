@@ -34,13 +34,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL)
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const { isSessionValid } = useSessionStore()
 
   const isPublicRoute = to.matched.some((route) => route.meta.public)
 
-  if (!isPublicRoute && !isSessionValid()) {
-    next({ name: 'login', query: { redirect: to.path } })
+  if (!isPublicRoute && !(await isSessionValid())) {
+    next({ name: 'login', query: { redirect: to.fullPath } })
     return
   }
 

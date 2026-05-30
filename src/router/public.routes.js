@@ -53,12 +53,6 @@ const routes = [
     component: () => import('@/views/errors/ForbiddenView.vue')
   },
   {
-    path: '/error/unauthorized',
-    name: '401',
-    meta: { public: true },
-    component: () => import('@/views/errors/UnauthorizedView.vue')
-  },
-  {
     path: '/error/server-error',
     name: '500',
     meta: { public: true },

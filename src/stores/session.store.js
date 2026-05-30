@@ -23,7 +23,6 @@ export const useSessionStore = defineStore('sessionStore', () => {
   const {
     loading: meLoading,
     get: meGet,
-    error: meError,
     data: meData
   } = useApi({
     path: 'auth/me'
@@ -66,14 +65,21 @@ export const useSessionStore = defineStore('sessionStore', () => {
         sessionValid.value = false
       }
     )
+    return sessionValid.value
   }
 
   async function logout() {
     logoutPost().finally(() => {
-      user.value = null
-      sessionValid.value = false
+      clearSession()
       router.push({ name: 'login' })
     })
+  }
+
+  // Drops the local session state without calling the back-end. Used when the server already told us
+  // the session is gone (a 401), where calling logout would be pointless.
+  function clearSession() {
+    user.value = null
+    sessionValid.value = false
   }
 
   async function isSessionValid() {
@@ -89,6 +95,7 @@ export const useSessionStore = defineStore('sessionStore', () => {
     isAuthenticated,
     login,
     logout,
+    clearSession,
     isSessionValid
   }
 })
